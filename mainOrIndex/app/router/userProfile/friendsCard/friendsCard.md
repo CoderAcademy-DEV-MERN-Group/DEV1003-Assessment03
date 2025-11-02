@@ -8,8 +8,8 @@ N/A
 
 ## States
 
-- State to represent currently selected tab received from card container
-- State to represent current user friendships, state and setter passed to all 3 tabs received from card container
+- State to represent currently selected tab received from user profile
+- State to represent current user friendships, state and setter passed to all 3 tabs received from user profile
 - State of all unfriended users, frontend logic to remove users in current friendships state from all users array. State and setter passed to friendCard
 
 ## Use Effects
