@@ -1,3 +1,0 @@
-# Config
-
-## env variables

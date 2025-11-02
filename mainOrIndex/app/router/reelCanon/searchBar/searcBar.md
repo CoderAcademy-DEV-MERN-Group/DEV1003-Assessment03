@@ -1,12 +1,26 @@
 # Search Bar
 
-## API call for user reel progress
+Component that renders a form/input and updates state depending on user input
 
-call either whole user router.get('/my-profile', verifyToken, getUserProfile);
-or just reel progress router.get('/', verifyToken, getReelProgress);
+## API Requests
 
-## Store user reel progress in state
+N/A
 
-## Store watched movies array in state
+## States
 
-## Store watched and unrated movies in state
+- State of search filter(s):
+  - Receive state setter from reel-canon. Can have filters for show/sort-by watched/unwatched, reviewed/unreviewed, genre, run time, release date
+
+## Use Effects
+
+(Might be better as event handlers unsure right now)
+
+- Update filter states depending on input
+
+## Event Handler
+
+N/A
+
+## Components
+
+N/A

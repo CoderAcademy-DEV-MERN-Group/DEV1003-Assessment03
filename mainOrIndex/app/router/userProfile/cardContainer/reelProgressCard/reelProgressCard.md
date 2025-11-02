@@ -1,7 +1,23 @@
-# reelProgress Card
+# Reel Progress Card
 
-## State
+Component that renders progress bar representing percentage of 100 reel canon movies that user has currently watched
 
-Will be passed reel progress state from userPage and use it to render progression bar that simply subtracts amount of movies in reel progress from 100 to represent percentage
+## API Requests
 
-No tab children, only one tab for this card
+N/A
+
+## States
+
+- State for current user containing amount of watched movies in 'reel progress' sub array
+
+## Use Effects
+
+N/A
+
+## Event Handler
+
+N/A
+
+## Components
+
+N/A

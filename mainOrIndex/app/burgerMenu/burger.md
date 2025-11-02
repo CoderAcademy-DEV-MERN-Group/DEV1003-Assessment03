@@ -12,6 +12,10 @@ Component that conditionally renders below certain screen size, all elements con
 - Render login and register links if login state is not set to logged, otherwise will render logout link. Will update any time login state updates
 - Render burger menu open when burgerOpened state set to true else just render burger icon (optional)
 
+## Event Handlers
+
+- On click for burger icon that toggles state
+
 ## Components
 
 - NavLinks

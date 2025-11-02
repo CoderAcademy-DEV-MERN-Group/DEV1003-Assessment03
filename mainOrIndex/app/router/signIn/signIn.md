@@ -1,15 +1,23 @@
-# Sign In
+# Log In
 
-## Sign In Form
+Login page that only renders login form
 
-Static? Sign in form
+## API Requests
 
-## Global Jwt State
+- router.post('auth/login', validateLogin)
 
-## Call this route
+## States
 
-router.post('auth/login', validateLogin,)
+- Global state of JWT status, with state setter here
 
-## Login Attempt Counter State
+## Use Effects
 
-Lock em out after 10 failed attempts
+- Update state of global JWT on successful login
+
+## Event Handler
+
+N/A
+
+## Components
+
+N/A

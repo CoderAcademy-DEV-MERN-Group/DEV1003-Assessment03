@@ -1,9 +1,23 @@
 # Register
 
-## Register Form
+Register page that only renders register form
 
-Static? Register form
+## API Requests
 
-## Global Jwt State
+- router.post('auth/register', validateUserRegistration)
 
-router.post('/register', validateUserRegistration)
+## States
+
+- Global state of JWT status, with state setter here
+
+## Use Effects
+
+- Update state of global JWT on successful register
+
+## Event Handler
+
+N/A
+
+## Components
+
+N/A

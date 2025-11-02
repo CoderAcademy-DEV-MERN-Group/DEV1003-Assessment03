@@ -1,3 +1,5 @@
+# Component Structure
+
 - Entry Level (main.jsx): Renders App to DOM; imports React, ReactDOM, global styles.
 
   - Global Assets Branch

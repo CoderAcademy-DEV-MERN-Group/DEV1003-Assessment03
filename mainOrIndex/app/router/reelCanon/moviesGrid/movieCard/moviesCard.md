@@ -1,17 +1,29 @@
-# Movies Card
+# Movie Card
 
-## API request for all movies
+Renders individual movies in divs (or semantic equivalent) with onHover and mobile equivalent revealing movie details (such as description) and displaying movie poster or blank color conditional on if user has watched the movie or not
 
-router.get('movies/reel-canon', getReelCanon);
+## API Requests
 
-## Update reel-progress
+N/A
 
-Call router.post('/', verifyToken, validateReelProgress, createReelProgress); To add movie to reel-progress, effectively 'scratching it off'
+## States
 
-Call router.patch('/:movieId', verifyToken, validateReelProgress, updateReelProgress); to add rating to watched, but unrated movie
+- State of watched movies (reel progress):
+  - Receive state and state setter from movies grid, so if a movie is scratched (aka set to watched) we update state of watched movies, and update whether movie is 'scratched'
+- State of ratings (in reel progress):
+  - Receive state and state setter from movies grid, so if a movie is rated it updates ratings state and changes rendering of rating in movie card
 
-## Store all movies in state
+## Use Effects
 
-update reel-progress state with state setter passed from movies grid
+(Might be better as event handlers unsure right now)
 
-update ratings state with state setter passed from movies grid
+- Update state of watched movies on scratch action
+- Update state of reviewed movies on review action
+
+## Event Handler
+
+N/A
+
+## Components
+
+- Movie Card

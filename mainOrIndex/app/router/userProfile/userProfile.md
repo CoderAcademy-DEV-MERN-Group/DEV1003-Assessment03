@@ -1,5 +1,19 @@
 # User Profile
 
-## API call to get user
+Renders card container child components
 
-router.get('/my-profile', verifyToken, getUserProfile); OR have user available as global state
+## API Requests
+
+N/A
+
+## States
+
+N/A
+
+## Use Effects
+
+N/A
+
+## Components
+
+- Card Container
