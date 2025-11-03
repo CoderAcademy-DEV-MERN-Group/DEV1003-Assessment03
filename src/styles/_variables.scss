@@ -1,0 +1,52 @@
+// GLOBAL VARIABLES only. Should not cause conflicts if used correctly.
+$colors: (
+  primary: #667eea,
+  primary-dark: #5a67d8,
+  secondary: #764ba2,
+  error: #e53e3e,
+  success: #38a169,
+  text-dark: #2d3748,
+  text-light: #718096,
+  background: #f7fafc,
+  white: #ffffff
+);
+
+// Spacing - consistent scale
+$spacing: (
+  xs: 0.25rem,
+  sm: 0.5rem,
+  md: 1rem,
+  lg: 1.5rem,
+  xl: 2rem,
+  xxl: 3rem
+);
+
+// Breakpoints for responsive design
+$breakpoints: (
+  mobile: 768px,
+  tablet: 1024px,
+  desktop: 1280px
+);
+
+// Border radius
+$border-radius: (
+  sm: 4px,
+  md: 8px,
+  lg: 12px
+);
+
+@function color($key) {
+  @return map.get($colors, $key);
+}
+
+@function spacing($key) {
+  @return map.get($spacing, $key);
+}
+
+@function breakpoint($key) {
+  @return map.get($breakpoints, $key);
+}
+
+@function radius($key) {
+  @return map.get($border-radius, $key);
+}
