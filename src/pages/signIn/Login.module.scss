@@ -1,6 +1,5 @@
-@use "sass:map";
-@import "../../styles/variables";
-@import "../../styles/mixins";
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
 
 // Login.module.scss
 .modalOverlay {
@@ -17,7 +16,7 @@
 .modal {
   @include flex-center;
   position: relative;
-  background: color(secondary);
+  background: rgba(77, 1, 1, 0.664);
   border-radius: radius(lg);
   padding: spacing(xxl);
   max-width: 30vw;
@@ -44,7 +43,7 @@
 }
 
 .loginForm {
-  background: color(white);
+  background: color(soft);
   padding: spacing(xxl);
   border-radius: radius(lg);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);

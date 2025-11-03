@@ -1,5 +1,5 @@
-@use 'sass:map';
-@import 'variables';
+// @use "sass:map";
+@use "variables" as *;
 
 // Flexbox helpers
 @mixin flex-center {
@@ -33,7 +33,7 @@
   background: transparent;
   cursor: pointer;
   font-family: inherit;
-  
+
   &:disabled {
     cursor: not-allowed;
     opacity: 0.6;

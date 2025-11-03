@@ -1,3 +1,5 @@
+@use "sass:map";
+
 // GLOBAL VARIABLES only. Should not cause conflicts if used correctly.
 $colors: (
   primary: #667eea,

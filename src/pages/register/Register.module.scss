@@ -1,10 +1,8 @@
-@use "sass:map";
-@import "../../styles/variables";
-@import "../../styles/mixins";
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
 
 .registerContainer{
-    @include flex-center;
-    align-items: center;
+    display:flex;
     text-align: left;
 }
 
@@ -20,6 +18,10 @@
     text-align: center;
     margin-bottom: spacing(xl);
     color: color(text-dark);
+  }
+
+  button {
+    display: block;
   }
 }
 
@@ -87,14 +89,14 @@
 .registerButton {
   @include button-reset;
   width: 30%;
-  margin-top: 5%;
+  margin: 0 auto;
   padding: spacing(md);
   background: color(primary);
   color: color(white);
   border-radius: radius(md);
   font-weight: 600;
   font-size: 1rem;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.4s ease;
 
   &:hover:not(:disabled) {
     background: color(primary-dark);
@@ -107,11 +109,11 @@
 
 // Responsive
 @include mobile {
-  .loginContainer {
+  .registerContainer {
     padding: spacing(md);
   }
 
-  .loginForm {
+  .registerForm {
     padding: spacing(xl);
   }
 }
