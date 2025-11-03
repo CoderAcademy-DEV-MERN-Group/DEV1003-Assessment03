@@ -1,5 +1,6 @@
 // React hook form provides form management without useState
 import clsx from "clsx";
+import styles from "./Register.module.scss";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 
@@ -65,12 +66,12 @@ const Register = () => {
 
   return (
     // Main: the main content of this component
-    <main className="register-container">
-      <form onSubmit={handleSubmit(onSubmit)} className="register-form">
+    <main className={styles.registerContainer}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.registerForm}>
         <h1> Join the Century Screening Room! </h1>
 
         {/* fieldset semantic HTML for all form fields */}
-        <fieldset className="input-group">
+        <fieldset className={styles.inputGroup}>
           
           {/* Legend for name of all fields */}
           <legend>Account Details</legend>
@@ -89,14 +90,14 @@ const Register = () => {
               })}
               // Conditional classes for styling appropriately
               className={clsx(
-                "input-base",
-                errors.email && "input-error" // shared error class for styling
+                styles.registerInput,
+                errors.email && styles.inputError // shared error class for styling
               )}
             />
             <br />
             {/* This runs when there are errors! */}
             {errors.email && (
-              <span className="error-message">{errors.email.message}</span> // Shows the specific email error
+              <span className={styles.errorMessage}>{errors.email.message}</span> // Shows the specific email error
             )}
           </p>
 
@@ -112,11 +113,11 @@ const Register = () => {
                   message: "Username must be at least 2 characters",
                 },
               })}
-              className={clsx("input-base", errors.username && "input-error")}
+              className={clsx(styles.registerInput, errors.username && styles.inputError)}
             />
             <br />
             {errors.username && (
-              <span className="error-message">{errors.username.message}</span>
+              <span className={styles.errorMessage}>{errors.username.message}</span>
             )}
           </p>
 
@@ -139,19 +140,19 @@ const Register = () => {
                 },
               })}
               className={clsx(
-                "input-base",
-                errors.password && "input-error" // shared error class for styling
+                styles.registerInput,
+                errors.password && styles.inputError // shared error class for styling
               )}
             />
             <br />
-            <small className="password-requirements">
+            <small id="passwordInstructions">
               Must include at least one: uppercase, lowercase, number and
               special character.
             </small>
             <br />
             {/* This runs when there are errors */}
             {errors.password && (
-              <span className="error-message">{errors.password.message}</span> // Shows the specific password error
+              <span className={styles.errorMessage}>{errors.password.message}</span> // Shows the specific password error
             )}
           </p>
           <p>
@@ -165,13 +166,13 @@ const Register = () => {
                   value === watchPassword || "Passwords do not match",
               })}
               className={clsx(
-                "input-base",
-                errors.confirmPassword && "input-error"
+                styles.registerInput,
+                errors.confirmPassword && styles.inputError
               )}
             />
             <br />
             {errors.confirmPassword && (
-              <span className="error-message">
+              <span className={styles.errorMessage}>
                 {errors.confirmPassword.message}
               </span>
             )}
@@ -179,13 +180,13 @@ const Register = () => {
         </fieldset>
 
         {/* API level error displays go here */}
-        {apiError && <span>Registration failed. {apiError.message}.</span>}
+        {apiError && <span className={styles.errorMessage}>Registration failed. {apiError.message}.</span>}
 
         <br></br>
         <button
           type="submit"
           disabled={isPending}
-          className={clsx("button-base", isPending && "button-loading")}
+          className={clsx(styles.registerButton, isPending && styles.loadingButton)}
         >
           {isPending ? "Setting up account" : "Register"}
         </button>

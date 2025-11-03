@@ -8,7 +8,8 @@ $colors: (
   text-dark: #2d3748,
   text-light: #718096,
   background: #f7fafc,
-  white: #ffffff
+  white: #ffffff,
+  soft: #cdc2f5,
 );
 
 // Spacing - consistent scale
@@ -18,21 +19,21 @@ $spacing: (
   md: 1rem,
   lg: 1.5rem,
   xl: 2rem,
-  xxl: 3rem
+  xxl: 3rem,
 );
 
 // Breakpoints for responsive design
 $breakpoints: (
   mobile: 768px,
   tablet: 1024px,
-  desktop: 1280px
+  desktop: 1280px,
 );
 
 // Border radius
 $border-radius: (
   sm: 4px,
   md: 8px,
-  lg: 12px
+  lg: 12px,
 );
 
 @function color($key) {
