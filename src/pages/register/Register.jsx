@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 // React hook form provides form management without useState
 import clsx from "clsx";
 import styles from "./Register.module.scss";
