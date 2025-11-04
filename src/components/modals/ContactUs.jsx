@@ -1,6 +1,6 @@
 import Modal from "react-modal";
 import { useForm } from "@formspree/react";
-import styles from "./about.module.scss";
+import styles from "./Modal.module.scss";
 
 function ContactUs({ isOpen, onClose }) {
   const [state, handleSubmit, reset] = useForm("mblpvzov");
@@ -48,25 +48,20 @@ function ContactUs({ isOpen, onClose }) {
         {" "}
         x{" "}
       </button>
-      <form onSubmit={handleSubmit} className={styles.contactForm}>
+      <form onSubmit={handleSubmit} className={styles.modalForm}>
         <h1> Contact Us! </h1>
         <fieldset className={styles.inputGroup}>
           <legend> What's on your mind? </legend>
           <p>
             <label htmlFor="email">Email: </label>
-            <input
-              name="email"
-              type="email"
-              className={styles.contactEmail}
-              required
-            />
+            <input name="email" type="email" className={styles.modalInput} required />
           </p>
           <p>
             <label htmlFor="message">Message: </label>
             <textarea
               name="message"
               type="text"
-              className={styles.contactMessage}
+              className={styles.modalTextarea}
               required
               minLength="10"
             />
