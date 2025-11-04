@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 // React hook form provides form management without useState
 import clsx from "clsx";
 import Modal from "react-modal";
