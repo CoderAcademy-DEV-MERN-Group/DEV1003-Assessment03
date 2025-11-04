@@ -1,12 +1,26 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App.jsx";
+import "./styles/index.css";
+import App from "./App";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Modal from "react-modal";
 
-const container = document.getElementById("root");
-const root = createRoot(container);
-root.render(
+Modal.setAppElement("#root");
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    // Globally applied to all queries by default
+    queries: {
+      retry: 1, // Retry failed requests once
+      staleTime: 5 * 60 * 1000, // Data is stale after 5 minutes
+    },
+  },
+});
+
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
   </StrictMode>
 );

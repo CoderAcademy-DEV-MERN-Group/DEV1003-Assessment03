@@ -103,6 +103,9 @@ export default [
       // React rules (Airbnb React Style Guide)
       "react/jsx-filename-extension": ["error", { extensions: [".jsx"] }],
       "react/jsx-uses-react": "off", // Not needed in React 17+
+      /* Prevent variables used in JSX (like `StrictMode` or component imports)
+      from being marked as unused by `no-unused-vars`. */
+      "react/jsx-uses-vars": "error",
       "react/react-in-jsx-scope": "off", // Not needed in React 17+
       "react/prop-types": "warn",
       "react/require-default-props": "warn",
