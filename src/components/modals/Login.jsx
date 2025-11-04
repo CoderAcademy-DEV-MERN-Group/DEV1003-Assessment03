@@ -5,7 +5,7 @@ import Modal from "react-modal";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
-import styles from "./Login.module.scss";
+import styles from "./Modal.module.scss";
 
 // Set up our form with RHF
 function Login({ isOpen, onClose }) {
@@ -87,11 +87,9 @@ function Login({ isOpen, onClose }) {
         x{" "}
       </button>
 
-      {loginSuccess && (
-        <span className={styles.successMessage}>Login successful! 🎉</span>
-      )}
+      {loginSuccess && <span className={styles.successMessage}>Login successful! 🎉</span>}
 
-      <form onSubmit={handleSubmit(onSubmit)} className={styles.loginForm}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.modalForm}>
         <h1> Welcome Back! </h1>
 
         {/* fieldset for all form fields */}
@@ -113,16 +111,14 @@ function Login({ isOpen, onClose }) {
               })}
               // Conditional classes for styling appropriately
               className={clsx(
-                styles.loginInput,
+                styles.modalInput,
                 errors.email && styles.inputError // shared error class for styling
               )}
             />
 
             {/* This runs when there are errors! */}
             {errors.email && (
-              <span className={styles.errorMessage}>
-                {errors.email.message}
-              </span> // Shows the specific email error
+              <span className={styles.errorMessage}>{errors.email.message}</span> // Shows the specific email error
             )}
           </p>
           <p>
@@ -138,15 +134,13 @@ function Login({ isOpen, onClose }) {
                 },
               })}
               className={clsx(
-                styles.loginInput,
+                styles.modalInput,
                 errors.password && styles.inputError // shared error class for styling
               )}
             />
             {/* This runs when there are errors */}
             {errors.password && (
-              <span className={styles.errorMessage}>
-                {errors.password.message}
-              </span> // Shows the specific password error
+              <span className={styles.errorMessage}>{errors.password.message}</span> // Shows the specific password error
             )}
           </p>
         </fieldset>
@@ -161,10 +155,7 @@ function Login({ isOpen, onClose }) {
         <button
           type="submit"
           disabled={isPending}
-          className={clsx(
-            styles.loginButton,
-            isPending && styles.buttonLoading
-          )}
+          className={clsx(styles.modalButton, isPending && styles.buttonLoading)}
         >
           {isPending ? "Signing in" : "Sign in"}
         </button>

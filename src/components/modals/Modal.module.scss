@@ -42,7 +42,8 @@
   }
 }
 
-.loginForm {
+// Form Styles - Shared across modal forms
+.modalForm {
   background: color(soft);
   padding: spacing(xxl);
   border-radius: radius(lg);
@@ -78,8 +79,8 @@
   }
 }
 
-// Unique to Login component
-.loginInput {
+// Input Styles
+.modalInput {
   width: 90%;
   padding: spacing(md);
   border: 2px solid #e2e8f0;
@@ -97,6 +98,13 @@
   }
 }
 
+.modalTextarea {
+  @extend .modalInput;
+  height: 20dvh;
+  resize: vertical;
+}
+
+// Status Messages
 .errorMessage {
   color: color(error);
   font-size: 0.875rem;
@@ -122,8 +130,8 @@
   text-align: center;
 }
 
-// Unique to Login component
-.loginButton {
+// Button Styles
+.modalButton {
   @include button-reset;
   width: 30%;
   margin-left: 35%;
@@ -147,11 +155,17 @@
 
 // Responsive
 @include mobile {
-  .loginContainer {
+  .modal {
     padding: spacing(md);
+    max-width: 95vw;
   }
 
-  .loginForm {
+  .modalForm {
     padding: spacing(xl);
+  }
+
+  .modalButton {
+    width: 50%;
+    margin-left: 25%;
   }
 }
