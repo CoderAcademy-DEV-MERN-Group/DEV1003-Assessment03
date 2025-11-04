@@ -3,13 +3,18 @@ import { useForm } from "@formspree/react";
 import styles from "./about.module.scss";
 
 function ContactUs({ isOpen, onClose }) {
-  const [state, handleSubmit] = useForm("mblpvzov");
+  const [state, handleSubmit, reset] = useForm("mblpvzov");
+
+  const handleClose = () => {
+    reset("mblpvzov");
+    onClose();
+  };
 
   if (state.succeeded) {
     return (
       <Modal
         isOpen={isOpen}
-        onRequestClose={onClose}
+        onRequestClose={handleClose}
         className={styles.modal}
         overlayClassName={styles.modalOverlay}
       >
@@ -17,7 +22,7 @@ function ContactUs({ isOpen, onClose }) {
           Thanks for contacting us! We'll get back to you soon.
           <br />
         </p>
-        <button onClick={onClose} className={styles.closeButton}>
+        <button onClick={handleClose} className={styles.closeButton}>
           {" "}
           x{" "}
         </button>
@@ -28,7 +33,7 @@ function ContactUs({ isOpen, onClose }) {
   return (
     <Modal
       isOpen={isOpen}
-      onRequestClose={onClose}
+      onRequestClose={handleClose}
       className={styles.modal}
       overlayClassName={styles.modalOverlay}
       shouldCloseOnOverlayClick
@@ -36,7 +41,7 @@ function ContactUs({ isOpen, onClose }) {
     >
       <button
         type="button"
-        onClick={onClose}
+        onClick={handleClose}
         className={styles.closeButton}
         aria-label="Close contact form pop-up"
       >
