@@ -5,6 +5,7 @@ import Modal from "react-modal";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
+import { loginUser } from "../../utilities/services/apiServices";
 import styles from "./Modal.module.scss";
 
 // Set up our form with RHF
@@ -27,27 +28,7 @@ function Login({ isOpen, onClose }) {
     error: apiError, // Error object if the API fails
   } = useMutation({
     // This is the function that makes the call to the backend
-    mutationFn: async (credentials) => {
-      const response = await fetch("http://localhost:3000/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json", // This may not be required, backend may be flexible?
-        },
-        body: JSON.stringify(credentials),
-      });
-
-      // Check for success status code:
-      if (!response.ok) {
-        try {
-          const errorData = await response.json();
-          throw new Error(`${errorData}`);
-        } catch {
-          throw new Error(`Login failed: ${response.status}`);
-        }
-      }
-
-      return response.json();
-    },
+    mutationFn: loginUser,
 
     onSuccess: (data) => {
       // JWT STORAGE to localstorage
