@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { getLeaderboardData } from "../services/apiServices";
+import { getLeaderboard } from "../services/apiServices";
 
 // Create tanstack fetch? custom hook to GET leaderboard data
-export const useLeaderboardData = () =>
+export const useLeaderboard = () =>
   useQuery({
-    queryKey: ["leaderboard-data"],
-    queryFn: getLeaderboardData,
+    queryKey: ["leaderboard"],
+    queryFn: getLeaderboard,
   });
