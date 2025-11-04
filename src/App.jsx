@@ -36,35 +36,35 @@
 
 // Example app file for login button
 
-// import "../src/styles/App.css";
-// import { useState } from "react";
-// import Login from "./pages/signIn/Login";
-// import Register from "./pages/register/Register";
-// import ContactUs from "./pages/about/ContactUs";
+import "../src/styles/App.css";
+import { useState } from "react";
+import Login from "./pages/signIn/Login";
+import Register from "./pages/register/Register";
+import ContactUs from "./pages/about/ContactUs";
 
-// function App() {
-//   const [showLogin, setShowLogin] = useState(false);
-//   const [showContactForm, setShowContact] = useState(false);
+function App() {
+  const [showLogin, setShowLogin] = useState(false);
+  const [showContactForm, setShowContact] = useState(false);
 
-//   return (
-//     <>
-//       <button onClick={() => setShowLogin(true)} className="open-login-button">
-//         Sign In
-//       </button>
-//       <Login isOpen={showLogin} onClose={() => setShowLogin(false)} />
-//       <Register />
-//       <button
-//         onClick={() => setShowContact(true)}
-//         className="open-contact-button"
-//       >
-//         Contact Us
-//       </button>
-//       <ContactUs
-//         isOpen={showContactForm}
-//         onClose={() => setShowContact(false)}
-//       />
-//     </>
-//   );
-// }
+  return (
+    <>
+      <button onClick={() => setShowLogin(true)} className="open-login-button">
+        Sign In
+      </button>
+      <Login isOpen={showLogin} onClose={() => setShowLogin(false)} />
+      <Register />
+      <button
+        onClick={() => setShowContact(true)}
+        className="open-contact-button"
+      >
+        Contact Us
+      </button>
+      <ContactUs
+        isOpen={showContactForm}
+        onClose={() => setShowContact(false)}
+      />
+    </>
+  );
+}
 
-// export default App;
+export default App;
