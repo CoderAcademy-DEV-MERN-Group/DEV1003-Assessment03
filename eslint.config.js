@@ -12,13 +12,13 @@ export default [
   {
     ignores: ["dist", "node_modules", "build"],
   },
+  js.configs.recommended,
   {
     files: ["**/*.{js,jsx}"],
-    ...js.configs.recommended,
-    ...reactHooks.configs["recommended-latest"],
-    ...reactRefresh.configs.vite,
     plugins: {
       react,
+      "react-hooks": reactHooks,
+      "react-refresh": reactRefresh,
       "jsx-a11y": jsxA11y,
       import: importPlugin,
       prettier,
@@ -46,6 +46,16 @@ export default [
     rules: {
       // Prettier integration
       "prettier/prettier": "error",
+
+      // React Hooks rules
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+
+      // React Refresh rules
+      "react-refresh/only-export-components": [
+        "warn",
+        { allowConstantExport: true },
+      ],
 
       // Airbnb JavaScript Style Guide rules
       "no-unused-vars": [
@@ -86,21 +96,9 @@ export default [
           ignore: ["^vite$", "^@vitejs/", "^@eslint/", "^eslint/", "^eslint-"],
         },
       ],
-      "import/order": [
-        "error",
-        {
-          groups: [
-            "builtin",
-            "external",
-            "internal",
-            "parent",
-            "sibling",
-            "index",
-          ],
-          "newlines-between": "never",
-          alphabetize: { order: "asc", caseInsensitive: true },
-        },
-      ],
+      "import/first": "error",
+      "import/newline-after-import": "error",
+      "import/no-duplicates": "error",
 
       // React rules (Airbnb React Style Guide)
       "react/jsx-filename-extension": ["error", { extensions: [".jsx"] }],
