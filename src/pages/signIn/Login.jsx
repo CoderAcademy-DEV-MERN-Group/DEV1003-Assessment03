@@ -6,7 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import styles from "./Login.module.scss";
 
 // Set up our form with RHF
-const Login = ({ isOpen, onClose }) => {
+function Login({ isOpen, onClose }) {
   // formState allows RHF to track which fields have errors and what they are
   const {
     register, // attaches form content
@@ -47,7 +47,7 @@ const Login = ({ isOpen, onClose }) => {
     onSuccess: (data) => {
       console.log("Login successful for user with email:", data.email);
 
-      //JWT STORAGE to localstorage
+      // JWT STORAGE to localstorage
       localStorage.setItem("authToken", data.token);
       console.log("Token stored");
     },
@@ -67,8 +67,8 @@ const Login = ({ isOpen, onClose }) => {
       onRequestClose={onClose}
       className={styles.modal}
       overlayClassName={styles.modalOverlay}
-      shouldCloseOnOverlayClick={true}
-      shouldCloseOnEsc={true}
+      shouldCloseOnOverlayClick
+      shouldCloseOnEsc
     >
       {/* Close button :D */}
       <button
@@ -151,13 +151,16 @@ const Login = ({ isOpen, onClose }) => {
         <button
           type="submit"
           disabled={isPending}
-          className={clsx(styles.loginButton, isPending && styles.buttonLoading)}
+          className={clsx(
+            styles.loginButton,
+            isPending && styles.buttonLoading
+          )}
         >
           {isPending ? "Signing in" : "Sign in"}
         </button>
       </form>
     </Modal>
   );
-};
+}
 
 export default Login;

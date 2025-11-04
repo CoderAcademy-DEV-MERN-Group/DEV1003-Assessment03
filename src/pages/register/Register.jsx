@@ -4,7 +4,7 @@ import styles from "./Register.module.scss";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 
-const Register = () => {
+function Register() {
   // formState allows RHF to track which fields have errors and what they are
   const {
     register, // attaches form content
@@ -51,7 +51,7 @@ const Register = () => {
         data.email
       );
 
-      //JWT STORAGE to localstorage
+      // JWT STORAGE to localstorage
       localStorage.setItem("authToken", data.token);
       console.log("Token stored");
     },
@@ -72,7 +72,6 @@ const Register = () => {
 
         {/* fieldset semantic HTML for all form fields */}
         <fieldset className={styles.inputGroup}>
-          
           {/* Legend for name of all fields */}
           <legend>Account Details</legend>
           <p>
@@ -97,7 +96,9 @@ const Register = () => {
             <br />
             {/* This runs when there are errors! */}
             {errors.email && (
-              <span className={styles.errorMessage}>{errors.email.message}</span> // Shows the specific email error
+              <span className={styles.errorMessage}>
+                {errors.email.message}
+              </span> // Shows the specific email error
             )}
           </p>
 
@@ -113,11 +114,16 @@ const Register = () => {
                   message: "Username must be at least 2 characters",
                 },
               })}
-              className={clsx(styles.registerInput, errors.username && styles.inputError)}
+              className={clsx(
+                styles.registerInput,
+                errors.username && styles.inputError
+              )}
             />
             <br />
             {errors.username && (
-              <span className={styles.errorMessage}>{errors.username.message}</span>
+              <span className={styles.errorMessage}>
+                {errors.username.message}
+              </span>
             )}
           </p>
 
@@ -152,7 +158,9 @@ const Register = () => {
             <br />
             {/* This runs when there are errors */}
             {errors.password && (
-              <span className={styles.errorMessage}>{errors.password.message}</span> // Shows the specific password error
+              <span className={styles.errorMessage}>
+                {errors.password.message}
+              </span> // Shows the specific password error
             )}
           </p>
           <p>
@@ -180,19 +188,26 @@ const Register = () => {
         </fieldset>
 
         {/* API level error displays go here */}
-        {apiError && <span className={styles.errorMessage}>Registration failed. {apiError.message}.</span>}
+        {apiError && (
+          <span className={styles.errorMessage}>
+            Registration failed. {apiError.message}.
+          </span>
+        )}
 
-        <br></br>
+        <br />
         <button
           type="submit"
           disabled={isPending}
-          className={clsx(styles.registerButton, isPending && styles.loadingButton)}
+          className={clsx(
+            styles.registerButton,
+            isPending && styles.loadingButton
+          )}
         >
           {isPending ? "Setting up account" : "Register"}
         </button>
       </form>
     </main>
   );
-};
+}
 
 export default Register;
