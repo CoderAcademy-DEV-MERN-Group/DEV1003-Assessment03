@@ -53,16 +53,10 @@ function App() {
       </button>
       <Login isOpen={showLogin} onClose={() => setShowLogin(false)} />
       <Register />
-      <button
-        onClick={() => setShowContact(true)}
-        className="open-contact-button"
-      >
+      <button onClick={() => setShowContact(true)} className="open-contact-button">
         Contact Us
       </button>
-      <ContactUs
-        isOpen={showContactForm}
-        onClose={() => setShowContact(false)}
-      />
+      <ContactUs isOpen={showContactForm} onClose={() => setShowContact(false)} />
     </>
   );
 }
