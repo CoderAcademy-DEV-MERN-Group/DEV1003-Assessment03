@@ -189,7 +189,7 @@ function Register() {
 
         {/* API level error displays go here */}
         {apiError && (
-          <span className={styles.errorMessage}>
+          <span className={styles.apiError}>
             Registration failed. {apiError.message}.
           </span>
         )}

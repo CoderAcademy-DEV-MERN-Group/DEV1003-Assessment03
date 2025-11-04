@@ -1,12 +1,16 @@
 // React hook form provides form management without useState
 import clsx from "clsx";
 import Modal from "react-modal";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import styles from "./Login.module.scss";
 
 // Set up our form with RHF
 function Login({ isOpen, onClose }) {
+  // set login states
+  const [loginSuccess, setLoginSuccess] = useState(false);
+
   // formState allows RHF to track which fields have errors and what they are
   const {
     register, // attaches form content
@@ -45,18 +49,19 @@ function Login({ isOpen, onClose }) {
     },
 
     onSuccess: (data) => {
-      console.log("Login successful for user with email:", data.email);
-
       // JWT STORAGE to localstorage
       localStorage.setItem("authToken", data.token);
-      console.log("Token stored");
+      setLoginSuccess(true);
+      setTimeout(() => {
+        onClose();
+        setLoginSuccess(false);
+      }, 2000);
     },
   });
 
   // What runs when the form is submitted and valid (handleSubmit automatically checks validation rules):
   // Just log for setup
   const onSubmit = (data) => {
-    console.log("Making Api call for ", data.email);
     login(data);
   };
 
@@ -80,6 +85,10 @@ function Login({ isOpen, onClose }) {
         {" "}
         x{" "}
       </button>
+
+      {loginSuccess && (
+        <span className={styles.successMessage}>Login successful! 🎉</span>
+      )}
 
       <form onSubmit={handleSubmit(onSubmit)} className={styles.loginForm}>
         <h1> Welcome Back! </h1>

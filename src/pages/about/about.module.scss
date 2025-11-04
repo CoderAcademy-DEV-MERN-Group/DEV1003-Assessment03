@@ -42,7 +42,7 @@
   }
 }
 
-.loginForm {
+.contactForm {
   background: color(soft);
   padding: spacing(xxl);
   border-radius: radius(lg);
@@ -79,8 +79,27 @@
 }
 
 // Unique to Login component
-.loginInput {
+.contactEmail {
   width: 90%;
+  padding: spacing(md);
+  border: 2px solid #e2e8f0;
+  border-radius: radius(md);
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: color(primary);
+  }
+
+  &.inputError {
+    border-color: color(error);
+  }
+}
+
+.contactMessage {
+  width: 90%;
+  height: 20dvh;
   padding: spacing(md);
   border: 2px solid #e2e8f0;
   border-radius: radius(md);
