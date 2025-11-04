@@ -26,7 +26,7 @@ function Login({ isOpen, onClose }) {
       const response = await fetch("http://localhost:3000/auth/login", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json", // This may not be required, backend may be flexible?
+          "Content-Type": "application/json", // This has to be included otherwise our backend cannot parse the data
         },
         body: JSON.stringify(credentials),
       });

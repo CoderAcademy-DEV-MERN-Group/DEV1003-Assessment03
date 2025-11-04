@@ -28,7 +28,7 @@ function Register() {
       const response = await fetch("http://localhost:3000/auth/register", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json", // This may not be required, backend may be flexible?
+          "Content-Type": "application/json", // This has to be included for our backend to parse the data
         },
         body: JSON.stringify(credentials),
       });
