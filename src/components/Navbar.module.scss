@@ -1,15 +1,47 @@
+@use "../styles/variables" as *;
+@use "../styles/mixins" as *;
+
 .navbar {
-    display: flex;
-    align-items: flex-end;
-    width: 100dvw;
-    justify-content: space-between;
+  background-color: color(secondary);
+  display: flex;
+  align-items: flex-end;
+  width: auto;
+  justify-content: space-between;
+  padding: 5px;
 }
 
 .logoImg {
-    border-radius: 50%;
-    height: 125px;
+  border-radius: 50%;
+  height: 125px;
 }
 
-button{
-    align-self: flex-end;
+.pageLinks {
+  //   @include flex-center;
+  //   justify-content: space-between;
+//   text-decoration: none !important;
+}
+
+.modalButtons {
+  //   align-self: flex-end;
+}
+
+.openLoginButton {
+}
+
+.link {
+  color: color(text-light);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  transition: color 0.4s ease;
+  
+  &:hover:not(:disabled) {
+    color: color(primary-dark);
+  }
+
+}
+
+.activeLink {
+  color: color(text-dark);
+  text-decoration: none;
+  font-weight: bold;
 }
