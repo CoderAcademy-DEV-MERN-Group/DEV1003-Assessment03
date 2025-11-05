@@ -4,9 +4,8 @@ import clsx from "clsx";
 import Modal from "react-modal";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useMutation } from "@tanstack/react-query";
-import { loginUser } from "../../utilities/services/apiServices";
 import styles from "./Modal.module.scss";
+import { useLoginUser } from "../../utilities/customHooks/useAuth";
 
 // Set up our form with RHF
 function Login({ isOpen, onClose }) {
@@ -14,37 +13,33 @@ function Login({ isOpen, onClose }) {
   const [loginSuccess, setLoginSuccess] = useState(false);
 
   // formState allows RHF to track which fields have errors and what they are
+  // register - attaches form content
+  // handleSubmit - runs when submitted
+  // formState: real-time validation error tracking
   const {
-    register, // attaches form content
-    handleSubmit, // runs when submitted
-    formState: { errors }, // real-time validation error tracking
+    register,
+    handleSubmit,
+    formState: { errors },
   } = useForm();
 
   // Tanstack Query mutation for handling login API call:
   // Gives us loading states, error handling & caching without complex logic
-  const {
-    mutate: login, // The function which triggers API call
-    isPending, // Loading state
-    error: apiError, // Error object if the API fails
-  } = useMutation({
-    // This is the function that makes the call to the backend
-    mutationFn: loginUser,
+  //  mutate: The function which triggers API call
+  // isPending: Data is being sent/changed state
+  // Error object if the API fails
+  const { mutate: login, isPending, error: apiError } = useLoginUser();
 
-    onSuccess: (data) => {
-      // JWT STORAGE to localstorage
-      localStorage.setItem("authToken", data.token);
-      setLoginSuccess(true);
-      setTimeout(() => {
-        onClose();
-        setLoginSuccess(false);
-      }, 2000);
-    },
-  });
-
-  // What runs when the form is submitted and valid (handleSubmit automatically checks validation rules):
-  // Just log for setup
   const onSubmit = (data) => {
-    login(data);
+    login(data, {
+      onSuccess: (res) => {
+        localStorage.setItem("authToken", res.token);
+        setLoginSuccess(true);
+        setTimeout(() => {
+          onClose();
+          setLoginSuccess(false);
+        }, 2000);
+      },
+    });
   };
 
   return (
@@ -67,8 +62,6 @@ function Login({ isOpen, onClose }) {
         {" "}
         x{" "}
       </button>
-
-      {loginSuccess && <span className={styles.successMessage}>Login successful! 🎉</span>}
 
       <form onSubmit={handleSubmit(onSubmit)} className={styles.modalForm}>
         <h1> Welcome Back! </h1>
@@ -125,7 +118,9 @@ function Login({ isOpen, onClose }) {
             )}
           </p>
         </fieldset>
+        {/* Login success message span */}
 
+        {loginSuccess && <span className={styles.successMessage}>Login successful! 🎉</span>}
         {/* API level error displays go here */}
         {apiError && (
           <span className={styles.apiError}>
