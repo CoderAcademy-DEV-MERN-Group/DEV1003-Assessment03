@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import ContactUs from "./modals/ContactUs";
-import logo from "../assets/images/templogo180px.png";
+// import logo from "../assets/images/templogo180px.png";
 import styles from "../components/styles/Footer.module.scss";
 
 function Footer() {
