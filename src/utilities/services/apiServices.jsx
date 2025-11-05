@@ -78,7 +78,7 @@ export const loginUser = async (userBodyData) => {
 // Logout current user
 export const logoutUser = async () => {
   try {
-    const res = await api.post("/auth/logout");
+    const res = await api.get("/auth/logout");
     return res.data;
   } catch (err) {
     // Shouldn't fail since no controller logic for logout route, but just in case
