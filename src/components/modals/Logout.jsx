@@ -71,7 +71,7 @@ function Logout({ isOpen, onClose }) {
             <p>Redirecting</p>
           </article>
         ) : (
-          <>
+          <article className={styles.confirmMessage}>
             <p>Are you sure you want to log out?</p>
 
             {apiError && (
@@ -88,7 +88,7 @@ function Logout({ isOpen, onClose }) {
             >
               {isPending ? "Logging out..." : "Yes, Log Out"}
             </button>
-          </>
+          </article>
         )}
       </section>
     </Modal>

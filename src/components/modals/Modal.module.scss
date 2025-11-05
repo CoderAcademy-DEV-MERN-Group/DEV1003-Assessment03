@@ -123,12 +123,17 @@
 
 .successMessage {
   background: rgba(144, 238, 144, 0.527);
-  color: color(darkgreen);
+  color: darkgreen;
   padding: spacing(xs);
   border-radius: radius(md);
   margin-bottom: spacing(xl);
   text-align: center;
 }
+
+.confirmMessage p {
+    color: color(text-dark);
+    text-align: center;
+  }
 
 // Button Styles
 .modalButton {
