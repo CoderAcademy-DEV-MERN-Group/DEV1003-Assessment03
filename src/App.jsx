@@ -34,17 +34,19 @@
 
 // export default App;
 
-// Example app file for login button
+// Example app file to test in browser
 
 // import "../src/styles/App.css";
 // import { useState } from "react";
 // import Login from "./components/modals/Login";
 // import Register from "./pages/register/Register";
 // import ContactUs from "./components/modals/ContactUs";
+// import Logout from "./components/modals/Logout";
 
 // function App() {
 //   const [showLogin, setShowLogin] = useState(false);
 //   const [showContactForm, setShowContact] = useState(false);
+//   const [showLogout, setShowLogout] = useState(false);
 
 //   return (
 //     <>
@@ -57,6 +59,10 @@
 //         Contact Us
 //       </button>
 //       <ContactUs isOpen={showContactForm} onClose={() => setShowContact(false)} />
+//       <button onClick={() => setShowLogout(true)} className="open-logout-button">
+//         Log Out
+//       </button>
+//       <Logout isOpen={showLogout} onClose={() => setShowLogout(false)} />
 //     </>
 //   );
 // }

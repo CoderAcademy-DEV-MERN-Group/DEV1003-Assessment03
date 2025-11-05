@@ -32,6 +32,9 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
+// NOTE: this shouldn't remove tokens, that happens from the modal (accessible from any page) 401 stuff is fine,
+// but need to double check all 401 errors relate to only invalid tokens, not any other token
+// errors. Left in for now but needs removal/refactoring.
 // Response interceptor for removing JWT token on logout
 api.interceptors.response.use(
   (response) => {
@@ -78,7 +81,7 @@ export const loginUser = async (userBodyData) => {
 // Logout current user
 export const logoutUser = async () => {
   try {
-    const res = await api.get("/auth/logout");
+    const res = await api.post("/auth/logout");
     return res.data;
   } catch (err) {
     // Shouldn't fail since no controller logic for logout route, but just in case

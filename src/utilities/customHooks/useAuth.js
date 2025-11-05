@@ -1,4 +1,4 @@
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { registerUser, loginUser, logoutUser } from "../services/apiServices";
 
 // Create tanstack mutation custom hook to register a new user
@@ -16,7 +16,6 @@ export const useLoginUser = () =>
 // Create tanstack mutation custom hook to logout current user
 // Is this needed? Logout is just GET request with success message
 export const useLogoutUser = () =>
-  useQuery({
-    queryKey: ["logout-user"],
-    queryFn: logoutUser,
+  useMutation({
+    mutationFn: logoutUser,
   });
