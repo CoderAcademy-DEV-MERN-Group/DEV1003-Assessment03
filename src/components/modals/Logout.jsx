@@ -1,45 +1,28 @@
 import clsx from "clsx";
 import Modal from "react-modal";
 import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
-import { logoutUser } from "../../utilities/services/apiServices";
 import styles from "./Modal.module.scss";
+import { useLogoutUser } from "../../utilities/customHooks/useAuth";
 
 function Logout({ isOpen, onClose }) {
   const [logoutSuccess, setLogoutSuccess] = useState(false);
 
-  const {
-    mutate: submit,
-    isPending,
-    error: apiError,
-  } = useMutation({
-    mutationFn: logoutUser,
-
-    onSuccess: () => {
-      // Remove token from local storage
-      localStorage.removeItem("authToken");
-      setLogoutSuccess(true);
-
-      setTimeout(() => {
-        onClose();
-        setLogoutSuccess(false);
-        window.location.reload();
-      }, 1500);
-    },
-
-    onError: () => {
-      localStorage.removeItem("authToken");
-      setLogoutSuccess(true);
-      setTimeout(() => {
-        onClose();
-        setLogoutSuccess(false);
-        window.location.reload();
-      }, 1500);
-    },
-  });
+  const { mutate: logout, isPending, error: apiError } = useLogoutUser();
 
   const handleLogout = () => {
-    submit();
+    logout(undefined, {
+      onSuccess: () => {
+        // Remove token from local storage
+        localStorage.removeItem("authToken");
+        setLogoutSuccess(true);
+
+        setTimeout(() => {
+          onClose();
+          setLogoutSuccess(false);
+          window.location.reload();
+        }, 1500);
+      },
+    });
   };
 
   return (
