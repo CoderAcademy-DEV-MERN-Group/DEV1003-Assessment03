@@ -1,45 +1,33 @@
 import clsx from "clsx";
 import Modal from "react-modal";
 import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
-import { logoutUser } from "../../utilities/services/apiServices";
 import styles from "./Modals.module.scss";
+import { useLogoutUser } from "../../utilities/customHooks/useAuth";
 
 function Logout({ isOpen, onClose }) {
   const [logoutSuccess, setLogoutSuccess] = useState(false);
 
-  const {
-    mutate: submit,
-    isPending,
-    error: apiError,
-  } = useMutation({
-    mutationFn: logoutUser,
-
-    onSuccess: () => {
-      // Remove token from local storage
-      localStorage.removeItem("authToken");
-      setLogoutSuccess(true);
-
-      setTimeout(() => {
-        onClose();
-        setLogoutSuccess(false);
-        window.location.reload();
-      }, 1500);
-    },
-
-    onError: () => {
-      localStorage.removeItem("authToken");
-      setLogoutSuccess(true);
-      setTimeout(() => {
-        onClose();
-        setLogoutSuccess(false);
-        window.location.reload();
-      }, 1500);
-    },
-  });
+  const { mutate: logout, isPending, error: apiError } = useLogoutUser();
 
   const handleLogout = () => {
-    submit();
+    logout(undefined, {
+      onSuccess: () => {
+        // Remove token from local storage
+        localStorage.removeItem("authToken");
+        setLogoutSuccess(true);
+
+        setTimeout(() => {
+          onClose();
+          setLogoutSuccess(false);
+          window.location.reload();
+        }, 1500);
+      },
+      // MVP: Only one logout -> handling this directly
+      // Future dev: move to useLogout User hook if reusing logout functionality
+      onError: () => {
+        localStorage.removeItem("authToken");
+      },
+    });
   };
 
   return (
@@ -71,8 +59,8 @@ function Logout({ isOpen, onClose }) {
             <p>Redirecting</p>
           </article>
         ) : (
-          <>
-            <p className={styles.formlessMsg}>Are you sure you want to log out?</p>
+          <article className={styles.confirmMessage}>
+            <p>Are you sure you want to log out?</p>
 
             {apiError && (
               <span className={styles.apiError}>
@@ -88,7 +76,7 @@ function Logout({ isOpen, onClose }) {
             >
               {isPending ? "Logging out..." : "Yes, Log Out"}
             </button>
-          </>
+          </article>
         )}
       </section>
     </Modal>

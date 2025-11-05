@@ -32,6 +32,9 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
+// NOTE: this shouldn't remove tokens, that happens from the modal (accessible from any page) 401 stuff is fine,
+// but need to double check all 401 errors relate to only invalid tokens, not any other token
+// errors. Left in for now but needs removal/refactoring.
 // Response interceptor for removing JWT token on logout
 api.interceptors.response.use(
   (response) => {
@@ -220,12 +223,12 @@ export const getMovieByTitle = async (title) => {
 };
 
 // Get a single movie by IMDB ID
-export const getMovieByImbdId = async (imbdId) => {
+export const getMovieByImdbId = async (imdbId) => {
   try {
-    const res = await api.get(`/movies/${encodeURIComponent(imbdId)}`);
+    const res = await api.get(`/movies/${encodeURIComponent(imdbId)}`);
     return res.data;
   } catch (err) {
-    console.error(`Error fetching movie by IMBD ID: ${err}`);
+    console.error(`Error fetching movie by IMDB ID: ${err}`);
     throw err;
   }
 };
