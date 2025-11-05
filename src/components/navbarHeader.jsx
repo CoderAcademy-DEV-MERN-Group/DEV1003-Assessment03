@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import logo from "../assets/images/navbarlogo215px.png";
 import Login from "./modals/Login";
 import Logout from "./modals/Logout";
-import styles from "./Navbar.module.scss";
+import styles from "../components/styles/Navbar.module.scss";
 
 function Header() {
   const [showLogin, setShowLogin] = useState(false);

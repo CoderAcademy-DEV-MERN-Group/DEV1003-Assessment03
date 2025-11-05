@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Modal from "react-modal";
 import Header from "./components/navbarHeader";
 import { BrowserRouter } from "react-router-dom";
+import Footer from "./components/footer";
 
 Modal.setAppElement("#root");
 
@@ -23,7 +24,10 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <Header>{/* <App /> */}</Header>
+        <Header />
+        {/* <App /> */}
+        <main>Main</main>
+        <Footer />
       </BrowserRouter>
     </QueryClientProvider>
   </StrictMode>
