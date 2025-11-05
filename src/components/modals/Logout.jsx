@@ -22,6 +22,11 @@ function Logout({ isOpen, onClose }) {
           window.location.reload();
         }, 1500);
       },
+      // MVP: Only one logout -> handling this directly
+      // Future dev: move to useLogout User hook if reusing logout functionality
+      onError: () => {
+        localStorage.removeItem("authToken");
+      },
     });
   };
 
