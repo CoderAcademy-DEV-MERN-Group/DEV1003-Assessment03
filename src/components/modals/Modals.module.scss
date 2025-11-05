@@ -153,6 +153,11 @@
   }
 }
 
+.formlessMsg {
+  text-align: center;
+  color: color(text-dark)
+}
+
 // Responsive
 @include mobile {
   .modal {

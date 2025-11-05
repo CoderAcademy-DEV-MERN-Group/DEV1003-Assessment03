@@ -33,38 +33,3 @@
 // }
 
 // export default App;
-
-// Example app file to test in browser
-
-// import "../src/styles/App.css";
-// import { useState } from "react";
-// import Login from "./components/modals/Login";
-// import Register from "./pages/register/Register";
-// import ContactUs from "./components/modals/ContactUs";
-// import Logout from "./components/modals/Logout";
-
-// function App() {
-//   const [showLogin, setShowLogin] = useState(false);
-//   const [showContactForm, setShowContact] = useState(false);
-//   const [showLogout, setShowLogout] = useState(false);
-
-//   return (
-//     <>
-//       <button onClick={() => setShowLogin(true)} className="open-login-button">
-//         Sign In
-//       </button>
-//       <Login isOpen={showLogin} onClose={() => setShowLogin(false)} />
-//       <Register />
-//       <button onClick={() => setShowContact(true)} className="open-contact-button">
-//         Contact Us
-//       </button>
-//       <ContactUs isOpen={showContactForm} onClose={() => setShowContact(false)} />
-//       <button onClick={() => setShowLogout(true)} className="open-logout-button">
-//         Log Out
-//       </button>
-//       <Logout isOpen={showLogout} onClose={() => setShowLogout(false)} />
-//     </>
-//   );
-// }
-
-// export default App;

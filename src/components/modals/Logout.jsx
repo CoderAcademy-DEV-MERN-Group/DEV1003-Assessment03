@@ -3,7 +3,7 @@ import Modal from "react-modal";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { logoutUser } from "../../utilities/services/apiServices";
-import styles from "./Modal.module.scss";
+import styles from "./Modals.module.scss";
 
 function Logout({ isOpen, onClose }) {
   const [logoutSuccess, setLogoutSuccess] = useState(false);
@@ -72,7 +72,7 @@ function Logout({ isOpen, onClose }) {
           </article>
         ) : (
           <>
-            <p>Are you sure you want to log out?</p>
+            <p className={styles.formlessMsg}>Are you sure you want to log out?</p>
 
             {apiError && (
               <span className={styles.apiError}>

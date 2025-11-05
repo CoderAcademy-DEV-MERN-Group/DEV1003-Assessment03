@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { loginUser } from "../../utilities/services/apiServices";
-import styles from "./Modal.module.scss";
+import styles from "./Modals.module.scss";
 
 // Set up our form with RHF
 function Login({ isOpen, onClose }) {

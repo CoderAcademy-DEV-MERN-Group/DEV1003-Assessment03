@@ -1,6 +1,6 @@
 import Modal from "react-modal";
 import { useForm } from "@formspree/react";
-import styles from "./Modal.module.scss";
+import styles from "./Modals.module.scss";
 
 function ContactUs({ isOpen, onClose }) {
   const [state, handleSubmit, reset] = useForm("mblpvzov");
