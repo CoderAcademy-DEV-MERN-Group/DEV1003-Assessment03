@@ -180,3 +180,14 @@
     margin-left: 25%;
   }
 }
+
+.loadingMessage {
+  background: color(primary-dark); 
+  color: color(primary);                        
+  padding: spacing(xs);
+  border-radius: radius(md);
+  margin-bottom: spacing(xl);
+  text-align: center;
+  align-self: center;
+  font-weight: 500;
+}

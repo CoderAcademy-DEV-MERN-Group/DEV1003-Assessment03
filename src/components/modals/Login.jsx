@@ -11,6 +11,8 @@ import { useAuthContext } from "../../contexts/useAuthContext";
 function Login({ isOpen, onClose }) {
   const [loginSuccess, setLoginSuccess] = useState(false);
 
+  const { isAuthenticated, isLoading } = useAuthContext();
+
   const {
     register,
     handleSubmit,
@@ -32,6 +34,45 @@ function Login({ isOpen, onClose }) {
       },
     });
   };
+
+  if (isLoading) {
+    return (
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={onClose}
+        className={styles.modal}
+        overlayClassName={styles.modalOverlay}
+        shouldCloseOnOverlayClick
+        shouldCloseOnEsc
+      >
+        <div className={styles.loadingMessage}>Checking authentication...</div>
+      </Modal>
+    );
+  }
+
+  if (isAuthenticated) {
+    return (
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={onClose}
+        className={styles.modal}
+        overlayClassName={styles.modalOverlay}
+        shouldCloseOnOverlayClick
+        shouldCloseOnEsc
+      >
+        <button
+          type="button"
+          onClick={onClose}
+          className={styles.closeButton}
+          aria-label="Close login pop-up"
+        >
+          {" "}
+          x{" "}
+        </button>
+        <span className={styles.successMessage}>You're already signed in!</span>
+      </Modal>
+    );
+  }
 
   return (
     // Modal instead of Main
@@ -111,7 +152,7 @@ function Login({ isOpen, onClose }) {
         </fieldset>
         {/* Login success message span */}
 
-        {loginSuccess && <span className={styles.successMessage}>Login successful! 🎉</span>}
+        {loginSuccess && <span className={styles.successMessage}>Login successful!</span>}
         {/* API level error displays go here */}
         {apiError && (
           <span className={styles.apiError}>
