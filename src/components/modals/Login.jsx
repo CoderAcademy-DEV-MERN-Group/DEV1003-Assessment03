@@ -23,7 +23,7 @@ function Login({ isOpen, onClose }) {
   const onSubmit = (data) => {
     apiLogin(data, {
       onSuccess: (res) => {
-        setGlobalAuth(res.user, res.token); // ← Magic happens here
+        setGlobalAuth(res.user, res.token);
         setLoginSuccess(true);
         setTimeout(() => {
           onClose();
