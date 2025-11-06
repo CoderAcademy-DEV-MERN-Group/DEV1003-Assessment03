@@ -9,7 +9,7 @@ import { useAuthContext } from "../../contexts/useAuthContext";
 function Logout({ isOpen, onClose }) {
   const navigate = useNavigate();
 
-  const { logout: contextLogout, isAuthenticated, isLoading } = useAuthContext();
+  const { logout: contextLogout, isLoading } = useAuthContext();
 
   const { mutate: apiLogout, isPending } = useLogoutUser();
 
@@ -35,26 +35,10 @@ function Logout({ isOpen, onClose }) {
         onRequestClose={onClose}
         className={styles.modal}
         overlayClassName={styles.modalOverlay}
+        closeTimeoutMS={300}
+        shouldFocusAfterRender={false}
       >
         <span className={styles.loadingMessage}>Checking authentication...</span>
-      </Modal>
-    );
-  }
-
-  if (!isAuthenticated) {
-    return (
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={onClose}
-        className={styles.modal}
-        overlayClassName={styles.modalOverlay}
-        shouldCloseOnOverlayClick
-        shouldCloseOnEsc
-      >
-        <button type="button" onClick={onClose} className={styles.closeButton} aria-label="Close">
-          x
-        </button>
-        <p className={styles.loadingMessage}>You are not signed in.</p>
       </Modal>
     );
   }
@@ -65,6 +49,8 @@ function Logout({ isOpen, onClose }) {
       onRequestClose={onClose}
       className={styles.modal}
       overlayClassName={styles.modalOverlay}
+      closeTimeoutMS={300}
+      shouldFocusAfterRender={false}
       shouldCloseOnOverlayClick={!isPending}
       shouldCloseOnEsc={!isPending}
     >

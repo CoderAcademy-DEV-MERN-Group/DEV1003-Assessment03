@@ -28,7 +28,7 @@ function Login({ isOpen, onClose }) {
         toast.success("Login successful!");
         setTimeout(() => {
           onClose();
-        }, 1500);
+        }, 800);
       },
       onError: (err) => {
         const msg = err?.response?.data?.message || "Login failed. Please try again.";
@@ -44,6 +44,8 @@ function Login({ isOpen, onClose }) {
         onRequestClose={onClose}
         className={styles.modal}
         overlayClassName={styles.modalOverlay}
+        closeTimeoutMS={300}
+        shouldFocusAfterRender={false}
         shouldCloseOnOverlayClick
         shouldCloseOnEsc
       >
@@ -59,6 +61,8 @@ function Login({ isOpen, onClose }) {
       onRequestClose={onClose}
       className={styles.modal}
       overlayClassName={styles.modalOverlay}
+      closeTimeoutMS={500}
+      shouldFocusAfterRender={false}
       shouldCloseOnOverlayClick
       shouldCloseOnEsc
     >
