@@ -3,37 +3,93 @@ import Modal from "react-modal";
 import { useState } from "react";
 import styles from "./Modals.module.scss";
 import { useLogoutUser } from "../../utilities/customHooks/useAuth";
+import { useAuthContext } from "../../contexts/useAuthContext";
 
 function Logout({ isOpen, onClose }) {
   const [logoutSuccess, setLogoutSuccess] = useState(false);
 
-  const { mutate: logout, isPending, error: apiError } = useLogoutUser();
+  const { logout: contextLogout, isAuthenticated, isLoading } = useAuthContext();
+
+  const { mutate: apiLogout, isPending, error: apiError } = useLogoutUser();
 
   const handleLogout = () => {
-    logout(undefined, {
-      onSuccess: () => {
+    apiLogout(undefined, {
+      onSuccess: async () => {
         // Remove token from local storage
-        localStorage.removeItem("authToken");
+        await contextLogout();
         setLogoutSuccess(true);
-
-        setTimeout(() => {
-          onClose();
-          setLogoutSuccess(false);
-          window.location.reload();
-        }, 1500);
       },
       // MVP: Only one logout -> handling this directly
       // Future dev: move to useLogout User hook if reusing logout functionality
-      onError: () => {
-        localStorage.removeItem("authToken");
+      onError: async () => {
+        await contextLogout();
+        setLogoutSuccess(true);
       },
     });
   };
 
+  const handleClose = () => {
+    onClose();
+    if (logoutSuccess) {
+      window.location.href = "/";
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={handleClose}
+        className={styles.modal}
+        overlayClassName={styles.modalOverlay}
+      >
+        <span className={styles.loadingMessage}>Checking authentication...</span>
+      </Modal>
+    );
+  }
+
+  if (logoutSuccess) {
+    return (
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={handleClose}
+        className={styles.modal}
+        overlayClassName={styles.modalOverlay}
+      >
+        <div className={styles.successMessage}>
+          You've been logged out successfully! See you next time!
+        </div>
+      </Modal>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={handleClose}
+        className={styles.modal}
+        overlayClassName={styles.modalOverlay}
+        shouldCloseOnOverlayClick
+        shouldCloseOnEsc
+      >
+        <button
+          type="button"
+          onClick={handleClose}
+          className={styles.closeButton}
+          aria-label="Close"
+        >
+          x
+        </button>
+        <p className={styles.loadingMessage}>You are not signed in.</p>
+      </Modal>
+    );
+  }
+
   return (
     <Modal
       isOpen={isOpen}
-      onRequestClose={onClose}
+      onRequestClose={handleClose}
       className={styles.modal}
       overlayClassName={styles.modalOverlay}
       shouldCloseOnOverlayClick={!isPending && !logoutSuccess}
@@ -43,7 +99,7 @@ function Logout({ isOpen, onClose }) {
       {!logoutSuccess && (
         <button
           type="button"
-          onClick={onClose}
+          onClick={handleClose}
           className={styles.closeButton}
           aria-label="Close logout pop-up"
         >

@@ -11,7 +11,7 @@ import { useAuthContext } from "../../contexts/useAuthContext";
 function Login({ isOpen, onClose }) {
   const [loginSuccess, setLoginSuccess] = useState(false);
 
-  const { isAuthenticated, isLoading } = useAuthContext();
+  const { login: setGlobalAuth, isAuthenticated, isLoading } = useAuthContext();
 
   const {
     register,
@@ -19,7 +19,6 @@ function Login({ isOpen, onClose }) {
     formState: { errors },
   } = useForm();
 
-  const { login: setGlobalAuth } = useAuthContext();
   const { mutate: apiLogin, isPending, error: apiError } = useLoginUser();
 
   const onSubmit = (data) => {
@@ -30,7 +29,7 @@ function Login({ isOpen, onClose }) {
         setTimeout(() => {
           onClose();
           setLoginSuccess(false);
-        }, 2000);
+        }, 3000);
       },
     });
   };
@@ -46,6 +45,22 @@ function Login({ isOpen, onClose }) {
         shouldCloseOnEsc
       >
         <div className={styles.loadingMessage}>Checking authentication...</div>
+      </Modal>
+    );
+  }
+
+  if (loginSuccess) {
+    return (
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={onClose}
+        className={styles.modal}
+        overlayClassName={styles.modalOverlay}
+      >
+        <button type="button" onClick={onClose} className={styles.closeButton}>
+          x
+        </button>
+        <div className={styles.successMessage}>Login successful!</div>
       </Modal>
     );
   }
@@ -150,9 +165,6 @@ function Login({ isOpen, onClose }) {
             )}
           </p>
         </fieldset>
-        {/* Login success message span */}
-
-        {loginSuccess && <span className={styles.successMessage}>Login successful!</span>}
         {/* API level error displays go here */}
         {apiError && (
           <span className={styles.apiError}>

@@ -5,8 +5,10 @@ import logo from "../assets/images/navbarlogo215px.png";
 import Login from "./modals/Login";
 import Logout from "./modals/Logout";
 import styles from "../components/styles/Navbar.module.scss";
+import { useAuthContext } from "../contexts/useAuthContext";
 
 function Header() {
+  const { isAuthenticated } = useAuthContext();
   const [showLogin, setShowLogin] = useState(false);
   const [showLogout, setShowLogout] = useState(false);
 
@@ -48,15 +50,24 @@ function Header() {
         </NavLink>
       </section>
 
-      {/* Modal buttons will need to be adjusted when authContext has been completed for now it's fine as is. */}
+      {/* Modal Buttons only appear when authentication is in the correct state*/}
+
       <section className={styles.modalButtons}>
-        <button onClick={() => setShowLogin(true)} className={styles.openLoginButton}>
-          Sign In
-        </button>
+        {isAuthenticated ? (
+          <>
+            <button onClick={() => setShowLogout(true)} className={styles.openLogoutButton}>
+              Sign Out
+            </button>
+          </>
+        ) : (
+          <>
+            {" "}
+            <button onClick={() => setShowLogin(true)} className={styles.openLoginButton}>
+              Sign In
+            </button>
+          </>
+        )}
         <Login isOpen={showLogin} onClose={() => setShowLogin(false)} />
-        <button onClick={() => setShowLogout(true)} className={styles.openLogoutButton}>
-          Sign Out
-        </button>
         <Logout isOpen={showLogout} onClose={() => setShowLogout(false)} />
       </section>
     </nav>
