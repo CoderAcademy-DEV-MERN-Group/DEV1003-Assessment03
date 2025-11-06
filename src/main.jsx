@@ -7,6 +7,7 @@ import Modal from "react-modal";
 import Header from "./components/navbarHeader";
 import { BrowserRouter } from "react-router-dom";
 import Footer from "./components/footer";
+import AuthProvider from "./contexts/authProvider";
 
 Modal.setAppElement("#root");
 
@@ -23,12 +24,14 @@ const queryClient = new QueryClient({
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Header />
-        {/* <App /> */}
-        <main>Main</main>
-        <Footer />
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <Header />
+          {/* <App /> */}
+          <main>Main</main>
+          <Footer />
+        </BrowserRouter>
+      </AuthProvider>
     </QueryClientProvider>
   </StrictMode>
 );

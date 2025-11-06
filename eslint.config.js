@@ -52,10 +52,7 @@ export default [
       "react-hooks/exhaustive-deps": "warn",
 
       // React Refresh rules
-      "react-refresh/only-export-components": [
-        "warn",
-        { allowConstantExport: true },
-      ],
+      "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
 
       // Airbnb JavaScript Style Guide rules
       "no-unused-vars": [
@@ -85,11 +82,7 @@ export default [
 
       // Import rules (Airbnb style)
       "import/prefer-default-export": "off", // Modern React prefers named exports
-      "import/extensions": [
-        "error",
-        "ignorePackages",
-        { js: "never", jsx: "never" },
-      ],
+      "import/extensions": ["error", "ignorePackages", { js: "never", jsx: "never" }],
       "import/no-unresolved": [
         "error",
         {
@@ -107,7 +100,7 @@ export default [
       from being marked as unused by `no-unused-vars`. */
       "react/jsx-uses-vars": "error",
       "react/react-in-jsx-scope": "off", // Not needed in React 17+
-      "react/prop-types": "warn",
+      "react/prop-types": "off",
       "react/require-default-props": "warn",
       "react/default-props-match-prop-types": "error",
       "react/no-unused-prop-types": "error",
