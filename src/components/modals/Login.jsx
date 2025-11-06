@@ -6,33 +6,24 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "./Modals.module.scss";
 import { useLoginUser } from "../../utilities/customHooks/useAuth";
+import { useAuth } from "../../contexts/useAuth";
 
-// Set up our form with RHF
 function Login({ isOpen, onClose }) {
-  // set login states
   const [loginSuccess, setLoginSuccess] = useState(false);
 
-  // formState allows RHF to track which fields have errors and what they are
-  // register - attaches form content
-  // handleSubmit - runs when submitted
-  // formState: real-time validation error tracking
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  // Tanstack Query mutation for handling login API call:
-  // Gives us loading states, error handling & caching without complex logic
-  //  mutate: The function which triggers API call
-  // isPending: Data is being sent/changed state
-  // Error object if the API fails
-  const { mutate: login, isPending, error: apiError } = useLoginUser();
+  const { login: setGlobalAuth } = useAuth();
+  const { mutate: apiLogin, isPending, error: apiError } = useLoginUser();
 
   const onSubmit = (data) => {
-    login(data, {
+    apiLogin(data, {
       onSuccess: (res) => {
-        localStorage.setItem("authToken", res.token);
+        setGlobalAuth(res.user, res.token); // ← Magic happens here
         setLoginSuccess(true);
         setTimeout(() => {
           onClose();
