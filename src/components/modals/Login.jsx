@@ -29,7 +29,7 @@ function Login({ isOpen, onClose }) {
         setTimeout(() => {
           onClose();
           setLoginSuccess(false);
-        }, 3000);
+        }, 1500);
       },
     });
   };
@@ -168,7 +168,7 @@ function Login({ isOpen, onClose }) {
         {/* API level error displays go here */}
         {apiError && (
           <span className={styles.apiError}>
-            Login failed. Please check your credentials and try again.
+            {apiError?.response?.data?.message || "Login failed. Please try again."}
           </span>
         )}
 

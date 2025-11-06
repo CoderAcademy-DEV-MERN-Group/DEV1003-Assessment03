@@ -1,11 +1,13 @@
 import clsx from "clsx";
 import Modal from "react-modal";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./Modals.module.scss";
 import { useLogoutUser } from "../../utilities/customHooks/useAuth";
 import { useAuthContext } from "../../contexts/useAuthContext";
 
 function Logout({ isOpen, onClose }) {
+  const navigate = useNavigate();
   const [logoutSuccess, setLogoutSuccess] = useState(false);
 
   const { logout: contextLogout, isAuthenticated, isLoading } = useAuthContext();
@@ -31,7 +33,7 @@ function Logout({ isOpen, onClose }) {
   const handleClose = () => {
     onClose();
     if (logoutSuccess) {
-      window.location.href = "/";
+      navigate("/", { replace: true });
     }
   };
 
