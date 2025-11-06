@@ -19,7 +19,7 @@ function Logout({ isOpen, onClose }) {
       await apiLogout(undefined); // ← await the mutation
       await contextLogout(); // ← await token removal
       toast.success("Logged out successfully!");
-    } catch (err) {
+    } catch {
       await contextLogout(); // still remove token
       toast.error("Server error, but logged out locally.");
     } finally {
