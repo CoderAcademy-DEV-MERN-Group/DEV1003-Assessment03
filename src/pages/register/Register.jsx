@@ -47,10 +47,7 @@ function Register() {
     },
 
     onSuccess: (data) => {
-      console.log(
-        `Account creation successful for ${data.username} with email:`,
-        data.email
-      );
+      console.log(`Account creation successful for ${data.username} with email:`, data.email);
 
       // JWT STORAGE to localstorage
       localStorage.setItem("authToken", data.token);
@@ -97,9 +94,7 @@ function Register() {
             <br />
             {/* This runs when there are errors! */}
             {errors.email && (
-              <span className={styles.errorMessage}>
-                {errors.email.message}
-              </span> // Shows the specific email error
+              <span className={styles.errorMessage}>{errors.email.message}</span> // Shows the specific email error
             )}
           </p>
 
@@ -115,16 +110,11 @@ function Register() {
                   message: "Username must be at least 2 characters",
                 },
               })}
-              className={clsx(
-                styles.registerInput,
-                errors.username && styles.inputError
-              )}
+              className={clsx(styles.registerInput, errors.username && styles.inputError)}
             />
             <br />
             {errors.username && (
-              <span className={styles.errorMessage}>
-                {errors.username.message}
-              </span>
+              <span className={styles.errorMessage}>{errors.username.message}</span>
             )}
           </p>
 
@@ -140,8 +130,7 @@ function Register() {
                   message: "Password must be at least 8 characters",
                 },
                 pattern: {
-                  value:
-                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/,
+                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/,
                   message:
                     "Must include at least one: uppercase, lowercase, number and special character.",
                 },
@@ -153,15 +142,12 @@ function Register() {
             />
             <br />
             <small id="passwordInstructions">
-              Must include at least one: uppercase, lowercase, number and
-              special character.
+              Must include at least one: uppercase, lowercase, number and special character.
             </small>
             <br />
             {/* This runs when there are errors */}
             {errors.password && (
-              <span className={styles.errorMessage}>
-                {errors.password.message}
-              </span> // Shows the specific password error
+              <span className={styles.errorMessage}>{errors.password.message}</span> // Shows the specific password error
             )}
           </p>
           <p>
@@ -171,38 +157,27 @@ function Register() {
               type="password"
               {...register("confirmPassword", {
                 required: "Please confirm your password",
-                validate: (value) =>
-                  value === watchPassword || "Passwords do not match",
+                validate: (value) => value === watchPassword || "Passwords do not match",
               })}
-              className={clsx(
-                styles.registerInput,
-                errors.confirmPassword && styles.inputError
-              )}
+              className={clsx(styles.registerInput, errors.confirmPassword && styles.inputError)}
             />
             <br />
             {errors.confirmPassword && (
-              <span className={styles.errorMessage}>
-                {errors.confirmPassword.message}
-              </span>
+              <span className={styles.errorMessage}>{errors.confirmPassword.message}</span>
             )}
           </p>
         </fieldset>
 
         {/* API level error displays go here */}
         {apiError && (
-          <span className={styles.apiError}>
-            Registration failed. {apiError.message}.
-          </span>
+          <span className={styles.apiError}>Registration failed. {apiError.message}.</span>
         )}
 
         <br />
         <button
           type="submit"
           disabled={isPending}
-          className={clsx(
-            styles.registerButton,
-            isPending && styles.loadingButton
-          )}
+          className={clsx(styles.registerButton, isPending && styles.loadingButton)}
         >
           {isPending ? "Setting up account" : "Register"}
         </button>
