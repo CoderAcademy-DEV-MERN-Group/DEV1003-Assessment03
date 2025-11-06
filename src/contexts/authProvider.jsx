@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { getCurrentUser, logoutUser } from "../utilities/services/apiServices";
-import { AuthContext } from "./useAuth"; // Have to import as jsx file exports component only
+import { AuthContext } from "./useAuthContext"; // Have to import as jsx file exports component only
 
 // 'children' is special jsx prop representing every nested component inside AuthProvider
 export default function AuthProvider({ children }) {
