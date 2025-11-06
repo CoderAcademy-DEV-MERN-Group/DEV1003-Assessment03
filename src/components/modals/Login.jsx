@@ -2,16 +2,16 @@
 // React hook form provides form management without useState
 import clsx from "clsx";
 import Modal from "react-modal";
-import { useState } from "react";
+// import { useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "./Modals.module.scss";
 import { useLoginUser } from "../../utilities/customHooks/useAuth";
 import { useAuthContext } from "../../contexts/useAuthContext";
+import toast from "react-hot-toast";
+// import { useEffect } from "react";
 
 function Login({ isOpen, onClose }) {
-  const [loginSuccess, setLoginSuccess] = useState(false);
-
-  const { login: setGlobalAuth, isAuthenticated, isLoading } = useAuthContext();
+  const { login: setGlobalAuth, isLoading } = useAuthContext();
 
   const {
     register,
@@ -19,17 +19,20 @@ function Login({ isOpen, onClose }) {
     formState: { errors },
   } = useForm();
 
-  const { mutate: apiLogin, isPending, error: apiError } = useLoginUser();
+  const { mutate: apiLogin, isPending } = useLoginUser();
 
   const onSubmit = (data) => {
     apiLogin(data, {
       onSuccess: (res) => {
         setGlobalAuth(res.user, res.token);
-        setLoginSuccess(true);
+        toast.success("Login successful!");
         setTimeout(() => {
           onClose();
-          setLoginSuccess(false);
         }, 1500);
+      },
+      onError: (err) => {
+        const msg = err?.response?.data?.message || "Login failed. Please try again.";
+        toast.error(msg);
       },
     });
   };
@@ -45,46 +48,6 @@ function Login({ isOpen, onClose }) {
         shouldCloseOnEsc
       >
         <div className={styles.loadingMessage}>Checking authentication...</div>
-      </Modal>
-    );
-  }
-
-  if (loginSuccess) {
-    return (
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={onClose}
-        className={styles.modal}
-        overlayClassName={styles.modalOverlay}
-      >
-        <button type="button" onClick={onClose} className={styles.closeButton}>
-          x
-        </button>
-        <div className={styles.successMessage}>Login successful!</div>
-      </Modal>
-    );
-  }
-
-  if (isAuthenticated) {
-    return (
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={onClose}
-        className={styles.modal}
-        overlayClassName={styles.modalOverlay}
-        shouldCloseOnOverlayClick
-        shouldCloseOnEsc
-      >
-        <button
-          type="button"
-          onClick={onClose}
-          className={styles.closeButton}
-          aria-label="Close login pop-up"
-        >
-          {" "}
-          x{" "}
-        </button>
-        <span className={styles.successMessage}>You're already signed in!</span>
       </Modal>
     );
   }
@@ -166,11 +129,11 @@ function Login({ isOpen, onClose }) {
           </p>
         </fieldset>
         {/* API level error displays go here */}
-        {apiError && (
+        {/* {apiError && (
           <span className={styles.apiError}>
             {apiError?.response?.data?.message || "Login failed. Please try again."}
           </span>
-        )}
+        )} */}
 
         <button
           type="submit"

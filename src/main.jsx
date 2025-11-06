@@ -8,6 +8,7 @@ import Header from "./components/navbarHeader";
 import { BrowserRouter } from "react-router-dom";
 import Footer from "./components/footer";
 import AuthProvider from "./contexts/authProvider";
+import { Toaster } from "react-hot-toast";
 
 Modal.setAppElement("#root");
 
@@ -31,6 +32,13 @@ createRoot(document.getElementById("root")).render(
           <main>Main</main>
           <Footer />
         </BrowserRouter>
+        <Toaster
+          position="top-center"
+          toastOptions={{
+            duration: 3000,
+            style: { fontSize: "0.95rem" },
+          }}
+        />
       </AuthProvider>
     </QueryClientProvider>
   </StrictMode>
