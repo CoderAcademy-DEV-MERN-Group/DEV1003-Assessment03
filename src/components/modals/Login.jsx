@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "./Modals.module.scss";
 import { useLoginUser } from "../../utilities/customHooks/useAuth";
-import { useAuth } from "../../contexts/useAuth";
+import { useAuthContext } from "../../contexts/useAuthContext";
 
 function Login({ isOpen, onClose }) {
   const [loginSuccess, setLoginSuccess] = useState(false);
@@ -17,7 +17,7 @@ function Login({ isOpen, onClose }) {
     formState: { errors },
   } = useForm();
 
-  const { login: setGlobalAuth } = useAuth();
+  const { login: setGlobalAuth } = useAuthContext();
   const { mutate: apiLogin, isPending, error: apiError } = useLoginUser();
 
   const onSubmit = (data) => {
