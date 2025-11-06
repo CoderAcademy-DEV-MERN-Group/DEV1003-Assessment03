@@ -1,4 +1,5 @@
 import axios from "axios";
+import { handleApiError } from "../helpers/errorHandler";
 
 // Create a custom axios instance with custom configuration
 const api = axios.create({
@@ -63,7 +64,7 @@ export const registerUser = async (userBodyData) => {
     // Catch error, log it and re-throw for further handling
   } catch (err) {
     console.error(`Error registering user: ${err}`);
-    throw err;
+    throw handleApiError(err);
   }
 };
 
@@ -74,7 +75,7 @@ export const loginUser = async (userBodyData) => {
     return res.data;
   } catch (err) {
     console.error(`Error logging in user: ${err}`);
-    throw err;
+    throw handleApiError(err);
   }
 };
 
@@ -86,7 +87,7 @@ export const logoutUser = async () => {
   } catch (err) {
     // Shouldn't fail since no controller logic for logout route, but just in case
     console.error(`Error logging out user: ${err}`);
-    throw err;
+    throw handleApiError(err);
   }
 };
 
@@ -100,7 +101,7 @@ export const getAllUsers = async () => {
     return res.data;
   } catch (err) {
     console.error(`Error fetching users: ${err}`);
-    throw err;
+    throw handleApiError(err);
   }
 };
 
@@ -111,7 +112,7 @@ export const getCurrentUser = async () => {
     return res.data;
   } catch (err) {
     console.error(`Error fetching current user: ${err}`);
-    throw err;
+    throw handleApiError(err);
   }
 };
 
@@ -122,7 +123,7 @@ export const updateCurrentUser = async (updateBodyData) => {
     return res.data;
   } catch (err) {
     console.error(`Error updating current user: ${err}`);
-    throw err;
+    throw handleApiError(err);
   }
 };
 
@@ -133,7 +134,7 @@ export const updateCurrentUserPassword = async (passwordBodyData) => {
     return res.data;
   } catch (err) {
     console.error(`Error updating current user password: ${err}`);
-    throw err;
+    throw handleApiError(err);
   }
 };
 
@@ -144,7 +145,7 @@ export const deleteCurrentUser = async () => {
     return res.data;
   } catch (err) {
     console.error(`Error deleting current user: ${err}`);
-    throw err;
+    throw handleApiError(err);
   }
 };
 
@@ -158,7 +159,7 @@ export const getAllFriendships = async () => {
     return res.data;
   } catch (err) {
     console.error(`Error fetching friendships: ${err}`);
-    throw err;
+    throw handleApiError(err);
   }
 };
 
@@ -169,7 +170,7 @@ export const createFriendship = async (recipientUserId) => {
     return res.data;
   } catch (err) {
     console.error(`Error creating friendship: ${err}`);
-    throw err;
+    throw handleApiError(err);
   }
 };
 
@@ -180,7 +181,7 @@ export const updateFriendship = async (requesterUserId) => {
     return res.data;
   } catch (err) {
     console.error(`Error updating friendship: ${err}`);
-    throw err;
+    throw handleApiError(err);
   }
 };
 
@@ -191,7 +192,7 @@ export const deleteFriendship = async (otherUserId) => {
     return res.data;
   } catch (err) {
     console.error(`Error deleting friendship: ${err}`);
-    throw err;
+    throw handleApiError(err);
   }
 };
 
@@ -205,7 +206,7 @@ export const getAllMovies = async () => {
     return res.data;
   } catch (err) {
     console.error(`Error fetching movies: ${err}`);
-    throw err;
+    throw handleApiError(err);
   }
 };
 
@@ -218,7 +219,7 @@ export const getMovieByTitle = async (title) => {
     return res.data;
   } catch (err) {
     console.error(`Error fetching movie by title: ${err}`);
-    throw err;
+    throw handleApiError(err);
   }
 };
 
@@ -229,7 +230,7 @@ export const getMovieByImdbId = async (imdbId) => {
     return res.data;
   } catch (err) {
     console.error(`Error fetching movie by IMDB ID: ${err}`);
-    throw err;
+    throw handleApiError(err);
   }
 };
 
@@ -243,7 +244,7 @@ export const getUserReelProgress = async () => {
     return res.data;
   } catch (err) {
     console.error(`Error fetching user reel-progress: ${err}`);
-    throw err;
+    throw handleApiError(err);
   }
 };
 
@@ -254,7 +255,7 @@ export const addMovieToReelProgress = async (movieBodyData) => {
     return res.data;
   } catch (err) {
     console.error(`Error adding movie to user reel-progress: ${err}`);
-    throw err;
+    throw handleApiError(err);
   }
 };
 
@@ -265,7 +266,7 @@ export const updateReelProgressMovieRating = async (movieId, movieRating) => {
     return res.data;
   } catch (err) {
     console.error(`Error updating movie rating in user reel-progress: ${err}`);
-    throw err;
+    throw handleApiError(err);
   }
 };
 
@@ -276,7 +277,7 @@ export const deleteMovieFromReelProgress = async (movieId) => {
     return res.data;
   } catch (err) {
     console.error(`Error deleting movie from user reel-progress: ${err}`);
-    throw err;
+    throw handleApiError(err);
   }
 };
 
@@ -290,6 +291,6 @@ export const getLeaderboard = async () => {
     return res.data;
   } catch (err) {
     console.error(`Error fetching leaderboard data: ${err}`);
-    throw err;
+    throw handleApiError(err);
   }
 };
