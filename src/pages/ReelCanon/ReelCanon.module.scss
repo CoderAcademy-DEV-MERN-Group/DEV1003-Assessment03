@@ -1,0 +1,73 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.reelCanon {
+  padding: spacing(xl) spacing(md);
+//   max-width: 1400px;
+  margin: 0 auto;
+  background: color(background);
+  min-height: 100vh;
+  color: color(text-dark);
+}
+
+.title {
+  text-align: center;
+  margin-bottom: spacing(xl);
+
+  h1 {
+    font-size: 2.8rem;
+    margin: 0 0 spacing(sm);
+    font-weight: 700;
+    color: color(theme-white);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  h2 {
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: color(text-light);
+    margin: 0 0 spacing(md);
+  }
+}
+
+// FLEX GRID — THIS IS BULLETPROOF
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: spacing(lg);
+  justify-content: center; // optional: center cards
+  margin: 0 auto;
+  padding: 0 spacing(sm); // prevent overflow
+}
+
+// Each card takes min 240px, grows to fill
+.grid > * {
+  flex: 1 1 175px;
+  min-height: 300px;
+  max-width: 175px;
+}
+
+// Responsive
+@include mobile {
+  .reelCanon {
+    padding: spacing(lg) spacing(sm);
+  }
+
+  .title h1 { font-size: 2.2rem; }
+  .title h2 { font-size: 1.1rem; }
+
+  .grid {
+    gap: spacing(md);
+  }
+
+  .grid > * {
+    flex: 1 1 200px;
+    max-width: 100%;
+  }
+}
+
+@include tablet {
+  .grid > * {
+    flex: 1 1 220px;
+  }
+}

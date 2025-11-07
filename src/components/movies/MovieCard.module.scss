@@ -1,110 +1,141 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
 .card {
-  border-radius: 12px;
-  overflow: hidden;
   position: relative;
-  background: linear-gradient(
-    135deg,
-    var(--card-color) 0%,
-    color-mix(in oklab, var(--card-color), white 20%) 100%
-  );
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-radius: radius(lg);
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: transparent;
+  min-height: 200px; // Ensure cards have some height
+}
+
+// PASTEL BACKGROUND - Always at the bottom
+.pastelBackground {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: radius(lg);
+}
+
+// POSTER - Above pastel background
+.poster {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+.posterOverlay {
+  position: absolute;
+  inset: 0;
+  background: color(overlay-dark);
+  z-index: 2;
 }
 
 .content {
-  padding: 1rem;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto; //
+  align-items: start;
   position: relative;
-  z-index: 1;
-  color: #333;
+  text-align: center;
+  z-index: 3; // Above everything
+  padding: spacing(md);
+  color: color(card-grey);
+  text-shadow: 0 1px 3px color(theme-white);
+  min-height: 200px;
+  height: 100%;
 }
 
-.title {
-  margin: 0 0 0.25rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  line-height: 1.3;
-}
-
-.year {
-  margin: 0 0 0.5rem;
-  font-size: 0.9rem;
-  color: #555;
-}
-
-.revealed {
-  margin-top: 0.5rem;
-  font-size: 0.9rem;
-}
-
-.rating {
-  margin: 0.25rem 0;
-  font-weight: 500;
-}
-
-.revealedText {
-  margin: 0.25rem 0;
-  color: #16a34a;
-  font-weight: bold;
-}
-
-.hidden {
-  margin: 0.5rem 0 0;
-  color: #999;
-  font-style: italic;
-  font-size: 0.9rem;
-}
-
-// Hover Overlay
 .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.78);
-  color: white;
+  background: color(overlay-dark);
+  backdrop-filter: blur(4px);
+  color: color(theme-white);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
-  backdrop-filter: blur(3px);
-  z-index: 3;
+  padding: spacing(md);
+  z-index: 4;
+  opacity: 0;
+  transition: opacity 0.3s ease; // Keep this CSS transition
+  pointer-events: none; // Prevent overlay from blocking hover
+}
+
+// Use the card hover to control overlay
+.card:hover .overlay {
+  opacity: 1;
+  pointer-events: auto; // Re-enable interactions when visible
 }
 
 .overlayContent {
+  @include flex-center;
+  flex-direction: column;
   text-align: center;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  max-height: 100%;
+  line-height: 1.55;
+  height: 100%;
   overflow-y: auto;
-  padding: 0 0.5rem;
-
   p {
-    margin: 0.4rem 0;
+    margin: spacing(xs) 0;
+    font-size: 0.65rem;
   }
-
   strong {
-    color: #ffd700;
+    color: color(accent-gold);
   }
 }
 
 .plot {
-  margin-top: 0.6rem;
+  margin-top: spacing(sm);
   font-style: italic;
-  font-size: 0.85rem;
-  opacity: 0.9;
-  line-height: 1.4;
+  font-size: 0.5rem !important;
+  opacity: 0.92;
 }
 
-// Responsive
-@media (max-width: 640px) {
+// Add this new class
+.revealedText {
+  color: #d69e2e !important; // Gold color
+  text-shadow: 0 1px 2px color(primary) !important; // Better shadow for gold text
+}
+
+.title {
+  margin: 0 0 spacing(xs);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #1a202c; // Even darker for titles
+}
+
+.year {
+  margin: 0 0 spacing(xs);
+  font-size: 0.95rem;
+  opacity: 0.8;
+  color: #4a5568; // Medium dark for less important text
+}
+
+.rating {
+  align-self: end; // Stick to bottom
+  margin-bottom: 20%;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #d69e2e; // Keep the gold for ratings
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); // Dark shadow for light text
+}
+
+.genre {
+  align-self: end;
+}
+
+@include mobile {
   .content {
-    padding: 0.75rem;
+    padding: spacing(sm);
   }
-
   .title {
-    font-size: 1rem;
+    font-size: 1.05rem;
   }
-
   .overlayContent {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
   }
 }

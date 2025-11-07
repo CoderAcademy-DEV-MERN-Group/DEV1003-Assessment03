@@ -1,6 +1,8 @@
 import { useAllMovies } from "../../utilities/customHooks/useMovies";
 import { useUserReelProgress } from "../../utilities/customHooks/useReelProgress";
 import { useAuthContext } from "../../contexts/useAuthContext";
+import MovieCard from "../../components/movies/movieCard";
+import styles from "./ReelCanon.module.scss";
 
 export default function ReelCanon() {
   // get all movies occurs even for non-logged in users
@@ -35,19 +37,20 @@ export default function ReelCanon() {
 
   const isLoading = canonLoading || progressLoading;
 
-  // 3. Debug logs
-  console.log("Canon:", canon?.movies?.length);
-  console.log("Progress:", rpResponse);
-  console.log("Merged movies sample:", movies.slice(0, 3));
-  console.log("isAuthenticated:", isAuthenticated);
-
   return (
-    <>
-      <h1> The Reel Canon</h1>
-      <h2> 100 Curated Films to Start Your Celluloid Exploration</h2>
-      <p>
-        {movies.filter((m) => m.isRevealed).length} / {movies.length} revealed
-      </p>
-    </>
+    <div>
+      <section className={styles.reelCanon}>
+        <article className={styles.title}>
+          <h1>The Reel Canon</h1>
+          <h2>100 Curated Films to Start Your Celluloid Exploration</h2>
+        </article>
+
+        <section className={styles.grid}>
+          {movies.map((movie, i) => (
+            <MovieCard key={movie._id} movie={movie} index={i} totalMovies={movies.length} />
+          ))}
+        </section>
+      </section>
+    </div>
   );
 }

@@ -1,50 +1,81 @@
 import { motion } from "framer-motion";
 import styles from "./MovieCard.module.scss";
 
-export default function MovieCard({ movie, index }) {
-  // Generates the pastel color based on the movie's index in the array! nifty!
-  const hue = (index * 137.508) % 360;
+export default function MovieCard({ movie, index, totalMovies }) {
+  // Pink (330°) to Blue (240°) - going the long way around
+  const startHue = 330;
+  const endHue = 240;
+
+  // This will go: Pink → Red → Orange → Yellow → Green → Blue
+  const hue = startHue + (((index / totalMovies) * (endHue + 360 - startHue)) % 360);
   const pastel = `hsl(${hue}, 70%, 85%)`;
 
   return (
     <motion.div
       className={styles.card}
-      style={{
-        "--card-color": pastel,
-        backgroundImage: movie.isRevealed ? `url(${movie.poster})` : "none",
+      whileHover={{
+        scale: 1.8,
+        zIndex: 50,
+        rotateY: 5,
       }}
-      whileHover={{ scale: 1.05, zIndex: 10 }}
-      transition={{ duration: 0.2 }}
+      whileTap={{ scale: 1.8 }}
+      transition={{
+        type: "spring",
+        stiffness: 200,
+        damping: 20,
+        mass: 8, // Higher = more heavy/slow
+        duration: 2.5,
+      }}
+      style={{
+        transformOrigin: "center center", // This is key
+      }}
     >
+      {/* PASTEL BACKGROUND - Always visible */}
+      <div className={styles.pastelBackground} style={{ backgroundColor: pastel }} />
+      {/* POSTER - Only when revealed, ABOVE the pastel */}
+      {movie.isRevealed && (
+        <div
+          className={styles.poster}
+          style={{
+            backgroundImage: `url(${movie.poster})`,
+          }}
+        />
+      )}
       {movie.isRevealed && <div className={styles.posterOverlay} />}
-
       <article className={styles.content}>
-        <h3 className={styles.title}>{movie.title}</h3>
-        <p className={styles.year}>{movie.year}</p>
+        <h3 className={`${styles.title} ${movie.isRevealed ? styles.revealedText : ""}`}>
+          {movie.title}
+        </h3>
+        <p className={`${styles.year} ${movie.isRevealed ? styles.revealedText : ""}`}>
+          {movie.year}
+        </p>
+        <p className={`${styles.genres} ${movie.isRevealed ? styles.revealedText : ""}`}>
+          {movie.genre.join(", ")}
+        </p>
 
         {movie.isRevealed && movie.rating !== null && (
-          <div classNames={styles.revealed}>
-            <p classNames={styles.rating}> ⭐ {movie.rating} stars!</p>
+          <div className={styles.revealed}>
+            <p className={styles.rating}> ⭐ {movie.rating} stars!</p>
           </div>
         )}
       </article>
-
-      <motion.div
-        className={styles.overlay}
-        initial={{ opacity: 0 }}
-        whileHover={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
-      >
-        <div className={styles.overlayContent}>
-          <p>
-            <strong>Director:</strong> {movie.director}
-          </p>
-          <p>
-            <strong>Actors:</strong> {movie.actors.join(", ")}
-          </p>
-          <p className={styles.plot}>{movie.plot || "No Plot currently available"}</p>
+      {!movie.isRevealed && (
+        <div className={styles.overlay}>
+          <div className={styles.overlayContent}>
+            <p>
+              <strong>Director:</strong>
+              <br />
+              {movie.director}
+            </p>
+            <p>
+              <strong>Starring:</strong>
+              <br /> {movie.actors.join(", ")}
+            </p>
+            <p className={styles.plot}>{movie.plot || "No Plot currently available"}</p>
+          </div>
         </div>
-      </motion.div>
+      )}
+      ;
     </motion.div>
   );
 }
