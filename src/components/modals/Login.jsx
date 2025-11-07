@@ -107,7 +107,7 @@ function Login({ isOpen, onClose }) {
           </div>
         </fieldset>
         {/* This runs when there are API errors! (Old code below) */}
-        <ErrorMessage error={apiError?.errors[0]} className={styles.apiError} />
+        <ErrorMessage error={apiError} className={styles.apiError} />
         <button
           type="submit"
           disabled={isPending}

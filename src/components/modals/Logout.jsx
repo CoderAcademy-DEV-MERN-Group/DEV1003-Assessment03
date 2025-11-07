@@ -9,9 +9,9 @@ import { useAuthContext } from "../../contexts/useAuthContext";
 function Logout({ isOpen, onClose }) {
   const navigate = useNavigate();
 
-  const { logout: contextLogout, isLoading } = useAuthContext();
+  const { logout: contextLogout } = useAuthContext();
 
-  const { mutate: apiLogout, isPending } = useLogoutUser();
+  const { mutateAsync: apiLogout, isPending } = useLogoutUser();
 
   const handleLogout = async () => {
     // ← make async
@@ -28,28 +28,12 @@ function Logout({ isOpen, onClose }) {
     }
   };
 
-  if (isLoading) {
-    return (
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={onClose}
-        className={styles.modal}
-        overlayClassName={styles.modalOverlay}
-        closeTimeoutMS={300}
-        shouldFocusAfterRender={false}
-      >
-        <span className={styles.loadingMessage}>Checking authentication...</span>
-      </Modal>
-    );
-  }
-
   return (
     <Modal
       isOpen={isOpen}
       onRequestClose={onClose}
       className={styles.modal}
       overlayClassName={styles.modalOverlay}
-      closeTimeoutMS={300}
       shouldFocusAfterRender={false}
       shouldCloseOnOverlayClick={!isPending}
       shouldCloseOnEsc={!isPending}
