@@ -1,7 +1,12 @@
 import { motion } from "framer-motion";
 import styles from "./MovieCard.module.scss";
+import { useUpdateReelProgressMovieRating } from "../../utilities/customHooks/useReelProgress";
+import toast from "react-hot-toast";
+import StarRating from "../common/StarRating";
 
 export default function MovieCard({ movie, index, totalMovies }) {
+  const { mutate: updateRating, isPending: isUpdating } = useUpdateReelProgressMovieRating();
+
   // Pink (330°) to Blue (240°) - going the long way around
   const startHue = 330;
   const endHue = 240;
@@ -9,6 +14,18 @@ export default function MovieCard({ movie, index, totalMovies }) {
   // This will go: Pink → Red → Orange → Yellow → Green → Blue
   const hue = startHue + (((index / totalMovies) * (endHue + 360 - startHue)) % 360);
   const pastel = `hsl(${hue}, 70%, 85%)`;
+
+  const handleRatingChange = async (newRating) => {
+    try {
+      await updateRating({
+        movieId: movie._id,
+        rating: newRating,
+      });
+    } catch (error) {
+      console.error("Failed to update rating:", error);
+      toast.error("Failed to update rating. Please try again");
+    }
+  };
 
   return (
     <motion.div
@@ -53,9 +70,13 @@ export default function MovieCard({ movie, index, totalMovies }) {
           {movie.genre.join(", ")}
         </p>
 
-        {movie.isRevealed && movie.rating !== null && (
-          <div className={styles.revealed}>
-            <p className={styles.rating}> ⭐ {movie.rating} stars!</p>
+        {movie.isRevealed && (
+          <div className={styles.ratingSection}>
+            <StarRating
+              initialRating={movie.userRating || movie.rating || 0}
+              onRatingChange={handleRatingChange}
+              isSubmitting={isUpdating}
+            />
           </div>
         )}
       </article>
@@ -71,7 +92,7 @@ export default function MovieCard({ movie, index, totalMovies }) {
               <strong>Starring:</strong>
               <br /> {movie.actors.join(", ")}
             </p>
-            <p className={styles.plot}>{movie.plot || "No Plot currently available"}</p>
+            <p className={styles.plot}>{movie.plot || "No plot currently available"}</p>
           </div>
         </div>
       )}

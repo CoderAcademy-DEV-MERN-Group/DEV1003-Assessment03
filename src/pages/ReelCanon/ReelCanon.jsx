@@ -1,18 +1,56 @@
 import { useAllMovies } from "../../utilities/customHooks/useMovies";
 import { useUserReelProgress } from "../../utilities/customHooks/useReelProgress";
 import { useAuthContext } from "../../contexts/useAuthContext";
+import ErrorMessage from "../../components/common/ErrorMessage";
 import MovieCard from "../../components/movies/movieCard";
 import styles from "./ReelCanon.module.scss";
 
 export default function ReelCanon() {
   // get all movies occurs even for non-logged in users
-  const { data: canon, isLoading: canonLoading } = useAllMovies();
+  const { data: canon, isLoading: canonLoading, error: canonError } = useAllMovies();
   // Checks for logged in status
   const { isAuthenticated } = useAuthContext();
   // Gets user reelProgress if logged in
-  const { data: rpResponse, isLoading: progressLoading } = useUserReelProgress({
+  const {
+    data: rpResponse,
+    isLoading: progressLoading,
+    error: progressError,
+  } = useUserReelProgress({
     enabled: isAuthenticated,
   });
+
+  if (canonLoading || progressLoading) {
+    return <>Movies loading...</>;
+  }
+
+  if (canonError) {
+    return (
+      <>
+        <div className={styles.reelProgress} />
+        <div className={styles.errorContainer}>
+          <ErrorMessage error={canonError.message} className={styles.errorMessage} />
+          <button onClick={() => window.location.reload()} className={styles.retryButton}>
+            Try Again
+          </button>
+        </div>
+      </>
+    );
+  }
+
+  if (isAuthenticated && progressError) {
+    return (
+      <>
+        <div className={styles.reelProgress} />
+        <div className={styles.errorContainer}>
+          <ErrorMessage error={progressError.message} className={styles.errorMessage} />
+          <p className={styles.errorMessage}>Movie data loaded, but progress failed to load.</p>
+          <button onClick={() => window.location.reload()} className={styles.retryButton}>
+            Try Again
+          </button>
+        </div>
+      </>
+    );
+  }
 
   // Create a lookup object for any existing progress records
   const progressMap = {};
@@ -34,8 +72,6 @@ export default function ReelCanon() {
       rating: prog?.rating ?? undefined,
     };
   });
-
-  const isLoading = canonLoading || progressLoading;
 
   return (
     <div>

@@ -2,9 +2,9 @@
 @use "../../styles/mixins" as *;
 
 .starRating {
-  @include flex-center;
+  // @include flex-center;
   gap: spacing(xs);
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .star {
