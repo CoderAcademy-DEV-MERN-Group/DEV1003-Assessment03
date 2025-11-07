@@ -1,0 +1,38 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.starRating {
+  @include flex-center;
+  gap: spacing(xs);
+  flex-direction: column;
+}
+
+.star {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.2 ease;
+  padding: 0;
+
+  &hover:not(.disabled) {
+    transform: scale(1.2);
+  }
+}
+
+.filled {
+  filter: brightness(1.2) saturate(1.5);
+}
+
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.ratingText {
+  font-size: 0.9rem;
+  margin-top: spacing(xs);
+  color: color(accent-gold);
+  font-weight: 600;
+  text-align: center;
+}
