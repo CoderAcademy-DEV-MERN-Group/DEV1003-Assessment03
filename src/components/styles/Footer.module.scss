@@ -1,0 +1,59 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.footer {
+  background-color: color(secondary);
+  position: 0, 0;
+  display: flex;
+  width: auto;
+  justify-content: space-between;
+}
+
+.logoImg {
+  border-radius: 50%;
+  height: 100px;
+}
+
+.footerLinks {
+  display: flex;
+  flex-direction: column;
+}
+
+.modalButtons {
+  //   align-self: flex-end;
+}
+
+.navItem {
+  color: inherit;
+  text-decoration: none;
+  padding: 0.5%;
+  border-radius: 4px;
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-align: left;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  &.active {
+    background: rgba(255, 255, 255, 0.2);
+    font-weight: 500;
+  }
+}
+
+p {
+    padding: 2px;
+    margin: 0;
+}
+
+.activeLink {
+  color: inherit;
+  text-decoration: none;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}

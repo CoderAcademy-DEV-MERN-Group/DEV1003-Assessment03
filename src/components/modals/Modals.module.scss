@@ -1,7 +1,10 @@
 @use "../../styles/variables" as *;
 @use "../../styles/mixins" as *;
 
-// Login.module.scss
+* {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
 .modalOverlay {
   position: fixed;
   top: 0;
@@ -23,7 +26,7 @@
   width: 90%;
   max-height: 90vh;
   overflow-y: auto;
-  outline: none; // Remove default focus outline
+  outline: none;
 }
 
 .closeButton {
@@ -36,9 +39,11 @@
   cursor: pointer;
   color: color(text-light);
   padding: spacing(xs);
+  transition: all 0.2s ease-in-out;
 
   &:hover {
     color: color(text-dark);
+    transform: scale(1.1);
   }
 }
 
@@ -67,7 +72,7 @@
     color: color(text-dark);
   }
 
-  p {
+  .formField {
     margin-bottom: spacing(md);
   }
 
@@ -86,11 +91,12 @@
   border: 2px solid #e2e8f0;
   border-radius: radius(md);
   font-size: 1rem;
-  transition: border-color 0.2s ease;
+  transition: all 0.2s ease-in-out; // Enhanced transition
 
   &:focus {
     outline: none;
     border-color: color(primary);
+    transform: translateY(-1px);
   }
 
   &.inputError {
@@ -132,9 +138,9 @@
 }
 
 .confirmMessage p {
-    color: color(text-dark);
-    text-align: center;
-  }
+  color: color(text-dark);
+  text-align: center;
+}
 
 // Button Styles
 .modalButton {
@@ -148,15 +154,21 @@
   border-radius: radius(md);
   font-weight: 600;
   font-size: 1rem;
-  transition: background-color 0.2s ease;
+  transition: all 0.3s ease-in-out;
 
   &:hover:not(:disabled) {
     background: color(primary-dark);
+    transform: translateY(-1px);
   }
 
   &.buttonLoading {
     background: #a0aec0;
   }
+}
+
+.formlessMsg {
+  text-align: center;
+  color: color(text-dark);
 }
 
 // Responsive
@@ -174,4 +186,15 @@
     width: 50%;
     margin-left: 25%;
   }
+}
+
+.loadingMessage {
+  background: color(primary-dark);
+  color: color(primary);
+  padding: spacing(xs);
+  border-radius: radius(md);
+  margin-bottom: spacing(xl);
+  text-align: center;
+  align-self: center;
+  font-weight: 500;
 }
