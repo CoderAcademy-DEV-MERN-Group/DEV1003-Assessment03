@@ -16,7 +16,7 @@ const statusMap = {
 export const handleApiError = (error) => {
   // Default error structure to return
   const errRes = {
-    message: "Unexpected API error occurred. Please try again.",
+    message: "",
     status: null,
     errors: [], // Some errors have errors array attached
   };
@@ -41,9 +41,9 @@ export const handleApiError = (error) => {
   } else if (error.request) {
     // If we have request but no response, it's probably a network error
     errRes.message = "Unable to connect to server. Check connection and try again";
-  } else if (error.message) {
-    // Catch other errors we may have missed and attach their message
-    errRes.message = error.message;
+  } else {
+    // Catch other errors we may have missed and give generic message
+    errRes.message = "An unexpected error occurred. Please try again.";
   }
 
   // Log error for debugging
