@@ -8,10 +8,11 @@ import {
 } from "../services/apiServices";
 
 // Create tanstack QUERY custom hook to GET user reel progress
-export const useUserReelProgress = () =>
+export const useUserReelProgress = (options = {}) =>
   useQuery({
     queryKey: ["user-reel-progress"],
     queryFn: getUserReelProgress,
+    ...options,
   });
 
 // Create tanstack MUTATION custom hook to ADD new movie to user reel progress

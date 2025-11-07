@@ -1,6 +1,53 @@
-import { useReelCanonWithProgress } from "../../utilities/customHooks/useReelCanonWithProgress";
+import { useAllMovies } from "../../utilities/customHooks/useMovies";
+import { useUserReelProgress } from "../../utilities/customHooks/useReelProgress";
+import { useAuthContext } from "../../contexts/useAuthContext";
 
-export default function ReelCanon() {}
+export default function ReelCanon() {
+  // get all movies occurs even for non-logged in users
+  const { data: canon, isLoading: canonLoading } = useAllMovies();
+  // Checks for logged in status
+  const { isAuthenticated } = useAuthContext();
+  // Gets user reelProgress if logged in
+  const { data: rpResponse, isLoading: progressLoading } = useUserReelProgress({
+    enabled: isAuthenticated,
+  });
 
-const { movies, isLoading } = useReelCanonWithProgress();
-console.log("Canon + Progress:", { movies, isLoading });
+  // Create a lookup object for any existing progress records
+  const progressMap = {};
+  if (rpResponse?.reelProgress) {
+    rpResponse.reelProgress.forEach((p) => {
+      progressMap[p.movie] = {
+        isRevealed: p.isWatched,
+        rating: p.rating,
+      };
+    });
+  }
+
+  // Create array of movies with isRevealed status for display
+  const movies = (canon?.movies ?? []).map((m) => {
+    const prog = progressMap[m._id];
+    return {
+      ...m,
+      isRevealed: !!prog?.isRevealed,
+      rating: prog?.rating ?? undefined,
+    };
+  });
+
+  const isLoading = canonLoading || progressLoading;
+
+  // 3. Debug logs
+  console.log("Canon:", canon?.movies?.length);
+  console.log("Progress:", rpResponse);
+  console.log("Merged movies sample:", movies.slice(0, 3));
+  console.log("isAuthenticated:", isAuthenticated);
+
+  return (
+    <>
+      <h1> The Reel Canon</h1>
+      <h2> 100 Curated Films to Start Your Celluloid Exploration</h2>
+      <p>
+        {movies.filter((m) => m.isRevealed).length} / {movies.length} revealed
+      </p>
+    </>
+  );
+}

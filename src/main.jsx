@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./styles/index.css";
-import App from "./App";
+// import App from "./App";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./utilities/constants/queryClient";
 import Modal from "react-modal";
@@ -10,6 +10,7 @@ import { BrowserRouter } from "react-router-dom";
 import Footer from "./components/footer";
 import AuthProvider from "./contexts/authProvider";
 import { Toaster } from "react-hot-toast";
+import ReelCanon from "./pages/ReelCanon/ReelCanon";
 
 Modal.setAppElement("#root");
 
@@ -20,7 +21,8 @@ createRoot(document.getElementById("root")).render(
         <BrowserRouter>
           <Header />
           {/* <App /> */}
-          <main>Main</main>
+          <ReelCanon />
+          {/* <main>Main</main> */}
           <Footer />
         </BrowserRouter>
         <Toaster
