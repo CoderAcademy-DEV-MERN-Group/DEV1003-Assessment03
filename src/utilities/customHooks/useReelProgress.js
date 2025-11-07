@@ -1,4 +1,5 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
+import { queryClient } from "../constants/queryClient";
 import {
   getUserReelProgress,
   addMovieToReelProgress,
@@ -17,16 +18,31 @@ export const useUserReelProgress = () =>
 export const useAddMovieToReelProgress = () =>
   useMutation({
     mutationFn: addMovieToReelProgress,
+    // Invalidate and refetch all reel progress and current user after creating a new entry
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["user-reel-progress"] });
+      queryClient.invalidateQueries({ queryKey: ["current-user"] });
+    },
   });
 
 // Create tanstack MUTATION custom hook to UPDATE rating of movie in reel progress of logged in user
 export const useUpdateReelProgressMovieRating = () =>
   useMutation({
     mutationFn: updateReelProgressMovieRating,
+    // Invalidate and refetch all reel progress and current user after updating an entry
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["user-reel-progress"] });
+      queryClient.invalidateQueries({ queryKey: ["current-user"] });
+    },
   });
 
 // Create tanstack MUTATION custom hook to DELETE movie from reel progress for logged in user
 export const useDeleteMovieFromReelProgress = () =>
   useMutation({
     mutationFn: deleteMovieFromReelProgress,
+    // Invalidate and refetch all reel progress and current user after deleting an entry
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["user-reel-progress"] });
+      queryClient.invalidateQueries({ queryKey: ["current-user"] });
+    },
   });
