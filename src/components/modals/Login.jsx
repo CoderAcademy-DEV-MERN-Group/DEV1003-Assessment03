@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 import ErrorMessage from "../common/ErrorMessage";
 
 function Login({ isOpen, onClose }) {
-  const { login: setGlobalAuth, isLoading } = useAuthContext();
+  const { login: setGlobalAuth } = useAuthContext();
 
   const {
     register,
@@ -20,7 +20,7 @@ function Login({ isOpen, onClose }) {
     formState: { errors },
   } = useForm();
 
-  const { mutate: apiLogin, isPending } = useLoginUser();
+  const { mutate: apiLogin, isPending, error: apiError } = useLoginUser();
 
   const onSubmit = (data) => {
     apiLogin(data, {
@@ -38,22 +38,21 @@ function Login({ isOpen, onClose }) {
     });
   };
 
-  if (isLoading) {
-    return (
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={onClose}
-        className={styles.modal}
-        overlayClassName={styles.modalOverlay}
-        closeTimeoutMS={300}
-        shouldFocusAfterRender={false}
-        shouldCloseOnOverlayClick
-        shouldCloseOnEsc
-      >
-        <div className={styles.loadingMessage}>Checking authentication...</div>
-      </Modal>
-    );
-  }
+  // if (isPending) {
+  //   return (
+  //     <Modal
+  //       isOpen={isOpen}
+  //       onRequestClose={onClose}
+  //       className={styles.modal}
+  //       overlayClassName={styles.modalOverlay}
+  //       shouldFocusAfterRender={false}
+  //       shouldCloseOnOverlayClick
+  //       shouldCloseOnEsc
+  //     >
+  //       <div className={styles.loadingMessage}>Checking authentication...</div>
+  //     </Modal>
+  //   );
+  // }
 
   return (
     // Modal instead of Main
@@ -107,9 +106,6 @@ function Login({ isOpen, onClose }) {
 
             {/* This runs when there are React Hook Form email errors! (Old code below) */}
             <ErrorMessage error={errors.email?.message} />
-            {/* {errors.email && (
-              <span className={styles.errorMessage}>{errors.email.message}</span> // Shows the specific email error
-            )} */}
           </p>
           <p>
             <label htmlFor="password">Password: </label>
@@ -135,23 +131,14 @@ function Login({ isOpen, onClose }) {
             )} */}
           </p>
         </fieldset>
-        {/* Login success message span */}
-
-        {loginSuccess && <span className={styles.successMessage}>Login successful! 🎉</span>}
         {/* This runs when there are API errors! (Old code below) */}
-        <ErrorMessage error={apiError} />
-        {/* {apiError && (
-          <span className={styles.apiError}>
-            {apiError?.response?.data?.message || "Login failed. Please try again."}
-          </span>
-        )} */}
-
+        <ErrorMessage error={apiError?.message} />
         <button
           type="submit"
           disabled={isPending}
           className={clsx(styles.modalButton, isPending && styles.buttonLoading)}
         >
-          {isPending ? "Signing in" : "Sign in"}
+          {isPending ? "Signing in..." : "Sign in"}
         </button>
       </form>
     </Modal>
