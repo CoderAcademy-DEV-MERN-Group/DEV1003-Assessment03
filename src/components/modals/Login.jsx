@@ -9,6 +9,7 @@ import { useLoginUser } from "../../utilities/customHooks/useAuth";
 import { useAuthContext } from "../../contexts/useAuthContext";
 import toast from "react-hot-toast";
 // import { useEffect } from "react";
+import ErrorMessage from "../common/ErrorMessage";
 
 function Login({ isOpen, onClose }) {
   const { login: setGlobalAuth, isLoading } = useAuthContext();
@@ -104,10 +105,11 @@ function Login({ isOpen, onClose }) {
               )}
             />
 
-            {/* This runs when there are errors! */}
-            {errors.email && (
+            {/* This runs when there are React Hook Form email errors! (Old code below) */}
+            <ErrorMessage error={errors.email?.message} />
+            {/* {errors.email && (
               <span className={styles.errorMessage}>{errors.email.message}</span> // Shows the specific email error
-            )}
+            )} */}
           </p>
           <p>
             <label htmlFor="password">Password: </label>
@@ -126,13 +128,18 @@ function Login({ isOpen, onClose }) {
                 errors.password && styles.inputError // shared error class for styling
               )}
             />
-            {/* This runs when there are errors */}
-            {errors.password && (
+            {/* This runs when there are React Hook Form password errors (old code below) */}
+            <ErrorMessage error={errors.password?.message} />
+            {/* {errors.password && (
               <span className={styles.errorMessage}>{errors.password.message}</span> // Shows the specific password error
-            )}
+            )} */}
           </p>
         </fieldset>
-        {/* API level error displays go here */}
+        {/* Login success message span */}
+
+        {loginSuccess && <span className={styles.successMessage}>Login successful! 🎉</span>}
+        {/* This runs when there are API errors! (Old code below) */}
+        <ErrorMessage error={apiError} />
         {/* {apiError && (
           <span className={styles.apiError}>
             {apiError?.response?.data?.message || "Login failed. Please try again."}
