@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "./Modal.module.scss";
 import { useLoginUser } from "../../utilities/customHooks/useAuth";
+import ErrorMessage from "../common/ErrorMessage";
 
 // Set up our form with RHF
 function Login({ isOpen, onClose }) {
@@ -90,10 +91,11 @@ function Login({ isOpen, onClose }) {
               )}
             />
 
-            {/* This runs when there are errors! */}
-            {errors.email && (
+            {/* This runs when there are React Hook Form email errors! (Old code below) */}
+            <ErrorMessage error={errors.email?.message} />
+            {/* {errors.email && (
               <span className={styles.errorMessage}>{errors.email.message}</span> // Shows the specific email error
-            )}
+            )} */}
           </p>
           <p>
             <label htmlFor="password">Password: </label>
@@ -112,21 +114,23 @@ function Login({ isOpen, onClose }) {
                 errors.password && styles.inputError // shared error class for styling
               )}
             />
-            {/* This runs when there are errors */}
-            {errors.password && (
+            {/* This runs when there are React Hook Form password errors (old code below) */}
+            <ErrorMessage error={errors.password?.message} />
+            {/* {errors.password && (
               <span className={styles.errorMessage}>{errors.password.message}</span> // Shows the specific password error
-            )}
+            )} */}
           </p>
         </fieldset>
         {/* Login success message span */}
 
         {loginSuccess && <span className={styles.successMessage}>Login successful! 🎉</span>}
-        {/* API level error displays go here */}
-        {apiError && (
+        {/* This runs when there are API errors! (Old code below) */}
+        <ErrorMessage error={apiError} />
+        {/* {apiError && (
           <span className={styles.apiError}>
             Login failed. Please check your credentials and try again.
           </span>
-        )}
+        )} */}
 
         <button
           type="submit"
