@@ -2,13 +2,11 @@
 // React hook form provides form management without useState
 import clsx from "clsx";
 import Modal from "react-modal";
-// import { useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "./Modals.module.scss";
 import { useLoginUser } from "../../utilities/customHooks/useAuth";
 import { useAuthContext } from "../../contexts/useAuthContext";
 import toast from "react-hot-toast";
-// import { useEffect } from "react";
 import ErrorMessage from "../common/ErrorMessage";
 
 function Login({ isOpen, onClose }) {
@@ -18,7 +16,7 @@ function Login({ isOpen, onClose }) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: "onChange" });
 
   const { mutate: apiLogin, isPending, error: apiError } = useLoginUser();
 
@@ -31,28 +29,8 @@ function Login({ isOpen, onClose }) {
           onClose();
         }, 800);
       },
-      onError: (err) => {
-        const msg = err?.response?.data?.message || "Login failed. Please try again.";
-        toast.error(msg);
-      },
     });
   };
-
-  // if (isPending) {
-  //   return (
-  //     <Modal
-  //       isOpen={isOpen}
-  //       onRequestClose={onClose}
-  //       className={styles.modal}
-  //       overlayClassName={styles.modalOverlay}
-  //       shouldFocusAfterRender={false}
-  //       shouldCloseOnOverlayClick
-  //       shouldCloseOnEsc
-  //     >
-  //       <div className={styles.loadingMessage}>Checking authentication...</div>
-  //     </Modal>
-  //   );
-  // }
 
   return (
     // Modal instead of Main
@@ -84,7 +62,7 @@ function Login({ isOpen, onClose }) {
         <fieldset className={styles.inputGroup}>
           {/* Legend for name of all fields */}
           <legend>Login Credentials</legend>
-          <p>
+          <div className={styles.formField}>
             <label htmlFor="email">Email: </label>
             <input
               id="email"
@@ -105,9 +83,9 @@ function Login({ isOpen, onClose }) {
             />
 
             {/* This runs when there are React Hook Form email errors! (Old code below) */}
-            <ErrorMessage error={errors.email?.message} />
-          </p>
-          <p>
+            <ErrorMessage error={errors.email?.message} className={styles.errorMessage} />
+          </div>
+          <div className={styles.formField}>
             <label htmlFor="password">Password: </label>
             <input
               id="password"
@@ -125,14 +103,11 @@ function Login({ isOpen, onClose }) {
               )}
             />
             {/* This runs when there are React Hook Form password errors (old code below) */}
-            <ErrorMessage error={errors.password?.message} />
-            {/* {errors.password && (
-              <span className={styles.errorMessage}>{errors.password.message}</span> // Shows the specific password error
-            )} */}
-          </p>
+            <ErrorMessage error={errors.password?.message} className={styles.errorMessage} />
+          </div>
         </fieldset>
         {/* This runs when there are API errors! (Old code below) */}
-        <ErrorMessage error={apiError?.message} />
+        <ErrorMessage error={apiError?.errors[0]} className={styles.apiError} />
         <button
           type="submit"
           disabled={isPending}
