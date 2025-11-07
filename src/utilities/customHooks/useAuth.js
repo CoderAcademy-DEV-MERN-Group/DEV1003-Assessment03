@@ -1,10 +1,14 @@
 import { useMutation } from "@tanstack/react-query";
+import { queryClient } from "../constants/queryClient";
 import { registerUser, loginUser, logoutUser } from "../services/apiServices";
 
 // Create tanstack mutation custom hook to register a new user
 export const useRegisterUser = () =>
   useMutation({
     mutationFn: registerUser,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["all-users"] });
+    },
   });
 
 // Create tanstack mutation custom hook to login an existing user
