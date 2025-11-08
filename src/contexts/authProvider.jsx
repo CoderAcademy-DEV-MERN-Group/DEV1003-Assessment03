@@ -24,7 +24,7 @@ export default function AuthProvider({ children }) {
       }
       try {
         const userData = await getCurrentUser();
-        setUser(userData); // Set user data if token is valid
+        setUser(userData?.data?.user || userData); // Set user data if token is valid
       } catch (error) {
         // If token invalid/expired backend will return 401 (causing frontend to throw error)
         console.error(`Error occurred during authentication: ${error}`);
@@ -41,7 +41,7 @@ export default function AuthProvider({ children }) {
   // Login function that can be used by components to log user in and set user state + token
   const login = async (userData, token) => {
     localStorage.setItem("authToken", token);
-    setUser(userData);
+    setUser(userData?.data?.user || userData);
   };
 
   // Logout function that can be used by components to log user out and clear user state + token

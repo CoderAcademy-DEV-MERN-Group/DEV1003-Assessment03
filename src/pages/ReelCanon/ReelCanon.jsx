@@ -9,7 +9,7 @@ export default function ReelCanon() {
   // get all movies occurs even for non-logged in users
   const { data: canon, isLoading: canonLoading, error: canonError } = useAllMovies();
   // Checks for logged in status
-  const { isAuthenticated } = useAuthContext();
+  const { user, isAuthenticated } = useAuthContext();
   // Gets user reelProgress if logged in
   const {
     data: rpResponse,
@@ -37,7 +37,7 @@ export default function ReelCanon() {
     );
   }
 
-  if (isAuthenticated && progressError) {
+  if (isAuthenticated && progressError && progressError.status !== 404) {
     return (
       <>
         <div className={styles.reelProgress} />
@@ -78,7 +78,14 @@ export default function ReelCanon() {
       <section className={styles.reelCanon}>
         <article className={styles.title}>
           <h1>The Reel Canon</h1>
-          <h2>100 Curated Films to Start Your Celluloid Exploration</h2>
+          {!isAuthenticated ? (
+            <h2>Sign In or Register to Start Your Film Journey!</h2>
+          ) : (
+            <h2>
+              {isAuthenticated ? `Welcome ${user.username}! ` : ""}
+              100 Curated Films to Start Your Celluloid Exploration!
+            </h2>
+          )}
         </article>
 
         <section className={styles.grid}>

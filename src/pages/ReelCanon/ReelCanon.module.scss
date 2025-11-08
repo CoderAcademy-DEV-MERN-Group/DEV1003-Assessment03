@@ -34,7 +34,7 @@
 .grid {
   display: flex;
   flex-wrap: wrap;
-  gap: spacing(lg);
+  gap: spacing(md);
   justify-content: center; // optional: center cards
   margin: 0 auto;
   padding: 0 spacing(sm); // prevent overflow
@@ -42,9 +42,9 @@
 
 // Each card takes min 240px, grows to fill
 .grid > * {
-  flex: 1 1 175px;
+  flex: 1 1 185px;
   min-height: 300px;
-  max-width: 175px;
+  max-width: 185px;
 }
 
 .apiError {

@@ -8,8 +8,10 @@ import {
 } from "../../utilities/customHooks/useReelProgress";
 import StarRating from "../common/StarRating";
 import CardLoadingOverlay from "../common/CardLoadingOverlay";
+import { useAuthContext } from "../../contexts/useAuthContext";
 
 export default function MovieCard({ movie, index, totalMovies }) {
+  const { isAuthenticated } = useAuthContext();
   const { mutate: updateRating, isPending: isUpdating } = useUpdateReelProgressMovieRating();
   const { mutate: markAsWatched, isPending: isMarkingWatched } = useAddMovieToReelProgress();
   const { mutate: removeFromWatched, isPending: isRemovingWatched } =
@@ -143,9 +145,11 @@ export default function MovieCard({ movie, index, totalMovies }) {
               <br /> {movie.actors.join(", ")}
             </p>
             <p className={styles.plot}>{movie.plot || "No plot currently available"}</p>
-            <button className={styles.markAsWatchedButton} onClick={handleMarkAsWatched}>
-              Mark as Watched
-            </button>
+            {isAuthenticated && (
+              <button className={styles.markAsWatchedButton} onClick={handleMarkAsWatched}>
+                Mark as Watched
+              </button>
+            )}
           </div>
         </div>
       )}
