@@ -105,13 +105,13 @@
   }
 
   .grid {
-    gap: spacing(md);
+    gap: spacing(sm);
   }
 
   .grid > * {
-    flex: 1 1 75px !important;
-    min-height: 50px !important;
-    max-height: 150px !important;
+    flex: 1 1 120px !important;    // Fits 3 columns nicely
+    min-height: 140px !important;
+    max-width: 130px !important;
   }
 
   .errorContainer {
