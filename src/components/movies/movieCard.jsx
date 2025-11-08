@@ -1,11 +1,16 @@
 import { motion } from "framer-motion";
 import styles from "./MovieCard.module.scss";
-import { useUpdateReelProgressMovieRating } from "../../utilities/customHooks/useReelProgress";
+import {
+  useAddMovieToReelProgress,
+  useUpdateReelProgressMovieRating,
+} from "../../utilities/customHooks/useReelProgress";
+import { handleApiError } from "../../utilities/helpers/errorHandler";
 import toast from "react-hot-toast";
 import StarRating from "../common/StarRating";
 
 export default function MovieCard({ movie, index, totalMovies }) {
   const { mutate: updateRating, isPending: isUpdating } = useUpdateReelProgressMovieRating();
+  const { mutate: markAsWatched, isPending: isMarkingWatched } = useAddMovieToReelProgress();
 
   // Pink (330°) to Blue (240°) - going the long way around
   const startHue = 330;
@@ -15,17 +20,28 @@ export default function MovieCard({ movie, index, totalMovies }) {
   const hue = startHue + (((index / totalMovies) * (endHue + 360 - startHue)) % 360);
   const pastel = `hsl(${hue}, 70%, 85%)`;
 
-  const handleRatingChange = async (newRating) => {
+  const handleMarkAsWatched = async () => {
     try {
-      await updateRating({
-        movieId: movie._id,
-        rating: newRating,
+      await markAsWatched({
+        movie: movie._id,
+        isWatched: true,
+        rating: null, // initial rating is 0
       });
-      toast.success("Rating updated!");
+      toast.success(`${movie.title} marked as watched!`);
     } catch (error) {
-      console.error("Failed to update rating:", error);
-      toast.error("Failed to update rating. Please try again");
+      console.error("Failed to mark as watched: ", error);
+      const formattedError = handleApiError(error);
+      if (formattedError.status !== 409) {
+        toast.error(formattedError.message);
+      }
     }
+  };
+
+  const handleRatingChange = async (newRating) => {
+    updateRating({
+      movieId: movie._id,
+      rating: newRating,
+    });
   };
 
   return (

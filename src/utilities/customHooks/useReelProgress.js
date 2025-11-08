@@ -6,6 +6,7 @@ import {
   updateReelProgressMovieRating,
   deleteMovieFromReelProgress,
 } from "../services/apiServices";
+import toast from "react-hot-toast";
 
 // Create tanstack QUERY custom hook to GET user reel progress
 export const useUserReelProgress = (options = {}) =>
@@ -34,6 +35,9 @@ export const useUpdateReelProgressMovieRating = () =>
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user-reel-progress"] });
       queryClient.invalidateQueries({ queryKey: ["current-user"] });
+    },
+    onError: (error) => {
+      toast.error(error.originalError?.message || error.message);
     },
   });
 
