@@ -10,7 +10,8 @@ import { BrowserRouter } from "react-router-dom";
 import Footer from "./components/footer";
 import AuthProvider from "./contexts/authProvider";
 import { Toaster } from "react-hot-toast";
-import ReelCanon from "./pages/ReelCanon/ReelCanon";
+import ErrorFallback from "./components/common/ErrorFallback";
+import { ErrorBoundary } from "react-error-boundary";
 
 Modal.setAppElement("#root");
 
@@ -18,13 +19,14 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <BrowserRouter>
-          <Header />
-          {/* <App /> */}
-          <ReelCanon />
-          {/* <main>Main</main> */}
-          <Footer />
-        </BrowserRouter>
+        {/* Error boundary catches unhandled child component errors, clears cache if triggered */}
+        <ErrorBoundary FallbackComponent={ErrorFallback} onReset={() => queryClient.clear()}>
+          <BrowserRouter>
+            <Header />
+            <App />
+            <Footer />
+          </BrowserRouter>
+        </ErrorBoundary>
         <Toaster
           position="top-center"
           toastOptions={{

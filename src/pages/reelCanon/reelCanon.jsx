@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Home() {
+export default function ReelCanon() {
   const [shouldThrowError, setShouldThrowError] = useState(false);
 
   if (shouldThrowError) {
@@ -9,8 +9,8 @@ export default function Home() {
 
   return (
     <div>
-      <h1>Welcome to the Home Page</h1>
-      <p>This is the main landing page of the application.</p>
+      <h1>Welcome to the Reel Canon Page</h1>
+      <p>This page showcases the reel canon of the application.</p>
 
       {/* Test button for error boundary */}
       <button onClick={() => setShouldThrowError(true)}>Test Error Boundary</button>

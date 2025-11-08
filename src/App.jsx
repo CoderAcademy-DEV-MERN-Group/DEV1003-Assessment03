@@ -1,35 +1,76 @@
-// import { useState } from "react";
-// import reactLogo from "./assets/react.svg";
-// import viteLogo from "/vite.svg";
-// import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import {
+  HOME,
+  PROFILE,
+  LEADERBOARD,
+  REGISTER,
+  REEL_CANON,
+  ABOUT,
+} from "./utilities/constants/routes";
+import { Home, UserProfile, Leaderboard, Register, ReelCanon, About } from "./pages";
+import "./styles/App.css";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "./components/common/ErrorFallback";
 
-// function App() {
-//   const [count, setCount] = useState(0);
+// ErrrorBoundary fallback component can be replaced with custom component for each route if needed
+export default function App() {
+  return (
+    <>
+      <Routes>
+        <Route
+          path={HOME}
+          element={
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <Home />
+            </ErrorBoundary>
+          }
+        />
 
-//   return (
-//     <>
-//       <div>
-//         <a href="https://vite.dev" target="_blank">
-//           <img src={viteLogo} className="logo" alt="Vite logo" />
-//         </a>
-//         <a href="https://react.dev" target="_blank">
-//           <img src={reactLogo} className="logo react" alt="React logo" />
-//         </a>
-//       </div>
-//       <h1>Vite + React</h1>
-//       <div className="card">
-//         <button onClick={() => setCount((count) => count + 1)}>
-//           count is {count}
-//         </button>
-//         <p>
-//           Edit <code>src/App.jsx</code> and save to test HMR
-//         </p>
-//       </div>
-//       <p className="read-the-docs">
-//         Click on the Vite and React logos to learn more
-//       </p>
-//     </>
-//   );
-// }
+        <Route
+          path={PROFILE}
+          element={
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <UserProfile />
+            </ErrorBoundary>
+          }
+        />
 
-// export default App;
+        <Route
+          path={LEADERBOARD}
+          element={
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <Leaderboard />
+            </ErrorBoundary>
+          }
+        />
+
+        <Route
+          path={REGISTER}
+          element={
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <Register />
+            </ErrorBoundary>
+          }
+        />
+
+        <Route
+          path={REEL_CANON}
+          element={
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <ReelCanon />
+            </ErrorBoundary>
+          }
+        />
+
+        <Route
+          path={ABOUT}
+          element={
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <About />
+            </ErrorBoundary>
+          }
+        />
+      </Routes>
+    </>
+  );
+}
