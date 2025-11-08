@@ -19,8 +19,7 @@ createRoot(document.getElementById("root")).render(
       <AuthProvider>
         <BrowserRouter>
           <Header />
-          {/* <App /> */}
-          <main>Main</main>
+          <App />
           <Footer />
         </BrowserRouter>
         <Toaster
