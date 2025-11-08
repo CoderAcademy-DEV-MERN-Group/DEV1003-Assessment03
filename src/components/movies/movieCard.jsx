@@ -21,6 +21,7 @@ export default function MovieCard({ movie, index, totalMovies }) {
         movieId: movie._id,
         rating: newRating,
       });
+      toast.success("Rating updated!");
     } catch (error) {
       console.error("Failed to update rating:", error);
       toast.error("Failed to update rating. Please try again");
@@ -84,15 +85,16 @@ export default function MovieCard({ movie, index, totalMovies }) {
         <div className={styles.overlay}>
           <div className={styles.overlayContent}>
             <p>
-              <strong>Director:</strong>
+              <strong>Director</strong>
               <br />
               {movie.director}
             </p>
             <p>
-              <strong>Starring:</strong>
+              <strong>Starring</strong>
               <br /> {movie.actors.join(", ")}
             </p>
             <p className={styles.plot}>{movie.plot || "No plot currently available"}</p>
+            <button className={styles.markWatchedButton}>Mark as Watched</button>
           </div>
         </div>
       )}

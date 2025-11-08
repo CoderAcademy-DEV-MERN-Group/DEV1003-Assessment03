@@ -6,7 +6,6 @@
   border-radius: radius(lg);
   overflow: hidden;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
   background: transparent;
   min-height: 200px; // Ensure cards have some height
 }
@@ -52,7 +51,7 @@
 .overlay {
   position: absolute;
   inset: 0;
-  background: color(overlay-dark);
+  background: color(overlay-light);
   backdrop-filter: blur(4px);
   color: color(theme-white);
   display: flex;
@@ -126,6 +125,20 @@
 
 .genre {
   align-self: end;
+}
+
+.markWatchedButton {
+  color: color(accent-gold);
+  background: color(primary-dark);
+  border-radius: 5px;
+  border-color: color(base-gold);
+  box-shadow: 1px 1px 1px 1px color(secondary-shadow);
+  cursor: pointer;
+  transition: scale 0.8s ease;
+
+  &:hover {
+    scale: 1.1;
+  }
 }
 
 @include mobile {
