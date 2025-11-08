@@ -24,6 +24,10 @@ export const useAddMovieToReelProgress = () =>
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user-reel-progress"] });
       queryClient.invalidateQueries({ queryKey: ["current-user"] });
+      toast.success("Movie marked as watched!");
+    },
+    onError: (error) => {
+      toast.error(error.message);
     },
   });
 
@@ -32,13 +36,13 @@ export const useUpdateReelProgressMovieRating = () =>
   useMutation({
     mutationFn: updateReelProgressMovieRating,
     // Invalidate and refetch all reel progress and current user after updating an entry
-    onSuccess: () => {
+    onSuccess: ({ newRating }) => {
       queryClient.invalidateQueries({ queryKey: ["user-reel-progress"] });
       queryClient.invalidateQueries({ queryKey: ["current-user"] });
-      toast.success(`Rating updated!`);
+      toast.success(`Rating updated to ${newRating}!`);
     },
     onError: (error) => {
-      toast.error(error.originalError?.message || error.message);
+      toast.error(error.message);
     },
   });
 
@@ -50,5 +54,9 @@ export const useDeleteMovieFromReelProgress = () =>
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user-reel-progress"] });
       queryClient.invalidateQueries({ queryKey: ["current-user"] });
+      toast.success("Movie removed from your Reel Progress!");
+    },
+    onError: (error) => {
+      toast.error(error.message);
     },
   });

@@ -1,17 +1,22 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
 import styles from "./MovieCard.module.scss";
 import {
   useAddMovieToReelProgress,
+  useDeleteMovieFromReelProgress,
   useUpdateReelProgressMovieRating,
 } from "../../utilities/customHooks/useReelProgress";
-import { handleApiError } from "../../utilities/helpers/errorHandler";
-import toast from "react-hot-toast";
 import StarRating from "../common/StarRating";
 import CardLoadingOverlay from "../common/CardLoadingOverlay";
 
 export default function MovieCard({ movie, index, totalMovies }) {
   const { mutate: updateRating, isPending: isUpdating } = useUpdateReelProgressMovieRating();
   const { mutate: markAsWatched, isPending: isMarkingWatched } = useAddMovieToReelProgress();
+  const { mutate: removeFromWatched, isPending: isRemovingWatched } =
+    useDeleteMovieFromReelProgress();
+
+  // state to manage "fresh movies"
+  const [wasWatchedAlready, setWasWatchedAlready] = useState(movie.isRevealed);
 
   // Pink (330°) to Blue (240°) - going the long way around
   const startHue = 330;
@@ -22,30 +27,31 @@ export default function MovieCard({ movie, index, totalMovies }) {
   const pastel = `hsl(${hue}, 70%, 85%)`;
 
   const handleMarkAsWatched = async () => {
-    try {
-      await markAsWatched({
-        movie: movie._id,
-        isWatched: true,
-        rating: null, // initial rating is 0
-      });
-      toast.success(`${movie.title} marked as watched!`);
-    } catch (error) {
-      console.error("Failed to mark as watched: ", error);
-      const formattedError = handleApiError(error);
-      if (formattedError.status !== 409) {
-        toast.error(formattedError.message);
-      }
-    }
+    // Attach all data to the post customHook
+    markAsWatched({
+      movie: movie._id,
+      isWatched: true,
+      rating: null, // initial rating is 0
+    });
   };
 
   const handleRatingChange = async (newRating) => {
+    // Attach newRating to the custom patch hook!
     updateRating({
       movieId: movie._id,
       rating: newRating,
     });
   };
 
+  const handleRemoveFromWatched = async () => {
+    removeFromWatched({
+      movieId: movie._id,
+    });
+    setWasWatchedAlready(false);
+  };
+
   return (
+    // Framer motion animation div, this will animate the card hover functions
     <motion.div
       className={styles.card}
       whileHover={{
@@ -53,36 +59,56 @@ export default function MovieCard({ movie, index, totalMovies }) {
         zIndex: 50,
         rotateY: 5,
       }}
-      whileTap={{ scale: 1.8 }}
+      whileTap={{ scale: 1.1 }}
       transition={{
-        type: "spring",
-        stiffness: 200,
-        damping: 20,
-        mass: 8, // Higher = more heavy/slow
-        duration: 2.5,
+        type: "tween",
+        ease: "easeIn",
+        duration: 0.4,
       }}
       style={{
-        transformOrigin: "center center", // This is key
+        transformOrigin: "center center", // ensures animation happens from the center of the card
       }}
     >
-      {/* Loading overlay for cards, passed the message prop depending on what's loading */}
-      {(isUpdating || isMarkingWatched) && (
-        <CardLoadingOverlay
-          message={isMarkingWatched ? "Marking as watched..." : "Updating your rating..."}
-        />
-      )}
-      {/* PASTEL BACKGROUND - Always visible */}
-      <div className={styles.pastelBackground} style={{ backgroundColor: pastel }} />
-      {/* POSTER - Only when revealed, ABOVE the pastel */}
+      {/* UNDO button for delete reelProgress API call */}
       {movie.isRevealed && (
-        <div
-          className={styles.poster}
-          style={{
-            backgroundImage: `url(${movie.poster})`,
-          }}
+        <button className={styles.undoButton} onClick={handleRemoveFromWatched}>
+          🗑️
+        </button>
+      )}
+      {/* Loading overlay for cards, passed the message prop depending on what's loading */}
+      {(isUpdating || isMarkingWatched || isRemovingWatched) && (
+        <CardLoadingOverlay
+          message={
+            isMarkingWatched ? `Adding ${movie.title} to your Reel Progress...` : "Updating..."
+          }
         />
       )}
-      {movie.isRevealed && <div className={styles.posterOverlay} />}
+      {/* AnimatePresence - animates based on state - Pastel background layer */}
+      <AnimatePresence>
+        {!movie.isRevealed && (
+          <motion.div
+            className={styles.pastelBackground}
+            style={{ backgroundColor: pastel }}
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 2 }}
+          />
+        )}
+      </AnimatePresence>
+      {/* Animate Presence - POSTER - show if revealed, animate if transitioning*/}
+      <AnimatePresence>
+        {movie.isRevealed && (
+          <motion.div
+            className={styles.poster}
+            style={{ backgroundImage: `url(${movie.poster})` }}
+            initial={!wasWatchedAlready ? { opacity: 0 } : false}
+            animate={{ opacity: 1 }}
+            transition={{ duration: !wasWatchedAlready ? 2 : 0 }}
+          />
+        )}
+      </AnimatePresence>
+      {/* Overlay ONLY for movies that were already revealed on page load */}
+      {wasWatchedAlready && <div className={styles.posterOverlay} />}
       <article className={styles.content}>
         <h3 className={`${styles.title} ${movie.isRevealed ? styles.revealedText : ""}`}>
           {movie.title}
@@ -117,7 +143,9 @@ export default function MovieCard({ movie, index, totalMovies }) {
               <br /> {movie.actors.join(", ")}
             </p>
             <p className={styles.plot}>{movie.plot || "No plot currently available"}</p>
-            <button className={styles.markWatchedButton}>Mark as Watched</button>
+            <button className={styles.markAsWatchedButton} onClick={handleMarkAsWatched}>
+              Mark as Watched
+            </button>
           </div>
         </div>
       )}

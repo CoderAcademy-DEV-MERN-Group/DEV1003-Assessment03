@@ -28,9 +28,7 @@ export default function StarRating({ initialRating = 0, onRatingChange, isSubmit
   };
 
   let statusText = "Rate this movie";
-  if (isSubmitting) statusText = "Saving...";
-  else if (justRated) statusText = "Rating saved! ★";
-  else if (rating > 0) statusText = `${rating} stars!`;
+  if (rating > 0) statusText = `${rating} stars!`;
 
   return (
     <div className={styles.starRating}>
@@ -52,7 +50,8 @@ export default function StarRating({ initialRating = 0, onRatingChange, isSubmit
           ⭐
         </button>
       ))}
-      <span className={clsx(styles.ratingText, justRated && styles.success)}>{statusText}</span>
+      <br />
+      <p className={clsx(styles.ratingText, justRated && styles.success)}>{statusText}</p>
     </div>
   );
 }

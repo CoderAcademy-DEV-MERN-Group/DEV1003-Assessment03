@@ -90,14 +90,18 @@
 // Responsive
 @include mobile {
   .reelCanon {
-    padding: spacing(lg) spacing(sm);
+    padding: 0;
+    max-width: 100dvw;
+    margin: 0;
   }
 
   .title h1 {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
+    line-height: 1.2;
   }
   .title h2 {
-    font-size: 1.1rem;
+    font-size: 1rem;
+    line-height: 1.3;
   }
 
   .grid {
@@ -105,13 +109,32 @@
   }
 
   .grid > * {
-    flex: 1 1 200px;
-    max-width: 100%;
+    flex: 1 1 75px !important;
+    min-height: 50px !important;
+    max-height: 150px !important;
+  }
+
+  .errorContainer {
+    padding: spacing(lg);
+    width: 95%;
   }
 }
 
 @include tablet {
+  .title h1 {
+    font-size: 2.4rem;
+  }
+
+  .title h2 {
+    font-size: 1.15rem;
+  }
+
   .grid > * {
-    flex: 1 1 220px;
+    flex: 1 1 180px;
+    min-height: 280px;
+  }
+
+  .errorContainer {
+    width: 85%;
   }
 }

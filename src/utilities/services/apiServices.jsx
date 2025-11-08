@@ -272,7 +272,7 @@ export const updateReelProgressMovieRating = async ({ movieId, rating }) => {
 };
 
 // Delete movie from reel-progress array for logged in user
-export const deleteMovieFromReelProgress = async (movieId) => {
+export const deleteMovieFromReelProgress = async ({ movieId }) => {
   try {
     const res = await api.delete(`/reel-progress/${encodeURIComponent(movieId)}`);
     return res.data;
