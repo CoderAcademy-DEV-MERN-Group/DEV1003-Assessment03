@@ -1,17 +1,20 @@
 // import clsx from "clsx";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/images/navbarlogo215px.png";
 import Login from "./modals/Login";
 import Logout from "./modals/Logout";
 import styles from "../components/styles/Navbar.module.scss";
 import { useAuthContext } from "../contexts/useAuthContext";
 import { HOME, PROFILE, LEADERBOARD, REGISTER, REEL_CANON } from "../utilities/constants/routes";
+// import Register from "../pages";
 
 function Header() {
   const { isAuthenticated } = useAuthContext();
   const [showLogin, setShowLogin] = useState(false);
   const [showLogout, setShowLogout] = useState(false);
+  // const [showRegister, setShowRegister] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <nav className={styles.navbar}>
@@ -40,12 +43,12 @@ function Header() {
         >
           Leaderboard
         </NavLink>
-        <NavLink
+        {/* <NavLink
           to={REGISTER}
           className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
         >
           Register
-        </NavLink>
+        </NavLink> */}
         <NavLink
           to={REEL_CANON}
           className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
@@ -58,16 +61,17 @@ function Header() {
 
       <section className={styles.modalButtons}>
         {isAuthenticated ? (
-          <>
-            <button onClick={() => setShowLogout(true)} className={styles.openLogoutButton}>
-              Sign Out
-            </button>
-          </>
+          <button onClick={() => setShowLogout(true)} className={styles.userStateButtons}>
+            Sign Out
+          </button>
         ) : (
           <>
-            {" "}
-            <button onClick={() => setShowLogin(true)} className={styles.openLoginButton}>
+            <button onClick={() => setShowLogin(true)} className={styles.userStateButtons}>
               Sign In
+            </button>
+
+            <button onClick={() => navigate(REGISTER)} className={styles.userStateButtons}>
+              Register
             </button>
           </>
         )}
