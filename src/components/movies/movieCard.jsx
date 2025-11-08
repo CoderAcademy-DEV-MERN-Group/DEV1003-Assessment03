@@ -7,6 +7,7 @@ import {
 import { handleApiError } from "../../utilities/helpers/errorHandler";
 import toast from "react-hot-toast";
 import StarRating from "../common/StarRating";
+import CardLoadingOverlay from "../common/CardLoadingOverlay";
 
 export default function MovieCard({ movie, index, totalMovies }) {
   const { mutate: updateRating, isPending: isUpdating } = useUpdateReelProgressMovieRating();
@@ -64,6 +65,12 @@ export default function MovieCard({ movie, index, totalMovies }) {
         transformOrigin: "center center", // This is key
       }}
     >
+      {/* Loading overlay for cards, passed the message prop depending on what's loading */}
+      {(isUpdating || isMarkingWatched) && (
+        <CardLoadingOverlay
+          message={isMarkingWatched ? "Marking as watched..." : "Updating your rating..."}
+        />
+      )}
       {/* PASTEL BACKGROUND - Always visible */}
       <div className={styles.pastelBackground} style={{ backgroundColor: pastel }} />
       {/* POSTER - Only when revealed, ABOVE the pastel */}

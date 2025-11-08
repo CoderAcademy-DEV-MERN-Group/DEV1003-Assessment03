@@ -35,6 +35,7 @@ export const useUpdateReelProgressMovieRating = () =>
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user-reel-progress"] });
       queryClient.invalidateQueries({ queryKey: ["current-user"] });
+      toast.success(`Rating updated!`);
     },
     onError: (error) => {
       toast.error(error.originalError?.message || error.message);
