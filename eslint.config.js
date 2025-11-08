@@ -86,7 +86,7 @@ export default [
       "import/no-unresolved": [
         "error",
         {
-          ignore: ["^vite$", "^@vitejs/", "^@eslint/", "^eslint/", "^eslint-"],
+          ignore: ["^vite$", "^@vitejs/", "^@eslint/", "^eslint/", "^react-error-boundary$"],
         },
       ],
       "import/first": "error",
