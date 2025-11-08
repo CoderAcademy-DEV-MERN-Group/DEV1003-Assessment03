@@ -7,4 +7,9 @@ export default defineConfig({
   server: {
     port: 5000,
   },
+  test: {
+    globals: true, // Lets us use globals like "describe", "test" and "it"
+    environment: "jsdom", // Lets us test DOM manipulation by simulating browser environment
+    setupFiles: "./src/setupTests.js", // Global test setup
+  },
 });
