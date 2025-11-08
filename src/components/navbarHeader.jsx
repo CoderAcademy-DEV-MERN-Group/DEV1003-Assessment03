@@ -1,4 +1,3 @@
-// import clsx from "clsx";
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/images/navbarlogo215px.png";
@@ -7,13 +6,11 @@ import Logout from "./modals/Logout";
 import styles from "../components/styles/Navbar.module.scss";
 import { useAuthContext } from "../contexts/useAuthContext";
 import { HOME, PROFILE, LEADERBOARD, REGISTER, REEL_CANON } from "../utilities/constants/routes";
-// import Register from "../pages";
 
 function Header() {
   const { isAuthenticated } = useAuthContext();
   const [showLogin, setShowLogin] = useState(false);
   const [showLogout, setShowLogout] = useState(false);
-  // const [showRegister, setShowRegister] = useState(false);
   const navigate = useNavigate();
 
   return (
@@ -43,12 +40,6 @@ function Header() {
         >
           Leaderboard
         </NavLink>
-        {/* <NavLink
-          to={REGISTER}
-          className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
-        >
-          Register
-        </NavLink> */}
         <NavLink
           to={REEL_CANON}
           className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
