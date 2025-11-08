@@ -2,12 +2,13 @@
 @use "../../styles/mixins" as *;
 
 .registerContainer {
-  display: flex;
+  @include flex-center;
+  margin: 0;
   text-align: left;
 }
 
 .registerForm {
-  background: color(soft);
+  background: color(theme-white);
   padding: spacing(xxl);
   border-radius: radius(lg);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
