@@ -261,9 +261,9 @@ export const addMovieToReelProgress = async (movieBodyData) => {
 };
 
 // Update rating of movie in reel-progress array for logged in user
-export const updateReelProgressMovieRating = async (movieId, movieRating) => {
+export const updateReelProgressMovieRating = async ({ movieId, rating }) => {
   try {
-    const res = await api.patch(`/reel-progress/${encodeURIComponent(movieId)}`, movieRating);
+    const res = await api.patch(`/reel-progress/${encodeURIComponent(movieId)}`, { rating });
     return res.data;
   } catch (err) {
     console.error(`Error updating movie rating in user reel-progress: ${err}`);
