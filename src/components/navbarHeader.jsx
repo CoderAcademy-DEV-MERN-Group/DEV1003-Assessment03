@@ -6,6 +6,7 @@ import Login from "./modals/Login";
 import Logout from "./modals/Logout";
 import styles from "../components/styles/Navbar.module.scss";
 import { useAuthContext } from "../contexts/useAuthContext";
+import { HOME, PROFILE, LEADERBOARD, REGISTER, REEL_CANON } from "../utilities/constants/routes";
 
 function Header() {
   const { isAuthenticated } = useAuthContext();
@@ -21,29 +22,32 @@ function Header() {
 
       {/* Link section */}
       <section className={styles.pageLinks}>
-        <NavLink to="/" className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}>
+        <NavLink
+          to={HOME}
+          className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
+        >
           Home
         </NavLink>
         <NavLink
-          to="/profile"
+          to={PROFILE}
           className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
         >
           My Profile
         </NavLink>
         <NavLink
-          to="/leaderboard"
+          to={LEADERBOARD}
           className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
         >
           Leaderboard
         </NavLink>
         <NavLink
-          to="/register"
+          to={REGISTER}
           className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
         >
           Register
         </NavLink>
         <NavLink
-          to="/the-reel-canon"
+          to={REEL_CANON}
           className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
         >
           The Reel Canon
