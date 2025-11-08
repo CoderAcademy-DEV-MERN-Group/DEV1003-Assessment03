@@ -1,16 +1,17 @@
-// import clsx from "clsx";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/images/navbarlogo215px.png";
 import Login from "./modals/Login";
 import Logout from "./modals/Logout";
 import styles from "../components/styles/Navbar.module.scss";
 import { useAuthContext } from "../contexts/useAuthContext";
+import { HOME, PROFILE, LEADERBOARD, REGISTER, REEL_CANON } from "../utilities/constants/routes";
 
 function Header() {
   const { isAuthenticated } = useAuthContext();
   const [showLogin, setShowLogin] = useState(false);
   const [showLogout, setShowLogout] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <nav className={styles.navbar}>
@@ -21,29 +22,26 @@ function Header() {
 
       {/* Link section */}
       <section className={styles.pageLinks}>
-        <NavLink to="/" className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}>
+        <NavLink
+          to={HOME}
+          className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
+        >
           Home
         </NavLink>
         <NavLink
-          to="/profile"
+          to={PROFILE}
           className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
         >
           My Profile
         </NavLink>
         <NavLink
-          to="/leaderboard"
+          to={LEADERBOARD}
           className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
         >
           Leaderboard
         </NavLink>
         <NavLink
-          to="/register"
-          className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
-        >
-          Register
-        </NavLink>
-        <NavLink
-          to="/the-reel-canon"
+          to={REEL_CANON}
           className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
         >
           The Reel Canon
@@ -54,16 +52,17 @@ function Header() {
 
       <section className={styles.modalButtons}>
         {isAuthenticated ? (
-          <>
-            <button onClick={() => setShowLogout(true)} className={styles.openLogoutButton}>
-              Sign Out
-            </button>
-          </>
+          <button onClick={() => setShowLogout(true)} className={styles.userStateButtons}>
+            Sign Out
+          </button>
         ) : (
           <>
-            {" "}
-            <button onClick={() => setShowLogin(true)} className={styles.openLoginButton}>
+            <button onClick={() => setShowLogin(true)} className={styles.userStateButtons}>
               Sign In
+            </button>
+
+            <button onClick={() => navigate(REGISTER)} className={styles.userStateButtons}>
+              Register
             </button>
           </>
         )}
