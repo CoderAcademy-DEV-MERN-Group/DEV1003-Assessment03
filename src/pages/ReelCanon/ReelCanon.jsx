@@ -8,7 +8,7 @@ import styles from "./ReelCanon.module.scss";
 export default function ReelCanon() {
   // get all movies occurs even for non-logged in users
   const { data: canon, isLoading: canonLoading, error: canonError } = useAllMovies();
-  // Checks for logged in status
+  // Checks for logged in status and attaches user data
   const { user, isAuthenticated } = useAuthContext();
   // Gets user reelProgress if logged in
   const {
