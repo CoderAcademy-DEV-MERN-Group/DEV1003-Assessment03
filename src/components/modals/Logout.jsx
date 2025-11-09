@@ -43,7 +43,7 @@ function Logout({ isOpen, onClose }) {
       </button>
       <section className={styles.modalForm}>
         <h1>Log Out</h1>
-        <article className={styles.confirmMessage}>
+        <article className={styles.generalMessage}>
           <p>Are you sure you want to log out?</p>
           <button
             type="button"
