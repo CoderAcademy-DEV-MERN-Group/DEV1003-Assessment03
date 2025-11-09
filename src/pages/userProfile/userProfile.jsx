@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { UserInfoCard } from "../../components/users";
 
 export default function UserProfile() {
   const [shouldThrowError, setShouldThrowError] = useState(false);
@@ -11,6 +12,7 @@ export default function UserProfile() {
     <div>
       <h1>Welcome to the User Profile Page</h1>
       <p>This is the User Profile page of the application.</p>
+      <UserInfoCard />
 
       {/* Test button for error boundary */}
       <button onClick={() => setShouldThrowError(true)}>Test Error Boundary</button>

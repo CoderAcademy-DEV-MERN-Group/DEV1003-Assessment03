@@ -19,6 +19,8 @@ export default function ReelCanon() {
     enabled: isAuthenticated,
   });
 
+  console.log(canon);
+
   if (canonLoading || progressLoading) {
     return <>Movies loading...</>;
   }
