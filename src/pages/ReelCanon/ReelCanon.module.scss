@@ -30,7 +30,6 @@
   }
 }
 
-// FLEX GRID — THIS IS BULLETPROOF
 .grid {
   display: flex;
   flex-wrap: wrap;
@@ -105,13 +104,14 @@
   }
 
   .grid {
-    gap: spacing(sm);
+    gap: spacing(md);
+    padding-bottom: 2dvh;
   }
 
   .grid > * {
-    flex: 1 1 120px !important;    // Fits 3 columns nicely
+    flex: 1 1 40dvw !important; // Fits 2 columns nicely
     min-height: 140px !important;
-    max-width: 130px !important;
+    max-width: 40dvw !important;
   }
 
   .errorContainer {
@@ -121,17 +121,18 @@
 }
 
 @include tablet {
+  .grid > * {
+    flex: 1 1 20dvw !important; // Fits 2 columns nicely
+    // min-height: 200px !important;
+    // max-height: 400px;
+  }
+
   .title h1 {
     font-size: 2.4rem;
   }
 
   .title h2 {
     font-size: 1.15rem;
-  }
-
-  .grid > * {
-    flex: 1 1 180px;
-    min-height: 280px;
   }
 
   .errorContainer {
