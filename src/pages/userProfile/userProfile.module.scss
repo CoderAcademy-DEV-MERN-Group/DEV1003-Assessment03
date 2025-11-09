@@ -1,0 +1,57 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.profilePage {
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.userCards {
+  gap: 2dvh;
+  padding: 2dvh;
+  margin-bottom: 2dvh;
+  display: flex;
+  flex-direction: row;
+  min-height: 0; // Important for flex children
+}
+
+.userInfoCard {
+  color: color(text-dark);
+  border-radius: 20px;
+  padding: 1dvw;
+  height: 69dvh;
+  background: color(theme-white);
+  overflow: auto;
+}
+
+.userWatchedCard {
+  color: color(text-dark);
+  border-radius: 20px;
+  flex: 1;
+  padding: 1dvw;
+  height: 69dvh;
+  background: color(theme-white);
+  overflow: scroll;
+}
+
+.userFriendsCard {
+  color: color(text-dark);
+  border-radius: 20px;
+  flex: 1;
+  padding: 1dvw;
+  height: 69dvh;
+  background: color(accent-silver);
+  overflow: scroll;
+}
+
+.userReelProgressCard {
+  color: color(text-dark);
+  border-radius: 20px;
+  flex: 1;
+  padding: 1dvw;
+  height: 69dvh;
+  background: color(theme-white);
+  overflow: scroll;
+}

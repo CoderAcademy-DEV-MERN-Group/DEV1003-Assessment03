@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { UserInfoCard } from "../../components/users";
+import styles from "./userProfile.module.scss";
+import MoviesWatched from "../../components/users/tabs/moviesWatchedTab";
 
 export default function UserProfile() {
   const [shouldThrowError, setShouldThrowError] = useState(false);
@@ -9,13 +11,14 @@ export default function UserProfile() {
   }
 
   return (
-    <div>
-      <h1>Welcome to the User Profile Page</h1>
-      <p>This is the User Profile page of the application.</p>
-      <UserInfoCard />
-
+    <div className={styles.profilePage}>
+      <div className={styles.userCards}>
+        <UserInfoCard className={styles.userInfoCard} />
+        <div className={styles.userFriendsCard} />
+        <div className={styles.userReelProgressCard} />
+      </div>
       {/* Test button for error boundary */}
-      <button onClick={() => setShouldThrowError(true)}>Test Error Boundary</button>
+      {/* <button onClick={() => setShouldThrowError(true)}>Test Error Boundary</button> */}
     </div>
   );
 }
