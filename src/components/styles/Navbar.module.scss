@@ -2,7 +2,7 @@
 @use "../../styles/mixins" as *;
 
 .navbar {
-  background-color: color(secondary);
+  background-color: color(soft-background);
   display: flex;
   align-items: flex-end;
   width: auto;
