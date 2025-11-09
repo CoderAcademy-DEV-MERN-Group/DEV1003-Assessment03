@@ -51,7 +51,7 @@
 .overlay {
   position: absolute;
   inset: 0;
-  background: color(overlay-light);
+  background: color(overlay-medium);
   backdrop-filter: blur(4px);
   color: color(theme-white);
   display: flex;
@@ -93,10 +93,9 @@
   opacity: 0.92;
 }
 
-// Add this new class
 .revealedText {
-  color: #d69e2e !important; // Gold color
-  text-shadow: 0 1px 2px color(primary) !important; // Better shadow for gold text
+  color: color(base-gold) !important; // Gold color
+  text-shadow: 2px 2px 2px 2px color(theme-black) !important; // Better shadow for gold text
 }
 
 .title {
