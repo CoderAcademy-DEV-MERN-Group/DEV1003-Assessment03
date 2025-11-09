@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
-// React hook form provides form management without useState
 import Modal from "react-modal";
 import styles from "./Modals.module.scss";
 
