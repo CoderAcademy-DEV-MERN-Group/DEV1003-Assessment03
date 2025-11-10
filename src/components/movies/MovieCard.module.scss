@@ -8,13 +8,14 @@
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
   background: transparent;
   min-height: 200px; // Ensure cards have some height
+  z-index: 1;
 }
 
 // PASTEL BACKGROUND - Always at the bottom
 .pastelBackground {
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: 1;
   border-radius: radius(lg);
 }
 
@@ -24,14 +25,15 @@
   background-size: cover;
   background-position: center;
   border-radius: radius(lg);
-  z-index: 1;
+  // filter: grayscale(0.);
+  z-index: 2;
 }
 
 .posterOverlay {
   position: absolute;
   inset: 0;
   background: color(overlay-dark);
-  z-index: 2;
+  z-index: 3;
 }
 
 .content {
@@ -40,7 +42,7 @@
   align-items: start;
   position: relative;
   text-align: center;
-  z-index: 3; // Above everything
+  z-index: 4; // Above everything
   padding: spacing(md);
   color: color(card-grey);
   text-shadow: 0 1px 3px color(theme-white);
@@ -51,14 +53,14 @@
 .overlay {
   position: absolute;
   inset: 0;
-  background: color(overlay-light);
+  background: color(overlay-medium);
   backdrop-filter: blur(4px);
   color: color(theme-white);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: spacing(md);
-  z-index: 4;
+  z-index: 5;
   opacity: 0;
   transition: opacity 0.3s ease; // Keep this CSS transition
   pointer-events: none; // Prevent overlay from blocking hover
@@ -93,10 +95,14 @@
   opacity: 0.92;
 }
 
-// Add this new class
-.revealedText {
-  color: #d69e2e !important; // Gold color
-  text-shadow: 0 1px 2px color(primary) !important; // Better shadow for gold text
+.revealedText,
+.rating {
+  color: #ff8c00 !important; // Gold color
+  text-shadow:
+    0 0 2px rgba(255, 255, 255, 0.4),
+    /* Light inner glow */ 0 1px 4px rgba(0, 0, 0, 1),
+    0 2px 8px rgba(0, 0, 0, 1),
+    0 4px 16px rgba(0, 0, 0, 1) !important;
 }
 
 .title {
@@ -114,14 +120,14 @@
   color: #4a5568; // Medium dark for less important text
 }
 
-.rating {
-  align-self: end; // Stick to bottom
-  margin-bottom: 20%;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #d69e2e; // Keep the gold for ratings
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); // Dark shadow for light text
-}
+// .rating {
+//   align-self: end; // Stick to bottom
+//   margin-bottom: 20%;
+//   font-size: 0.95rem;
+//   font-weight: 600;
+//   color: #d69e2e; // Keep the gold for ratings
+//   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); // Dark shadow for light text
+// }
 
 .genre {
   align-self: end;
@@ -175,13 +181,12 @@
   }
 
   .content {
-    text-align:center;
+    text-align: center;
   }
 
-
   .markAsWatchedButton {
-    padding: spacing(sm) spacing(md);
-    font-size: 1rem;
+    padding: spacing(xs) spacing(xs);
+    font-size: 0.75rem;
 
     &:active {
       scale: 0.95;
@@ -199,20 +204,36 @@
     }
   }
 
+  // Mobile tap state
+  .overlayMobile {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
   .overlayContent {
-    p {
-      font-size: 0.75rem;
-    }
+    font-size: 0.75rem;
   }
 
   .plot {
-    font-size: 065rem !important;
+    font-size: 0.65rem !important;
   }
 }
 
 @include tablet {
+  // Mobile tap state
+  .overlayMobile {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+  
+  .plot {
+    font-size: 0.65rem !important;
+  }
+
   .markAsWatchedButton {
-    padding: spacing(xs) spacing(lg);
+    padding: spacing(xs) spacing(xs);
+    font-size: 0.75rem;
+
     &:active {
       scale: 0.95;
     }
