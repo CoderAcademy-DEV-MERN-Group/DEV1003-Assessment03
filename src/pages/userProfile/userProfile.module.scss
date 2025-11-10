@@ -26,6 +26,13 @@
   overflow: auto;
 }
 
+.userInfoCard.userInfoCard > * {
+  color: color(card-grey);
+  text-shadow: 0 1px 3px color(theme-white);
+}
+
+
+
 .userWatchedCard {
   color: color(text-dark);
   border-radius: 20px;
