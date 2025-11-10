@@ -56,37 +56,41 @@ function DeleteUser({ isOpen, onClose }) {
           {!showConfirmation ? (
             <>
               <p>This action will permanently delete your account and all associated data.</p>
-              <button type="button" onClick={handleClose} className={styles.modalButton}>
-                Cancel
-              </button>
-              <button
-                type="button"
-                onClick={() => setShowConfirmation(true)}
-                className={styles.modalButton}
-              >
-                Delete Account
-              </button>
+              <div className={styles.buttonSection}>
+                <button type="button" className={styles.cancelButton} onClick={handleClose}>
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmation(true)}
+                  className={styles.deleteButton}
+                >
+                  Delete Account
+                </button>
+              </div>
             </>
           ) : (
             <>
-              <p className={styles.errorMessage}>
+              <p>
                 <strong>Are you sure?</strong> This action cannot be undone.
               </p>
-              <button
-                type="button"
-                onClick={() => setShowConfirmation(false)}
-                className={clsx(styles.modalButton)}
-              >
-                Go Back
-              </button>
-              <button
-                type="button"
-                onClick={handleDeleteConfirm}
-                disabled={isPending}
-                className={clsx(styles.modalButton, isPending && styles.buttonLoading)}
-              >
-                {isPending ? "Deleting..." : "Yes, Delete My Account"}
-              </button>
+              <div className={styles.buttonSection}>
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmation(false)}
+                  className={clsx(styles.cancelButton)}
+                >
+                  Go Back
+                </button>
+                <button
+                  type="button"
+                  onClick={handleDeleteConfirm}
+                  disabled={isPending}
+                  className={clsx(styles.deleteButton, isPending && styles.buttonLoading)}
+                >
+                  {isPending ? "Deleting..." : "Yes, Delete My Account"}
+                </button>
+              </div>
             </>
           )}
         </article>

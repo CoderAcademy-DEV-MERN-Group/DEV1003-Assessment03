@@ -7,12 +7,14 @@ import styles from "../UserComponents.module.scss";
 import MoviesWatched from "../tabs/moviesWatchedTab";
 import UpdateProfile from "../../modals/UpdateProfileInfo";
 import UpdatePassword from "../../modals/UpdatePassword";
+import DeleteUser from "../../modals/DeleteUser";
 
 export default function UserInfoCard({ className }) {
   const { data, isLoading } = useAllMovies();
   const { user } = useAuthContext();
   const { data: userRp } = useUserReelProgress();
 
+  const [showDeleteProfile, setShowDeleteProfile] = useState(false);
   const [showUpdateProfile, setShowUpdateProfile] = useState(false);
   const [showUpdatePassword, setShowUpdatePassword] = useState(false);
 
@@ -36,6 +38,10 @@ export default function UserInfoCard({ className }) {
         {" "}
         Update Password{" "}
       </button>
+      <button onClick={() => setShowDeleteProfile(true)} className={styles.deleteButton}>
+        {" "}
+        Delete Profile{" "}
+      </button>
       <fieldset className={styles.cardBorder}>
         <legend>Your Cinematic Info</legend>
         <h2>Username: {user.username}</h2>
@@ -49,6 +55,7 @@ export default function UserInfoCard({ className }) {
         <MoviesWatched />
         <UpdateProfile isOpen={showUpdateProfile} onClose={() => setShowUpdateProfile(false)} />
         <UpdatePassword isOpen={showUpdatePassword} onClose={() => setShowUpdatePassword(false)} />
+        <DeleteUser isOpen={showDeleteProfile} onClose={() => setShowDeleteProfile(false)} />
       </fieldset>
     </section>
   );

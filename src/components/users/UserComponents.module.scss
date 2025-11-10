@@ -41,3 +41,31 @@
     font-weight: 500;
   }
 }
+
+.deleteButton {
+  @include button-reset;
+  // width: 30%;
+  margin-left: 41%;
+  // margin-top: 5%;
+  // padding: spacing(md);
+  background: color(secondary);
+  color: color(white);
+  border-radius: radius(md);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
+
+  &:hover:not(:disabled) {
+    background: color(red);
+    transform: translateY(-1px);
+  }
+
+  &.buttonLoading {
+    background: #a0aec0;
+  }
+
+  &.buttonDisabled {
+    filter: grayscale(.9);
+  }
+}
+
