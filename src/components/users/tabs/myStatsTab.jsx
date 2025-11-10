@@ -28,7 +28,8 @@ export const getFavouriteGenreStats = (userRatings, moviesData) => {
       });
     });
 
-  // some very math functions, but basically sorts by total movies watched with that genre and then averages the star ratings and returns a formatted string
+  // some very math functions, but basically sorts by total movies watched with that
+  // genre and then averages the star ratings and returns a formatted string
   return Object.entries(genreStats)
     .sort((a, b) => b[1].movieCount - a[1].movieCount)
     .slice(0, 5)
