@@ -1,5 +1,3 @@
-import { statsBuffer } from "framer-motion";
-
 export const getFavouriteGenreStats = (userRatings, moviesData) => {
   // Map movie data to an array to parse
   const moviesMap = moviesData.reduce((map, movie) => {
