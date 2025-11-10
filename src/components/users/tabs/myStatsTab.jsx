@@ -1,3 +1,5 @@
+import { statsBuffer } from "framer-motion";
+
 export const getFavouriteGenreStats = (userRatings, moviesData) => {
   // Map movie data to an array to parse
   const moviesMap = moviesData.reduce((map, movie) => {
@@ -33,10 +35,9 @@ export const getFavouriteGenreStats = (userRatings, moviesData) => {
   return Object.entries(genreStats)
     .sort((a, b) => b[1].movieCount - a[1].movieCount)
     .slice(0, 5)
-    .map(([genre, movieCount], index) => {
-      const ratings = genreStats[genre];
-      const averageRating = ratings ? (ratings.totalStars / ratings.movieCount).toFixed(1) : 0;
+    .map(([genre, stats], index) => {
+      const avgRating = (stats.totalStars / stats.movieCount).toFixed(1);
 
-      return `${index + 1}. ${genre}: ${movieCount} ${movieCount === 1 ? "movie" : "movies"} rated. Average ${averageRating} stars!`;
+      return `${index + 1}. ${genre}: ${stats.movieCount} ${stats.movieCount === 1 ? "movie" : "movies"} rated. Average ${avgRating} stars!`;
     });
 };
