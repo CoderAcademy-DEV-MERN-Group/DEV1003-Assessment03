@@ -19,14 +19,16 @@ function Logout({ isOpen, onClose }) {
       await apiLogout(undefined); // ← await the mutation
       await contextLogout(); // ← await token removal
       toast.success("Logged out successfully!");
+      onClose();
+      navigate("/", { replace: true });
     } catch {
       await contextLogout(); // still remove token
       toast.error("Server error, but logged out locally.");
-    } finally {
-      onClose(); // ← Close immediately
-      navigate("/", { replace: true }); // ← Redirect immediately
+      onClose();
+      navigate("/", { replace: true });
     }
   };
+  if (!isOpen) return null;
 
   return (
     <Modal

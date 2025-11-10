@@ -29,6 +29,7 @@ function ContactUs({ isOpen, onClose }) {
       </Modal>
     );
   }
+  if (!isOpen) return null;
 
   return (
     <Modal

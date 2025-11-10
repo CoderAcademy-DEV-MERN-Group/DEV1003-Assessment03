@@ -15,50 +15,44 @@
   display: flex;
   flex-direction: row;
   min-height: 0; // Important for flex children
+
+  h2 {
+    margin-top: 0;
+  }
 }
 
-.userInfoCard {
-  color: color(text-dark);
-  border-radius: 20px;
-  padding: 1dvw;
-  height: 69dvh;
-  background: color(theme-white);
-  overflow: auto;
-}
-
-.userInfoCard.userInfoCard > * {
+.userCards > * {
   color: color(card-grey);
   text-shadow: 0 1px 3px color(theme-white);
 }
 
-
-
-.userWatchedCard {
-  color: color(text-dark);
+.userInfoCard {
+  max-width: 30dvw;
   border-radius: 20px;
-  flex: 1;
   padding: 1dvw;
   height: 69dvh;
-  background: color(theme-white);
-  overflow: scroll;
+  background: #f5d1e6d5;
+  overflow: auto;
 }
 
 .userFriendsCard {
-  color: color(text-dark);
+  max-width: 30dvw;
   border-radius: 20px;
   flex: 1;
   padding: 1dvw;
   height: 69dvh;
-  background: color(accent-silver);
+  background: #e4d1f5d5;
   overflow: scroll;
 }
 
 .userReelProgressCard {
   color: color(text-dark);
+  max-width: 30dvw;
   border-radius: 20px;
   flex: 1;
   padding: 1dvw;
   height: 69dvh;
-  background: color(theme-white);
+  background: #d1d8f5d5;
   overflow: scroll;
 }
+

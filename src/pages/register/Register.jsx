@@ -31,7 +31,12 @@ export default function Register() {
   const navigate = useNavigate(); // Create navigate hook instance
   // What runs when the form is submitted and valid (handleSubmit automatically checks validation rules):
   const onSubmit = (data) => {
-    registerAccount(data, {
+    const registrationData = {
+      email: data.email,
+      username: data.username,
+      password: data.password,
+    };
+    registerAccount(registrationData, {
       onSuccess: (res) => {
         // Use auth context to login the user automatically after registration
         setGlobalAuth(res.user, res.token);

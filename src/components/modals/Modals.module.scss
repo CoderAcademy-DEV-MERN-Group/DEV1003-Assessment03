@@ -73,6 +73,7 @@
 
 .inputGroup {
   margin-bottom: spacing(lg);
+  border-radius: 3px;
 
   legend {
     font-weight: 600;
@@ -171,6 +172,10 @@
 
   &.buttonLoading {
     background: #a0aec0;
+  }
+
+  &.buttonDisabled {
+    filter: grayscale(.9);
   }
 }
 

@@ -2,6 +2,7 @@ import Modal from "react-modal";
 import styles from "./Modals.module.scss";
 
 function Terms({ isOpen, onClose }) {
+  if (!isOpen) return null;
   return (
     // Modal
     <Modal

@@ -4,13 +4,18 @@ import { useAuthContext } from "../../contexts/useAuthContext";
 import ErrorMessage from "../../components/common/ErrorMessage";
 import MovieCard from "../../components/movies/movieCard";
 import styles from "./ReelCanon.module.scss";
+import LoadingSpinner from "../../components/common/LoadingScreenOverlay";
+import { useMemo } from "react";
 
 export default function ReelCanon() {
-  // get all movies occurs even for non-logged in users
+  console.time("ReelCanon-total");
+
   const { data: canon, isLoading: canonLoading, error: canonError } = useAllMovies();
-  // Checks for logged in status and attaches user data
+  console.timeLog("ReelCanon-total", "after useAllMovies");
+
   const { user, isAuthenticated } = useAuthContext();
-  // Gets user reelProgress if logged in
+  console.timeLog("ReelCanon-total", "after useAuthContext");
+
   const {
     data: rpResponse,
     isLoading: progressLoading,
@@ -18,9 +23,40 @@ export default function ReelCanon() {
   } = useUserReelProgress({
     enabled: isAuthenticated,
   });
+  console.timeLog("ReelCanon-total", "after useUserReelProgress");
+
+  // Create a lookup object for any existing progress records
+  const progressMap = useMemo(() => {
+    const map = {};
+    if (rpResponse?.reelProgress) {
+      rpResponse.reelProgress.forEach((p) => {
+        map[p.movie] = {
+          isRevealed: p.isWatched,
+          rating: p.rating,
+        };
+      });
+    }
+    return map;
+  }, [rpResponse?.reelProgress]);
+
+  // Create array of movies with isRevealed status for display
+  const movies = useMemo(
+    () =>
+      (canon?.movies ?? []).map((m) => {
+        const prog = progressMap[m._id];
+        return {
+          ...m,
+          isRevealed: !!prog?.isRevealed,
+          rating: prog?.rating ?? undefined,
+        };
+      }),
+    [canon?.movies, progressMap]
+  );
+
+  console.timeEnd("ReelCanon-total");
 
   if (canonLoading || progressLoading) {
-    return <>Movies loading...</>;
+    return <LoadingSpinner />;
   }
 
   if (canonError) {
@@ -52,27 +88,6 @@ export default function ReelCanon() {
     );
   }
 
-  // Create a lookup object for any existing progress records
-  const progressMap = {};
-  if (rpResponse?.reelProgress) {
-    rpResponse.reelProgress.forEach((p) => {
-      progressMap[p.movie] = {
-        isRevealed: p.isWatched,
-        rating: p.rating,
-      };
-    });
-  }
-
-  // Create array of movies with isRevealed status for display
-  const movies = (canon?.movies ?? []).map((m) => {
-    const prog = progressMap[m._id];
-    return {
-      ...m,
-      isRevealed: !!prog?.isRevealed,
-      rating: prog?.rating ?? undefined,
-    };
-  });
-
   return (
     <div>
       <section className={styles.reelCanon}>
@@ -82,7 +97,8 @@ export default function ReelCanon() {
             <h2>Sign In or Register to Start Your Film Journey!</h2>
           ) : (
             <h2>
-              {isAuthenticated ? `Welcome ${user.username}! ` : ""}<br />
+              {isAuthenticated ? `Welcome ${user.username}! ` : ""}
+              <br />
               The Reel Canon is 100 Curated Films to Start Your Celluloid Exploration!
             </h2>
           )}
