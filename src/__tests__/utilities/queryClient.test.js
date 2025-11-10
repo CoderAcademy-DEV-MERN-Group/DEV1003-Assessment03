@@ -1,6 +1,5 @@
 import { QueryClient } from "@tanstack/react-query";
 import { queryClient } from "../../utilities/constants/queryClient";
-// import { handleApiError } from "../../utilities/helpers/errorHandler";
 import { describe, it, expect, vi } from "vitest";
 
 describe("queryClient instance", () => {

@@ -41,7 +41,7 @@ function createTestQueryClient() {
 }
 
 // Wraps all children components (the ones being tested) with all providers/context we use in main
-function GlobalProviders({ children }) {
+export function GlobalProviders({ children }) {
   const testQueryClient = createTestQueryClient();
   return (
     <QueryClientProvider client={testQueryClient}>
