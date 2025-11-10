@@ -23,7 +23,7 @@ export default function UserInfoCard({ className }) {
     return getFavouriteGenreStats(userRp.reelProgress, data.movies);
   }, [userRp, data?.movies]);
 
-  if (isLoading || !userRp) {
+  if (isLoading) {
     return <LoadingSpinner />;
   }
 

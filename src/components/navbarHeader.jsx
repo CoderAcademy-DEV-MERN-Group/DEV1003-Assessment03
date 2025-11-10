@@ -36,12 +36,14 @@ function Header() {
           Home
         </NavLink>
 
-        <NavLink
-          to={PROFILE}
-          className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
-        >
-          My Profile
-        </NavLink>
+        {isAuthenticated && (
+          <NavLink
+            to={PROFILE}
+            className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
+          >
+            My Profile
+          </NavLink>
+        )}
 
         <NavLink
           to={LEADERBOARD}
