@@ -21,9 +21,9 @@ export default function UserInfoCard({ className }) {
     return getFavouriteGenreStats(userRp.reelProgress, data.movies);
   }, [userRp, data?.movies]);
 
-  // if (isLoading || !userRp) {
-  //   return <LoadingSpinner />;
-  // }
+  if (isLoading || !userRp) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <section className={className}>

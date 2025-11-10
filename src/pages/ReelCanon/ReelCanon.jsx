@@ -5,16 +5,12 @@ import ErrorMessage from "../../components/common/ErrorMessage";
 import MovieCard from "../../components/movies/movieCard";
 import styles from "./ReelCanon.module.scss";
 import LoadingSpinner from "../../components/common/LoadingScreenOverlay";
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 
 export default function ReelCanon() {
-  console.time("ReelCanon-total");
-
   const { data: canon, isLoading: canonLoading, error: canonError } = useAllMovies();
-  console.timeLog("ReelCanon-total", "after useAllMovies");
 
   const { user, isAuthenticated } = useAuthContext();
-  console.timeLog("ReelCanon-total", "after useAuthContext");
 
   const {
     data: rpResponse,
@@ -23,7 +19,8 @@ export default function ReelCanon() {
   } = useUserReelProgress({
     enabled: isAuthenticated,
   });
-  console.timeLog("ReelCanon-total", "after useUserReelProgress");
+
+  const [visibleCount, setVisibleCount] = useState(30);
 
   // Create a lookup object for any existing progress records
   const progressMap = useMemo(() => {
@@ -53,7 +50,15 @@ export default function ReelCanon() {
     [canon?.movies, progressMap]
   );
 
-  console.timeEnd("ReelCanon-total");
+  // This useEffect loads the movies over time, starting at 30 movies.
+  useEffect(() => {
+    if (visibleCount < movies.length) {
+      const timer = setTimeout(() => {
+        setVisibleCount((prev) => Math.min(prev + 20, movies.length));
+      }, 50);
+      return () => clearTimeout(timer);
+    }
+  }, [visibleCount, movies.length]);
 
   if (canonLoading || progressLoading) {
     return <LoadingSpinner />;
@@ -105,10 +110,12 @@ export default function ReelCanon() {
         </article>
 
         <section className={styles.grid}>
-          {movies.map((movie, i) => (
+          {movies.slice(0, visibleCount).map((movie, i) => (
             <MovieCard key={movie._id} movie={movie} index={i} totalMovies={movies.length} />
           ))}
         </section>
+
+        {visibleCount < movies.length && <LoadingSpinner />}
       </section>
     </div>
   );

@@ -6,13 +6,13 @@ import styles from "../UserComponents.module.scss";
 export default function ReelProgressCard({ className }) {
   const { isAuthenticated } = useAuthContext();
 
-  const { data } = useUserReelProgress({
+  const { data, isLoading } = useUserReelProgress({
     enabled: isAuthenticated,
   });
 
-  // if (isLoading) {
-  //   return <LoadingSpinner />;
-  // }
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <section className={className}>
