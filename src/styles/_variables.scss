@@ -11,13 +11,15 @@ $colors: (
   text-light: #E8E3E3,
   background: #100b16,
   theme-white: #b5a6be,
+  theme-black: #000000,
   soft-background: #2D1B3A,
   base-gold: #D4A017,           // Same as success – for stars, highlights
   base-silver: #C0C0C0,         // Metallic silver – borders, icons
   accent-gold: #E8C547,    // Brighter gold for hover/active
   accent-silver: #D8D8D8,  // Lighter silver for subtle glow
   overlay-dark: rgba(26, 20, 35, 0.85), // For poster overlay
-  overlay-light: rgba(4, 21, 68, 0.7),
+  overlay-medium: rgba(4, 21, 68, 0.7),
+  overlay-light: rgba(186, 123, 211, 0.7),
   secondary-shadow: rgba(168, 32, 32, 0.4),
   card-grey: #2d3748,
 );

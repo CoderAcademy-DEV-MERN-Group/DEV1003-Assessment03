@@ -82,8 +82,8 @@ export default function ReelCanon() {
             <h2>Sign In or Register to Start Your Film Journey!</h2>
           ) : (
             <h2>
-              {isAuthenticated ? `Welcome ${user.username}! ` : ""}
-              100 Curated Films to Start Your Celluloid Exploration!
+              {isAuthenticated ? `Welcome ${user.username}! ` : ""}<br />
+              The Reel Canon is 100 Curated Films to Start Your Celluloid Exploration!
             </h2>
           )}
         </article>

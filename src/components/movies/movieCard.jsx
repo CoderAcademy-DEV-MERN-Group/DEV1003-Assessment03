@@ -17,8 +17,13 @@ export default function MovieCard({ movie, index, totalMovies }) {
   const { mutate: removeFromWatched, isPending: isRemovingWatched } =
     useDeleteMovieFromReelProgress();
 
+  const isTouchDevice = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+
   // state to manage "fresh movies"
   const [wasWatchedAlready, setWasWatchedAlready] = useState(movie.isRevealed);
+
+  // state to manage "clicked/hover" for mobile devices
+  const [isTapped, setIsTapped] = useState(false);
 
   // Pink (330°) to Blue (240°) - going the long way around
   const startHue = 330;
@@ -29,6 +34,7 @@ export default function MovieCard({ movie, index, totalMovies }) {
   const pastel = `hsl(${hue}, 70%, 85%)`;
 
   const handleMarkAsWatched = async () => {
+    if (isTouchDevice) setIsTapped(false);
     // Attach all data to the post customHook
     markAsWatched({
       movie: movie._id,
@@ -38,6 +44,7 @@ export default function MovieCard({ movie, index, totalMovies }) {
   };
 
   const handleRatingChange = async (newRating) => {
+    if (isTouchDevice) setIsTapped(false);
     // Attach newRating to the custom patch hook!
     updateRating({
       movieId: movie._id,
@@ -46,6 +53,7 @@ export default function MovieCard({ movie, index, totalMovies }) {
   };
 
   const handleRemoveFromWatched = async () => {
+    if (isTouchDevice) setIsTapped(false);
     removeFromWatched({
       movieId: movie._id,
     });
@@ -56,16 +64,33 @@ export default function MovieCard({ movie, index, totalMovies }) {
     // Framer motion animation div, this will animate the card hover functions
     <motion.div
       className={styles.card}
-      whileHover={{
-        scale: 1.8,
-        zIndex: 50,
-        rotateY: 5,
+      whileHover={
+        !isTouchDevice
+          ? {
+              scale: 1.8,
+              zIndex: 50,
+              rotateY: 5,
+            }
+          : {}
+      }
+      onTapStart={() => {
+        if (isTouchDevice) {
+          setIsTapped(!isTapped);
+        }
       }}
-      whileTap={{ scale: 1.1 }}
+      animate={
+        isTapped
+          ? {
+              scale: 1.4,
+              zIndex: 50,
+              rotateY: 5,
+            }
+          : {}
+      }
       transition={{
-        type: "tween",
-        ease: "easeIn",
-        duration: 0.4,
+        type: "spring",
+        stiffness: 150,
+        damping: 30,
       }}
       style={{
         transformOrigin: "center center", // ensures animation happens from the center of the card
@@ -133,7 +158,7 @@ export default function MovieCard({ movie, index, totalMovies }) {
         )}
       </article>
       {!movie.isRevealed && (
-        <div className={styles.overlay}>
+        <div className={`${styles.overlay} ${isTapped ? styles.overlayMobile : ""}`}>
           <div className={styles.overlayContent}>
             <p>
               <strong>Director</strong>
