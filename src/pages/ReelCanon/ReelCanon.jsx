@@ -20,6 +20,7 @@ export default function ReelCanon() {
     enabled: isAuthenticated,
   });
 
+  // useState to manage how many movieCards are initially visible
   const [visibleCount, setVisibleCount] = useState(30);
 
   // Create a lookup object for any existing progress records

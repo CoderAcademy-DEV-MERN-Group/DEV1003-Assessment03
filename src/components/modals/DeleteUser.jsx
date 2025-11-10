@@ -1,0 +1,98 @@
+import clsx from "clsx";
+import Modal from "react-modal";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import styles from "./Modals.module.scss";
+import { useAuthContext } from "../../contexts/useAuthContext";
+import { useDeleteCurrentUser } from "../../utilities/customHooks";
+import { useState } from "react";
+
+function DeleteUser({ isOpen, onClose }) {
+  const navigate = useNavigate();
+  const { logout } = useAuthContext();
+  const [showConfirmation, setShowConfirmation] = useState(false);
+
+  const { mutate: deleteUser, isPending } = useDeleteCurrentUser();
+
+  const handleDeleteConfirm = () => {
+    deleteUser(undefined, {
+      onSuccess: () => {
+        logout();
+        toast.success("Your account has been permanently deleted. Come back anytime!");
+        navigate("/");
+        onClose();
+        setShowConfirmation(false);
+      },
+      onError: () => {
+        toast.error("Failed to delete account. Please try again.");
+        setShowConfirmation(false);
+      },
+    });
+  };
+
+  const handleClose = () => {
+    setShowConfirmation(false);
+    onClose();
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <Modal
+      isOpen={isOpen}
+      onRequestClose={onClose}
+      className={styles.modal}
+      overlayClassName={styles.modalOverlay}
+      shouldFocusAfterRender={false}
+      shouldCloseOnOverlayClick={!isPending}
+      shouldCloseOnEsc={!isPending}
+    >
+      <button type="button" onClick={onClose} className={styles.closeButton} disabled={isPending}>
+        x
+      </button>
+      <section className={styles.modalForm}>
+        <h1>Delete Account</h1>
+        <article className={styles.generalMessage}>
+          {!showConfirmation ? (
+            <>
+              <p>This action will permanently delete your account and all associated data.</p>
+              <button type="button" onClick={handleClose} className={styles.modalButton}>
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowConfirmation(true)}
+                className={styles.modalButton}
+              >
+                Delete Account
+              </button>
+            </>
+          ) : (
+            <>
+              <p className={styles.errorMessage}>
+                <strong>Are you sure?</strong> This action cannot be undone.
+              </p>
+              <button
+                type="button"
+                onClick={() => setShowConfirmation(false)}
+                className={clsx(styles.modalButton)}
+              >
+                Go Back
+              </button>
+              <button
+                type="button"
+                onClick={handleDeleteConfirm}
+                disabled={isPending}
+                className={clsx(styles.modalButton, isPending && styles.buttonLoading)}
+              >
+                {isPending ? "Deleting..." : "Yes, Delete My Account"}
+              </button>
+            </>
+          )}
+        </article>
+      </section>
+    </Modal>
+  );
+}
+
+export default DeleteUser;

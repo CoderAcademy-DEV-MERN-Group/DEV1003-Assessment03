@@ -42,6 +42,7 @@ export default function UpdatePassword({ isOpen, onClose }) {
       },
     });
   };
+
   if (!isOpen) return null;
 
   return (
