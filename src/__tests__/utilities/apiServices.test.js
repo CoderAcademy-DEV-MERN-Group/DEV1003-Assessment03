@@ -8,6 +8,7 @@ vi.mock("../../utilities/services/apiServices");
 
 // Test data constants to keep tests DRY
 const mockUser = { email: "test@example.com", username: "testuser", password: "Password1!" };
+const mockMovie = { imdbId: "tt0111161", title: "The Shawshank Redemption" };
 
 // Helper function to setup fake API call and test it returns expected data
 const testApiCall = async (apiFn, args, expectedRes) => {
@@ -68,5 +69,41 @@ describe("User API axios functions", () => {
   // Test delete current user fn works as expected
   it("should delete current user", async () => {
     await testApiCall(api.deleteCurrentUser, [], { success: true });
+  });
+});
+
+// Test friendship axios API functions work as expected
+describe("Friendships axios API functions", () => {
+  // Test get all current user friendships fn works as expected
+  it("should get all friendships of current user", async () => {
+    await testApiCall(api.getAllFriendships, [], [{ id: 1, friendRequestAccepted: true }]);
+  });
+  // Test create friendship request fn works as expected
+  it("should create a friendship request", async () => {
+    await testApiCall(api.createFriendship, ["user2"], { id: 1, friendRequestAccepted: false });
+  });
+  // Test update friendship fn works as expected
+  it("should accept a friendship", async () => {
+    await testApiCall(api.updateFriendship, ["user2"], { friendRequestAccepted: true });
+  });
+  // Test delete friendship fn works as expected
+  it("should delete a friendship", async () => {
+    await testApiCall(api.deleteFriendship, ["user2"], { success: true });
+  });
+});
+
+// Test movies axios API functions work as expected
+describe("Movies axios API functions", () => {
+  // Test get all movies fn works as expected
+  it("should get all movies", async () => {
+    await testApiCall(api.getAllMovies, [], [mockMovie]);
+  });
+  // Test search movie by title fn works as expected
+  it("should search movie by title", async () => {
+    await testApiCall(api.getMovieByTitle, ["Shawshank"], mockMovie);
+  });
+  // Test get movie by IMDB ID fn works as expected
+  it("should get movie by IMDB ID", async () => {
+    await testApiCall(api.getMovieByImdbId, ["tt0111161"], mockMovie);
   });
 });
