@@ -107,3 +107,43 @@ describe("Movies axios API functions", () => {
     await testApiCall(api.getMovieByImdbId, ["tt0111161"], mockMovie);
   });
 });
+
+// Test get user reel progress fn works as expected
+describe("Reel Progress axios API functions", () => {
+  // Test get user reel progress fn works as expected
+  it("should get user reel progress", async () => {
+    await testApiCall(api.getUserReelProgress, [], [{ movieId: mockMovie.imdbId, rating: 5 }]);
+  });
+  // Test add movie to reel progress fn works as expected
+  it("should add movie to reel progress", async () => {
+    const movieData = { movieId: mockMovie.imdbId, rating: 4 };
+    await testApiCall(api.addMovieToReelProgress, [movieData], { success: true, ...movieData });
+  });
+  // Test update reel progress movie rating fn works as expected
+  it("should update movie rating", async () => {
+    const updateData = { movieId: mockMovie.imdbId, rating: 3 };
+    await testApiCall(api.updateReelProgressMovieRating, [updateData], { success: true });
+  });
+  // Test delete movie from reel progress fn works as expected
+  it("should delete movie from reel progress", async () => {
+    const movieData = { movieId: mockMovie.imdbId };
+    await testApiCall(api.deleteMovieFromReelProgress, [movieData], { success: true });
+  });
+});
+
+// Test leaderboard axios API functions work as expected
+describe("Leaderboard axios API functions", () => {
+  // Test get leaderboard data fn works as expected
+  it("should get leaderboard data", async () => {
+    await testApiCall(api.getLeaderboard, [], [{ userId: 1, username: "user1", score: 100 }]);
+  });
+});
+
+// Test error handling
+describe("Error Handling", () => {
+  // Test API error handling fn works as expected
+  it("should handle API errors", async () => {
+    api.loginUser.mockRejectedValue(new Error("Invalid credentials"));
+    await expect(api.loginUser(mockUser)).rejects.toThrow("Invalid credentials");
+  });
+});
