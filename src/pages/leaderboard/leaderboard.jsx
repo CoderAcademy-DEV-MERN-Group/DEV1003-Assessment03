@@ -1,19 +1,16 @@
-import { useState } from "react";
+import LeaderboardPodium from "./leaderboardPodium";
+import RankingList from "./rankingList";
+import { useLeaderboard } from "../../utilities/customHooks";
 
 export default function Leaderboard() {
-  const [shouldThrowError, setShouldThrowError] = useState(false);
-
-  if (shouldThrowError) {
-    throw new Error("Test error to check error boundary!");
-  }
+  const { data } = useLeaderboard();
+  const topRankings = data?.reelProgressData.slice(0, 3).map((e) => e._id) || [];
 
   return (
-    <div>
-      <h1>Welcome to the Leaderboard Page</h1>
-      <p>This page displays the leaderboard of the application.</p>
-
-      {/* Test button for error boundary */}
-      <button onClick={() => setShouldThrowError(true)}>Test Error Boundary</button>
-    </div>
+    <>
+      <h1>Leaderboard</h1>
+      <LeaderboardPodium rankings={topRankings} />
+      <RankingList title="Ranking List" />
+    </>
   );
 }
