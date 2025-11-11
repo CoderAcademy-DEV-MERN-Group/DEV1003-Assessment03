@@ -1,5 +1,5 @@
 // Map to provide default error messages for expected HTTP codes
-const statusMap = {
+export const statusMap = {
   // Client errors (4xx)
   400: "Bad request. Please check request syntax.",
   401: "Unauthorized. Please log in to continue.",
