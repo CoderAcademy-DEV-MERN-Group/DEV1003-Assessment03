@@ -22,7 +22,7 @@ const users = [
   { id: 2, username: "user2", email: "user2@test.com" },
 ];
 
-// Helper function for testing custom hooks
+// Helper function for testing mutation hooks (create, update, delete)
 const testMutationHook = async (hook, fakeApi, fakeRes, mutateParams = undefined) => {
   // Mock the API call to return the fake response
   vi.mocked(fakeApi).mockResolvedValue(fakeRes);
@@ -36,9 +36,17 @@ const testMutationHook = async (hook, fakeApi, fakeRes, mutateParams = undefined
   expect(result.current.data).toEqual(fakeRes);
 };
 
-beforeEach(() => {
-  vi.clearAllMocks(); // Reset all fake API functions to clean state
-});
+// Helper function for testing query hooks (get)
+const testQueryHook = async (hook, fakeApi, fakeRes, hookArgs) => {
+  vi.mocked(fakeApi).mockResolvedValue(fakeRes);
+  // If hook args provided, spread them in wrapper function, else just pass hook directly
+  const { result } = renderHook(hookArgs ? () => hook(...hookArgs) : hook, renderArgs);
+  await waitFor(() => expect(result.current.isSuccess).toBe(true));
+  expect(result.current.data).toEqual(fakeRes);
+};
+
+// Reset all fake API functions to clean state
+beforeEach(() => vi.clearAllMocks());
 
 // Test auth custom hooks work as expected
 describe("Auth Custom Hooks", () => {
@@ -51,6 +59,7 @@ describe("Auth Custom Hooks", () => {
       user
     );
   });
+
   // Test useLoginUser hook works as expected
   it("should login a user and return success response with user data", async () => {
     await testMutationHook(
@@ -60,6 +69,7 @@ describe("Auth Custom Hooks", () => {
       { email: user.email, password: user.password }
     );
   });
+
   // Test useLogoutUser hook works as expected
   it("should logout a user and return success response", async () => {
     await testMutationHook(hooks.useLogoutUser, api.logoutUser, {
@@ -71,14 +81,11 @@ describe("Auth Custom Hooks", () => {
 
 // Test friendship custom hooks work as expected
 describe("Friendship Custom Hooks", () => {
+  // Test useAllFriendships hook works as expected
   it("should get all friendships of current logged in user", async () => {
-    // Expects array of friendship objects
-    const friendships = [friendship];
-    vi.mocked(api.getAllFriendships).mockResolvedValue(friendships);
-    const { result } = renderHook(hooks.useAllFriendships, renderArgs);
-    await waitFor(() => expect(result.current.isSuccess).toBe(true));
-    expect(result.current.data).toEqual(friendships);
+    await testQueryHook(hooks.useAllFriendships, api.getAllFriendships, [friendship]);
   });
+
   // Test useCreateFriendship hook works as expected
   it("should create a new friendship and return success response with friendship data", async () => {
     const newFriendship = { id: 3, user1: 1, user2: 4, requesterUserId: 1 };
@@ -89,6 +96,7 @@ describe("Friendship Custom Hooks", () => {
       { user2: 4 }
     );
   });
+
   // Test useUpdateFriendship hook works as expected
   it("should update a friendship and return success response with updated friendship data", async () => {
     await testMutationHook(
@@ -98,6 +106,7 @@ describe("Friendship Custom Hooks", () => {
       { requesterUserId: 1 }
     );
   });
+
   // Test useDeleteFriendship hook works as expected
   it("should delete a friendship and return success response with deleted friendship", async () => {
     await testMutationHook(
@@ -122,10 +131,7 @@ describe("Leaderboard Custom Hook", () => {
       { userId: 1, username: "user1", points: 150 },
       { userId: 2, username: "user2", points: 120 },
     ];
-    vi.mocked(api.getLeaderboard).mockResolvedValue(leaderboard);
-    const { result } = renderHook(hooks.useLeaderboard, renderArgs);
-    await waitFor(() => expect(result.current.isSuccess).toBe(true));
-    expect(result.current.data).toEqual(leaderboard);
+    await testQueryHook(hooks.useLeaderboard, api.getLeaderboard, leaderboard);
   });
 });
 
@@ -133,27 +139,19 @@ describe("Leaderboard Custom Hook", () => {
 describe("Movie Custom Hooks", () => {
   // Test useAllMovies hook works as expected
   it("should get all movies and return movies array", async () => {
-    vi.mocked(api.getAllMovies).mockResolvedValue(movies);
-    const { result } = renderHook(hooks.useAllMovies, renderArgs);
-    await waitFor(() => expect(result.current.isSuccess).toBe(true));
-    expect(result.current.data).toEqual(movies);
+    await testQueryHook(hooks.useAllMovies, api.getAllMovies, movies);
   });
+
   // Test useMovieByTitle hook works as expected
   it("should get movie by title and return movie object", async () => {
-    vi.mocked(api.getMovieByTitle).mockResolvedValue(movies[0]);
-    const { result } = renderHook(
-      () => hooks.useMovieByTitle("The Shawshank Redemption"),
-      renderArgs
-    );
-    await waitFor(() => expect(result.current.isSuccess).toBe(true));
-    expect(result.current.data).toEqual(movies[0]);
+    await testQueryHook(hooks.useMovieByTitle, api.getMovieByTitle, movies[0], [
+      "The Shawshank Redemption",
+    ]);
   });
+
   // Test useMovieByImdbId hook works as expected
   it("should get movie by IMDB ID and return movie object", async () => {
-    vi.mocked(api.getMovieByImdbId).mockResolvedValue(movies[0]);
-    const { result } = renderHook(() => hooks.useMovieByImdbId("tt0111161"), renderArgs);
-    await waitFor(() => expect(result.current.isSuccess).toBe(true));
-    expect(result.current.data).toEqual(movies[0]);
+    await testQueryHook(hooks.useMovieByImdbId, api.getMovieByImdbId, movies[0], ["tt0111161"]);
   });
 });
 
@@ -161,11 +159,9 @@ describe("Movie Custom Hooks", () => {
 describe("Reel Progress Custom Hooks", () => {
   // Test useUserReelProgress hook works as expected
   it("should get user reel progress and return reel progress array", async () => {
-    vi.mocked(api.getUserReelProgress).mockResolvedValue(reelProgress);
-    const { result } = renderHook(hooks.useUserReelProgress, renderArgs);
-    await waitFor(() => expect(result.current.isSuccess).toBe(true));
-    expect(result.current.data).toEqual(reelProgress);
+    await testQueryHook(hooks.useUserReelProgress, api.getUserReelProgress, reelProgress);
   });
+
   // Test useAddMovieToReelProgress hook works as expected
   it("should add movie to reel progress and return success response", async () => {
     await testMutationHook(
@@ -179,6 +175,7 @@ describe("Reel Progress Custom Hooks", () => {
       { movie: movies[0].imdbId }
     );
   });
+
   // Test useUpdateReelProgressMovieRating hook works as expected
   it("should update reel progress movie rating and return success response", async () => {
     await testMutationHook(
@@ -188,6 +185,7 @@ describe("Reel Progress Custom Hooks", () => {
       { movieId: movies[0].imdbId, rating: 5 }
     );
   });
+
   // Test useDeleteMovieFromReelProgress hook works as expected
   it("should delete movie from reel progress and return success response", async () => {
     await testMutationHook(
@@ -203,18 +201,14 @@ describe("Reel Progress Custom Hooks", () => {
 describe("User Custom Hooks", () => {
   // Test useAllUsers hook works as expected
   it("should get all users and return users array", async () => {
-    vi.mocked(api.getAllUsers).mockResolvedValue(users);
-    const { result } = renderHook(hooks.useAllUsers, renderArgs);
-    await waitFor(() => expect(result.current.isSuccess).toBe(true));
-    expect(result.current.data).toEqual(users);
+    await testQueryHook(hooks.useAllUsers, api.getAllUsers, users);
   });
+
   // Test useCurrentUser hook works as expected
   it("should get current user and return user object", async () => {
-    vi.mocked(api.getCurrentUser).mockResolvedValue(userRes);
-    const { result } = renderHook(hooks.useCurrentUser, renderArgs);
-    await waitFor(() => expect(result.current.isSuccess).toBe(true));
-    expect(result.current.data).toEqual(userRes);
+    await testQueryHook(hooks.useCurrentUser, api.getCurrentUser, userRes);
   });
+
   // Test useUpdateCurrentUser hook works as expected
   it("should update current user and return success response with updated user", async () => {
     const updatedUser = { ...userRes, username: "updateduser" };
@@ -225,6 +219,7 @@ describe("User Custom Hooks", () => {
       { username: "updateduser" }
     );
   });
+
   // Test useUpdateCurrentUserPassword hook works as expected
   it("should update current user password and return success response", async () => {
     await testMutationHook(
@@ -234,6 +229,7 @@ describe("User Custom Hooks", () => {
       { currentPassword: "Password1!", newPassword: "Password2!" }
     );
   });
+
   // Test useDeleteCurrentUser hook works as expected
   it("should delete current user and return success response", async () => {
     await testMutationHook(hooks.useDeleteCurrentUser, api.deleteCurrentUser, {
