@@ -42,3 +42,31 @@ describe("Authentication axios API functions", () => {
     await testApiCall(api.logoutUser, [], { success: true });
   });
 });
+
+// Test user API axios functions work as expected
+describe("User API axios functions", () => {
+  // Test get all users fn works as expected
+  it("should get all users", async () => {
+    await testApiCall(api.getAllUsers, [], [mockUser]);
+  });
+
+  // Test get current user fn works as expected
+  it("should get current user", async () => {
+    await testApiCall(api.getCurrentUser, [], mockUser);
+  });
+
+  // Test update current user fn works as expected
+  it("should update current user", async () => {
+    const updates = { username: "newname" };
+    await testApiCall(api.updateCurrentUser, [updates], { ...mockUser, ...updates });
+  });
+  // Test update current user password fn works as expected
+  it("should update current user password", async () => {
+    const passwordData = { currentPassword: "old", newPassword: "new" };
+    await testApiCall(api.updateCurrentUserPassword, [passwordData], { success: true });
+  });
+  // Test delete current user fn works as expected
+  it("should delete current user", async () => {
+    await testApiCall(api.deleteCurrentUser, [], { success: true });
+  });
+});
