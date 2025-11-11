@@ -60,3 +60,47 @@ describe("useAuthContext hook", () => {
     ]);
   });
 });
+
+// Test app mount runs initial AuthProvider auth check correctly
+describe("AuthProvider checks auth on mount", () => {
+  // Test that user is set to null when no JWT in storage
+  it("should set user to null when no token in localStorage", async () => {
+    fakeCache.getItem.mockReturnValue(null);
+    const { result } = renderAuthHook();
+    await waitFor(() => expect(result.current.isLoading).toBe(false));
+    // User should be set to null and isAuthenticated should be false
+    expect(result.current.user).toBe(null);
+    expect(result.current.isAuthenticated).toBe(false);
+    // Api should only have been called if token existed
+    expect(api.getCurrentUser).not.toHaveBeenCalled();
+  });
+
+  // Test that user is authenticated and user data set with valid JWT
+  it("should authenticate and set user with valid token", async () => {
+    // Add fake token to localStorage mock
+    fakeCache.getItem.mockReturnValue(token);
+    // Should call getCurrentUser with valid token and return user data so we fake API call and res
+    vi.mocked(api.getCurrentUser).mockResolvedValue(user);
+    const { result } = renderAuthHook();
+    await waitFor(() => expect(result.current.isLoading).toBe(false));
+    // Check that getCurrentUser was called to validate token
+    expect(api.getCurrentUser).toHaveBeenCalledTimes(1);
+    // User should be set and authenticated
+    expect(result.current.user).toEqual(user);
+    expect(result.current.isAuthenticated).toBe(true);
+  });
+
+  // Test that invalid/expired token is deleted and user set to null
+  it("should clear token and set user to null with invalid token", async () => {
+    fakeCache.getItem.mockReturnValue(token);
+    // Token validation is done in backend, so fake API call to throw error for invalid token
+    vi.mocked(api.getCurrentUser).mockRejectedValue(new Error("Token expired"));
+    const { result } = renderAuthHook();
+    await waitFor(() => expect(result.current.isLoading).toBe(false));
+    // User should be removed and isAuthenticated set to false
+    expect(result.current.user).toBe(null);
+    expect(result.current.isAuthenticated).toBe(false);
+    // Invalid token should have been removed from localStorage
+    expect(fakeCache.removeItem).toHaveBeenCalledWith("authToken");
+  });
+});
