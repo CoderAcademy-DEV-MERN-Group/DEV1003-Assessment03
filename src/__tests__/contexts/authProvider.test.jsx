@@ -122,3 +122,45 @@ describe("AuthProvider login function", () => {
     expect(result.current.isAuthenticated).toBe(true);
   });
 });
+
+// Test AuthProvider's built in logout function
+describe("AuthProvider logout function", () => {
+  // Test that logout clears token and user state
+  it("should clear token from localStorage and delete global user state on logout", async () => {
+    // Start with a logged in user to test logging out
+    fakeCache.getItem.mockReturnValue(token);
+    vi.mocked(api.getCurrentUser).mockResolvedValue(user);
+    vi.mocked(api.logoutUser).mockResolvedValue({ success: true });
+    const { result } = renderAuthHook();
+    await waitFor(() => expect(result.current.isLoading).toBe(false));
+    expect(result.current.isAuthenticated).toBe(true);
+
+    // Call logout function
+    await act(async () => await result.current.logout());
+    // Check that logoutUser API was called
+    expect(api.logoutUser).toHaveBeenCalledTimes(1);
+    // Check that user state was cleared
+    expect(result.current.user).toBe(null);
+    expect(result.current.isAuthenticated).toBe(false);
+    // Check that token was removed from localStorage
+    expect(fakeCache.removeItem).toHaveBeenCalledWith("authToken");
+  });
+});
+
+// Test AuthProvider's built in updateUser function
+describe("AuthProvider updateUser function", () => {
+  // Test that updateUser updates users global state correctly
+  it("should update user global state with new user data", async () => {
+    // Start with logged in user to test updating user data
+    fakeCache.getItem.mockReturnValue(token);
+    vi.mocked(api.getCurrentUser).mockResolvedValue(user);
+    const { result } = renderAuthHook();
+    await waitFor(() => expect(result.current.isLoading).toBe(false));
+    const updatedUser = { ...user, username: "updatedusername" };
+    // Call updateUser function
+    act(() => result.current.updateUser(updatedUser));
+    // Check that user state was updated with new data
+    expect(result.current.user).toEqual(updatedUser);
+    expect(result.current.user.username).toBe("updatedusername");
+  });
+});
