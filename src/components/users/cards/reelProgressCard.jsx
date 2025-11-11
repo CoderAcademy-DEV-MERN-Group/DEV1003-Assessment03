@@ -20,10 +20,10 @@ export default function ReelProgressCard({ className }) {
 
   return (
     <section className={className}>
-      <fieldset className={styles.cardBorder}>
-        <legend>Your Cinematic Info</legend>
+      <article className={styles.cardBorder}>
+        <h2>Your Cinematic Info</h2>
 
-        <section className={styles.verticalProgressContainer}>
+        <div className={styles.verticalProgressContainer}>
           <article className={styles.progressTrack}>
             <motion.div
               className={styles.progressFill}
@@ -36,12 +36,12 @@ export default function ReelProgressCard({ className }) {
               }}
             />
           </article>
-          <section className={styles.progressContent}>
+          <div className={styles.progressContent}>
             <h2>{progress}/100 Reel Canon Movies Watched!</h2>
             <div className={styles.percentage}>Your Popcorn Meter is at {progressPercentage}%!</div>
-          </section>
-        </section>
-      </fieldset>
+          </div>
+        </div>
+      </article>
     </section>
   );
 }

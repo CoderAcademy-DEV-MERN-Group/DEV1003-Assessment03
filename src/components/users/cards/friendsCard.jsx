@@ -12,8 +12,8 @@ export default function FriendsCard({ className }) {
 
   return (
     <section className={className}>
-      <fieldset className={styles.cardBorder}>
-        <legend>Your Friendships</legend>
+      <article className={styles.cardBorder}>
+        <h2>Your Friendships</h2>
         {!friendships?.friendships || friendships.friendships.length === 0 ? (
           <p>No friends yet!</p>
         ) : (
@@ -39,7 +39,7 @@ export default function FriendsCard({ className }) {
             </tbody>
           </table>
         )}
-      </fieldset>
+      </article>
     </section>
   );
 }

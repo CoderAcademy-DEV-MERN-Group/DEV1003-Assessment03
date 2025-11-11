@@ -22,18 +22,18 @@ export default function UserInfoCard({ className }) {
 
   return (
     <section className={className}>
-      <fieldset className={styles.cardBorder}>
-        <legend>Your Cinematic Info</legend>
-        <h2>Username: {user.username}</h2>
-        <h2>Email: {user.email}</h2>
-        <h2>Your Top 5 Favourite Genres:</h2>
+      <article className={styles.cardBorder}>
+        <h2>Your Cinematic Info</h2>
+        <h3>Username: {user.username}</h3>
+        <h3>Email: {user.email}</h3>
+        <h3>Your Top 5 Favourite Genres:</h3>
         {topGenres.length > 0 ? (
           topGenres.map((genre) => <div key={genre}>{genre}</div>)
         ) : (
           <div>You haven't rated any movies yet!</div>
         )}
         <MoviesWatched />
-      </fieldset>
+      </article>
     </section>
   );
 }

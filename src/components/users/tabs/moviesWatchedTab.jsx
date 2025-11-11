@@ -28,7 +28,7 @@ export default function MoviesWatched({ className }) {
 
   return (
     <div className={className}>
-      <h2>Movies Watched</h2>
+      <h3>Movies Watched</h3>
       {watchedMovies.length === 0 ? (
         <p>No movies watched yet!</p>
       ) : (

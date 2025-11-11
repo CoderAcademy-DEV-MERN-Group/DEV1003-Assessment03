@@ -28,12 +28,14 @@
 }
 
 .userInfoCard {
+  position: relative;
+  overflow: hidden;
   width: 20dvw;
   border-radius: 20px;
   padding: 1dvw;
   // height: 69dvh;
   background: #f5d1e6a9;
-  overflow: auto;
+  // overflow: scroll;
 }
 
 .userFriendsCard {
@@ -43,7 +45,7 @@
   padding: 1dvw;
   // height: 69dvh;
   background: #e4d1f594;
-  overflow: scroll;
+  // overflow: scroll;
 }
 
 .userReelProgressCard {
@@ -54,7 +56,7 @@
   padding: 1dvw;
   // height: 69dvh;
   background: #939fcfdc;
-  overflow: scroll;
+  // overflow: scroll;
 }
 
 .userButtons {
@@ -87,7 +89,7 @@
   }
 
   &.buttonDisabled {
-    filter: grayscale(.9);
+    filter: grayscale(0.9);
   }
 }
 
@@ -112,6 +114,6 @@
   }
 
   &.buttonDisabled {
-    filter: grayscale(.9);
+    filter: grayscale(0.9);
   }
 }
