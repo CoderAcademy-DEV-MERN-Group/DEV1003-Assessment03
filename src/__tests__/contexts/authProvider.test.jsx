@@ -104,3 +104,21 @@ describe("AuthProvider checks auth on mount", () => {
     expect(fakeCache.removeItem).toHaveBeenCalledWith("authToken");
   });
 });
+
+// Test AuthProvider built in login function
+describe("AuthProvider login function", () => {
+  // Test that login saves JWT and assigns user data to state
+  it("should save token to localStorage and set global user state when login is called", async () => {
+    // Start with no token so we can test logging in
+    fakeCache.getItem.mockReturnValue(null);
+    const { result } = renderAuthHook();
+    await waitFor(() => expect(result.current.isLoading).toBe(false));
+    // Call login function (act checks that all state updates are finished before moving on)
+    act(() => result.current.login(user, token));
+    // Check that token was saved to localStorage
+    expect(fakeCache.setItem).toHaveBeenCalledWith("authToken", token);
+    // Check that user state was updated
+    expect(result.current.user).toEqual(user);
+    expect(result.current.isAuthenticated).toBe(true);
+  });
+});
