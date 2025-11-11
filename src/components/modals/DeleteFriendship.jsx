@@ -1,30 +1,33 @@
-import clsx from "clsx";
-import Modal from "react-modal";
-import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
-import styles from "./Modals.module.scss";
-import { useAuthContext } from "../../contexts/useAuthContext";
-import { useDeleteFriendship } from "../../utilities/customHooks";
 import { useState } from "react";
+import Modal from "react-modal";
+import toast from "react-hot-toast";
+import { useDeleteFriendship } from "../../utilities/customHooks/useFriendships";
+import styles from "./Modals.module.scss";
 
-function DeleteFriendship({ isOpen, onClose }) {
-  const navigate = useNavigate();
-  const { logout } = useAuthContext();
+export default function DeleteFriendship({
+  isOpen,
+  onClose,
+  friendUser,
+  isPendingRequest = false,
+}) {
   const [showConfirmation, setShowConfirmation] = useState(false);
-
   const { mutate: deleteFriendship, isPending } = useDeleteFriendship();
 
+  const actionText = isPendingRequest ? "cancel friend request to" : "unfriend";
+  const buttonText = isPendingRequest ? "Cancel Request" : "Unfriend";
+  const successMessage = isPendingRequest
+    ? `Friend request to ${friendUser?.username} cancelled`
+    : `You are no longer friends with ${friendUser?.username}`;
+
   const handleDeleteConfirm = () => {
-    deleteFriendship(undefined, {
+    deleteFriendship(friendUser._id, {
       onSuccess: () => {
-        logout();
-        toast.success("Your account has been permanently deleted. Come back anytime!");
-        navigate("/");
+        toast.success(successMessage);
         onClose();
         setShowConfirmation(false);
       },
       onError: () => {
-        toast.error("Failed to delete account. Please try again.");
+        toast.error(`Failed to ${actionText}. Please try again.`);
         setShowConfirmation(false);
       },
     });
@@ -43,7 +46,6 @@ function DeleteFriendship({ isOpen, onClose }) {
       onRequestClose={onClose}
       className={styles.modal}
       overlayClassName={styles.modalOverlay}
-      shouldFocusAfterRender={false}
       shouldCloseOnOverlayClick={!isPending}
       shouldCloseOnEsc={!isPending}
     >
@@ -51,44 +53,42 @@ function DeleteFriendship({ isOpen, onClose }) {
         x
       </button>
       <section className={styles.modalForm}>
-        <h1>Delete Account</h1>
+        <h1>{buttonText}</h1>
         <article className={styles.generalMessage}>
           {!showConfirmation ? (
             <>
-              <p>This action will permanently delete your account and all associated data.</p>
+              <p>
+                This will {actionText} {friendUser?.username}.
+              </p>
               <div className={styles.buttonSection}>
                 <button type="button" className={styles.cancelButton} onClick={handleClose}>
-                  Cancel
+                  Go Back
                 </button>
                 <button
                   type="button"
-                  onClick={() => setShowConfirmation(true)}
                   className={styles.deleteButton}
+                  onClick={() => setShowConfirmation(true)}
                 >
-                  Delete Account
+                  {buttonText}
                 </button>
               </div>
             </>
           ) : (
             <>
               <p>
-                <strong>Are you sure?</strong> This action cannot be undone.
+                <strong>Are you sure?</strong> This will {actionText} {friendUser?.username}.
               </p>
               <div className={styles.buttonSection}>
-                <button
-                  type="button"
-                  onClick={() => setShowConfirmation(false)}
-                  className={clsx(styles.cancelButton)}
-                >
+                <button type="button" onClick={handleClose} className={styles.cancelButton}>
                   Go Back
                 </button>
                 <button
                   type="button"
                   onClick={handleDeleteConfirm}
                   disabled={isPending}
-                  className={clsx(styles.deleteButton, isPending && styles.buttonLoading)}
+                  className={`${styles.deleteButton} ${isPending ? styles.buttonLoading : ""}`}
                 >
-                  {isPending ? "Deleting..." : "Yes, Delete My Account"}
+                  {isPending ? "Processing..." : `Confirm Cancel`}
                 </button>
               </div>
             </>
@@ -98,5 +98,3 @@ function DeleteFriendship({ isOpen, onClose }) {
     </Modal>
   );
 }
-
-export default DeleteFriendship;

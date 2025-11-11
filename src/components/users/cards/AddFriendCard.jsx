@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { useAuthContext } from "../../../contexts/useAuthContext";
 import { useAllFriendships, useAllUsers } from "../../../utilities/customHooks";
+import { style } from "framer-motion/client";
 
 export default function AddFriendCard({ className }) {
   const { user: currentUser } = useAuthContext();
@@ -24,12 +25,24 @@ export default function AddFriendCard({ className }) {
   // useMemo only recalculates when dependencies change, more efficient than useEffect + useState
   const unfriendedUsers = useMemo(findUnfriendedUsers, [allUsers, allFriendships, currentUser]);
 
-  if (!currentUser) {
-    return <div>Please Sign In</div>;
-  }
+  const handleSendRequest = (user) => {
+    console.log("Sending friend request to:", user.username);
+  };
+
   return (
     <section className={className}>
-      <>hi</>
+      <article className={cardBorder}>
+        <h2>Add Friends</h2>
+        {/* Search bar!!!! WEEEWWW!!!! */}
+        <search className={styles.searchCointainer}>
+          <input
+            type="text"
+            className={styles.searchField}
+            placeholder="Search by username..."
+            value={searchTerm}
+          ></input>
+        </search>
+      </article>
     </section>
   );
 }
