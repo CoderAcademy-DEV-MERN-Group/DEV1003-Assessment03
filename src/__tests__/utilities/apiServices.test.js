@@ -1,5 +1,6 @@
 /* Unit tests for apiServices functions. Simplified responses and arguments are fine as we're just
-  testing isolation and structured return values of the functions. */
+  testing isolation and structured return values of the functions. Potentially upgrade later to use
+  mock service worker to simulate real API interaction, increasing validity of tests*/
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import * as api from "../../utilities/services/apiServices";
 
