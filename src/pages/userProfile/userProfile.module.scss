@@ -39,7 +39,9 @@
 }
 
 .userFriendsCard {
-  // max-width: 30dvw;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
   border-radius: 20px;
   flex: 1;
   padding: 1dvw;

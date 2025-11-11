@@ -1,7 +1,9 @@
+import { useAuthContext } from "../../../contexts/useAuthContext";
 import { useAllFriendships, useAllUsers } from "../../../utilities/customHooks";
 import styles from "../UserComponents.module.scss";
 
 export default function FriendsCard({ className }) {
+  const { user } = useAuthContext();
   const { data: friendships } = useAllFriendships();
   const { data: users } = useAllUsers();
 
@@ -18,21 +20,25 @@ export default function FriendsCard({ className }) {
           <p>No friends yet!</p>
         ) : (
           <table className={styles.friendsTable}>
-            <thead>
+            <thead className={styles.tableHeader}>
               <tr>
-                <th className={styles.colUsername}>Username</th>
-                <th className={styles.colEmail}>Username</th>
-                <th className={styles.colStatus}>Username</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
               {friendships.friendships.map((friendship) => {
-                const friendUser = usersLookup?.[friendship.user2];
+                const friendId =
+                  friendship.user1 === user?._id ? friendship.user2 : friendship.user1;
+                const friendUser = usersLookup?.[friendId];
                 return (
                   <tr key={friendship._id} className={styles.tableRow}>
-                    <td>Username: {friendUser?.username || "Uknown user"}</td>
-                    <td>Email: {friendUser?.email}</td>
-                    <td>Status: {!friendship.friendRequestAccepted ? "Pending" : "Accepted"}</td>
+                    <td className={styles.colUsername}>{friendUser?.username || "Unknown user"}</td>
+                    <td className={styles.colEmail}>{friendUser?.email}</td>
+                    <td className={styles.colStatus}>
+                      {!friendship.friendRequestAccepted ? "Pending" : "Accepted"}
+                    </td>
                   </tr>
                 );
               })}
