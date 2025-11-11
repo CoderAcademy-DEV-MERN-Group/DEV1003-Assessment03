@@ -12,6 +12,7 @@ import AuthProvider from "./contexts/authProvider";
 import { Toaster } from "react-hot-toast";
 import ErrorFallback from "./components/common/ErrorFallback";
 import { ErrorBoundary } from "react-error-boundary";
+import BurgerMenu from "./components/burgerMenu";
 
 Modal.setAppElement("#root");
 
@@ -23,6 +24,7 @@ createRoot(document.getElementById("root")).render(
         <ErrorBoundary FallbackComponent={ErrorFallback} onReset={() => queryClient.clear()}>
           <BrowserRouter>
             <Header />
+            <BurgerMenu />
             <App />
             <Footer />
           </BrowserRouter>
