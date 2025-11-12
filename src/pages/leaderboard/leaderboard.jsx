@@ -1,4 +1,4 @@
-import LeaderboardPodium from "./leaderboardPodium";
+import LeaderboardPodium from "../../components/common/leaderboardPodium";
 import RankingList from "./rankingList";
 import { useLeaderboard } from "../../utilities/customHooks";
 
