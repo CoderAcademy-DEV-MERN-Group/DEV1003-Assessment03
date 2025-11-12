@@ -39,7 +39,7 @@ export default function AuthProvider({ children }) {
   }, []); // Empty dependency array means useEffect only runs on mount (app load)
 
   // Login function that can be used by components to log user in and set user state + token
-  const login = async (userData, token) => {
+  const login = (userData, token) => {
     localStorage.setItem("authToken", token);
     setUser(userData?.user || userData);
   };

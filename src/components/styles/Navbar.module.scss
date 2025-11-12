@@ -82,3 +82,10 @@
   justify-content: center;
   margin-left: 0.4rem;
 }
+
+// Make navbar disappear on tablet and below
+@media (max-width: breakpoint(tablet)) {
+  .navbar {
+    display: none;
+  }
+}
