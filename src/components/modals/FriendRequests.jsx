@@ -5,6 +5,7 @@ import { useAllFriendships, useAllUsers, useUpdateFriendship } from "../../utili
 import styles from "./Modals.module.scss";
 import LoadingSpinner from "../common/LoadingScreenOverlay";
 import toast from "react-hot-toast";
+import DeleteFriendship from "./DeleteFriendship";
 
 export default function MyFriendRequests({ isOpen, onClose }) {
   const { user } = useAuthContext();
@@ -13,6 +14,7 @@ export default function MyFriendRequests({ isOpen, onClose }) {
   const { data: users, isLoading: usersLoading } = useAllUsers();
 
   const [activeTab, setActiveTab] = useState("received");
+  const [selectedFriendship, setSelectedFriendship] = useState(null);
 
   if (usersLoading || friendshipsLoading) {
     return <LoadingSpinner />;
@@ -57,69 +59,87 @@ export default function MyFriendRequests({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={onClose}
-      className={styles.modal}
-      overlayClassName={styles.modalOverlay}
-    >
-      <button onClick={onClose} className={styles.closeButton}>
-        x
-      </button>
-      <section className={styles.modalForm}>
-        <h1>Friend Requests</h1>
-        <div className={styles.modalTabs}>
-          <button className={styles.smallModalButton} onClick={() => setActiveTab("received")}>
-            Received ({receivedRequests.length || 0})
-          </button>
-          <button className={styles.smallModalButton} onClick={() => setActiveTab("sent")}>
-            Sent ({sentRequests.length || 0})
-          </button>
-        </div>
+    <>
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={onClose}
+        className={styles.modal}
+        overlayClassName={styles.modalOverlay}
+      >
+        <button onClick={onClose} className={styles.closeButton}>
+          x
+        </button>
+        <section className={styles.modalForm}>
+          <h1>Friend Requests</h1>
+          <div className={styles.modalTabs}>
+            <button className={styles.smallModalButton} onClick={() => setActiveTab("received")}>
+              Received ({receivedRequests.length || 0})
+            </button>
+            <button className={styles.smallModalButton} onClick={() => setActiveTab("sent")}>
+              Sent ({sentRequests.length || 0})
+            </button>
+          </div>
 
-        <table className={styles.friendsTable}>
-          <thead className={styles.tableHeader}>
-            <tr>
-              <th>Username</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentRequests.map((friendship) => {
-              const friendUser = getFriendFromFriendship(friendship);
-              return (
-                <tr key={friendship._id} className={styles.requestTableRow}>
-                  <td className={styles.colUsername}>{friendUser?.username || "Unknown user"}</td>
-                  <td className={styles.colEmail}>Pending</td>
-                  <td className={styles.colActions}>
-                    {activeTab === "received" ? (
-                      <>
+          <table className={styles.friendsTable}>
+            <thead className={styles.tableHeader}>
+              <tr>
+                <th>Username</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentRequests.map((friendship) => {
+                const friendUser = getFriendFromFriendship(friendship);
+                return (
+                  <tr key={friendship._id} className={styles.requestTableRow}>
+                    <td className={styles.colUsername}>{friendUser?.username || "Unknown user"}</td>
+                    <td className={styles.colEmail}>Pending</td>
+                    <td className={styles.colActions}>
+                      {activeTab === "received" ? (
+                        <>
+                          <button
+                            className={styles.acceptButton}
+                            onClick={() => handleAcceptRequest(friendship)}
+                          >
+                            {isPending ? "Processing..." : "Accept"}
+                          </button>
+                          <button
+                            className={styles.declineButton}
+                            onClick={() => setSelectedFriendship(friendship)}
+                          >
+                            Decline
+                          </button>
+                        </>
+                      ) : (
                         <button
-                          className={styles.acceptButton}
-                          onClick={() => handleAcceptRequest(friendship)}
+                          className={styles.declineButton}
+                          onClick={() => setSelectedFriendship(friendship)}
                         >
-                          {isPending ? "Processing..." : "Accept"}
+                          Cancel
                         </button>
-                        <button className={styles.declineButton}>Decline</button>
-                      </>
-                    ) : (
-                      <button className={styles.declineButton}>Cancel</button>
-                    )}
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+              {currentRequests.length === 0 && (
+                <tr>
+                  <td colSpan="4" className={styles.noRequests}>
+                    No {activeTab} requests
                   </td>
                 </tr>
-              );
-            })}
-            {currentRequests.length === 0 && (
-              <tr>
-                <td colSpan="4" className={styles.noRequests}>
-                  No {activeTab} requests
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </section>
-    </Modal>
+              )}
+            </tbody>
+          </table>
+        </section>
+      </Modal>
+      <DeleteFriendship
+        isOpen={!!selectedFriendship}
+        onClose={() => setSelectedFriendship(null)}
+        friendUser={getFriendFromFriendship(selectedFriendship)}
+        isPendingRequest
+      />
+    </>
   );
 }
