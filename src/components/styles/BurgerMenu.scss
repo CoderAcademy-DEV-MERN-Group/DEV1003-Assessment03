@@ -6,9 +6,9 @@
 .bm-burger-button {
   position: fixed;
   width: 36px;
-  height: 30px;
-  left: 20px;
-  top: 20px;
+  height: 36px;
+  left: 15px;
+  top: 15px;
 }
 
 /* Color/shape of burger icon bars */
@@ -21,17 +21,20 @@
 .bm-burger-bars-hover {
   background: color(primary-dark);
   box-shadow: 0 2px 4px color(base-gold);
+  opacity: 1 !important;
 }
 
 /* Position and sizing of clickable cross button */
 .bm-cross-button {
-  height: 36px;
-  width: 36px;
+  height: 30px !important;
+  width: 30px !important;
 }
 
 /* Color/shape of close button cross */
 .bm-cross {
   background: color(text-light);
+  height: 20px !important;
+  width: 5px !important;
 }
 
 /*
@@ -77,11 +80,14 @@ Note: Beware of modifying this element as it can break the animations - you shou
   margin-bottom: 1.5rem;
   display: inline-block;
   border-bottom: 1px solid color(success);
+  transition: all 0.3s ease 0s !important;
+  white-space: nowrap;
 }
 
 .bm-item:hover {
   color: color(primary-dark);
   background-color: color(base-gold);
+  transform: scale(1.1) !important;
 }
 
 .bm-item.active {
@@ -117,4 +123,13 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* FontAwesome icons in menu items */
 .bm-item svg {
   margin-right: 8px;
+}
+
+// Media breakpoints
+@media (min-width: breakpoint(tablet)) {
+  .bm-overlay,
+  .bm-burger-button,
+  .bm-menu-wrap {
+    display: none !important;
+  }
 }

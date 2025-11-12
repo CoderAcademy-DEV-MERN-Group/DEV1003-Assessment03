@@ -46,8 +46,8 @@
 }
 
 p {
-    padding: 2px;
-    margin: 0;
+  padding: 2px;
+  margin: 0;
 }
 
 .activeLink {
@@ -56,4 +56,11 @@ p {
   font-weight: bold;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
+}
+
+// Make footer disappear on tablet and below
+@media (max-width: breakpoint(tablet)) {
+  .footer {
+    display: none;
+  }
 }
