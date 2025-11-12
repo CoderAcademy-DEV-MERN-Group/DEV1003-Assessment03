@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { useAuthContext } from "../../contexts/useAuthContext";
-import { useAllFriendships } from "../../utilities/customHooks";
 import styles from "../styles/Navbar.module.scss";
 import MyFriendRequests from "../modals/FriendRequests";
 import usePendingRequestCount from "../../utilities/customHooks/usePendingRequestCount";
