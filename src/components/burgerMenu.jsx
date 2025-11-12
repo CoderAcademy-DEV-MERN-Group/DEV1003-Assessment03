@@ -45,7 +45,7 @@ export default function BurgerMenu() {
   };
 
   return (
-    <Menu isOpen={menuOpen} onStateChange={handleStateChange}>
+    <Menu isOpen={menuOpen} onStateChange={handleStateChange} width={350}>
       <NavLink to={ROUTES.HOME} onClick={closeMenu}>
         <FontAwesomeIcon icon={faHome} />
         Home
