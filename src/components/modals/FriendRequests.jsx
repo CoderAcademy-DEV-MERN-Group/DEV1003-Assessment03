@@ -1,0 +1,106 @@
+import { useState } from "react";
+import Modal from "react-modal";
+import { useAuthContext } from "../../contexts/useAuthContext";
+import { useAllFriendships, useAllUsers } from "../../utilities/customHooks";
+import styles from "./Modals.module.scss";
+import LoadingSpinner from "../common/LoadingScreenOverlay";
+
+export default function MyFriendRequests({ isOpen, onClose }) {
+  const { user } = useAuthContext();
+  const { data: friendships, isLoading: friendshipsLoading } = useAllFriendships();
+  const { data: users, isLoading: usersLoading } = useAllUsers();
+  const [activeTab, setActiveTab] = useState("received");
+
+  if (usersLoading || friendshipsLoading) {
+    return <LoadingSpinner />;
+  }
+
+  // Create a lookup table for all friendships (users are occasionally in the wrong order)
+  const usersLookup = users?.users?.reduce((account, user) => {
+    account[user._id] = user;
+    return account;
+  }, {});
+
+  const getFriendFromFriendship = (friendship) => {
+    if (!friendship || !user) return null;
+    const friendId = friendship.user1 === user._id ? friendship.user2 : friendship.user1;
+    return usersLookup?.[friendId];
+  };
+
+  // Helper function to get friend user from friendship
+  const receivedRequests =
+    friendships?.friendships?.filter(
+      (friendship) => !friendship.friendRequestAccepted && friendship.requesterUserId !== user._id
+    ) || [];
+
+  const sentRequests =
+    friendships?.friendships?.filter(
+      (friendship) => !friendship.friendRequestAccepted && friendship.requesterUserId === user._id
+    ) || [];
+
+  const currentRequests = activeTab === "received" ? receivedRequests : sentRequests;
+
+  if (!isOpen) return null;
+
+  return (
+    <Modal
+      isOpen={isOpen}
+      onRequestClose={onClose}
+      className={styles.modal}
+      overlayClassName={styles.modalOverlay}
+    >
+      <button onClick={onClose} className={styles.closeButton}>
+        x
+      </button>
+      <section className={styles.modalForm}>
+        <h1>Friend Requests</h1>
+        <div className={styles.modalTabs}>
+          <button className={styles.smallModalButton} onClick={() => setActiveTab("received")}>
+            Received ({receivedRequests.length || 0})
+          </button>
+          <button className={styles.smallModalButton} onClick={() => setActiveTab("sent")}>
+            Sent ({sentRequests.length || 0})
+          </button>
+        </div>
+
+        <table className={styles.friendsTable}>
+          <thead className={styles.tableHeader}>
+            <tr>
+              <th>Username</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentRequests.map((friendship) => {
+              const friendUser = getFriendFromFriendship(friendship);
+              return (
+                <tr key={friendship._id} className={styles.requestTableRow}>
+                  <td className={styles.colUsername}>{friendUser?.username || "Unknown user"}</td>
+                  <td className={styles.colEmail}>Pending</td>
+                  <td className={styles.colActions}>
+                    {activeTab === "received" ? (
+                      <>
+                        <button className={styles.acceptButton}>Accept</button>
+                        <button className={styles.declineButton}>Decline</button>
+                      </>
+                    ) : (
+                      <button className={styles.cancelButton}>Cancel Request</button>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
+            {currentRequests.length === 0 && (
+              <tr>
+                <td colSpan="4" className={styles.noRequests}>
+                  No {activeTab} requests
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </section>
+    </Modal>
+  );
+}
