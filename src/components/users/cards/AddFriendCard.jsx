@@ -39,9 +39,7 @@ export default function AddFriendCard({ className }) {
 
   let content;
 
-  if (!searchTerm) {
-    content = <p>Enter a username to search for friends</p>;
-  } else if (filteredUsers.length === 0) {
+  if (filteredUsers.length === 0) {
     content = <p>No Matching users found</p>;
   } else {
     content = filteredUsers.map((user) => <div key={user._id}>{user.username}</div>);
@@ -53,16 +51,18 @@ export default function AddFriendCard({ className }) {
         <h2>Add Friends</h2>
         {/* Search bar!!!! WEEEWWW!!!! */}
         <search className={styles.searchContainer}>
+          <label>Enter a username to search for friends:</label>
           <input
             type="text"
             className={styles.searchField}
-            placeholder="Search by username..."
+            placeholder=" &#x1F50E;&#xFE0E; Start your search..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
+
+          {/* Search results */}
+          <div className={styles.searchResults}>{content}</div>
         </search>
-        {/* Search results */}
-        <div className={styles.searchResults}>{content}</div>
       </article>
     </section>
   );

@@ -177,3 +177,12 @@
     background: color(red);
   }
 }
+
+.searchContainer {
+  display: flex;
+  flex-direction: column;
+  background: color(theme-white);
+  margin: 2dvh;
+  padding: 1dvh;
+  border-radius: 4px;
+}
