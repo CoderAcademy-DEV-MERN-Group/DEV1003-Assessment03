@@ -125,6 +125,17 @@ Note: Beware of modifying this element as it can break the animations - you shou
   margin-right: 8px;
 }
 
+.bm-menu p {
+  color: color(text-light);
+  font-size: 0.9rem;
+  text-align: center;
+  white-space: normal;
+  border: none;
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 // Media breakpoints
 @media (min-width: breakpoint(tablet)) {
   .bm-overlay,

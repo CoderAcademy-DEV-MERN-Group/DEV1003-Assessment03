@@ -87,6 +87,7 @@ export default function BurgerMenu() {
       <Login isOpen={showLogin} onClose={() => setShowLogin(false)} />
       <Logout isOpen={showLogout} onClose={() => setShowLogout(false)} />
       <img src={logo} alt="Logo" />
+      <p>&copy; 2025 The Century Screening Room.</p>
     </Menu>
   );
 }
