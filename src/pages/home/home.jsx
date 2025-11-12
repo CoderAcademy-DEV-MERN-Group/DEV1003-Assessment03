@@ -7,17 +7,17 @@ import { sampleSize } from "lodash-es";
 import styles from "../../styles/Home.module.scss";
 
 export default function Home() {
-  const { data } = useLeaderboard();
+  const { data, error: leaderboardError, isLoading: leaderboardLoading } = useLeaderboard();
   const { data: canon, isLoading: canonLoading, error: canonError } = useAllMovies();
   // Create array of 7 random reel-canon movies using lodash sampleSize
   const randomMovies = sampleSize(canon?.movies || [], 7);
 
-  if (canonLoading) {
+  if (canonLoading || leaderboardLoading) {
     return <>Loading...</>;
   }
 
-  if (canonError) {
-    return <ErrorMessage error={canonError} />;
+  if (canonError || leaderboardError) {
+    return <ErrorMessage error={canonError || leaderboardError} />;
   }
 
   const topRankings = data?.reelProgressData.slice(0, 3).map((e) => e._id) || [];
