@@ -75,11 +75,7 @@ function DeleteUser({ isOpen, onClose }) {
                 <strong>Are you sure?</strong> This action cannot be undone.
               </p>
               <div className={styles.buttonSection}>
-                <button
-                  type="button"
-                  onClick={() => setShowConfirmation(false)}
-                  className={clsx(styles.cancelButton)}
-                >
+                <button type="button" onClick={handleClose} className={clsx(styles.cancelButton)}>
                   Go Back
                 </button>
                 <button

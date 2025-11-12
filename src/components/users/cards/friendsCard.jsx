@@ -40,8 +40,7 @@ export default function FriendsCard({ className }) {
           <thead className={styles.tableHeader}>
             <tr>
               <th>Username</th>
-              <th>Email</th>
-              <th>Status</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -50,16 +49,15 @@ export default function FriendsCard({ className }) {
               .map((friendship) => {
                 const friendUser = getFriendFromFriendship(friendship);
                 return (
-                  <tr
-                    key={friendship._id}
-                    className={styles.tableRow}
-                    onClick={() => setSelectedFriendship(friendship)}
-                    title={!friendship.friendRequestAccepted ? "Cancel Request" : "Unfriend"}
-                  >
+                  <tr key={friendship._id} className={styles.tableRow}>
                     <td className={styles.colUsername}>{friendUser?.username || "Unknown user"}</td>
-                    <td className={styles.colEmail}>{friendUser?.email}</td>
-                    <td className={styles.colStatus}>
-                      {!friendship.friendRequestAccepted ? "Pending" : "Accepted"}
+                    <td className={styles.colActions}>
+                      <button
+                        className={styles.unfriendButton}
+                        onClick={() => setSelectedFriendship(friendship)}
+                      >
+                        Unfriend
+                      </button>
                     </td>
                   </tr>
                 );
@@ -78,7 +76,7 @@ export default function FriendsCard({ className }) {
         isOpen={!!selectedFriendship}
         onClose={() => setSelectedFriendship(null)}
         friendUser={selectedFriendUser}
-        isPendingRequest={!selectedFriendship?.friendRequestAccepted}
+        isPendingRequest={false}
       />
     </section>
   );

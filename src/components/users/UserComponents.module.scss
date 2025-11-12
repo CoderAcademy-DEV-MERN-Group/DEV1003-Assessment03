@@ -130,8 +130,7 @@
   }
 }
 
-.colUsername,
-.colStatus {
+.colUsername {
   padding: 12px 16px;
   background: #e8d7f8;
   box-shadow:
@@ -140,7 +139,8 @@
   border-right: 1px solid rgba(228, 209, 245, 0.5);
 }
 
-.colEmail {
+.colActions {
+  text-align: center;
   padding: 12px 16px;
   background: #e8d7f8c5;
   box-shadow:
@@ -149,12 +149,11 @@
   border-right: 1px solid rgba(228, 209, 245, 0.5);
 }
 
-.tableRow:hover .colUsername,
-.tableRow:hover .colStatus {
+.tableRow:hover .colUsername {
   background: #ece0f8;
 }
 
-.tableRow:hover .colEmail {
+.tableRow:hover .colActions {
   background: #f4edfdc5;
 }
 
@@ -166,4 +165,15 @@
   font-style: italic;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+
+.unfriendButton {
+  border: none;
+  border-radius: 5px;
+  background: color(secondary);
+  color: white;
+
+  &:hover:not(:disabled) {
+    background: color(red);
+  }
 }

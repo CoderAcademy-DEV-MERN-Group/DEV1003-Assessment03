@@ -76,7 +76,7 @@ export default function DeleteFriendship({
           ) : (
             <>
               <p>
-                <strong>Are you sure?</strong> This will {actionText} {friendUser?.username}.
+                <strong>Are you sure?</strong>.
               </p>
               <div className={styles.buttonSection}>
                 <button type="button" onClick={handleClose} className={styles.cancelButton}>

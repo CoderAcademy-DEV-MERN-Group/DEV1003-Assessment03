@@ -1,14 +1,17 @@
 import { useState } from "react";
 import Modal from "react-modal";
 import { useAuthContext } from "../../contexts/useAuthContext";
-import { useAllFriendships, useAllUsers } from "../../utilities/customHooks";
+import { useAllFriendships, useAllUsers, useUpdateFriendship } from "../../utilities/customHooks";
 import styles from "./Modals.module.scss";
 import LoadingSpinner from "../common/LoadingScreenOverlay";
+import toast from "react-hot-toast";
 
 export default function MyFriendRequests({ isOpen, onClose }) {
   const { user } = useAuthContext();
   const { data: friendships, isLoading: friendshipsLoading } = useAllFriendships();
+  const { mutate: acceptRequest, isPending } = useUpdateFriendship();
   const { data: users, isLoading: usersLoading } = useAllUsers();
+
   const [activeTab, setActiveTab] = useState("received");
 
   if (usersLoading || friendshipsLoading) {
@@ -39,6 +42,17 @@ export default function MyFriendRequests({ isOpen, onClose }) {
     ) || [];
 
   const currentRequests = activeTab === "received" ? receivedRequests : sentRequests;
+
+  const handleAcceptRequest = (friendship) => {
+    acceptRequest(friendship.requesterUserId, {
+      onSuccess: () => {
+        toast.success(`You and ${getFriendFromFriendship(friendship)?.username} are now friends!`);
+      },
+      onError: () => {
+        toast.error("Failed to accept friend request. Please try again.");
+      },
+    });
+  };
 
   if (!isOpen) return null;
 
@@ -81,7 +95,12 @@ export default function MyFriendRequests({ isOpen, onClose }) {
                   <td className={styles.colActions}>
                     {activeTab === "received" ? (
                       <>
-                        <button className={styles.acceptButton}>Accept</button>
+                        <button
+                          className={styles.acceptButton}
+                          onClick={() => handleAcceptRequest(friendship)}
+                        >
+                          {isPending ? "Processing..." : "Accept"}
+                        </button>
                         <button className={styles.declineButton}>Decline</button>
                       </>
                     ) : (
