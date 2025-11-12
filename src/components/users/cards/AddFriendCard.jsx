@@ -1,12 +1,18 @@
 import { useMemo, useState } from "react";
 import { useAuthContext } from "../../../contexts/useAuthContext";
-import { useAllFriendships, useAllUsers } from "../../../utilities/customHooks";
+import {
+  useAllFriendships,
+  useAllUsers,
+  useCreateFriendship,
+} from "../../../utilities/customHooks";
 import styles from "../UserComponents.module.scss";
+import toast from "react-hot-toast";
 
 export default function AddFriendCard({ className }) {
   const { user: currentUser } = useAuthContext();
   const { data: allUsersData } = useAllUsers();
   const { data: allFriendshipsData } = useAllFriendships();
+  const { mutate: addFriend, isPending } = useCreateFriendship();
   const [searchTerm, setSearchTerm] = useState("");
 
   // Extract arrays from API response objects
@@ -33,16 +39,30 @@ export default function AddFriendCard({ className }) {
     );
   }, [unfriendedUsers, searchTerm]);
 
-  // const handleSendRequest = (user) => {
-  //   console.log("Sending friend request to:", user.username);
-  // };
+  const handleSendRequest = (user) => {
+    addFriend(user._id, {
+      onSuccess: () => {
+        toast.success(`Sent friend request to: ${user.username}!`);
+      },
+      onError: () => {
+        toast.error(`Failed to send request to ${user.username}. Please try again.`);
+      },
+    });
+  };
 
   let content;
 
   if (filteredUsers.length === 0) {
     content = <p>No Matching users found</p>;
   } else {
-    content = filteredUsers.map((user) => <div key={user._id}>{user.username}</div>);
+    content = filteredUsers.map((user) => (
+      <div key={user._id} className={styles.foundUsers}>
+        {user.username}
+        <button className={styles.addButton} onClick={() => handleSendRequest(user)}>
+          {isPending ? "Adding friend..." : "Add Friend"} &#x2795;
+        </button>
+      </div>
+    ));
   }
 
   return (

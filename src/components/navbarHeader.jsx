@@ -73,7 +73,7 @@ function Header() {
       <section className={styles.modalButtons}>
         {isAuthenticated ? (
           <>
-            <FriendRequestButton /> | {""}
+            <FriendRequestButton /> |
             <button onClick={() => setShowLogout(true)} className={styles.userStateButtons}>
               Sign Out
             </button>

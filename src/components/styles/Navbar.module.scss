@@ -32,7 +32,7 @@
 .link {
   background: none;
   border: none;
-  color: color(text-light);
+  color: color(base-gold);
   text-decoration: none;
   padding: 0.5rem 1rem;
   transition: color 0.4s ease;
@@ -40,7 +40,7 @@
   border-radius: 4px;
 
   &:hover:not(:disabled) {
-    color: color(primary-dark);
+    color: color(accent-gold);
     background: rgba(255, 255, 255, 0.1);
   }
 }
@@ -61,9 +61,10 @@
 }
 
 .activeLink {
-  color: inherit;
+  color: color(base-silver);
   text-decoration: none;
   font-weight: bold;
+  padding: 0.5rem 1rem;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
 }
