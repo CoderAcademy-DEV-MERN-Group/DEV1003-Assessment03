@@ -13,10 +13,10 @@ export default function DeleteFriendship({
   const [showConfirmation, setShowConfirmation] = useState(false);
   const { mutate: deleteFriendship, isPending } = useDeleteFriendship();
 
-  const actionText = isPendingRequest ? "cancel friend request to" : "unfriend";
-  const buttonText = isPendingRequest ? "Cancel Request" : "Unfriend";
+  const actionText = isPendingRequest ? "delete friend request to" : "unfriend";
+  const buttonText = isPendingRequest ? "Delete Request" : "Unfriend";
   const successMessage = isPendingRequest
-    ? `Friend request to ${friendUser?.username} cancelled`
+    ? `Friend request to ${friendUser?.username} deleted`
     : `You are no longer friends with ${friendUser?.username}`;
 
   const handleDeleteConfirm = () => {
@@ -76,7 +76,7 @@ export default function DeleteFriendship({
           ) : (
             <>
               <p>
-                <strong>Are you sure?</strong>.
+                <strong>Are you sure?</strong> This will {actionText} {friendUser?.username}.
               </p>
               <div className={styles.buttonSection}>
                 <button type="button" onClick={handleClose} className={styles.cancelButton}>

@@ -3,16 +3,12 @@ import { useAuthContext } from "../../contexts/useAuthContext";
 import { useAllFriendships } from "../../utilities/customHooks";
 import styles from "../styles/Navbar.module.scss";
 import MyFriendRequests from "../modals/FriendRequests";
+import usePendingRequestCount from "../../utilities/customHooks/usePendingRequestCount";
 
 export default function FriendRequestButton() {
-  const { user } = useAuthContext();
-  const { data: friendships } = useAllFriendships();
   const [showModal, setShowModal] = useState(false);
 
-  const pendingRequestCount =
-    friendships?.friendships?.filter(
-      (friendship) => !friendship.friendRequestAccepted && friendship.requesterUserId !== user._id
-    ).length || 0;
+  const pendingRequestCount = usePendingRequestCount();
 
   return (
     <>
