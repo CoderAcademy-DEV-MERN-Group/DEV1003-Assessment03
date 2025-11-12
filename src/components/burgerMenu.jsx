@@ -6,14 +6,7 @@ import Login from "./modals/Login";
 import Logout from "./modals/Logout";
 import "../components/styles/BurgerMenu.scss";
 import { useAuthContext } from "../contexts/useAuthContext";
-import {
-  HOME,
-  PROFILE,
-  LEADERBOARD,
-  REGISTER,
-  REEL_CANON,
-  ABOUT,
-} from "../utilities/constants/routes";
+import { ROUTES } from "../utilities/constants/routes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
@@ -30,50 +23,51 @@ export default function BurgerMenu() {
   const { isAuthenticated } = useAuthContext();
   const [showLogin, setShowLogin] = useState(false);
   const [showLogout, setShowLogout] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
+  // Event handler to open login modal and close menu on click
   const handleLoginClick = () => {
     setShowLogin(true);
-    setIsMenuOpen(false);
+    setMenuOpen(false);
   };
-
+  // Event handler to open logout modal and close menu on click
   const handleLogoutClick = () => {
     setShowLogout(true);
-    setIsMenuOpen(false);
+    setMenuOpen(false);
   };
-
+  // Update menu open state on state change
   const handleStateChange = (state) => {
-    setIsMenuOpen(state.isOpen);
+    setMenuOpen(state.isOpen);
   };
-
+  // Event handler to change menu state to closed
   const closeMenu = () => {
-    setIsMenuOpen(false);
+    setMenuOpen(false);
   };
 
   return (
-    <Menu isOpen={isMenuOpen} onStateChange={handleStateChange}>
-      <NavLink to={HOME} onClick={closeMenu}>
+    <Menu isOpen={menuOpen} onStateChange={handleStateChange}>
+      <NavLink to={ROUTES.HOME} onClick={closeMenu}>
         <FontAwesomeIcon icon={faHome} />
         Home
       </NavLink>
-      <NavLink to={PROFILE} onClick={closeMenu}>
+      <NavLink to={ROUTES.PROFILE} onClick={closeMenu}>
         <FontAwesomeIcon icon={faUser} />
         My Profile
       </NavLink>
-      <NavLink to={LEADERBOARD} onClick={closeMenu}>
+      <NavLink to={ROUTES.LEADERBOARD} onClick={closeMenu}>
         <FontAwesomeIcon icon={faTrophy} />
         Leaderboard
       </NavLink>
-      <NavLink to={REEL_CANON} onClick={closeMenu}>
+      <NavLink to={ROUTES.REEL_CANON} onClick={closeMenu}>
         <FontAwesomeIcon icon={faPlayCircle} />
         The Reel Canon
       </NavLink>
-      <NavLink to={ABOUT} onClick={closeMenu}>
+      <NavLink to={ROUTES.ABOUT} onClick={closeMenu}>
         <FontAwesomeIcon icon={faInfoCircle} />
         About
       </NavLink>
       {isAuthenticated || (
-        <NavLink to={REGISTER} onClick={closeMenu}>
+        <NavLink to={ROUTES.REGISTER} onClick={closeMenu}>
           <FontAwesomeIcon icon={faUserPlus} />
           Register
         </NavLink>
