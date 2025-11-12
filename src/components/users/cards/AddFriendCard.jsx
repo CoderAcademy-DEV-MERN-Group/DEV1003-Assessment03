@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useAuthContext } from "../../../contexts/useAuthContext";
 import { useAllFriendships, useAllUsers } from "../../../utilities/customHooks";
 import styles from "../UserComponents.module.scss";
@@ -7,6 +7,7 @@ export default function AddFriendCard({ className }) {
   const { user: currentUser } = useAuthContext();
   const { data: allUsersData } = useAllUsers();
   const { data: allFriendshipsData } = useAllFriendships();
+  const [searchTerm, setSearchTerm] = useState("");
 
   // Extract arrays from API response objects
   const allUsers = allUsersData?.users;
@@ -25,20 +26,43 @@ export default function AddFriendCard({ className }) {
   // useMemo only recalculates when dependencies change, more efficient than useEffect + useState
   const unfriendedUsers = useMemo(findUnfriendedUsers, [allUsers, allFriendships, currentUser]);
 
-  const handleSendRequest = (user) => {
-    console.log("Sending friend request to:", user.username);
-  };
+  const filteredUsers = useMemo(() => {
+    if (!searchTerm.trim()) return [];
+    return unfriendedUsers.filter((user) =>
+      user.username.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [unfriendedUsers, searchTerm]);
+
+  // const handleSendRequest = (user) => {
+  //   console.log("Sending friend request to:", user.username);
+  // };
+
+  let content;
+
+  if (!searchTerm) {
+    content = <p>Enter a username to search for friends</p>;
+  } else if (filteredUsers.length === 0) {
+    content = <p>No Matching users found</p>;
+  } else {
+    content = filteredUsers.map((user) => <div key={user._id}>{user.username}</div>);
+  }
 
   return (
     <section className={className}>
       <article className={styles.cardBorder}>
         <h2>Add Friends</h2>
         {/* Search bar!!!! WEEEWWW!!!! */}
-        <search className={styles.searchCointainer}>
-          <input type="text" className={styles.searchField} placeholder="Search by username...">
-            sd
-          </input>
+        <search className={styles.searchContainer}>
+          <input
+            type="text"
+            className={styles.searchField}
+            placeholder="Search by username..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
         </search>
+        {/* Search results */}
+        <div className={styles.searchResults}>{content}</div>
       </article>
     </section>
   );

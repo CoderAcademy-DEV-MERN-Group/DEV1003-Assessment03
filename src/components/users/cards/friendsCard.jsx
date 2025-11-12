@@ -36,19 +36,18 @@ export default function FriendsCard({ className }) {
     <section className={className}>
       <article className={styles.cardBorder}>
         <h2>Your Friendships</h2>
-        {!friendships?.friendships || friendships.friendships.length === 0 ? (
-          <p>No friends yet!</p>
-        ) : (
-          <table className={styles.friendsTable}>
-            <thead className={styles.tableHeader}>
-              <tr>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {friendships.friendships.map((friendship) => {
+        <table className={styles.friendsTable}>
+          <thead className={styles.tableHeader}>
+            <tr>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {friendships.friendships
+              .filter((f) => f.friendRequestAccepted)
+              .map((friendship) => {
                 const friendUser = getFriendFromFriendship(friendship);
                 return (
                   <tr
@@ -65,9 +64,15 @@ export default function FriendsCard({ className }) {
                   </tr>
                 );
               })}
-            </tbody>
-          </table>
-        )}
+            {friendships.friendships.filter((f) => f.friendRequestAccepted).length === 0 && (
+              <tr>
+                <td colSpan="4" className={styles.noRequests}>
+                  No friendships yet!
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
       </article>
       <DeleteFriendship
         isOpen={!!selectedFriendship}

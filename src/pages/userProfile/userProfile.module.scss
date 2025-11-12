@@ -28,9 +28,12 @@
 }
 
 .userInfoCard {
-  position: relative;
+  // position: relative;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
   overflow: hidden;
-  width: 20dvw;
+  flex: 1;
   border-radius: 20px;
   padding: 1dvw;
   // height: 69dvh;
@@ -51,7 +54,10 @@
 }
 
 .userReelProgressCard {
-  color: color(text-dark);
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  // color: color(text-dark);
   // max-width: 30dvw;
   border-radius: 20px;
   flex: 1;

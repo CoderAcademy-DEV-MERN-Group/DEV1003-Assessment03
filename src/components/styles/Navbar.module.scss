@@ -44,6 +44,21 @@
     background: rgba(255, 255, 255, 0.1);
   }
 }
+.friendRequestButton {
+  background: none;
+  border: none;
+  color: color(text-light);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  transition: color 0.4s ease;
+  transition: background 0.6s;
+  border-radius: 4px;
+
+  &:hover:not(:disabled) {
+    color: color(primary-dark);
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
 
 .activeLink {
   color: inherit;
@@ -51,4 +66,18 @@
   font-weight: bold;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
+}
+
+.badge {
+  position: relative;
+  background: red;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.4rem;
 }

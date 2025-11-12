@@ -16,9 +16,9 @@ export default function FriendRequestButton() {
 
   return (
     <>
-      <button className={styles.link} onClick={() => setShowModal(true)}>
-        Friend Requests{" "}
-        {pendingRequestCount > 0 && <span className={styles.badge}>{pendingRequestCount}</span>}
+      <button className={styles.friendRequestButton} onClick={() => setShowModal(true)}>
+        Friend Requests
+        {pendingRequestCount > 0 && <div className={styles.badge}>{pendingRequestCount}</div>}
       </button>
 
       <MyFriendRequests isOpen={showModal} onClose={() => setShowModal(false)} />

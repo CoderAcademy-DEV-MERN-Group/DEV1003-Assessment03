@@ -9,7 +9,7 @@
   // margin-bottom: spacing(lg);
   border-radius: 3px;
   margin-top: spacing(sm);
-  width: auto;
+  width: 95%;
   height: 95%;
   overflow: scroll;
   border: 1px solid color(primary-dark);
@@ -156,4 +156,14 @@
 
 .tableRow:hover .colEmail {
   background: #f4edfdc5;
+}
+
+.noRequests {
+  background: #e8d7f8;
+  text-align: center;
+  padding: 20px;
+  color: #6b7280;
+  font-style: italic;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }

@@ -85,7 +85,7 @@ export default function MyFriendRequests({ isOpen, onClose }) {
                         <button className={styles.declineButton}>Decline</button>
                       </>
                     ) : (
-                      <button className={styles.cancelButton}>Cancel Request</button>
+                      <button className={styles.declineButton}>Cancel</button>
                     )}
                   </td>
                 </tr>
