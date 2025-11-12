@@ -10,6 +10,8 @@ export default function usePendingRequestCount() {
     refetchInterval: 30000,
   });
 
+  if (!user?._id) return 0; // <-- guard clause
+
   // Count pending requests where current user is NOT the requester
   const pendingCount =
     data?.friendships?.filter(
