@@ -26,7 +26,7 @@ export default function MyFriendRequests({ isOpen, onClose }) {
 
   // Create a lookup table for all friendships (users are occasionally in the wrong order)
   const usersLookup = users?.users?.reduce((account, user) => {
-    account[userId] = user;
+    account[user?._id] = user;
     return account;
   }, {});
 
