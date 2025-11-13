@@ -2,6 +2,8 @@
 @use "../../styles/mixins" as *;
 
 .podiumSection {
+  background: color(overlay-medium);
+  box-shadow: 0px 0.4rem 0.5rem 0.5rem rgba(color(base-silver), 0.637);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,8 +13,10 @@
   border-radius: 5px;
 }
 
-// .podiumTitle {
-// }
+.podiumTitle {
+  color: color(base-silver);
+  text-shadow: 0 2px 4px rgba(209, 157, 13, 0.637);
+}
 
 .podiumContainer {
   display: flex;
@@ -65,4 +69,10 @@
 
 .first {
   width: 150px;
+}
+
+@include mobile {
+  h2 {
+    font-size: 1.5rem;
+  }
 }

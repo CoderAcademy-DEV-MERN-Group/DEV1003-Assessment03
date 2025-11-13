@@ -94,7 +94,7 @@
 .tableHeader {
   th {
     padding: 12px 16px;
-    background: #dcc7f0;
+    background: color(table-color-1);
     box-shadow:
       inset 1px 1px 2px rgba(0, 0, 0, 0.3),
       inset -1px -1px 2px rgba(255, 255, 255, 0.5);
@@ -105,7 +105,7 @@
 
 .colUsername {
   padding: 12px 16px;
-  background: #e8d7f8;
+  background: color(table-color-2);
   box-shadow:
     inset 1px 1px 2px rgba(0, 0, 0, 0.3),
     inset -1px -1px 2px rgba(255, 255, 255, 0.5);
@@ -115,7 +115,7 @@
 .colActions {
   text-align: center;
   padding: 12px 16px;
-  background: #e8d7f8c5;
+  background: color(table-color-3);
   box-shadow:
     inset 1px 1px 2px rgba(0, 0, 0, 0.3),
     inset -1px -1px 2px rgba(255, 255, 255, 0.5);

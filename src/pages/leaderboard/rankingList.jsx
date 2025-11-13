@@ -1,4 +1,5 @@
 import { useLeaderboard } from "../../utilities/customHooks";
+import styles from "./leaderboard.module.scss";
 
 export default function RankingList({ title }) {
   const { data, isLoading, error } = useLeaderboard();
@@ -13,18 +14,20 @@ export default function RankingList({ title }) {
   ));
 
   return (
-    <>
+    <div className={styles.rankings}>
       <h2>{title}</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Username</th>
-            <th>Total % of Movies Watched</th>
-          </tr>
-        </thead>
-        <tbody>{rankingTable}</tbody>
-      </table>
-    </>
+      <div className={styles.tableWrapper}>
+        <table>
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Username</th>
+              <th>Completion Percentage</th>
+            </tr>
+          </thead>
+          <tbody>{rankingTable}</tbody>
+        </table>
+      </div>
+    </div>
   );
 }
