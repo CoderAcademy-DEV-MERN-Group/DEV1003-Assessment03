@@ -1,0 +1,79 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.leaderboard {
+  grid-row: 2;
+  padding: spacing(xl) spacing(md);
+  max-height: 100%;
+  background: color(background);
+  overflow: hidden;
+}
+
+.title {
+  h1 {
+    margin-top: 0;
+    text-align: center;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: color(base-silver);
+    text-shadow: 0 2px 4px rgba(209, 157, 13, 0.637);
+  }
+}
+
+.featureContainer {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+}
+
+.rankings {
+  background: color(soft-background);
+  border-radius: 5px;
+  box-shadow: 0px 6px 8px 8px rgba(209, 157, 13, 0.637);
+  padding: spacing(sm);
+  min-width: 474px;
+  max-width: 500px;
+
+  h2 {
+    text-align: center;
+    color: color(base-silver);
+    text-shadow: 0 2px 4px rgba(209, 157, 13, 0.637);
+  }
+
+  .tableWrapper {
+    border: 1px solid color(base-gold);
+    border-radius: 5px;
+    overflow: hidden; // <-- clips table corners
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    background: rgba(color(overlay-medium), 0.45);
+  }
+
+  th, td {
+    padding: spacing(sm);
+  }
+
+  td:first-child {
+    text-align: center;
+    font-weight: 400;
+  }
+
+  td:nth-child(3) {
+    text-align: right;
+  }
+
+  th {
+    background-color: rgba(color(theme-white), 0.8);
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: rgba(color(base-silver), 0.7);
+  }
+
+  tbody tr:nth-child(odd) {
+    background-color: rgba(color(theme-white), 0.7);
+  }
+}
