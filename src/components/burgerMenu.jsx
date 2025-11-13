@@ -50,10 +50,12 @@ export default function BurgerMenu() {
         <FontAwesomeIcon icon={faHome} />
         Home
       </NavLink>
-      <NavLink to={ROUTES.PROFILE} onClick={closeMenu}>
-        <FontAwesomeIcon icon={faUser} />
-        My Profile
-      </NavLink>
+      {isAuthenticated && (
+        <NavLink to={ROUTES.PROFILE} onClick={closeMenu}>
+          <FontAwesomeIcon icon={faUser} />
+          My Profile
+        </NavLink>
+      )}
       <NavLink to={ROUTES.LEADERBOARD} onClick={closeMenu}>
         <FontAwesomeIcon icon={faTrophy} />
         Leaderboard
