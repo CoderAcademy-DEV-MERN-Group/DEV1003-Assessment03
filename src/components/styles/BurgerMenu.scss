@@ -2,6 +2,14 @@
 @use "../../styles/variables" as *;
 @use "../../styles/mixins" as *;
 
+.bm-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  touch-action: none;
+  // height: auto !important;
+}
+
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: fixed;
@@ -54,9 +62,13 @@ Note: Beware of modifying this element as it can break the animations - you shou
   padding: 2.5em 0.7em 0;
   font-size: 1.15em;
   width: 110%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+  // height: auto !important;
+  // display: flex;
+  // flex-direction: column;
+  // position: fixed !important;
+  // top: 0 !important;
+  // bottom: 0 !important;
+  touch-action: none;
   // overflow: visible !important;
 }
 
