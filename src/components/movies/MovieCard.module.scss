@@ -7,7 +7,7 @@
   overflow: hidden;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
   background: transparent;
-  min-height: 200px; // Ensure cards have some height
+  min-height: 200px; 
   z-index: 1;
 }
 
@@ -25,7 +25,6 @@
   background-size: cover;
   background-position: center;
   border-radius: radius(lg);
-  // filter: grayscale(0.);
   z-index: 2;
 }
 
@@ -38,7 +37,7 @@
 
 .content {
   display: grid;
-  grid-template-rows: auto auto 1fr auto; //
+  grid-template-rows: auto auto 1fr auto; 
   align-items: start;
   position: relative;
   text-align: center;
@@ -62,8 +61,8 @@
   padding: spacing(md);
   z-index: 5;
   opacity: 0;
-  transition: opacity 0.3s ease; // Keep this CSS transition
-  pointer-events: none; // Prevent overlay from blocking hover
+  transition: opacity 0.3s ease; 
+  pointer-events: none; 
 }
 
 // Use the card hover to control overlay
@@ -97,10 +96,10 @@
 
 .revealedText,
 .rating {
-  color: #ff8c00 !important; // Gold color
+  color: #ff8c00 !important;
   text-shadow:
     0 0 2px rgba(255, 255, 255, 0.4),
-    /* Light inner glow */ 0 1px 4px rgba(0, 0, 0, 1),
+    0 1px 4px rgba(0, 0, 0, 1),
     0 2px 8px rgba(0, 0, 0, 1),
     0 4px 16px rgba(0, 0, 0, 1) !important;
 }
@@ -110,24 +109,15 @@
   font-size: 1.15rem;
   font-weight: 700;
   line-height: 1.3;
-  color: #1a202c; // Even darker for titles
+  color: #1a202c;
 }
 
 .year {
   margin: 0 0 spacing(xs);
   font-size: 0.95rem;
   opacity: 0.8;
-  color: #4a5568; // Medium dark for less important text
+  color: #4a5568;
 }
-
-// .rating {
-//   align-self: end; // Stick to bottom
-//   margin-bottom: 20%;
-//   font-size: 0.95rem;
-//   font-weight: 600;
-//   color: #d69e2e; // Keep the gold for ratings
-//   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); // Dark shadow for light text
-// }
 
 .genre {
   align-self: end;
@@ -174,6 +164,10 @@
     font-size: small;
   }
 
+  .title, .year {
+    font-size: medium;
+  }
+
   .card {
     padding: 0;
     text-align: center;
@@ -185,8 +179,10 @@
   }
 
   .markAsWatchedButton {
+    margin-top: 10%;
     padding: spacing(xs) spacing(xs);
-    font-size: 0.75rem;
+    font-size: 1rem;
+    font-weight: bold;
 
     &:active {
       scale: 0.95;
@@ -225,7 +221,7 @@
     opacity: 1 !important;
     pointer-events: auto !important;
   }
-  
+
   .plot {
     font-size: 0.65rem !important;
   }

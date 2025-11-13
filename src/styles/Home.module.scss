@@ -56,4 +56,13 @@
 }
 
 @include mobile {
+  .home {
+    margin-top: 7.5dvh;
+    max-width: 100dvw;
+  }
+
+  .homeFeatures {
+    max-width: 90dvw;
+    margin-bottom: 3%;
+  }
 }

@@ -176,8 +176,7 @@
   .profilePage {
     min-height: auto;
     max-height: none;
-    padding-top: 7dvh;
-    margin: 2dvw;
+    padding-top: 7.9dvh;
     overflow: visible;
   }
 
@@ -195,6 +194,7 @@
     min-height: 60dvh;
     overflow-y: auto;
     margin-bottom: 2dvh;
+    max-width: 98%;
   }
 
   .userReelProgressCard {
@@ -204,9 +204,12 @@
     overflow-y: hidden;
     order: -1;
     margin-bottom: 2dvh;
+    max-width: 98%;
   }
 
   .userFriendsCard {
+    max-width: 98%;
+    margin-top: 2%;
     flex-basis: auto;
     width: 100%;
     margin-bottom: 2dvh;
