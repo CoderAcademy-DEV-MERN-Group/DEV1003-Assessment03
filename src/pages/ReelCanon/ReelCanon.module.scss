@@ -89,9 +89,9 @@
 // Responsive
 @include mobile {
   .reelCanon {
+    margin-top: 7.5dvh;
     padding: 0;
     max-width: 100dvw;
-    margin: 0;
   }
 
   .title h1 {
@@ -121,6 +121,10 @@
 }
 
 @include tablet {
+ .reelCanon{
+  margin-top: 7dvh;
+ }
+
   .grid > * {
     flex: 1 1 20dvw !important; // Fits 2 columns nicely
     // min-height: 200px !important;
