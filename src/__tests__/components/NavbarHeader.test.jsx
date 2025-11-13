@@ -42,16 +42,7 @@ beforeEach(() => {
 // Clear fake localStorage after each test
 afterEach(() => fakeCache.clear());
 
-// Test navbar header renders expected links
-describe("NavbarHeader renders links", () => {
-  it("should render navigation links", () => {
-    render(<NavbarHeader />);
-    // Check that the navigation links are rendered in the NavbarHeader by looking for their text
-    const navLinks = [/Home/, /My Profile/, /Leaderboard/, /The Reel Canon/, /About/];
-    navLinks.forEach((regex) => expect(screen.getByText(regex)).toBeInTheDocument());
-  });
-});
-
+// Test NavbarHeader behaviour when user is logged in
 describe("Navbar behaviour for logged in user", () => {
   // Run before each test to simulate loaded NavbarHeader with logged in user
   beforeEach(async () => {
@@ -60,7 +51,12 @@ describe("Navbar behaviour for logged in user", () => {
     render(<NavbarHeader />);
     await waitFor(() => expect(screen.getByText(/Home/)).toBeInTheDocument());
   });
-
+  // Test it renders all expected navigation links when logged in
+  it("should render navigation links", () => {
+    // Check that the navigation links are rendered in the NavbarHeader by looking for their text
+    const navLinks = [/Home/, /My Profile/, /Leaderboard/, /The Reel Canon/, /About/];
+    navLinks.forEach((regex) => expect(screen.getByText(regex)).toBeInTheDocument());
+  });
   // Test it renders 'Sign Out' button when logged in but not 'Sign In' or 'Register'
   it("should render 'Sign Out' when user is logged in", async () => {
     // Sign out button should be rendered but not sign in or register button
@@ -82,6 +78,7 @@ describe("Navbar behaviour for logged in user", () => {
   });
 });
 
+// Test NavbarHeader behaviour when user is logged out
 describe("Navbar behaviour for logged out user", () => {
   // Run before each test to simulate loaded NavbarHeader with logged out user
   beforeEach(async () => {
@@ -92,10 +89,11 @@ describe("Navbar behaviour for logged out user", () => {
 
   // Test it renders 'Sign In' and 'Register' buttons when not logged in
   it("should render 'Sign In' and 'Register' when user is not logged in", async () => {
-    // Check 'Sign In' and 'Register' are rendered but not 'Sign Out'
+    // Check 'Sign In' and 'Register' are rendered but not 'Sign Out' or 'User Profile'
     expect(screen.getByText(/Sign In/)).toBeInTheDocument();
     expect(screen.getByText(/Register/)).toBeInTheDocument();
     expect(screen.queryByText(/Sign Out/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/User Profile/)).not.toBeInTheDocument();
   });
   // Test that clicking Sign In button successfully loads modal
   it("should load modal for signing in when clicking 'Sign In'", async () => {
@@ -116,9 +114,12 @@ describe("Navbar behaviour for logged out user", () => {
 
 // Test that all navigation links redirects to correct routes
 describe("Navbar navigation links", () => {
-  // Render NavbarHeader before each test
-  beforeEach(() => {
+  // Render NavbarHeader as logged in user before each test (user profile only shows if logged in)
+  beforeEach(async () => {
+    fakeCache.getItem.mockReturnValue("fake-token");
+    vi.mocked(api.getCurrentUser).mockResolvedValue({ id: 1, username: "testuser" });
     render(<NavbarHeader />);
+    await waitFor(() => expect(screen.getByText(/Home/)).toBeInTheDocument());
   });
   // Test each link correctly links to expected route
   it.each([

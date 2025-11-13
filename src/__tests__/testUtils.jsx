@@ -35,9 +35,24 @@ vi.mock("../utilities/services/apiServices", () => ({
   getLeaderboard: vi.fn(),
 }));
 
-// Function to create new query client for each test with retries disabled for consistency
+// Function to create new query client for each test with retry and refetching behaviour disabled
 function createTestQueryClient() {
-  return new QueryClient({ defaultOptions: { queries: { retry: false } } });
+  return new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+        refetchOnWindowFocus: false,
+        refetchOnMount: false,
+        refetchOnReconnect: false,
+        staleTime: Infinity,
+        refetchInterval: false,
+        refetchIntervalInBackground: false,
+      },
+      mutations: {
+        retry: false,
+      },
+    },
+  });
 }
 
 // Wraps all children components (the ones being tested) with all providers/context we use in main
