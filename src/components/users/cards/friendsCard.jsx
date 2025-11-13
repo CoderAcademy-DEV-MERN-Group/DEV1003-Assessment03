@@ -11,20 +11,22 @@ export default function FriendsCard({ className }) {
   const { data: users, isLoading: usersLoading } = useAllUsers();
   const [selectedFriendship, setSelectedFriendship] = useState(null);
 
+  const userId = user?.id || user?._id;
+
   if (usersLoading || friendshipsLoading) {
     return <LoadingSpinner />;
   }
 
   // Create a lookup table for all friendships (users are occasionally in the wrong order)
   const usersLookup = users?.users?.reduce((account, user) => {
-    account[user._id] = user;
+    account[user?._id] = user;
     return account;
   }, {});
 
   // Helper function to get friend user from friendship
   const getFriendFromFriendship = (friendship) => {
     if (!friendship || !user) return null;
-    const friendId = friendship.user1 === user?.id ? friendship.user2 : friendship.user1;
+    const friendId = friendship.user1 === userId ? friendship.user2 : friendship.user1;
     return usersLookup?.[friendId];
   };
 
