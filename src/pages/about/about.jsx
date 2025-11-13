@@ -1,5 +1,8 @@
 import { useState } from "react";
 import ContactUs from "../../components/modals/ContactUs";
+import JossImg from "../../assets/images/Joss.jpg";
+import JordanImg from "../../assets/images/Jordan.jpg";
+import NhiImg from "../../assets/images/Nhi.png";
 
 export default function About() {
   const [showContact, setShowContact] = useState(false);
@@ -33,7 +36,7 @@ export default function About() {
       <section>
         <article>
           <h3>Joss</h3>
-          <img src="src/assets/images/Joss.jpg" alt="Joss" />
+          <img src={JossImg} alt="Joss" />
           <p>
             Joss is an all rounder, but had a big influence on the Reel Canon and the user
             experience site-wide!
@@ -43,7 +46,7 @@ export default function About() {
 
         <article>
           <h3>Jordan</h3>
-          <img src="src/assets/images/Jordan.jpg" alt="Jordan" />
+          <img src={JordanImg} alt="Jordan" />
           <p>
             Jordan is a tester and framework dynamo, making the granular components that help this
             site run in the background!
@@ -53,7 +56,7 @@ export default function About() {
 
         <article>
           <h3>Nhi</h3>
-          <img src="src/assets/images/Nhi.png" alt="Nhi" />
+          <img src={NhiImg} alt="Nhi" />
           <p>
             Nhi is enthusiastic and loves styling! She helped finesse the final colours and theming
             for this site!
