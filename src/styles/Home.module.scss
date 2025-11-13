@@ -1,6 +1,8 @@
 @use "./variables" as *;
+@use "./mixins" as *;
 
 .home {
+  background: color(background);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,7 +33,7 @@
     max-width: 100rem;
     margin: spacing(lg) 0;
     color: color(text-light);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     padding: 0 spacing(md);
   }
 
@@ -45,4 +47,13 @@
     gap: 15px;
     padding: 25px 0;
   }
+}
+
+@include tablet {
+  .home {
+    margin-top: 7.5dvh;
+  }
+}
+
+@include mobile {
 }
