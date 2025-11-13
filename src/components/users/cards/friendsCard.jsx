@@ -24,7 +24,7 @@ export default function FriendsCard({ className }) {
   // Helper function to get friend user from friendship
   const getFriendFromFriendship = (friendship) => {
     if (!friendship || !user) return null;
-    const friendId = friendship.user1 === user?._id ? friendship.user2 : friendship.user1;
+    const friendId = friendship.user1 === user?.id ? friendship.user2 : friendship.user1;
     return usersLookup?.[friendId];
   };
 
