@@ -11,7 +11,7 @@
 .userCards {
   gap: 2dvh;
   padding: 2dvh;
-  margin-bottom: 2dvh;
+  margin-bottom: 3dvh;
   display: flex;
   flex-direction: row;
   min-height: 0; // Important for flex children
@@ -142,7 +142,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 1rem 1rem;
-     h2 {
+    h2 {
       font-size: 1.5rem;
     }
   }
@@ -165,7 +165,7 @@
   .userReelProgressCard {
     flex-basis: 40%;
     // width: 47%;
-    height: 60dvh;
+    height: auto;
     overflow: visible;
     order: -1;
   }
@@ -173,6 +173,8 @@
 
 @include mobile {
   .profilePage {
+    min-height: auto;
+    max-height: none;
     padding-top: 7dvh;
     margin: 2dvw;
     overflow: visible;
@@ -181,20 +183,31 @@
   .userCards {
     display: flex;
     flex-direction: column;
-    margin-bottom: 7dvh;
-    h2 {
-      font-size: 1.5rem;
-    }
+    flex-wrap: nowrap;
+    height: auto;
+    margin-bottom: 0.5dvh;
   }
 
   .userInfoCard {
+    max-height: 60dvh;
+    width: 100%;
     min-height: 60dvh;
-    overflow: scroll;
+    overflow-y: auto;
+    margin-bottom: 2dvh;
   }
 
   .userReelProgressCard {
-    min-height: 65dvh;
-    overflow: visible;
-    order: -1;
+    min-height: 60dvh;
+    max-height: 60dvh;
+    width: 100%; 
+    overflow-y: hidden;
+    order: -1; 
+    margin-bottom: 2dvh; 
+  }
+
+  .userFriendsCard {
+    flex-basis: auto;
+    width: 100%;
+    margin-bottom: 2dvh;
   }
 }
