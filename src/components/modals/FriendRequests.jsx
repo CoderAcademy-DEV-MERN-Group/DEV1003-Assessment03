@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import DeleteFriendship from "./DeleteFriendship";
 
 export default function MyFriendRequests({ isOpen, onClose }) {
-  const { user } = useAuthContext();
+  const { user, isLoading: currentUserLoading } = useAuthContext();
   const { data: friendships, isLoading: friendshipsLoading } = useAllFriendships();
   const { mutate: acceptRequest, isPending } = useUpdateFriendship();
   const { data: users, isLoading: usersLoading } = useAllUsers();
@@ -16,7 +16,7 @@ export default function MyFriendRequests({ isOpen, onClose }) {
   const [activeTab, setActiveTab] = useState("received");
   const [selectedFriendship, setSelectedFriendship] = useState(null);
 
-  if (usersLoading || friendshipsLoading) {
+  if (!user || currentUserLoading || usersLoading || friendshipsLoading) {
     return <LoadingSpinner />;
   }
 
@@ -28,19 +28,19 @@ export default function MyFriendRequests({ isOpen, onClose }) {
 
   const getFriendFromFriendship = (friendship) => {
     if (!friendship || !user) return null;
-    const friendId = friendship.user1 === user._id ? friendship.user2 : friendship.user1;
+    const friendId = friendship.user1 === user.id ? friendship.user2 : friendship.user1;
     return usersLookup?.[friendId];
   };
 
   // Helper function to get friend user from friendship
   const receivedRequests =
     friendships?.friendships?.filter(
-      (friendship) => !friendship.friendRequestAccepted && friendship.requesterUserId !== user._id
+      (friendship) => !friendship.friendRequestAccepted && friendship.requesterUserId !== user.id
     ) || [];
 
   const sentRequests =
     friendships?.friendships?.filter(
-      (friendship) => !friendship.friendRequestAccepted && friendship.requesterUserId === user._id
+      (friendship) => !friendship.friendRequestAccepted && friendship.requesterUserId === user.id
     ) || [];
 
   const currentRequests = activeTab === "received" ? receivedRequests : sentRequests;

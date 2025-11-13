@@ -17,7 +17,7 @@ import BurgerMenu from "./components/burgerMenu";
 Modal.setAppElement("#root");
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+  // <StrictMode>
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         {/* Error boundary catches unhandled child component errors, clears cache if triggered */}
@@ -38,5 +38,5 @@ createRoot(document.getElementById("root")).render(
         />
       </AuthProvider>
     </QueryClientProvider>
-  </StrictMode>
+  // </StrictMode>
 );
