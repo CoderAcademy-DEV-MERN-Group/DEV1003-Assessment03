@@ -21,7 +21,7 @@ export default function ReelProgressCard({ className }) {
   return (
     <section className={className}>
       <article className={styles.cardBorder}>
-        <h2>Your Cinematic Info</h2>
+        <h2>Your Reel Progress</h2>
 
         <div className={styles.verticalProgressContainer}>
           <article className={styles.progressTrack}>

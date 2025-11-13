@@ -28,8 +28,8 @@ export default function UserProfile() {
       </div>
       <div className={styles.userCards}>
         <UserInfoCard className={styles.userInfoCard} />
-        <FriendsCard className={styles.userFriendsCard} />
         <AddFriendCard className={styles.userFriendsCard} />
+        <FriendsCard className={styles.userFriendsCard} />
         <ReelProgressCard className={styles.userReelProgressCard} />
       </div>
       <UpdateProfile isOpen={showUpdateProfile} onClose={() => setShowUpdateProfile(false)} />

@@ -29,7 +29,7 @@
 
 .userInfoCard {
   // position: relative;
-  display:flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   overflow: hidden;
@@ -42,7 +42,7 @@
 }
 
 .userFriendsCard {
-  display:flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: 20px;
@@ -54,7 +54,7 @@
 }
 
 .userReelProgressCard {
-  display:flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   // color: color(text-dark);
@@ -123,5 +123,35 @@
 
   &.buttonDisabled {
     filter: grayscale(0.9);
+  }
+}
+
+@include tablet {
+}
+
+@include mobile {
+  .profilePage {
+    padding-top: 7dvh;
+    margin: 2dvw;
+    overflow: visible;
+  }
+
+  .userCards {
+    display: flex;
+    flex-direction: column;
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
+
+  .userInfoCard {
+    min-height: 60dvh;
+    overflow: scroll;
+  }
+
+  .userReelProgressCard {
+    min-height: 65dvh;
+    overflow: visible;
+    order: -1;
   }
 }
