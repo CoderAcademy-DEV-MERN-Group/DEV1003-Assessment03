@@ -13,7 +13,7 @@
 
 .logoImg {
   border-radius: 50%;
-  height: 125px;
+  height: 105px;
 }
 
 .pageLinks {
@@ -86,6 +86,51 @@
 // Make navbar disappear on tablet and below
 @media (max-width: breakpoint(tablet)) {
   .navbar {
+    position: fixed;
+    background-color: color(soft-background);
+    display: flex;
+    align-items: flex-end;
+    width: 100dvw;
+    height: 7dvh;
+    padding: 5px;
+    padding-bottom: 0;
+    z-index:1;
+  }
+
+  .logoImg,
+  .pageLinks,
+  .userStateButtons {
     display: none;
+  }
+
+  .friendRequestButton {
+    background: none;
+    border: none;
+    color: color(text-light);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    transition: color 0.4s ease;
+    transition: background 0.6s;
+    border-radius: 4px;
+
+    &:hover:not(:disabled) {
+      color: color(primary-dark);
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  .badge {
+    position: relative;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.4rem;
   }
 }

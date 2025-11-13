@@ -29,7 +29,7 @@
 
 .userInfoCard {
   // position: relative;
-  display:flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   overflow: hidden;
@@ -42,7 +42,7 @@
 }
 
 .userFriendsCard {
-  display:flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: 20px;
@@ -54,7 +54,7 @@
 }
 
 .userReelProgressCard {
-  display:flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   // color: color(text-dark);
@@ -123,5 +123,78 @@
 
   &.buttonDisabled {
     filter: grayscale(0.9);
+  }
+}
+
+@include tablet {
+  .profilePage {
+    margin: 1dvw;
+    overflow: visible;
+    padding-bottom: 5dvh;
+
+    .userButtons {
+      padding-top: 9dvh;
+    }
+  }
+
+  .userCards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem 1rem;
+     h2 {
+      font-size: 1.5rem;
+    }
+  }
+
+  .userInfoCard {
+    // width: 47%;
+    height: 60dvh;
+    flex-basis: 40%;
+    overflow: scroll;
+    order: -1;
+  }
+
+  .userFriendsCard {
+    height: auto;
+    flex-basis: 40%;
+    overflow: hidden;
+    margin-bottom: 8dvh;
+  }
+
+  .userReelProgressCard {
+    flex-basis: 40%;
+    // width: 47%;
+    height: 60dvh;
+    overflow: visible;
+    order: -1;
+  }
+}
+
+@include mobile {
+  .profilePage {
+    padding-top: 7dvh;
+    margin: 2dvw;
+    overflow: visible;
+  }
+
+  .userCards {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 7dvh;
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
+
+  .userInfoCard {
+    min-height: 60dvh;
+    overflow: scroll;
+  }
+
+  .userReelProgressCard {
+    min-height: 65dvh;
+    overflow: visible;
+    order: -1;
   }
 }

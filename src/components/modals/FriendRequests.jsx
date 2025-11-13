@@ -10,11 +10,15 @@ import DeleteFriendship from "./DeleteFriendship";
 export default function MyFriendRequests({ isOpen, onClose }) {
   const { user, isLoading: currentUserLoading } = useAuthContext();
   const { data: friendships, isLoading: friendshipsLoading } = useAllFriendships();
-  const { mutate: acceptRequest, isPending } = useUpdateFriendship();
+
   const { data: users, isLoading: usersLoading } = useAllUsers();
+  const { mutate: acceptRequest, isPending } = useUpdateFriendship();
 
   const [activeTab, setActiveTab] = useState("received");
   const [selectedFriendship, setSelectedFriendship] = useState(null);
+
+  // Create a consistent user ID
+  const userId = user?._id || user?.id;
 
   if (!user || currentUserLoading || usersLoading || friendshipsLoading) {
     return <LoadingSpinner />;
@@ -22,25 +26,25 @@ export default function MyFriendRequests({ isOpen, onClose }) {
 
   // Create a lookup table for all friendships (users are occasionally in the wrong order)
   const usersLookup = users?.users?.reduce((account, user) => {
-    account[user._id] = user;
+    account[userId] = user;
     return account;
   }, {});
 
   const getFriendFromFriendship = (friendship) => {
     if (!friendship || !user) return null;
-    const friendId = friendship.user1 === user.id ? friendship.user2 : friendship.user1;
+    const friendId = friendship.user1 === userId ? friendship.user2 : friendship.user1;
     return usersLookup?.[friendId];
   };
 
   // Helper function to get friend user from friendship
   const receivedRequests =
     friendships?.friendships?.filter(
-      (friendship) => !friendship.friendRequestAccepted && friendship.requesterUserId !== user.id
+      (friendship) => !friendship.friendRequestAccepted && friendship.requesterUserId !== userId
     ) || [];
 
   const sentRequests =
     friendships?.friendships?.filter(
-      (friendship) => !friendship.friendRequestAccepted && friendship.requesterUserId === user.id
+      (friendship) => !friendship.friendRequestAccepted && friendship.requesterUserId === userId
     ) || [];
 
   const currentRequests = activeTab === "received" ? receivedRequests : sentRequests;
