@@ -12,15 +12,22 @@ function Footer() {
   return (
     <footer className={styles.footer}>
       <section className={styles.footerLinks}>
-        <button onClick={() => setShowAboutUs(true)} className={styles.navItem}>
+        <button onClick={() => setShowAboutUs(true)} className={styles.footerButtons}>
           About Us
         </button>
-        <button onClick={() => setShowTerms(true)} className={styles.navItem}>
+        <button onClick={() => setShowTerms(true)} className={styles.footerButtons}>
           Terms of Use
         </button>
-        <button onClick={() => setShowContact(true)} className={styles.navItem}>
+        <button onClick={() => setShowContact(true)} className={styles.footerButtons}>
           Contact Us
         </button>
+
+        <ContactUs isOpen={showContact} onClose={() => setShowContact(false)} />
+        <AboutUs isOpen={showAboutUs} onClose={() => setShowAboutUs(false)} />
+        <Terms isOpen={showTerms} onClose={() => setShowTerms(false)} />
+      </section>
+
+      <section>
         <p>
           &copy; 2025 The Century Screening Room. Licensed under{" "}
           <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer">
@@ -28,12 +35,7 @@ function Footer() {
           </a>
           .
         </p>
-        <ContactUs isOpen={showContact} onClose={() => setShowContact(false)} />
-        <AboutUs isOpen={showAboutUs} onClose={() => setShowAboutUs(false)} />
-        <Terms isOpen={showTerms} onClose={() => setShowTerms(false)} />
       </section>
-
-      <section className={styles.socialButtons} />
     </footer>
   );
 }

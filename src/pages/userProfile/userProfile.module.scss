@@ -128,17 +128,21 @@
 
 @include tablet {
   .profilePage {
-    padding-top: 9dvh;
-    margin: 0.7dvw;
+    margin: 1dvw;
     overflow: visible;
+    padding-bottom: 5dvh;
+
+    .userButtons {
+      padding-top: 9dvh;
+    }
   }
 
   .userCards {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 1rem;
-    h2 {
+    gap: 1rem 1rem;
+     h2 {
       font-size: 1.5rem;
     }
   }
@@ -149,6 +153,13 @@
     flex-basis: 40%;
     overflow: scroll;
     order: -1;
+  }
+
+  .userFriendsCard {
+    height: auto;
+    flex-basis: 40%;
+    overflow: hidden;
+    margin-bottom: 8dvh;
   }
 
   .userReelProgressCard {
@@ -170,6 +181,7 @@
   .userCards {
     display: flex;
     flex-direction: column;
+    margin-bottom: 7dvh;
     h2 {
       font-size: 1.5rem;
     }
