@@ -127,6 +127,37 @@
 }
 
 @include tablet {
+  .profilePage {
+    padding-top: 9dvh;
+    margin: 0.7dvw;
+    overflow: visible;
+  }
+
+  .userCards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
+
+  .userInfoCard {
+    // width: 47%;
+    height: 60dvh;
+    flex-basis: 40%;
+    overflow: scroll;
+    order: -1;
+  }
+
+  .userReelProgressCard {
+    flex-basis: 40%;
+    // width: 47%;
+    height: 60dvh;
+    overflow: visible;
+    order: -1;
+  }
 }
 
 @include mobile {

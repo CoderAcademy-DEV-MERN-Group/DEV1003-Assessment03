@@ -188,3 +188,9 @@
   color: white;
   background-color: color(green);
 }
+
+@include tablet {
+  .progressTrack {
+    min-height: 30dvh;
+  }
+}
