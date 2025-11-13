@@ -31,7 +31,6 @@
   border-radius: 5px;
   box-shadow: 0px 6px 8px 8px rgba(209, 157, 13, 0.637);
   padding: spacing(sm);
-  min-width: 474px;
   max-width: 500px;
 
   h2 {
@@ -52,7 +51,8 @@
     background: rgba(color(overlay-medium), 0.45);
   }
 
-  th, td {
+  th,
+  td {
     padding: spacing(sm);
   }
 
@@ -76,4 +76,31 @@
   tbody tr:nth-child(odd) {
     background-color: rgba(color(theme-white), 0.7);
   }
+}
+
+@include tablet {
+  .leaderboard {
+    height: auto;
+    margin-top: 7.50dvh;
+    overflow: visible;
+  }
+
+  .featureContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .podium {
+      order: -1;
+    }
+
+    .rankings{
+      margin-top: 8%;
+      width: 500px;
+    }
+  }
+}
+
+@include mobile {
 }
