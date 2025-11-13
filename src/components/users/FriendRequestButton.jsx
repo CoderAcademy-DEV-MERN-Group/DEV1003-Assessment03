@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import styles from "../styles/Navbar.module.scss";
 import MyFriendRequests from "../modals/FriendRequests";
 import usePendingRequestCount from "../../utilities/customHooks/usePendingRequestCount";
-import { useAuthContext } from "../../contexts/useAuthContext";
+// import { useAuthContext } from "../../contexts/useAuthContext";
 
-export default function FriendRequestButton() {
-  const { user } = useAuthContext();
+function FriendRequestButton() {
   const [showModal, setShowModal] = useState(false);
 
   const pendingRequestCount = usePendingRequestCount();
@@ -17,7 +16,9 @@ export default function FriendRequestButton() {
         {pendingRequestCount > 0 && <div className={styles.badge}>{pendingRequestCount}</div>}
       </button>
 
-      <MyFriendRequests key={user?._id} isOpen={showModal} onClose={() => setShowModal(false)} />
+      <MyFriendRequests isOpen={showModal} onClose={() => setShowModal(false)} />
     </>
   );
 }
+
+export default memo(FriendRequestButton);
