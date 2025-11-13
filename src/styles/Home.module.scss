@@ -1,0 +1,48 @@
+@use "./variables" as *;
+
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: color(text-dark);
+
+  @media (max-width: breakpoint(tablet)) {
+    padding-top: spacing(xxl);
+  }
+
+  h1 {
+    font-size: 2.8rem;
+    margin: 0 0 spacing(sm);
+    font-weight: 700;
+    color: color(base-silver);
+    text-shadow: 0 2px 4px rgba(209, 157, 13, 0.637);
+  }
+
+  h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: color(base-silver);
+    text-shadow: 0 2px 4px rgba(209, 157, 13, 0.637);
+  }
+
+  p {
+    max-width: 100rem;
+    margin: spacing(lg) 0;
+    color: color(text-light);
+    font-size: 1.2rem;
+    padding: 0 spacing(md);
+  }
+
+  .homeFeatures {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: space-between;
+    justify-content: space-evenly;
+    gap: 15px;
+    padding: 25px 0;
+  }
+}
