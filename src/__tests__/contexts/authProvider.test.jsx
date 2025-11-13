@@ -26,9 +26,8 @@ beforeEach(() => vi.clearAllMocks());
 
 // Clear fake localStorage cache after each test
 afterEach(() => {
-  fakeCache.getItem.mockReset();
-  fakeCache.setItem.mockReset();
-  fakeCache.removeItem.mockReset();
+  fakeCache.clear();
+  vi.clearAllTimers();
 });
 
 // Test that useAuthContext hook works correctly and enforces provider usage
