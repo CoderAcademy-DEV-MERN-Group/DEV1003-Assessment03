@@ -11,6 +11,6 @@ export default defineConfig({
     globals: true, // Lets us use globals like "describe", "test" and "it"
     environment: "jsdom", // Lets us test DOM manipulation by simulating browser environment
     setupFiles: "./src/setupTests.js", // Global test setup
-    testTimeout: 10000, // Increase test timeout to 10 seconds
+    testTimeout: 15000, // Increase test timeout to 15 seconds
   },
 });

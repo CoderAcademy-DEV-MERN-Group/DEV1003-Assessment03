@@ -40,7 +40,10 @@ beforeEach(() => {
 });
 
 // Clear fake localStorage after each test
-afterEach(() => fakeCache.clear());
+afterEach(() => {
+  vi.clearAllTimers();
+  fakeCache.clear();
+});
 
 // Test NavbarHeader behaviour when user is logged in
 describe("Navbar behaviour for logged in user", () => {

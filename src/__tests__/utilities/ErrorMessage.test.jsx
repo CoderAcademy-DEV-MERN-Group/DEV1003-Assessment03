@@ -1,6 +1,10 @@
 import { render, screen, fireEvent } from "../testUtils";
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, afterEach } from "vitest";
 import ErrorMessage from "../../components/common/ErrorMessage";
+
+afterEach(() => {
+  vi.clearAllTimers();
+});
 
 // Tests that ErrorMessage component correctly uses and renders error messages passed as props
 describe("ErrorMessage component conditionally renders errors passed as props", () => {
