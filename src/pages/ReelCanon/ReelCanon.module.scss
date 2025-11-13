@@ -41,9 +41,9 @@
 
 // Each card takes min 240px, grows to fill
 .grid > * {
-  flex: 1 1 185px;
+  flex: 1 1 165px;
   min-height: 300px;
-  max-width: 185px;
+  max-width: 165px;
 }
 
 .apiError {
