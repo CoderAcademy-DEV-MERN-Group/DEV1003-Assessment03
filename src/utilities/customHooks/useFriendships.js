@@ -8,10 +8,11 @@ import {
 } from "../services/apiServices";
 
 // Create tanstack QUERY custom hook to GET ALL existing friendships
-export const useAllFriendships = () =>
+export const useAllFriendships = (options = {}) =>
   useQuery({
     queryKey: ["all-friendships"],
     queryFn: getAllFriendships,
+    ...options,
   });
 
 // Create tanstack MUTATION custom hook to CREATE new friendship (send friend request)

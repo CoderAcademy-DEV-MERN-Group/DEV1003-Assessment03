@@ -2,6 +2,7 @@ import Modal from "react-modal";
 import styles from "./Modals.module.scss";
 
 function Terms({ isOpen, onClose }) {
+  if (!isOpen) return null;
   return (
     // Modal
     <Modal
@@ -62,7 +63,11 @@ function Terms({ isOpen, onClose }) {
             </ul>
             <p>
               Then head over to our team's {""}
-              <a href="" target="_blank" className={styles.navItem}>
+              <a
+                href="https://github.com/CoderAcademy-DEV-MERN-Group"
+                target="_blank"
+                className={styles.navItem}
+              >
                 GitHub
               </a>
               {""} and reach out!

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { getCurrentUser, logoutUser } from "../utilities/services/apiServices";
 import { AuthContext } from "./useAuthContext"; // Have to import as jsx file exports component only
+import LoadingSpinner from "../components/common/LoadingScreenOverlay";
 
 // 'children' is special jsx prop representing every nested component inside AuthProvider
 export default function AuthProvider({ children }) {
@@ -74,7 +75,7 @@ export default function AuthProvider({ children }) {
 
   // While auth check is happening, render this. Render app after it finishes.
   if (isLoading) {
-    return <div>Loading...</div>; // Can replace with a spinner animation or something
+    return <LoadingSpinner />; // Can replace with a spinner animation or something
   }
 
   // Provide auth data and functions to all nested components

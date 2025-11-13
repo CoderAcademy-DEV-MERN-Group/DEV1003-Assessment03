@@ -1,0 +1,127 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.profilePage {
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.userCards {
+  gap: 2dvh;
+  padding: 2dvh;
+  margin-bottom: 2dvh;
+  display: flex;
+  flex-direction: row;
+  min-height: 0; // Important for flex children
+  height: 80dvh;
+
+  h2 {
+    margin-top: 0;
+  }
+}
+
+.userCards > * {
+  color: color(card-grey);
+  text-shadow: 0 1px 3px color(theme-white);
+}
+
+.userInfoCard {
+  // position: relative;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  flex: 1;
+  border-radius: 20px;
+  padding: 1dvw;
+  // height: 69dvh;
+  background: #f5d1e6a9;
+  // overflow: scroll;
+}
+
+.userFriendsCard {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  flex: 1;
+  padding: 1dvw;
+  // height: 69dvh;
+  background: #e4d1f594;
+  // overflow: scroll;
+}
+
+.userReelProgressCard {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  // color: color(text-dark);
+  // max-width: 30dvw;
+  border-radius: 20px;
+  flex: 1;
+  padding: 1dvw;
+  // height: 69dvh;
+  background: #939fcfdc;
+  // overflow: scroll;
+}
+
+.userButtons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1dvh;
+  margin-top: 5px;
+  margin-bottom: 0;
+  padding-left: 1dvh;
+  padding-right: 1dvh;
+  // max-height:auto;
+}
+
+.modalButton {
+  // padding: spacing(md);
+  background: color(primary);
+  color: color(white);
+  border-radius: radius(md);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
+
+  &:hover:not(:disabled) {
+    background: color(primary-dark);
+    transform: translateY(-1px);
+  }
+
+  &.buttonLoading {
+    background: #a0aec0;
+  }
+
+  &.buttonDisabled {
+    filter: grayscale(0.9);
+  }
+}
+
+.deleteButton {
+  @include button-reset;
+  margin-left: auto;
+  justify-self: end;
+  background: color(secondary);
+  color: color(white);
+  border-radius: radius(md);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
+
+  &:hover:not(:disabled) {
+    background: color(red);
+    transform: translateY(-1px);
+  }
+
+  &.buttonLoading {
+    background: #a0aec0;
+  }
+
+  &.buttonDisabled {
+    filter: grayscale(0.9);
+  }
+}

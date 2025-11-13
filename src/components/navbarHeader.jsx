@@ -13,6 +13,7 @@ import {
   REEL_CANON,
   ABOUT,
 } from "../utilities/constants/routes";
+import FriendRequestButton from "./users/FriendRequestButton";
 
 function Header() {
   const { isAuthenticated } = useAuthContext();
@@ -36,12 +37,14 @@ function Header() {
           Home
         </NavLink>
 
-        <NavLink
-          to={PROFILE}
-          className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
-        >
-          My Profile
-        </NavLink>
+        {isAuthenticated && (
+          <NavLink
+            to={PROFILE}
+            className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
+          >
+            My Profile
+          </NavLink>
+        )}
 
         <NavLink
           to={LEADERBOARD}
@@ -69,9 +72,12 @@ function Header() {
 
       <section className={styles.modalButtons}>
         {isAuthenticated ? (
-          <button onClick={() => setShowLogout(true)} className={styles.userStateButtons}>
-            Sign Out
-          </button>
+          <>
+            <FriendRequestButton /> |
+            <button onClick={() => setShowLogout(true)} className={styles.userStateButtons}>
+              Sign Out
+            </button>
+          </>
         ) : (
           <>
             <button onClick={() => setShowLogin(true)} className={styles.userStateButtons}>

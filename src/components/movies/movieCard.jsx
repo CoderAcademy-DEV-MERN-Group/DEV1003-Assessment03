@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { memo, useState } from "react";
 import styles from "./MovieCard.module.scss";
 import {
   useAddMovieToReelProgress,
@@ -10,7 +10,7 @@ import StarRating from "../common/StarRating";
 import CardLoadingOverlay from "../common/CardLoadingOverlay";
 import { useAuthContext } from "../../contexts/useAuthContext";
 
-export default function MovieCard({ movie, index, totalMovies }) {
+function MovieCard({ movie, index, totalMovies }) {
   const { isAuthenticated } = useAuthContext();
   const { mutate: updateRating, isPending: isUpdating } = useUpdateReelProgressMovieRating();
   const { mutate: markAsWatched, isPending: isMarkingWatched } = useAddMovieToReelProgress();
@@ -88,9 +88,8 @@ export default function MovieCard({ movie, index, totalMovies }) {
           : {}
       }
       transition={{
-        type: "spring",
-        stiffness: 150,
-        damping: 30,
+        type: "tween",
+        duration: 0.3,
       }}
       style={{
         transformOrigin: "center center", // ensures animation happens from the center of the card
@@ -131,6 +130,7 @@ export default function MovieCard({ movie, index, totalMovies }) {
             initial={!wasWatchedAlready ? { opacity: 0 } : false}
             animate={{ opacity: 1 }}
             transition={{ duration: !wasWatchedAlready ? 2 : 0 }}
+            loading="lazy"
           />
         )}
       </AnimatePresence>
@@ -182,3 +182,5 @@ export default function MovieCard({ movie, index, totalMovies }) {
     </motion.div>
   );
 }
+
+export default memo(MovieCard);

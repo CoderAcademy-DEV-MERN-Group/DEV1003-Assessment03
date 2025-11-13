@@ -244,6 +244,10 @@ export const getUserReelProgress = async () => {
     const res = await api.get("/reel-progress");
     return res.data;
   } catch (err) {
+    // If 404, return empty array (no reel progress exists yet)
+    if (err.response?.status === 404) {
+      return { reelProgress: [] };
+    }
     console.error(`Error fetching user reel-progress: ${err}`);
     throw handleApiError(err);
   }
@@ -255,6 +259,10 @@ export const addMovieToReelProgress = async (movieBodyData) => {
     const res = await api.post("/reel-progress", movieBodyData);
     return res.data;
   } catch (err) {
+    // If 404, return empty array (no reel progress exists yet)
+    if (err.response?.status === 404) {
+      return { reelProgress: [] };
+    }
     console.error(`Error adding movie to user reel-progress: ${err}`);
     throw handleApiError(err);
   }

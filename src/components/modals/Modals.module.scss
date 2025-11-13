@@ -73,6 +73,7 @@
 
 .inputGroup {
   margin-bottom: spacing(lg);
+  border-radius: 3px;
 
   legend {
     font-weight: 600;
@@ -172,6 +173,213 @@
   &.buttonLoading {
     background: #a0aec0;
   }
+
+  &.buttonDisabled {
+    filter: grayscale(0.9);
+  }
+}
+
+.buttonSection {
+  display: flex;
+  justify-content: space-around;
+}
+
+.deleteButton {
+  @include button-reset;
+  width: 30%;
+  // margin-left: 41%;
+  margin-top: 5%;
+  padding: spacing(md);
+  background: color(secondary);
+  color: color(white);
+  border-radius: radius(md);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
+
+  &:hover:not(:disabled) {
+    background: color(red);
+    transform: translateY(-1px);
+  }
+
+  &.buttonLoading {
+    background: #a0aec0;
+  }
+
+  &.buttonDisabled {
+    filter: grayscale(0.9);
+  }
+}
+
+.cancelButton {
+  @include button-reset;
+  width: 30%;
+  // margin-left: 41%;
+  margin-top: 5%;
+  padding: spacing(md);
+  background: color(green);
+  color: color(white);
+  border-radius: radius(md);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
+
+  &:hover:not(:disabled) {
+    background: color(red);
+    transform: translateY(-1px);
+  }
+
+  &.buttonLoading {
+    background: #a0aec0;
+  }
+
+  &.buttonDisabled {
+    filter: grayscale(0.9);
+  }
+}
+
+.friendsTable {
+  color: color(text-dark);
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 2px;
+  margin-top: 4px;
+  font-size: 0.8rem;
+}
+
+.tableHeader tr th:first-child {
+  border-top-left-radius: 5px;
+}
+
+// Round top-right corner of last header cell
+.tableHeader tr th:last-child {
+  border-top-right-radius: 5px;
+}
+
+.tableHeader {
+  th {
+    padding: 8px 12px;
+    background: #dcc7f0;
+    box-shadow:
+      inset 1px 1px 2px rgba(0, 0, 0, 0.3),
+      inset -1px -1px 2px rgba(255, 255, 255, 0.5);
+    font-weight: 600;
+    font-size: 0.85rem;
+    border-right: 1px solid rgba(228, 209, 245, 0.5);
+    color: color(text-dark);
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+}
+
+.requestTableRow:hover .colUsername,
+.requestTableRow:hover .colActions {
+  background: #ece0f8;
+}
+
+.requestTableRow:hover .colEmail {
+  background: #f4edfdc5;
+}
+
+.requestTableRow {
+  cursor: default; // Not clickable like friends table
+
+  &:hover {
+    background-color: rgba(66, 34, 94, 0.1);
+  }
+}
+
+// Round bottom-left corner of first cell in last row
+.requestTableRow:last-child td:first-child {
+  border-bottom-left-radius: 5px;
+}
+
+// Round bottom-right corner of last cell in last row
+.requestTableRow:last-child td:last-child {
+  border-bottom-right-radius: 5px;
+}
+
+.colUsername,
+.colEmail,
+.colActions {
+  padding: 8px 12px;
+  background: #e8d7f8;
+  box-shadow:
+    inset 1px 1px 2px rgba(0, 0, 0, 0.3),
+    inset -1px -1px 2px rgba(255, 255, 255, 0.5);
+  border-right: 1px solid rgba(228, 209, 245, 0.5);
+  font-size: 0.8rem;
+
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.colEmail {
+  background: #e8d7f8c5;
+}
+
+.colActions {
+  padding: 8px 12px;
+  background: #e8d7f8;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+
+  button {
+    padding: 4px 8px;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-1px);
+    }
+  }
+}
+
+.smallModalButton {
+  padding: 8px 16px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  color: color(text-dark);
+  font-size: 0.9rem;
+}
+
+.acceptButton {
+  background: color(green);
+  color: white;
+
+  &:hover:not(:disabled) {
+    background: darken(color(green), 10%);
+  }
+}
+
+.declineButton {
+  background: color(secondary);
+  color: white;
+
+  &:hover:not(:disabled) {
+    background: color(red);
+  }
+}
+
+.noRequests {
+  background: #e8d7f8;
+  text-align: center;
+  padding: 20px;
+  color: #6b7280;
+  font-style: italic;
+  border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+
 }
 
 .navItem {

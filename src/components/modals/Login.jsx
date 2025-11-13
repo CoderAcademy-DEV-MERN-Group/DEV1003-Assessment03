@@ -31,6 +31,7 @@ function Login({ isOpen, onClose }) {
       },
     });
   };
+  if (!isOpen) return null;
 
   return (
     // Modal instead of Main
