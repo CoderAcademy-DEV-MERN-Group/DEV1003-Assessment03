@@ -11,6 +11,7 @@
   justify-content: center;
   text-align: center;
   color: color(text-dark);
+  // height: 100% !important;
 
   @media (max-width: breakpoint(tablet)) {
     padding-top: spacing(xxl);
@@ -59,4 +60,13 @@
 }
 
 @include mobile {
+  .home {
+    margin-top: 7.5dvh;
+    max-width: 100dvw;
+  }
+
+  .homeFeatures {
+    max-width: 90dvw;
+    margin-bottom: 3%;
+  }
 }
