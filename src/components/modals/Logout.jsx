@@ -44,15 +44,15 @@ function Logout({ isOpen, onClose }) {
         <h1>Log Out</h1>
         <article className={styles.generalMessage}>
           <p>Are you sure you want to log out?</p>
-          <button
-            type="button"
-            onClick={handleLogout}
-            disabled={isPending}
-            className={clsx(styles.modalButton, isPending && styles.buttonLoading)}
-          >
-            {isPending ? "Logging out..." : "Yes, Log Out"}
-          </button>
         </article>
+        <button
+          type="button"
+          onClick={handleLogout}
+          disabled={isPending}
+          className={clsx(styles.modalButton, isPending && styles.buttonLoading)}
+        >
+          {isPending ? "Logging out..." : "Yes, Log Out"}
+        </button>
       </section>
     </CustomModal>
   );

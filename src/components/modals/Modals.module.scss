@@ -381,8 +381,7 @@ h2 {
 
   &:active {
     color: color(base-gold);
-    background: rgba(color(primary-dark), 0.2)
-
+    background: rgba(color(primary-dark), 0.2);
   }
 }
 
@@ -452,6 +451,7 @@ h2 {
 
   .modalForm {
     padding: spacing(xl);
+    max-width: 75dvw;
   }
 
   .modalButton {
@@ -479,6 +479,7 @@ h2 {
 
   .modalForm {
     padding: spacing(xl);
+    max-width: 70dvw;
   }
 
   .modalButton {
