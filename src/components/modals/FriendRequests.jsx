@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Modal from "react-modal";
+import CustomModal from "./CustomModal";
 import { useAuthContext } from "../../contexts/useAuthContext";
 import { useAllFriendships, useAllUsers, useUpdateFriendship } from "../../utilities/customHooks";
 import styles from "./Modals.module.scss";
@@ -64,12 +64,7 @@ export default function MyFriendRequests({ isOpen, onClose }) {
 
   return (
     <>
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={onClose}
-        className={styles.modal}
-        overlayClassName={styles.modalOverlay}
-      >
+      <CustomModal isOpen={isOpen} onRequestClose={onClose}>
         <button onClick={onClose} className={styles.closeButton}>
           x
         </button>
@@ -137,7 +132,7 @@ export default function MyFriendRequests({ isOpen, onClose }) {
             </tbody>
           </table>
         </section>
-      </Modal>
+      </CustomModal>
       <DeleteFriendship
         isOpen={!!selectedFriendship}
         onClose={() => setSelectedFriendship(null)}
