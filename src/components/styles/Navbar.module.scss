@@ -130,7 +130,7 @@
     border-radius: 4px;
 
     &:hover:not(:disabled) {
-      color: color(primary-dark);
+      // color: color(primary-dark);
       background: rgba(255, 255, 255, 0.1);
     }
   }
