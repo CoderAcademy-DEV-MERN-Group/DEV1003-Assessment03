@@ -170,6 +170,98 @@ Appropriate explanation of ALL of the hardware and software technologies used wi
 - **Resources:**
 - **Comparison:**
 
+<!-- ---
+
+### `react-hook-form`
+
+- **What it does:** Simplifies handling form input and validation.
+- **Why it’s important:** Manages complex forms without repetitive `onChange` logic.
+- **Use case:** Login forms, registration forms, or filters.
+- **Relates to:** Future feature (e.g., feedback submission).
+- **Resources**[React Hook Form Docs](https://react-hook-form.com/)
+
+---
+
+### `react-dom`
+
+- **What it does:** Connects React to the DOM (the browser view).
+- **Why it’s important:** Without this, React can’t render to the page.
+- **Use case:** The `createRoot()` call in `main.jsx`.
+- **Resources:** [ReactDOM Documentation](https://react.dev/reference/react-dom)
+
+---
+
+### `react-router-dom`
+
+- **What it does:** Enables multi-page routing and navigation.
+- **Why it’s important:** Lets you use `<Route>`, `<Link>`, and `useNavigate()` to handle pages like `/leaderboard`, `/profile` etc.
+- **Use case:** Page navigation in Single Page Application (SPA).
+- **Resources:** [React Router Documentation](https://reactrouter.com/home)
+
+--- -->
+
+<!-- ### `clsx`
+
+- **What it does:** A tiny utility to conditionally join CSS class names.
+- **Why it’s important:** Cleaner logic when using custom classes.
+- **Use case:** `className={clsx( --- find examples in codebase *****)}`
+- **Relates to:** Styling (custom CSS).
+- **Resources** [clsx on npm](https://www.npmjs.com/package/clsx) -->
+<!--
+### `clxs`
+
+- **What it does:** A tiny utility to conditionally join CSS class names.
+- **How we used it:** Helped keep code clear when conditionally styling elements. -->
+
+  <!-- "dependencies": {
+    "@formspree/react": "^3.0.0",
+    "@fortawesome/free-regular-svg-icons": "^7.1.0",
+    "@fortawesome/free-solid-svg-icons": "^7.1.0",
+    "@fortawesome/react-fontawesome": "^3.1.0",
+          "@tanstack/react-query": "^5.90.6",
+          "axios": "^1.13.1",
+    "clsx": "^2.1.1",
+    "embla-carousel-react": "^8.6.0",
+    "framer-motion": "^12.23.24",
+    "lodash-es": "^4.17.21",
+          "react": "^19.1.1",
+    "react-burger-menu": "^3.1.0",
+    "react-dom": "^19.1.1",
+    "react-error-boundary": "^6.0.0",
+    "react-hook-form": "^7.66.0",
+    "react-hot-toast": "^2.6.0",
+    "react-intersection-observer": "^10.0.0",
+          "react-modal": "^3.16.3",
+    "react-router-dom": "^7.9.5",
+    "sass": "^1.93.3" -->
+
+  <!-- "devDependencies": {
+    "@eslint/js": "^9.36.0",
+    "@tanstack/eslint-plugin-query": "^5.91.2",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/react": "^19.1.16",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^5.1.0",
+    "@vitest/ui": "^4.0.8",
+    "eslint": "^9.36.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-import-resolver-node": "^0.3.9",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.22",
+    "globals": "^16.4.0",
+    "jsdom": "^27.1.0",
+    "prettier": "^3.6.2",
+    "vite": "^7.1.7",
+    "vitest": "^4.0.8"
+  }
+   -->
+
 ---
 
 ## Additional Dependencies
@@ -213,102 +305,6 @@ Appropriate explanation of ALL of the hardware and software technologies used wi
 - **`eslint`** - JavaScript linter for code quality
 - **`prettier`** - Code formatter
 - Multiple ESLint plugins for React, accessibility, imports and code style
-
----
-
-### `react-hook-form`
-
-- **What it does:** Simplifies handling form input and validation.
-- **Why it’s important:** Manages complex forms without repetitive `onChange` logic.
-- **Use case:** Login forms, registration forms, or filters.
-- **Relates to:** Future feature (e.g., feedback submission).
-- **Resources**[React Hook Form Docs](https://react-hook-form.com/)
-
----
-
-### `react-dom`
-
-- **What it does:** Connects React to the DOM (the browser view).
-- **Why it’s important:** Without this, React can’t render to the page.
-- **Use case:** The `createRoot()` call in `main.jsx`.
-- **Resources:** [ReactDOM Documentation](https://react.dev/reference/react-dom)
-
----
-
-### `react-router-dom`
-
-- **What it does:** Enables multi-page routing and navigation.
-- **Why it’s important:** Lets you use `<Route>`, `<Link>`, and `useNavigate()` to handle pages like `/leaderboard`, `/profile` etc.
-- **Use case:** Page navigation in Single Page Application (SPA).
-- **Resources:** [React Router Documentation](https://reactrouter.com/home)
-
----
-
-<!-- ### `clsx`
-
-- **What it does:** A tiny utility to conditionally join CSS class names.
-- **Why it’s important:** Cleaner logic when using custom classes.
-- **Use case:** `className={clsx( --- find examples in codebase *****)}`
-- **Relates to:** Styling (custom CSS).
-- **Resources** [clsx on npm](https://www.npmjs.com/package/clsx) -->
-
-### `clxs`
-
-- **What it does:** A tiny utility to conditionally join CSS class names.
-- **How we used it:** Helped keep code clear when conditionally styling elements.
-
-  <!-- "dependencies": {
-    "@formspree/react": "^3.0.0",
-    "@fortawesome/free-regular-svg-icons": "^7.1.0",
-    "@fortawesome/free-solid-svg-icons": "^7.1.0",
-    "@fortawesome/react-fontawesome": "^3.1.0",
-          "@tanstack/react-query": "^5.90.6",
-          "axios": "^1.13.1",
-    "clsx": "^2.1.1",
-    "embla-carousel-react": "^8.6.0",
-    "framer-motion": "^12.23.24",
-    "lodash-es": "^4.17.21",
-          "react": "^19.1.1",
-    "react-burger-menu": "^3.1.0",
-    "react-dom": "^19.1.1",
-    "react-error-boundary": "^6.0.0",
-    "react-hook-form": "^7.66.0",
-    "react-hot-toast": "^2.6.0",
-    "react-intersection-observer": "^10.0.0",
-          "react-modal": "^3.16.3",
-    "react-router-dom": "^7.9.5",
-    "sass": "^1.93.3" -->---
-
----
-
-### Development Dependencies
-
-  <!-- "devDependencies": {
-    "@eslint/js": "^9.36.0",
-    "@tanstack/eslint-plugin-query": "^5.91.2",
-    "@testing-library/jest-dom": "^6.9.1",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/user-event": "^14.6.1",
-    "@types/react": "^19.1.16",
-    "@types/react-dom": "^19.1.9",
-    "@vitejs/plugin-react": "^5.1.0",
-    "@vitest/ui": "^4.0.8",
-    "eslint": "^9.36.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-import-resolver-node": "^0.3.9",
-    "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
-    "eslint-plugin-prettier": "^5.5.4",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.22",
-    "globals": "^16.4.0",
-    "jsdom": "^27.1.0",
-    "prettier": "^3.6.2",
-    "vite": "^7.1.7",
-    "vitest": "^4.0.8"
-  }
-   -->
 
 ---
 
