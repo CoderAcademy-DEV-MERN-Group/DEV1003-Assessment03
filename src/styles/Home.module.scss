@@ -2,6 +2,8 @@
 @use "./mixins" as *;
 
 .home {
+  grid-row: 2;
+  padding: spacing(xl) spacing(md);
   background: color(background);
   display: flex;
   flex-direction: column;
@@ -11,13 +13,17 @@
   color: color(text-dark);
   // height: 100% !important;
 
+  .podiumSection {
+    height: 575px;
+  }
+
   @media (max-width: breakpoint(tablet)) {
     padding-top: spacing(xxl);
   }
 
   h1 {
     font-size: 2.8rem;
-    margin: 0 0 spacing(sm);
+    margin: 0;
     font-weight: 700;
     color: color(base-silver);
     text-shadow: 0 2px 4px rgba(209, 157, 13, 0.637);
@@ -32,10 +38,11 @@
 
   p {
     max-width: 100rem;
-    margin: spacing(lg) 0;
+    line-height: 1;
+    // margin: spacing(lg) 0;
     color: color(text-light);
     font-size: 1.1rem;
-    padding: 0 spacing(md);
+    // padding: 0 spacing(sm);
   }
 
   .homeFeatures {
@@ -45,14 +52,19 @@
     width: 100%;
     align-items: space-between;
     justify-content: space-evenly;
-    gap: 15px;
-    padding: 25px 0;
+    // gap: 15px;
+    padding-top: 25px;
   }
 }
 
 @include tablet {
   .home {
-    margin-top: 7.5dvh;
+    margin-top: 7dvh;
+  }
+
+  .homeFeatures {
+    gap: 4dvh;
+    padding-bottom: 2dvh;
   }
 }
 
@@ -64,6 +76,7 @@
 
   .homeFeatures {
     max-width: 90dvw;
-    margin-bottom: 3%;
+    gap: 4dvh;
+    padding-bottom: 2dvh;
   }
 }

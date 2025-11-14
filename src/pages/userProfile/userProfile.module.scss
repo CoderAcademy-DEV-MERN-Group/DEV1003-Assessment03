@@ -80,17 +80,17 @@
 }
 
 .modalButton {
-  // padding: spacing(md);
-  background: color(primary);
-  color: color(white);
-  border-radius: radius(md);
-  font-weight: 600;
-  font-size: 1rem;
-  transition: all 0.3s ease-in-out;
+  font-size: 1.1rem;
+  color: color(accent-gold);
+  background: color(primary-dark);
+  border-radius: 5px;
+  border-color: color(base-gold);
+  box-shadow: 1px 1px 1px 1px color(secondary-shadow);
+  cursor: pointer;
+  transition: scale 0.8s ease;
 
-  &:hover:not(:disabled) {
-    background: color(primary-dark);
-    transform: translateY(-1px);
+  &:hover {
+    scale: 1.1;
   }
 
   &.buttonLoading {
@@ -129,9 +129,8 @@
 
 @include tablet {
   .profilePage {
-    margin: 1dvw;
     overflow: visible;
-    padding-bottom: 5dvh;
+    padding-bottom: 8dvh;
 
     .userButtons {
       padding-top: 9dvh;
@@ -198,8 +197,8 @@
   }
 
   .userReelProgressCard {
-    min-height: 60dvh;
-    max-height: 60dvh;
+    min-height: 62dvh;
+    max-height: 62dvh;
     width: 100%;
     overflow-y: hidden;
     order: -1;
