@@ -57,6 +57,11 @@
   .home {
     margin-top: 7dvh;
   }
+
+  .homeFeatures {
+    gap: 4dvh;
+    padding-bottom: 2dvh;
+  }
 }
 
 @include mobile {
