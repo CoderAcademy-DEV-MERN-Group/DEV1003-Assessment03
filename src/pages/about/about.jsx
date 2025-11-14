@@ -43,7 +43,7 @@ export default function About() {
             Joss is an all rounder, but had a big influence on the Reel Canon and the user
             experience site-wide!
           </p>
-          <a href="https://github.com/truth-josstice">
+          <a href="https://github.com/truth-josstice" target="_blank">
             <img className={styles.gitHubLogo} src={GitHubLogo} alt="GitHub Logo white" />{" "}
             truth-josstice on GitHub
           </a>
@@ -56,7 +56,7 @@ export default function About() {
             Jordan is a tester and framework dynamo, making the granular components that help this
             site run in the background!
           </p>
-          <a href="https://github.com/jordanleal12">
+          <a href="https://github.com/jordanleal12" target="_blank">
             <img className={styles.gitHubLogo} src={GitHubLogo} alt="GitHub Logo white" />{" "}
             jordanleal12 on GitHub
           </a>
@@ -69,7 +69,7 @@ export default function About() {
             Nhi is enthusiastic and loves styling! She helped finesse the final colours and theming
             for this site!
           </p>
-          <a href="https://github.com/lulu-codes">
+          <a href="https://github.com/lulu-codes" target="_blank">
             <img className={styles.gitHubLogo} src={GitHubLogo} alt="GitHub Logo white" /> lulucodes
             on GitHub
           </a>

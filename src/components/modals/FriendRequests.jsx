@@ -69,7 +69,11 @@ export default function MyFriendRequests({ isOpen, onClose }) {
           x
         </button>
         <section className={styles.modalForm}>
-          <h1>Friend Requests</h1>
+          {activeTab === "received" ? (
+            <h1>Received Friend Requests</h1>
+          ) : (
+            <h1>Sent Friend Requests</h1>
+          )}
           <div className={styles.modalTabs}>
             <button className={styles.smallModalButton} onClick={() => setActiveTab("received")}>
               Received ({receivedRequests.length || 0})

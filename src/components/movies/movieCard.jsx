@@ -19,51 +19,41 @@ function MovieCard({ movie, index, totalMovies }) {
 
   const isTouchDevice = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
 
-  // state to manage "fresh movies"
+  // Track if movie was already revealed when component mounted
   const [wasWatchedAlready, setWasWatchedAlready] = useState(movie.isRevealed);
 
-  // state to manage "clicked/hover" for mobile devices
-  const [isTapped, setIsTapped] = useState(false);
-
-  // Pink (330°) to Blue (240°) - going the long way around
+  // Pastel background color based on index
   const startHue = 330;
   const endHue = 240;
-
-  // This will go: Pink → Red → Orange → Yellow → Green → Blue
   const hue = startHue + (((index / totalMovies) * (endHue + 360 - startHue)) % 360);
   const pastel = `hsl(${hue}, 70%, 85%)`;
 
-  const handleMarkAsWatched = async () => {
-    if (isTouchDevice) setIsTapped(false);
-    // Attach all data to the post customHook
+  // Handlers
+  const handleMarkAsWatched = () => {
     markAsWatched({
       movie: movie._id,
       isWatched: true,
-      rating: null, // initial rating is 0
+      rating: null,
     });
   };
 
-  const handleRatingChange = async (newRating) => {
-    if (isTouchDevice) setIsTapped(false);
-    // Attach newRating to the custom patch hook!
+  const handleRatingChange = (newRating) => {
     updateRating({
       movieId: movie._id,
       rating: newRating,
     });
   };
 
-  const handleRemoveFromWatched = async () => {
-    if (isTouchDevice) setIsTapped(false);
-    removeFromWatched({
-      movieId: movie._id,
-    });
+  const handleRemoveFromWatched = () => {
+    removeFromWatched({ movieId: movie._id });
     setWasWatchedAlready(false);
   };
 
   return (
-    // Framer motion animation div, this will animate the card hover functions
     <motion.div
       className={styles.card}
+      // Desktop hover effect only
+      tabIndex={isTouchDevice ? 0 : undefined} // ← only on mobile
       whileHover={
         !isTouchDevice
           ? {
@@ -73,35 +63,17 @@ function MovieCard({ movie, index, totalMovies }) {
             }
           : {}
       }
-      onTapStart={() => {
-        if (isTouchDevice) {
-          setIsTapped(!isTapped);
-        }
-      }}
-      animate={
-        isTapped
-          ? {
-              scale: 1.6,
-              zIndex: 50,
-              rotateY: 5,
-            }
-          : {}
-      }
-      transition={{
-        type: "tween",
-        duration: 0.3,
-      }}
-      style={{
-        transformOrigin: "center center", // ensures animation happens from the center of the card
-      }}
+      transition={{ type: "tween", duration: 0.3 }}
+      style={{ transformOrigin: "center center" }}
     >
-      {/* UNDO button for delete reelProgress API call */}
+      {/* Undo button */}
       {movie.isRevealed && (
         <button className={styles.undoButton} onClick={handleRemoveFromWatched}>
-          🗑️
+          Unwatch
         </button>
       )}
-      {/* Loading overlay for cards, passed the message prop depending on what's loading */}
+
+      {/* Loading overlay */}
       {(isUpdating || isMarkingWatched || isRemovingWatched) && (
         <CardLoadingOverlay
           message={
@@ -109,7 +81,8 @@ function MovieCard({ movie, index, totalMovies }) {
           }
         />
       )}
-      {/* AnimatePresence - animates based on state - Pastel background layer */}
+
+      {/* Pastel background (fades out when revealed) */}
       <AnimatePresence>
         {!movie.isRevealed && (
           <motion.div
@@ -121,7 +94,8 @@ function MovieCard({ movie, index, totalMovies }) {
           />
         )}
       </AnimatePresence>
-      {/* Animate Presence - POSTER - show if revealed, animate if transitioning*/}
+
+      {/* Movie poster (fades in when revealed) */}
       <AnimatePresence>
         {movie.isRevealed && (
           <motion.div
@@ -134,8 +108,11 @@ function MovieCard({ movie, index, totalMovies }) {
           />
         )}
       </AnimatePresence>
-      {/* Overlay ONLY for movies that were already revealed on page load */}
+
+      {/* Dark overlay for already-watched movies */}
       {wasWatchedAlready && <div className={styles.posterOverlay} />}
+
+      {/* Main content */}
       <article className={styles.content}>
         <h3 className={`${styles.title} ${movie.isRevealed ? styles.revealedText : ""}`}>
           {movie.title}
@@ -157,8 +134,10 @@ function MovieCard({ movie, index, totalMovies }) {
           </div>
         )}
       </article>
+
+      {/* Overlay with details + Mark as Watched button */}
       {!movie.isRevealed && (
-        <div className={`${styles.overlay} ${isTapped ? styles.overlayMobile : ""}`}>
+        <div className={styles.overlay}>
           <div className={styles.overlayContent}>
             <p>
               <strong>Director</strong>
@@ -167,9 +146,11 @@ function MovieCard({ movie, index, totalMovies }) {
             </p>
             <p>
               <strong>Starring</strong>
-              <br /> {movie.actors.join(", ")}
+              <br />
+              {movie.actors.join(", ")}
             </p>
             <p className={styles.plot}>{movie.plot || "No plot currently available"}</p>
+
             {isAuthenticated && (
               <button className={styles.markAsWatchedButton} onClick={handleMarkAsWatched}>
                 Mark as Watched
@@ -178,7 +159,6 @@ function MovieCard({ movie, index, totalMovies }) {
           </div>
         </div>
       )}
-      ;
     </motion.div>
   );
 }

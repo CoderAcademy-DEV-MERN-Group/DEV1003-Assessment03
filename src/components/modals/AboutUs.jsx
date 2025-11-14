@@ -1,5 +1,6 @@
 import CustomModal from "./CustomModal";
 import styles from "./Modals.module.scss";
+import GitHubLogo from "../../assets/images/github-mark-white.png";
 
 function AboutUs({ isOpen, onClose }) {
   if (!isOpen) return null;
@@ -17,9 +18,9 @@ function AboutUs({ isOpen, onClose }) {
         x{" "}
       </button>
       <section className={styles.modalForm}>
-        <fieldset className={styles.inputGroup}>
-          <legend>About the Developers</legend>
-          <h1>Joss, Jordan and Nhi!</h1>
+        <section className={styles.inputGroup}>
+          <h1>About the Developers</h1>
+          <h2>Joss, Jordan and Nhi!</h2>
           <article className={styles.generalMessage}>
             <p>
               We are three student developers, currently studying a bootcamp style course on Full
@@ -36,6 +37,7 @@ function AboutUs({ isOpen, onClose }) {
             </p>
             <br />
             <a href="https://github.com/jordanleal12" className={styles.navItem} target="_blank">
+              <img className={styles.gitHubLogo} src={GitHubLogo} alt="GitHub Logo white" />{" "}
               Jordan's Github
             </a>{" "}
             <br />
@@ -45,7 +47,8 @@ function AboutUs({ isOpen, onClose }) {
             </p>
             <br />
             <a href="https://github.com/lulu-codes" className={styles.navItem} target="_blank">
-              Nhi's Github
+              <img className={styles.gitHubLogo} src={GitHubLogo} alt="GitHub Logo white" /> Nhi's
+              Github
             </a>{" "}
             <br />
             <p>
@@ -54,6 +57,7 @@ function AboutUs({ isOpen, onClose }) {
             </p>{" "}
             <br />
             <a href="https://github.com/truth-josstice" className={styles.navItem} target="_blank">
+              <img className={styles.gitHubLogo} src={GitHubLogo} alt="GitHub Logo white" />
               Joss' Github
             </a>{" "}
             <br />
@@ -62,7 +66,7 @@ function AboutUs({ isOpen, onClose }) {
               experience site-wide!
             </p>
           </article>
-        </fieldset>
+        </section>
       </section>
     </CustomModal>
   );
