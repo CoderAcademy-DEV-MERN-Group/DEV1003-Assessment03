@@ -20,7 +20,16 @@ The development of our group's project is documented across the below GitHub rep
 
 **The Century Screening Room** is a social platform web application that showcases the "Reel Canon," a curated list of 100 films for movie enthusiasts to explore, mark and rate movies they have watched.as they complete watching them.
 
-Key Features included
+- The app's first release version features the following functionalities:
+  - User Authentication and Authorisation
+  - Movie Browsing with the "Reel Canon" with 100 loaded movies
+  - Rating System
+  - "Reel" Progress tracking
+  - Basic Friend System
+  - Leaderboard
+  - Contact Form
+
+Check out this section for further details on the current version features and future development plans [here](#future-development-plans).
 
 ---
 
@@ -91,16 +100,23 @@ Appropriate explanation of ALL of the hardware and software technologies used wi
 ### `react`
 
 - **Industry Relevance:**
-  - React has a built-in large ecosystem providing plenty of built-in packages including for features such as for routing and forms. It is currently the most widely used front-end library used for building user interface (UI) components, use hooks, manage state and virtual document-object model (DOM), making it considered a highly relevant industry skill for developers to learn. (Add that link for the stats for 2025).
+  - React has a built-in large ecosystem providing plenty of built-in packages including for features such as for routing and forms and is a widely used front-end library used for building user interface (UI) components, use hooks, manage state and virtual document-object model (DOM).
   - It also provides flexibility to integrate with other packages and is backed by strong community support.
+  - On the [2024 survey ran by Devographics](https://2024.stateofjs.com/en-US/libraries/front-end-frameworks/), the responses reflect that it is the most used front-end framework, therefore making it considered a highly relevant industry skill for developers to learn for front-end development (2025, Devographics).
+    ![2024 survey ran by Devographics](src/assets/images/2024-devographics-frontend-survey.png)
+
 - **Purpose & Usage:**
   - React is a lightweight and the currently the main library
   - Everything is a component under `/components/`. We use functional components with core logic, custom hooks as well as (`useState`, `useEffect`) and for rendering JSX.
+
 - **Why it’s important:**
   - Everything in our app runs on React.
+
 - **Comparisons:**
   - **Vue:** Vue is another popular front-end framework that has a gentler learning curve and is known for its simplicity and flexibility, with its single-file components and also built-in router and states. However, in comparison to React, it offers a component-based architecture and an extensive ecosystem making it more suitable for developers working towards building a larger-scale application.
+
   - **Angular:** Angular is a comprehensive front-end framework that is considered more robust and suitable for large enterprise applications. It includes a full framework that is out of the box with built-in features like dependency injection and has a steeper learning curve compared to React. For the project scope and size of our team, React's flexibility such as being able to choose our own libraries for routing and state management, makes it more of an adaptable option for us to learn and use while we work in agile to make adjustments to our projects needs.
+
 - **License:** MIT License
 
 <!-- - **Resources:** [React Documentation](https://react.dev/reference/react) -->
@@ -111,14 +127,21 @@ Appropriate explanation of ALL of the hardware and software technologies used wi
 ### `vite`
 
 - **Industry Relevance:**
-  - Vite is a production bundler and it is an increasingly popular modern build tool for front-end development due to its speed and efficiency. It is widely adopted in the industry for its ability to provide a fast development experience with features for developers to learn and experiment building with more efficiently.
+- Vite is a production bundler and it is an increasingly popular build tool for modern front-end web development due to its speed and efficiency. It is widely adopted in the industry for its leading performance and ability to provide instant dev server startup for a faster development experience. It is used by large leading companies such as Google, Apple and Microsoft.
+
 - **Purpose & Usage:**
-  - Vite is used as the build tool and development server for our React application. It provides a fast and efficient development environment with features like hot module replacement (HMR) for effiency during development as it updates code in the browser almost instantly and requires minimal configuration for most React apps.
+  - Vite is used as the build tool and development server for our React application. It provides a fast and efficient development environment with features like hot module replacement (HMR) for efficiency during development as it updates code in the browser almost instantly.
+
 - **Why it’s important:**
-  - It is optimised for modern JavaScript and leverages native ES modules in the browser, resulting in faster build times and improved performance compared to traditional bundlers.
-  - @vitejs/plugin-react (React Fast Refresh).
+  - It is optimised for modern JavaScript and leverages native ES modules in the browser during development and eliminates bundling delays therefore resulting in faster build times and improved performance compared to traditional bundlers.
+  - It is configured with `@vitejs/plugin-react` for React Fast Refresh support.
+  - It works with minimal configuration required for most React apps.
+
 - **Comparisons:**
-  - **Webpack:** Webpack is a widely used module bundler that offers extensive configuration options and a rich plugin ecosystem. However, it can be slower during development due to its bundling process. Vite, in comparison provides a much faster development experience by leveraging native ES modules and offering instant server start times making it a more preferred and efficient option for our React application.
+  - **Webpack:** Webpack is also a widely used module bundler that offers extensive configuration options and an extensive plugin ecosystem, which makes it a good option suited for complex enterprise applications. However, it requires a lot of configuration and can be slower during development build time due to its bundling process. Vite, in comparison provides a much more suitable option for our project build because of its faster development experience with instant server start times and also minimal configuration setup required, therefore making it a more ideal and efficient option for our React application.
+
+  - **Create React App:** Create React App (CRA) is another popular tool for bootstrapping React applications with a zero configuration setup. However, CRA can be slower during development due to its bundling process and lacks some of the advanced features that Vite offers, such as faster hot module replacement (HMR) and faster build times. With Vite's modern architecture and optimal performance with development, this makes it more of a preferred choice based on efficiency importance.
+
 - **License:** MIT License
 
 ---
@@ -126,12 +149,20 @@ Appropriate explanation of ALL of the hardware and software technologies used wi
 ### `axios`
 
 - **Industry Relevance:**
-  - Axios is a widely used HTTP client library in the JavaScript ecosystem and it is known for its simplicity and ease to use when making API requests, which makes it a popular option for developers for handling asynchronous data fetching. It is commonly used particularly in React applications for its promise-based syntax and built-in features that simplify the process of making HTTP requests.
+  - Axios is a widely used HTTP client library in the JavaScript ecosystem, and is used by almost every major tech company and is considered the go to standard for HTTP requests. It is well known for its simplicity and ease to use when making API requests, which is why it is a popular option for developers especially when handling asynchronous data fetching. It is commonly used particularly in React applications for its promise-based syntax and built-in features that simplify the process of making HTTP requests. It is a reliable and widely supported by the community with extensive documentation making it a well resourced option for developers to use.
+
 - **Purpose & Usage:**
-  - It is a promise-based HTTP client for making API requests and centrally configured in `apiServices.js`. It is configured to use base URL for `GET`, `POST`, `PUT`, `DELETE` to interact with the Back-End API, automatic JSON parsing, used for authentication with JWT interceptors (like cancelling tokens), set timeouts for requests, and used with responses for error handling.
-- **Why it’s important:** Provides developers with working with easier syntax for fetch() and features built-in JSON parsing.
+  - It is a promise-based HTTP client for making API requests and centrally configured in `apiServices.js`.
+  - It is configured to use base URL for `GET`, `POST`, `PUT`, `DELETE` to interact with the Back-End API, automatic JSON parsing, used for authentication with JWT interceptors (like cancelling tokens), request timeout handling for requests, and used with responses for global error handling with response interceptors.
+
+- **Why it’s important:**
+  - Provides developers with working with easier syntax for fetch() and features built-in JSON parsing.
+  - It provides us with the core requirements as listed above for our application functionality and is easy to use.
+
 - **Comparisons:**
-  - **Fetch API:** The native Fetch API is built into modern browsers and provides a simple way to make HTTP requests. However, it lacks some features that Axios provides out of the box, such as automatic JSON parsing, request cancellation, and interceptors for handling requests and responses. Axios also has better error handling capabilities compared to the Fetch API.
+  - **Fetch API:** The native Fetch API is built into modern browsers and provides a simple way to make HTTP requests. However, it lacks some features that Axios provides out of the box, such as automatic JSON parsing, built in timeout, request cancellation, and interceptors for handling requests and responses. Overall, Fetch API is more suited to a more light application compared to this project and Axios offers far better authentication, interceptors and error handling capabilities compared to the Fetch API.
+  - **Ky:** Ky is a lightweight HTTP client based on the Fetch API that offers a simpler API and smaller bundle size and offers some similar features to Axios, but not as extensive and reliable as Axios in comparison.
+
 - **License:** MIT License
 
 <!-- - **Use case:** The `/apiServices.js` file uses `api.get('/leaderboard')`.
@@ -144,14 +175,22 @@ Appropriate explanation of ALL of the hardware and software technologies used wi
 ### `@tanstack/react-query`
 
 - **Industry Relevance:**
-  - Tanstack React Query is a commonly used library for managing server state, caching, data fetching and invalidating server data in React applications. It is widely adopted in the industry due to its ability to simplify data management, caching and synchronise with server data with the use of Axios, making it a library that provides a seamless experience for developers when working with asynchronous data in React applications.
+  - Tanstack React Query is the most widely used React data fetching library and is used by large production applications such as Netflix, Amazon and Microsoft. It is considered as a highly relevant library in the React ecosystem and is considered the best practice for handling server state in Modern React applications.
+  <!-- - It is widely adopted in the industry due to its ability to simplify data management, caching and synchronise with server data with the use of Axios, making it a library that provides a seamless experience for developers when working with asynchronous data in React applications. -->
+
 - **Purpose & Usage:**
+  - Used for managing server state, caching, data fetching and invalidating server data in React applications.
   - It is used in conjunction with Axios (HTTP client) to handle data fetching, for state management and global cache config (queryClient).
   - Every API call goes through custom hooks like `useLeaderboard()` and it handles API data fetching, caching, and background refetching.
+
 - **Why it’s important:**
-  - Simplifies async calls and manages “loading / success / error” states.
+  - It simplifies async calls and automatically handles loading, error and success states and requires minimal code.
+  - Industry relevance as mentioned above.
+
 - **Comparisons:**
-  - **Redux Toolkit Query:** Redux Toolkit Query is another popular library for managing server state in React applications. However, it is more tightly integrated with Redux and can require additional setup and configuration compared to Tanstack React Query. Tanstack React Query offers a more lightweight and flexible approach to data fetching and caching, making it easier to use in projects that do not already use Redux for state management.
+- **Manual useEffect + fetch:** The manual `useEffect + fetch` implementations require more boilerplate code and Tanstack in comparison automatically handles the loading, error and success states, which is built-in and requires minimal code.
+  - **Redux Toolkit Query:** Redux Toolkit Query is another popular library for managing server state in React applications, generally would be more ideal if using Redux for client state management. However, Tanstack React Query is more lightweight and has a simpler learning curve to use and is less complex as it works with standard async function. Whereas, with Redux, it requires understanding Redux concepts which can make it more complex and therefore based on our understanding and experience with async functions, we chose to go with Tanstack React Query.
+
 - **License:** MIT License
 
 <!-- - **Use case:** Fetch leaderboard data in your `useLeaderboard()` hook.
@@ -163,12 +202,26 @@ Appropriate explanation of ALL of the hardware and software technologies used wi
 
 ### `react-modal`
 
-- **What it does:**
+- **Industry Relevance:**
+  - React-modal is one of the most established modal libraries in the React ecosystem known for its accessibility features and ease of use. It has been used and tested in production for many years and is trusted by major companies for its accessibility-compliant modal implementations.
+- It's focus on accessibility is increasingly important for legal compliance (ADA, Section 508, WCAG standards), making React Modal's built-in accessibility features valuable for inclusive design.
+
+- **Purpose & Usage:**
+  - It offers a comprehensive, accessible modal dialog component handling focus management, keyboard navigation and many more accessibility features.
+  - Provides portal rendering to avoid z-index conflicts and CSS styling issues
+  - Powers all modal dialogues in the application including Login, Registration, Contact Us (form), Terms of Use, and About Us modals, friendship requests (see `/components/modals/`)
+  - Centralised styling in `Modals.module.scss` with shared accessibility behaviours
+
 - **Why it’s important:**
-- **Use case:**
-- **Relates to:**
-- **Resources:**
-- **Comparison:**
+  - It makes building accessible modals straightforward as it handles all accessibility requirements following WAI-ARIA guidelines.
+  - Is is a modal solution with a consistent UX and helps to ensure it is usable for people with disabilities.
+
+- **Comparisons:**
+  <!-- - **vs. Custom modal with HTML `<dialog>` element:** The modern HTML `<dialog>` element provides native modal functionality with built-in backdrop and ESC key handling. It's lightweight (zero dependencies) and has good browser support (95%+). However, it requires polyfills for older browsers, offers less styling flexibility, and has limited features compared to React Modal. React Modal provides consistent behavior across all browsers, advanced features like custom animations and nested modals, and better integration with React's component lifecycle. For a production application targeting diverse users, React Modal's reliability and feature set outweigh the bundle size cost.
+
+  - **vs. Radix UI Dialog:** Radix UI provides unstyled, accessible primitives with more granular control over modal behavior and better composition patterns. It's more modern with excellent TypeScript support and smaller bundle size. However, it requires more setup code and styling effort—you must build the complete modal structure yourself. React Modal provides a complete, styled solution out of the box with sensible defaults. For this project's timeline and team size, React Modal's batteries-included approach allows faster development while still meeting accessibility requirements. Radix would be better for design-system-first applications with dedicated UI teams. -->
+
+- **License:** MIT License
 
 <!-- ---
 
@@ -425,23 +478,74 @@ Below is a list of current and future plans for improving functionality and feat
 
 **V.0.1.0** - Core functionality created and tested
 
-- User Authentication and Authorisation:
-  - Register and login to manage user accounts and profiles including changing password.
-- Movie Browsing with the "Reel Canon" with 100 loaded movies:
-  - Explore the curated list of 100 films with brief summary about the movie with hover effect.
-- Rating System:
+- **User Authentication and Authorisation:**
+  - JWT-based authentication with protected routes.
+    - User can Register and Login to manage their user accounts and profiles including Edit their profile info and update password.
+- **Movie Browsing with the "Reel Canon" with 100 loaded movies:**
+  - Explore the curated list of 100 films via movie cards (with graphic animations effect) including a brief summary about the movie.
+- **Rating System:**
   - Rate movies from 1 to 5 stars after watching.
-- Progress tracking:
-  - Visual "Popcorn Meter" that shows how many percent of the Reel Canon the user has completed.
-  - Tracker to list how many movies user has watched and rated and categorised by Genres and view average ratings.
-  -
-- Basic friend system
-- Leaderboard
-  The app's first release version features the following functionalities:
+- **"Reel" Progress tracking:**
+  - Visual "Popcorn Meter" that shows how many percent of the Reel Canon the user has watched.
+  - Ability to mark movies as "Watched" or "Unwatched".
+  - View overall progress on the profile page.
+  - "Your Cinematic Info" lists:
+    - "Your Top 5 Favourite Genres" and how many movies watched and rated in each Genre category and calculates an average rating for them.
+    - It also shows a list view of the names of the movies user has watched and rated with your rating scored on them.
+- **Social Features:**
+  - Basic Friend System
+  - Search for other users by usernames to send and accept friend requests.
+  - View friends list on profile page.
+  - Check Friend Request notifications to see received and sent requests including other user's username, status of request and ability to action to accept or decline requests.
+- **Leaderboard:**
+  - Global leaderboard ranking users based on number of movies watched, their username and completion percentage of how much of the Reel Canon they have watched.
+  - View top 3 ranking users and their stats.
+- **Contact Form:**
+  - Contact form for users to submit feedback or inquiries.
+  - Form submissions are sent via Formspree service.
+  - Form validation and success/error notifications.
+- **Design & UX:**
+  - Responsive design for usability on various devices.
+  - Accessibility features for inclusive user experience.
+  - Toast notifications for user feedback on actions.
+- **Animations & Performance:**
+  - Animations with Framer Motion for enhanced UI
+  - Smooth animations and transitions for enhanced user experience.
+  - Performance optimizations for faster load times.
+- **Additional Features & Enhancements:**
+- **Error Handling & Notifications:**
+  - Error handling with React Error Boundaries.
+  - Toast notifications for user feedback on actions.
+  - Lazy loading of movie cards with Intersection Observer for performance.
+  - Carousel display for featured movies using Embla Carousel.
+  - Responsive hamburger menu for mobile navigation.
+- **Styling & State Management:**
+  - Styling with SASS for modular and maintainable CSS.
+  - State management with React Context API for global state.
+  - Basic unit tests with Vitest for core components and functionalities.
+  - Deployed on Netlify for front-end and Render for back-end.
+  - Comprehensive documentation in README.md.
+- **Development Practices:**
+  - CI/CD setup for automated testing and deployment.
+  - Code linting and formatting with ESLint and Prettier.
+  - Version control with Git and GitHub.
+  - Project management with GitHub Projects and Issues.
+  - Agile development practices with regular sprints and retrospectives.
+  - Collaboration and code reviews via GitHub pull requests.
+  - Environment variable management with .env files.
+  - Performance optimizations for faster load times.
+  - Security best practices for user data protection.
+  - Scalability considerations for future growth.
+- **Testing & Quality Assurance:**
+  - Cross-browser compatibility testing.
+  - Responsive design for mobile and desktop.
+  - Unit and integration tests for core features.
+  - User acceptance testing (UAT) with sample users.
+  - Documentation of test cases and results.
 
-**Planned Releases:**
+  **Planned Releases:**
 
-**V.0.2.0** - Custom lists
+  **V.0.2.0** - Custom lists
 
 - User-created custom lists
 - List sharing between friends
@@ -498,3 +602,4 @@ Below is a list of current and future plans for improving functionality and feat
 - [Angular vs React vs Vue: Core Differences | BrowserStack](https://www.browserstack.com/guide/angular-vs-react-vs-vue)
 - [React VS Angular VS Vue - Which Framework is the Best? - GeeksforGeeks](https://www.geeksforgeeks.org/blogs/react-vs-angular-vs-vue-which-framework-is-the-best/)
 - [React vs Angular vs Vue Performance in 2025 | by React Masters | Medium](https://medium.com/@reactmasters.in/react-vs-angular-vs-vue-performance-in-2025-7590f673494b)
+- [State of Javascript 2024: Build Tools](https://2024.stateofjs.com/en-US/libraries/build-tools)
