@@ -58,6 +58,230 @@ The development of our group's project is documented across the below GitHub rep
 
 **The Century Screening Room** is a social platform web application that showcases the "Reel Canon," a curated list of 100 films for movie enthusiasts to explore, mark and rate movies they have watched.as they complete watching them.
 
+## Programming Style Guide
+
+This project adheres to the [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript), enforced through ESLint configuration [`eslint.config.js`](eslint.config.js) and Prettier formatting [`.prettierrc`](.prettierrc) to ensure quality and maintainability. This style guide allows our code to be more consistent, readable, predictable and efficient.
+
+<!-- Changed linter rules, what we changes and why -->
+
+## Technologies Used
+
+- **Vite** for fast local development and build.
+- **Resources:** [Vite Documentation](https://vite.dev/)
+-
+- **React 19** for the UI framework.
+- **React Query**, **Axios**, and **React Router** for data fetching and navigation.
+- **Prettier**, **ESLint**, and **Sass** for developer experience and styling.
+
+This project uses:
+
+### Core Dependencies
+
+<!-- react
+vite
+axios
+tanstack query
+modal
+react hook form
+ -->
+
+### `react`
+
+- **What it does:** The main React library lets us build UI components, manage state and use hooks.
+- **Why it’s important:** Everything in our app runs on React.
+- **Use case:** Core logic, hooks (`useState`, `useEffect`), rendering JSX.
+- **Resources:** [React Documentation](https://react.dev/reference/react)
+
+---
+
+### `vite`
+
+---
+
+### `axios`
+
+- **What it does:** HTTP client for making API requests (`GET`, `POST`, etc.).
+- **Why it’s important:** Replaces `fetch()` with easier syntax and built-in JSON parsing.
+- **Use case:** Your `/apiServices.js` file uses `api.get('/leaderboard')`.
+- **Relates to:** `@tanstack/react-query` for data fetching.
+- **Resources:** [Axios Documentation](https://axios-http.com/docs/intro)
+
+---
+
+### `@tanstack/react-query`
+
+- **What it does:** Handles API data fetching, caching, and background refetching.
+- **Why it’s important:** Simplifies async calls and manages “loading / success / error” states.
+- **Use case:** Fetch leaderboard data in your `useLeaderboard()` hook.
+- **Relates to:** `axios` (used to perform the actual request).
+- **Resources:** [React Query Documentation](https://tanstack.com/query/v4)
+
+---
+
+### `modal`
+
+---
+
+### `react-hook-form`
+
+- **What it does:** Simplifies handling form input and validation.
+- **Why it’s important:** Manages complex forms without repetitive `onChange` logic.
+- **Use case:** Login forms, registration forms, or filters.
+- **Relates to:** Future feature (e.g., feedback submission).
+- **Resources**[React Hook Form Docs](https://react-hook-form.com/)
+
+---
+
+### `react-dom`
+
+- **What it does:** Connects React to the DOM (the browser view).
+- **Why it’s important:** Without this, React can’t render to the page.
+- **Use case:** The `createRoot()` call in `main.jsx`.
+- **Resources:** [ReactDOM Documentation](https://react.dev/reference/react-dom)
+
+---
+
+### `react-router-dom`
+
+- **What it does:** Enables multi-page routing and navigation.
+- **Why it’s important:** Lets you use `<Route>`, `<Link>`, and `useNavigate()` to handle pages like `/leaderboard`, `/profile` etc.
+- **Use case:** Page navigation in Single Page Application (SPA).
+- **Resources:** [React Router Documentation](https://reactrouter.com/home)
+
+---
+
+### `clsx`
+
+- **What it does:** A tiny utility to conditionally join CSS class names.
+- **Why it’s important:** Cleaner logic when using custom classes.
+- **Use case:** `className={clsx( --- find examples in codebase *****)}`
+- **Relates to:** Styling (custom CSS).
+- **Resources** [clsx on npm](https://www.npmjs.com/package/clsx)
+
+  <!-- "dependencies": {
+    "@formspree/react": "^3.0.0",
+    "@fortawesome/free-regular-svg-icons": "^7.1.0",
+    "@fortawesome/free-solid-svg-icons": "^7.1.0",
+    "@fortawesome/react-fontawesome": "^3.1.0",
+    "@tanstack/react-query": "^5.90.6",
+    "axios": "^1.13.1",
+    "clsx": "^2.1.1",
+    "embla-carousel-react": "^8.6.0",
+    "framer-motion": "^12.23.24",
+    "lodash-es": "^4.17.21",
+    "react": "^19.1.1",
+    "react-burger-menu": "^3.1.0",
+    "react-dom": "^19.1.1",
+    "react-error-boundary": "^6.0.0",
+    "react-hook-form": "^7.66.0",
+    "react-hot-toast": "^2.6.0",
+    "react-intersection-observer": "^10.0.0",
+    "react-modal": "^3.16.3",
+    "react-router-dom": "^7.9.5",
+    "sass": "^1.93.3" -->---
+
+---
+
+### Development Dependencies
+
+  <!-- "devDependencies": {
+    "@eslint/js": "^9.36.0",
+    "@tanstack/eslint-plugin-query": "^5.91.2",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/react": "^19.1.16",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^5.1.0",
+    "@vitest/ui": "^4.0.8",
+    "eslint": "^9.36.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-import-resolver-node": "^0.3.9",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.22",
+    "globals": "^16.4.0",
+    "jsdom": "^27.1.0",
+    "prettier": "^3.6.2",
+    "vite": "^7.1.7",
+    "vitest": "^4.0.8"
+  }
+   -->
+
+---
+
+### Hardware Requirements
+
+- Modern computer with internet connection
+- Disk space: (NEED TO CHECK) including dependencies
+
+### 1.4 Software Requirements
+
+- **Development:** VSCode or similar editing software
+- **Runtime:** (Windows, macOS, Linux)
+- **Environment:**
+- **Testing:**
+- **Version Control:** Git and GitHub
+- **Package Management:** npm
+
+---
+
+Licensing
+
+| Package | License |
+| ------- | ------- |
+
+---
+
+## Running the Application
+
+### Installation
+
+1. Clone this repository
+
+2. Install the dependencies:
+
+```bash
+npm install
+```
+
+3. Set up .env variables by following the .env.example file
+
+4. Also clone the Backend API for full functionality:
+
+- [GitHub Repository for Back-End](https://github.com/CoderAcademy-DEV-MERN-Group/DEV1003-Assessment02.git)
+- OR Git Clone via terminal with below code:
+
+```bash
+git clone https://github.com/CoderAcademy-DEV-MERN-Group/DEV1003-Assessment02.git
+```
+
+> See Back-End Installation Guide [here](https://github.com/CoderAcademy-DEV-MERN-Group/DEV1003-Assessment02/blob/main/docs/INSTALLATION_AND_DEPLOYMENT.md)
+
+---
+
+## Available Scripts
+
+These are the available scripts that you can run in this project directory:
+
+- `npm run dev` - Start development server with hot reload
+- `npm run build` - Build production assets
+- `npm start` - Start production server
+- `npm test` - Run test suite (Vitest)
+- `npm run test:watch` - Run tests in watch mode
+- `npm run test:ui` - Open Vitest interactive UI
+- `npm run test:coverage` - Run tests with coverage reporting
+- `npm run lint` - Check code for style issues (ESLint)
+- `npm run lint:fix` - Automatically fix linting errors
+- `npm run format` - Format code with Prettier
+- `npm run format:check` - Check formatting with Prettier
+- `npm run preview` - Preview the production build locally (`vite preview`)
+
+---
+
 ### Future Development Plans
 
 ### Version Pipeline
@@ -124,165 +348,6 @@ Below is a list of current and future plans for improving functionality and feat
 - **Conventional Commits**: Follow conventional commit format (`feat:`, `fix:`, `docs:`, `style:`, `refactor:`, `test:`, `chore:`) for clear commit history
 - **Pull Requests**: Pull requests with no explanation will not be merged, please leave detailed comments in your code!
 - **Issues**: Issues must be clear and concise, vague issues are non-issues!
-
----
-
-## Programming Style Guide
-
-This project adheres to the [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript), enforced through ESLint configuration [`eslint.config.js`](eslint.config.js) and Prettier formatting [`.prettierrc`](.prettierrc) to ensure quality and maintainability. This style guide allows our code to be more consistent, readable, predictable and efficient.
-
-<!-- Changed linter rules, what we changes and why -->
-
-## Technologies Used
-
-- **Vite** for fast local development and build.
-- **React 19** for the UI framework.
-- **React Query**, **Axios**, and **React Router** for data fetching and navigation.
-- **Prettier**, **ESLint**, and **Sass** for developer experience and styling.
-
-This project uses:
-
-<!-- react
-vite
-axios
-tanstack query
-modal
-react hook form
- -->
-
-### Core Dependencies
-
-### **react**
-
-- **What it does:** The main React library lets us build UI components, manage state and use hooks.
-- **Why it’s important:** Everything in our app runs on React.
-- **Use case:** Core logic, hooks (`useState`, `useEffect`), rendering JSX.
-- **Resources:** [React Documentation](https://react.dev/reference/react)
-
----
-
-### **react-dom**
-
-- **What it does:** Connects React to the DOM (the browser view).
-- **Why it’s important:** Without this, React can’t render to the page.
-- **Use case:** The `createRoot()` call in `main.jsx`.
-- **Resources:** [ReactDOM Documentation](https://react.dev/reference/react-dom)
-
----
-
-### **react-router-dom**
-
-- **What it does:** Enables multi-page routing and navigation.
-- **Why it’s important:** Lets you use `<Route>`, `<Link>`, and `useNavigate()` to handle pages like `/leaderboard`, `/profile` etc.
-- **Use case:** Page navigation in Single Page Application (SPA).
-- **Resources:** [React Router Documentation](https://reactrouter.com/home)
-
----
-
-### **axios**
-
-- **What it does:** HTTP client for making API requests (`GET`, `POST`, etc.).
-- **Why it’s important:** Replaces `fetch()` with easier syntax and built-in JSON parsing.
-- **Use case:** Your `/apiServices.js` file uses `api.get('/leaderboard')`.
-- **Relates to:** `@tanstack/react-query` for data fetching.
-- **Resources:** [Axios Documentation](https://axios-http.com/docs/intro)
-
----
-
-### **@tanstack/react-query**
-
-- **What it does:** Handles API data fetching, caching, and background refetching.
-- **Why it’s important:** Simplifies async calls and manages “loading / success / error” states.
-- **Use case:** Fetch leaderboard data in your `useLeaderboard()` hook.
-- **Relates to:** `axios` (used to perform the actual request).
-- **Resources:** [React Query Documentation](https://tanstack.com/query/v4)
-
----
-
-### **clsx**
-
-- **What it does:** A tiny utility to conditionally join CSS class names.
-- **Why it’s important:** Cleaner logic when using custom classes.
-- **Use case:** `className={clsx( --- find examples in codebase *****)}`
-- **Relates to:** Styling (custom CSS).
-- **Resources** [clsx on npm](https://www.npmjs.com/package/clsx)
-
----
-
-### **react-hook-form**
-
-- **What it does:** Simplifies handling form input and validation.
-- **Why it’s important:** Manages complex forms without repetitive `onChange` logic.
-- **Use case:** Login forms, registration forms, or filters.
-- **Relates to:** Future feature (e.g., feedback submission).
-- **Resources**[React Hook Form Docs](https://react-hook-form.com/)
-
----
-
-### External Packages
-
----
-
-### Development Dependencies
-
----
-
-### Hardware Requirements
-
-- Modern computer with internet connection
-- Disk space: (NEED TO CHECK) including dependencies
-
-### 1.4 Software Requirements
-
-- **Development:** VSCode or similar editing software
-- **Runtime:** (Windows, macOS, Linux)
-- **Environment:**
-- **Testing:**
-- **Version Control:** Git and GitHub
-- **Package Management:** npm
-
----
-
-Licensing
-
-| Package | License |
-| ------- | ------- |
-
----
-
-## 2. Running the Application
-
-### 2.1 Installation
-
-1. Clone the repository
-2. Install the dependencies:
-
-```bash
-npm install
-```
-
-3. Set up .env variables by following the .env.example file
-
-4. Also clone the Backend API via:
-   - GitHub Repo: https://github.com/CoderAcademy-DEV-MERN-Group/DEV1003-Assessment03.git
-   - OR Git Clone via terminal with below code:
-
-```
-git clone https://github.com/CoderAcademy-DEV-MERN-Group/DEV1003-Assessment03.git
-```
-
-### Available Scripts
-
-- `npm run dev` - Start development server with hot reload
-- `npm start` - Start production server
-- `npm test` - Run test suite
-- `npm run test:watch` - Run tests in watch mode
-- `npm run test:coverage` - Run tests with coverage reporting
-- `npm run seed:movies` - Seed local database with movie data
-- `npm run seed:movies:deployed` - Seed production database
-- `npm run lint` - Check code for style issues
-- `npm run lint-fix` - Automatically fix linting errors
-- `npm run format` - Format code with Prettier
 
 ---
 
