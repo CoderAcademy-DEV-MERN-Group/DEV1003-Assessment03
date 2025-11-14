@@ -81,7 +81,7 @@ function MovieCard({ movie, index, totalMovies }) {
       animate={
         isTapped
           ? {
-              scale: 1.4,
+              scale: 1.6,
               zIndex: 50,
               rotateY: 5,
             }
