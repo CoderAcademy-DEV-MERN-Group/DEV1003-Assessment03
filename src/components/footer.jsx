@@ -27,7 +27,7 @@ function Footer() {
         <Terms isOpen={showTerms} onClose={() => setShowTerms(false)} />
       </section>
 
-      <section>
+      <section className={styles.footerCopyright}>
         <p>
           &copy; 2025 The Century Screening Room. Licensed under{" "}
           <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer">
@@ -36,6 +36,8 @@ function Footer() {
           .
         </p>
       </section>
+
+      <div className={styles.footerSpacer} />
     </footer>
   );
 }
