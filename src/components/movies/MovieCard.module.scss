@@ -7,7 +7,7 @@
   overflow: hidden;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
   background: transparent;
-  min-height: 200px; 
+  min-height: 200px;
   z-index: 1;
 }
 
@@ -37,7 +37,7 @@
 
 .content {
   display: grid;
-  grid-template-rows: auto auto 1fr auto; 
+  grid-template-rows: auto auto 1fr auto;
   align-items: start;
   position: relative;
   text-align: center;
@@ -61,8 +61,8 @@
   padding: spacing(md);
   z-index: 5;
   opacity: 0;
-  transition: opacity 0.3s ease; 
-  pointer-events: none; 
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
 // Use the card hover to control overlay
@@ -138,16 +138,16 @@
 }
 
 .undoButton {
+  background: color(overlay-medium);
   position: absolute;
   top: spacing(xs);
   right: spacing(xs);
   z-index: 5; // Above everything
   font-size: 0.8rem;
-  opacity: 0.3;
-  background: none;
+  opacity: 0.5;
   border: none;
   border-radius: 3px;
-  color: color(theme-white);
+  color: color(accent-silver);
   padding: 2px 6px;
   cursor: pointer;
   transition: all 0.8s ease;
@@ -164,7 +164,8 @@
     font-size: small;
   }
 
-  .title, .year {
+  .title,
+  .year {
     font-size: medium;
   }
 
@@ -216,7 +217,6 @@
 }
 
 @include tablet {
-  // Mobile tap state
   .overlayMobile {
     opacity: 1 !important;
     pointer-events: auto !important;
@@ -226,20 +226,96 @@
     font-size: 0.65rem !important;
   }
 
+  .card {
+    outline: none;
+    transition: transform 0.2s ease;
+  }
+
+  .card:focus-within .overlay {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transition: opacity 0.2s ease;
+  }
+
+  .card:focus-within {
+    transform: scale(1.6) !important;
+    z-index: 50 !important;
+  }
+
   .markAsWatchedButton {
     padding: spacing(xs) spacing(xs);
     font-size: 0.75rem;
 
+    .overlay[style*="opacity: 0"]:not(:has(+ .card:focus-within)) &,
+    .overlay:not(:hover):not(:has(+ .card:focus-within)) & {
+      pointer-events: none !important;
+    }
+
+    .card:focus-within & {
+      pointer-events: auto !important;
+    }
+
+    &:hover {
+      scale: none;
+    }
     &:active {
-      scale: 0.95;
+      scale: none;
     }
   }
 
   .undoButton {
+    transition: all 0.2s ease;
+
     &:active {
       opacity: 1;
       background: color(secondary);
       transform: scale(1.1);
+    }
+  }
+}
+@include mobile {
+  .overlay {
+    opacity: 0;
+    pointer-events: auto !important;
+    transition: opacity 0.2s ease;
+  }
+
+  .card {
+    outline: none;
+    transition: transform 0.2s ease;
+  }
+
+  .card:focus-within .overlay,
+  .overlayMobile {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transition: opacity 0.2s ease;
+  }
+
+  .card:focus-within {
+    transform: scale(1.6) !important;
+    z-index: 50 !important;
+  }
+
+  .markAsWatchedButton {
+    padding: spacing(xs) spacing(xs);
+    font-size: 0.75rem;
+    transition: none;
+
+    .overlay[style*="opacity: 0"]:not(:has(+ .card:focus-within)) &,
+    .overlay:not(:hover):not(:has(+ .card:focus-within)) & {
+      pointer-events: none !important;
+    }
+
+    .card:focus-within & {
+      pointer-events: auto !important;
+    }
+
+    &:hover {
+      scale: none;
+    }
+    &:active {
+      scale: none;
     }
   }
 }
