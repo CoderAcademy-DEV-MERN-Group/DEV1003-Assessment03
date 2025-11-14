@@ -5,7 +5,7 @@ import styles from "./Modals.module.scss";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import ErrorMessage from "../../components/common/ErrorMessage";
-import Modal from "react-modal";
+import CustomModal from "./CustomModal";
 import { useUpdateCurrentUserPassword } from "../../utilities/customHooks/useUsers";
 // import { useEffect } from "react";
 
@@ -47,16 +47,7 @@ export default function UpdatePassword({ isOpen, onClose }) {
 
   return (
     // Main: the main content of this component
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={onClose}
-      className={styles.modal}
-      overlayClassName={styles.modalOverlay}
-      closeTimeoutMS={500}
-      shouldFocusAfterRender={false}
-      shouldCloseOnOverlayClick
-      shouldCloseOnEsc
-    >
+    <CustomModal isOpen={isOpen} onRequestClose={onClose}>
       {/* Close button :D */}
       <button
         type="button"
@@ -146,6 +137,6 @@ export default function UpdatePassword({ isOpen, onClose }) {
           {isPending ? "Updating password..." : "Update Password"}
         </button>
       </form>
-    </Modal>
+    </CustomModal>
   );
 }
