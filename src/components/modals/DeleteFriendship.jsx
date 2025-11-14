@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Modal from "react-modal";
+import CustomModal from "./CustomModal";
 import toast from "react-hot-toast";
 import { useDeleteFriendship } from "../../utilities/customHooks/useFriendships";
 import styles from "./Modals.module.scss";
@@ -41,11 +41,9 @@ export default function DeleteFriendship({
   if (!isOpen) return null;
 
   return (
-    <Modal
+    <CustomModal
       isOpen={isOpen}
       onRequestClose={onClose}
-      className={styles.modal}
-      overlayClassName={styles.modalOverlay}
       shouldCloseOnOverlayClick={!isPending}
       shouldCloseOnEsc={!isPending}
     >
@@ -95,6 +93,6 @@ export default function DeleteFriendship({
           )}
         </article>
       </section>
-    </Modal>
+    </CustomModal>
   );
 }
