@@ -127,7 +127,7 @@ Appropriate explanation of ALL of the hardware and software technologies used wi
 ### `vite`
 
 - **Industry Relevance:**
-- Vite is a production bundler and it is an increasingly popular build tool for modern front-end web development due to its speed and efficiency. It is widely adopted in the industry for its leading performance and ability to provide instant dev server startup for a faster development experience. It is used by large leading companies such as Google, Apple and Microsoft.
+  - Vite is a production bundler and it is an increasingly popular build tool for modern front-end web development due to its speed and efficiency. It is widely adopted in the industry for its leading performance and ability to provide instant dev server startup for a faster development experience. It is used by large leading companies such as Google, Apple and Microsoft.
 
 - **Purpose & Usage:**
   - Vite is used as the build tool and development server for our React application. It provides a fast and efficient development environment with features like hot module replacement (HMR) for efficiency during development as it updates code in the browser almost instantly.
@@ -188,7 +188,7 @@ Appropriate explanation of ALL of the hardware and software technologies used wi
   - Industry relevance as mentioned above.
 
 - **Comparisons:**
-- **Manual useEffect + fetch:** The manual `useEffect + fetch` implementations require more boilerplate code and Tanstack in comparison automatically handles the loading, error and success states, which is built-in and requires minimal code.
+  - **Manual useEffect + fetch:** The manual `useEffect + fetch` implementations require more boilerplate code and Tanstack in comparison automatically handles the loading, error and success states, which is built-in and requires minimal code.
   - **Redux Toolkit Query:** Redux Toolkit Query is another popular library for managing server state in React applications, generally would be more ideal if using Redux for client state management. However, Tanstack React Query is more lightweight and has a simpler learning curve to use and is less complex as it works with standard async function. Whereas, with Redux, it requires understanding Redux concepts which can make it more complex and therefore based on our understanding and experience with async functions, we chose to go with Tanstack React Query.
 
 - **License:** MIT License
@@ -204,7 +204,7 @@ Appropriate explanation of ALL of the hardware and software technologies used wi
 
 - **Industry Relevance:**
   - React-modal is one of the most established modal libraries in the React ecosystem known for its accessibility features and ease of use. It has been used and tested in production for many years and is trusted by major companies for its accessibility-compliant modal implementations.
-- It's focus on accessibility is increasingly important for legal compliance (ADA, Section 508, WCAG standards), making React Modal's built-in accessibility features valuable for inclusive design.
+  - It's focus on accessibility is increasingly important for legal compliance (ADA, Section 508, WCAG standards), making React Modal's built-in accessibility features valuable for inclusive design.
 
 - **Purpose & Usage:**
   - It offers a comprehensive, accessible modal dialog component handling focus management, keyboard navigation and many more accessibility features.
@@ -217,7 +217,7 @@ Appropriate explanation of ALL of the hardware and software technologies used wi
   - Is is a modal solution with a consistent UX and helps to ensure it is usable for people with disabilities.
 
 - **Comparisons:**
-  <!-- - **vs. Custom modal with HTML `<dialog>` element:** The modern HTML `<dialog>` element provides native modal functionality with built-in backdrop and ESC key handling. It's lightweight (zero dependencies) and has good browser support (95%+). However, it requires polyfills for older browsers, offers less styling flexibility, and has limited features compared to React Modal. React Modal provides consistent behavior across all browsers, advanced features like custom animations and nested modals, and better integration with React's component lifecycle. For a production application targeting diverse users, React Modal's reliability and feature set outweigh the bundle size cost.
+  <!-- - **Custom modal with HTML `<dialog>` element:** The modern HTML `<dialog>` element provides native modal functionality with built-in backdrop and ESC key handling. It's lightweight (zero dependencies) and has good browser support (95%+). However, it requires polyfills for older browsers, offers less styling flexibility, and has limited features compared to React Modal. React Modal provides consistent behavior across all browsers, advanced features like custom animations and nested modals, and better integration with React's component lifecycle. For a production application targeting diverse users, React Modal's reliability and feature set outweigh the bundle size cost.
 
   - **vs. Radix UI Dialog:** Radix UI provides unstyled, accessible primitives with more granular control over modal behavior and better composition patterns. It's more modern with excellent TypeScript support and smaller bundle size. However, it requires more setup code and styling effort—you must build the complete modal structure yourself. React Modal provides a complete, styled solution out of the box with sensible defaults. For this project's timeline and team size, React Modal's batteries-included approach allows faster development while still meeting accessibility requirements. Radix would be better for design-system-first applications with dedicated UI teams. -->
 
