@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 // React hook form provides form management without useState
 import clsx from "clsx";
-import Modal from "react-modal";
+import CustomModal from "./CustomModal";
 import { useForm } from "react-hook-form";
 import styles from "./Modals.module.scss";
 import { useLoginUser } from "../../utilities/customHooks/useAuth";
@@ -35,16 +35,7 @@ function Login({ isOpen, onClose }) {
 
   return (
     // Modal instead of Main
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={onClose}
-      className={styles.modal}
-      overlayClassName={styles.modalOverlay}
-      closeTimeoutMS={500}
-      shouldFocusAfterRender={false}
-      shouldCloseOnOverlayClick
-      shouldCloseOnEsc
-    >
+    <CustomModal isOpen={isOpen} onRequestClose={onClose}>
       {/* Close button :D */}
       <button
         type="button"
@@ -117,7 +108,7 @@ function Login({ isOpen, onClose }) {
           {isPending ? "Signing in..." : "Sign in"}
         </button>
       </form>
-    </Modal>
+    </CustomModal>
   );
 }
 
