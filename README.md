@@ -73,7 +73,7 @@ To run this app, you need:
 - JavaScript (ES6+)
 - JSX
 - HTML
-- CSS/SASS
+- CSS/Sass
 
 ---
 
@@ -504,44 +504,6 @@ Below is a list of current and future plans for improving functionality and feat
   - Contact form for users to submit feedback or inquiries.
   - Form submissions are sent via Formspree service.
   - Form validation and success/error notifications.
-- **Design & UX:**
-  - Responsive design for usability on various devices.
-  - Accessibility features for inclusive user experience.
-  - Toast notifications for user feedback on actions.
-- **Animations & Performance:**
-  - Animations with Framer Motion for enhanced UI
-  - Smooth animations and transitions for enhanced user experience.
-  - Performance optimizations for faster load times.
-- **Additional Features & Enhancements:**
-- **Error Handling & Notifications:**
-  - Error handling with React Error Boundaries.
-  - Toast notifications for user feedback on actions.
-  - Lazy loading of movie cards with Intersection Observer for performance.
-  - Carousel display for featured movies using Embla Carousel.
-  - Responsive hamburger menu for mobile navigation.
-- **Styling & State Management:**
-  - Styling with SASS for modular and maintainable CSS.
-  - State management with React Context API for global state.
-  - Basic unit tests with Vitest for core components and functionalities.
-  - Deployed on Netlify for front-end and Render for back-end.
-  - Comprehensive documentation in README.md.
-- **Development Practices:**
-  - CI/CD setup for automated testing and deployment.
-  - Code linting and formatting with ESLint and Prettier.
-  - Version control with Git and GitHub.
-  - Project management with GitHub Projects and Issues.
-  - Agile development practices with regular sprints and retrospectives.
-  - Collaboration and code reviews via GitHub pull requests.
-  - Environment variable management with .env files.
-  - Performance optimizations for faster load times.
-  - Security best practices for user data protection.
-  - Scalability considerations for future growth.
-- **Testing & Quality Assurance:**
-  - Cross-browser compatibility testing.
-  - Responsive design for mobile and desktop.
-  - Unit and integration tests for core features.
-  - User acceptance testing (UAT) with sample users.
-  - Documentation of test cases and results.
 
   **Planned Releases:**
 
