@@ -17,9 +17,10 @@
 }
 
 .pageLinks {
-  padding-bottom: 10px;
+  padding-bottom: 7px;
 
   :hover {
+    border-width: 3px;
     border-style: inset;
   }
 }
