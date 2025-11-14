@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import Modal from "react-modal";
+import CustomModal from "./CustomModal";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import styles from "./Modals.module.scss";
@@ -38,12 +38,9 @@ function DeleteUser({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   return (
-    <Modal
+    <CustomModal
       isOpen={isOpen}
       onRequestClose={onClose}
-      className={styles.modal}
-      overlayClassName={styles.modalOverlay}
-      shouldFocusAfterRender={false}
       shouldCloseOnOverlayClick={!isPending}
       shouldCloseOnEsc={!isPending}
     >
@@ -91,7 +88,7 @@ function DeleteUser({ isOpen, onClose }) {
           )}
         </article>
       </section>
-    </Modal>
+    </CustomModal>
   );
 }
 
