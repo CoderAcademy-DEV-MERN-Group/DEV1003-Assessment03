@@ -28,7 +28,7 @@ export default function UserProfile() {
       </div>
       <div className={styles.userCards}>
         <UserInfoCard className={styles.userInfoCard} />
-        <AddFriendCard className={styles.userFriendsCard} />
+        <AddFriendCard className={styles.userAddFriendsCard} />
         <FriendsCard className={styles.userFriendsCard} />
         <ReelProgressCard className={styles.userReelProgressCard} />
       </div>

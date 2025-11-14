@@ -30,6 +30,7 @@
 }
 
 .link {
+  font-size: 1.2rem;
   background: none;
   border: none;
   color: color(base-gold);
@@ -37,13 +38,14 @@
   padding: 0.5rem 1rem;
   transition: color 0.4s ease;
   transition: background 0.6s;
-  border-radius: 4px;
+  border-radius: 5px;
 
   &:hover:not(:disabled) {
     color: color(accent-gold);
     background: rgba(255, 255, 255, 0.1);
   }
 }
+
 .friendRequestButton {
   background: none;
   border: none;
@@ -61,12 +63,13 @@
 }
 
 .activeLink {
+  font-size: 1.2rem;
   color: color(base-silver);
   text-decoration: none;
   font-weight: bold;
   padding: 0.5rem 1rem;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
+  background: rgba(color(secondary-shadow), 0.2);
+  border-radius: 5px;
 }
 
 .badge {
