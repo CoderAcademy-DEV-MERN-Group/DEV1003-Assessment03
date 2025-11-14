@@ -5,6 +5,7 @@
 .carouselWrapper {
   width: 100vw;
   max-width: 500px;
+  height: 575px;
   margin: 0;
   padding: 0;
   border: 5px solid color(overlay-dark);
@@ -30,6 +31,7 @@
 .embla {
   margin: 0;
   padding: spacing(lg);
+  padding-top: spacing(sm);
   display: flex;
   align-items: center;
   gap: spacing(md);

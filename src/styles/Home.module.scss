@@ -13,6 +13,10 @@
   color: color(text-dark);
   // height: 100% !important;
 
+  .podiumSection {
+    height: 575px;
+  }
+
   @media (max-width: breakpoint(tablet)) {
     padding-top: spacing(xxl);
   }
@@ -72,6 +76,7 @@
 
   .homeFeatures {
     max-width: 90dvw;
-    margin-bottom: 3%;
+    gap: 4dvh;
+    padding-bottom: 2dvh;
   }
 }

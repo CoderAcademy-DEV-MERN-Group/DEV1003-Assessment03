@@ -3,6 +3,7 @@ import ContactUs from "../../components/modals/ContactUs";
 import JossImg from "../../assets/images/Joss.jpg";
 import JordanImg from "../../assets/images/Jordan.jpg";
 import NhiImg from "../../assets/images/Nhi.png";
+import GitHubLogo from "../../assets/images/github-mark-white.png";
 import styles from "./about.module.scss";
 
 export default function About() {
@@ -35,34 +36,43 @@ export default function About() {
       </section>
 
       <section className={styles.aboutUs}>
-        <article>
-          <h3>Joss</h3>
+        <article className={styles.aboutCard}>
+          <h2>Joss</h2>
           <img src={JossImg} alt="Joss" />
           <p>
             Joss is an all rounder, but had a big influence on the Reel Canon and the user
             experience site-wide!
           </p>
-          <a href="https://github.com/truth-josstice">Github Link</a>
+          <a href="https://github.com/truth-josstice">
+            <img className={styles.gitHubLogo} src={GitHubLogo} alt="GitHub Logo white" />{" "}
+            truth-josstice on GitHub
+          </a>
         </article>
 
-        <article>
-          <h3>Jordan</h3>
+        <article className={styles.aboutCard}>
+          <h2>Jordan</h2>
           <img src={JordanImg} alt="Jordan" />
           <p>
             Jordan is a tester and framework dynamo, making the granular components that help this
             site run in the background!
           </p>
-          <a href="https://github.com/jordanleal12">Github Link</a>
+          <a href="https://github.com/jordanleal12">
+            <img className={styles.gitHubLogo} src={GitHubLogo} alt="GitHub Logo white" />{" "}
+            jordanleal12 on GitHub
+          </a>
         </article>
 
-        <article>
-          <h3>Nhi</h3>
+        <article className={styles.aboutCard}>
+          <h2>Nhi</h2>
           <img src={NhiImg} alt="Nhi" />
           <p>
             Nhi is enthusiastic and loves styling! She helped finesse the final colours and theming
             for this site!
           </p>
-          <a href="https://github.com/lulu-codes">Github Link</a>
+          <a href="https://github.com/lulu-codes">
+            <img className={styles.gitHubLogo} src={GitHubLogo} alt="GitHub Logo white" /> lulucodes
+            on GitHub
+          </a>
         </article>
       </section>
 
@@ -78,7 +88,9 @@ export default function About() {
           enjoy the list, you have some suggestions, or you just want to talk movies...let us know
           and blame him! 😂
         </p>
-        <button onClick={() => setShowContact(true)}>Contact Us</button>
+        <button className={styles.contactButton} onClick={() => setShowContact(true)}>
+          Contact Us
+        </button>
         <ContactUs isOpen={showContact} onClose={() => setShowContact(false)} />
       </section>
     </div>
