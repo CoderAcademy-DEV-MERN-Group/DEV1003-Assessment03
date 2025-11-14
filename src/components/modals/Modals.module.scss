@@ -5,6 +5,13 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
+h1,
+h2 {
+  text-align: center;
+  color: color(text-dark);
+  @include dark-text-shadow;
+}
+
 .modalOverlay {
   position: fixed;
   top: 0;
@@ -19,7 +26,7 @@
 .modal {
   @include flex-center;
   position: relative;
-  background: rgba(77, 1, 1, 0.664);
+  background: rgba((color(secondary-shadow)), 0.25);
   border-radius: radius(lg);
   padding: spacing(xxl);
   max-width: 30vw;
@@ -49,7 +56,7 @@
 
 // Form Styles - Shared across modal forms
 .modalForm {
-  background: color(theme-white);
+  background: color(modal-background);
   padding: spacing(xxl);
   border-radius: radius(lg);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
@@ -65,10 +72,6 @@
   h3 {
     color: color(text-dark);
   }
-
-  li {
-    color: color(text-dark);
-  }
 }
 
 .inputGroup {
@@ -76,6 +79,7 @@
   border-radius: 3px;
 
   legend {
+    @include dark-text-shadow;
     font-weight: 600;
     margin-bottom: spacing(md);
     color: color(text-dark);
@@ -97,7 +101,7 @@
 .modalInput {
   width: 90%;
   padding: spacing(md);
-  border: 2px solid #e2e8f0;
+  border: 1px solid color(accent-silver);
   border-radius: radius(md);
   font-size: 1rem;
   transition: all 0.2s ease-in-out; // Enhanced transition
@@ -146,9 +150,23 @@
   align-self: center;
 }
 
-.generalMessage p {
+.generalMessage {
   color: color(text-dark);
-  text-align: left;
+  text-align: center;
+
+  ul {
+    li:nth-child(odd) {
+      list-style-type: disc;
+    }
+    li:nth-child(even) {
+      padding-left: 2%;
+      list-style: circle;
+      list-style-position: inside;
+    }
+    margin: 0;
+    padding: 0;
+    text-align: left;
+  }
 }
 
 // Button Styles
@@ -158,16 +176,18 @@
   margin-left: 35%;
   margin-top: 5%;
   padding: spacing(md);
-  background: color(primary);
-  color: color(white);
-  border-radius: radius(md);
-  font-weight: 600;
-  font-size: 1rem;
-  transition: all 0.3s ease-in-out;
+  font-size: 1.1rem;
+  color: color(accent-gold);
+  background: color(primary-dark);
+  border-radius: 5px;
+  border-color: color(base-gold);
+  box-shadow: 1px 1px 1px 1px color(secondary-shadow);
+  cursor: pointer;
+  transition: scale 0.8s ease;
 
   &:hover:not(:disabled) {
-    background: color(primary-dark);
-    transform: translateY(-1px);
+    background: rgba(color(primary), 0.9);
+    scale: 1.1;
   }
 
   &.buttonLoading {
@@ -276,11 +296,11 @@
 
 .requestTableRow:hover .colUsername,
 .requestTableRow:hover .colActions {
-  background: #ece0f8;
+  background: color(table-color-1);
 }
 
 .requestTableRow:hover .colEmail {
-  background: #f4edfdc5;
+  background: color(table-color-2);
 }
 
 .requestTableRow {
@@ -378,30 +398,31 @@
   color: #6b7280;
   font-style: italic;
   border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-
+  border-bottom-right-radius: 5px;
 }
 
 .navItem {
-  color: blue;
+  border-radius: 5px;
+  background: rgba(color(overlay-dark), 0.5);
+  padding: 0.2rem;
+  color: color(gold-dark);
   text-decoration: none;
-  padding: 0.5%;
-  border-radius: 4px;
-  background: none;
-  border: none;
-  font: inherit;
-  cursor: pointer;
+  text-align: center;
+  font-size: 1.2rem;
   transition: background 0.2s;
-  text-align: left;
+  cursor: pointer;
+  transition: all 0.8s ease;
 
-  &:hover {
-    background: rgba(255, 255, 255, 0.1);
+  &:hover:not(:disabled) {
+    background: rgba(color(primary), 0.9);
+    scale: 1.1;
   }
+}
 
-  &.active {
-    background: rgba(255, 255, 255, 0.2);
-    font-weight: 500;
-  }
+.gitHubLogo {
+  max-height: 1.1rem;
+  width: auto;
+  object-fit: contain;
 }
 
 .formlessMsg {
@@ -410,6 +431,33 @@
 }
 
 // Responsive
+@include tablet {
+  .modal {
+    padding: spacing(md);
+    max-width: 95vw;
+  }
+
+  .modalForm {
+    padding: spacing(xl);
+  }
+
+  .modalButton {
+    width: 50%;
+    margin-left: 25%;
+  }
+}
+
+.loadingMessage {
+  background: color(primary-dark);
+  color: color(primary);
+  padding: spacing(xs);
+  border-radius: radius(md);
+  margin-bottom: spacing(xl);
+  text-align: center;
+  align-self: center;
+  font-weight: 500;
+}
+
 @include mobile {
   .modal {
     padding: spacing(md);

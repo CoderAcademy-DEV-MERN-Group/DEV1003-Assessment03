@@ -1,5 +1,6 @@
 import CustomModal from "./CustomModal";
 import styles from "./Modals.module.scss";
+import GitHubLogo from "../../assets/images/github-mark-white.png";
 
 function Terms({ isOpen, onClose }) {
   if (!isOpen) return null;
@@ -17,8 +18,8 @@ function Terms({ isOpen, onClose }) {
         x{" "}
       </button>
       <section className={styles.modalForm}>
-        <fieldset className={styles.inputGroup}>
-          <legend>Terms of Use</legend>
+        <section>
+          <h2>Terms of Use</h2>
           <h1>Be Kind, Be Fair, Have Fun!</h1>
           <article className={styles.generalMessage}>
             <p>
@@ -31,41 +32,49 @@ function Terms({ isOpen, onClose }) {
             </p>
             <p>Mainly just be nice and chill and you'll be fine!</p>
           </article>
-        </fieldset>
-        <fieldset className={styles.inputGroup}>
-          <legend>Contributing</legend>
+        </section>
+        <section>
+          <h2>Contributing</h2>
           <article className={styles.generalMessage}>
             <h3>If you'd like to contribute, please read below:</h3>
             <ul>
               <li>
-                <b>Branching and Forking:</b> Fork the repository and create feature branches from
-                main using descriptive names (feature/user-auth, fix/rating-bug)
+                <b>Branching and Forking:</b>
               </li>
               <li>
-                <b>Conventional Commits:</b> Follow conventional commit format (feat:, fix:, docs:,
-                style:, refactor:, test:, chore:) for clear commit history
+                Fork the repository and create feature branches from main using descriptive names
+                (feature/user-auth, fix/rating-bug)
               </li>
               <li>
-                <b>Pull Requests:</b> Pull requests with no explanation will not be merged, please
-                leave detailed comments in your code!
+                <b>Conventional Commits:</b>
               </li>
               <li>
-                <b>Issues:</b> Issues must be clear and concise, vague issues are non-issues!
+                Follow conventional commit format (feat:, fix:, docs:, style:, refactor:, test:,
+                chore:) for clear commit history
               </li>
+              <li>
+                <b>Pull Requests:</b>
+              </li>
+              <li>
+                Pull requests with no explanation will not be merged, please leave detailed comments
+                in your code!
+              </li>
+              <li>
+                <b>Issues:</b>
+              </li>
+              <li>Issues must be clear and concise, vague issues are non-issues!</li>
             </ul>
-            <p>
-              Then head over to our team's {""}
-              <a
-                href="https://github.com/CoderAcademy-DEV-MERN-Group"
-                target="_blank"
-                className={styles.navItem}
-              >
-                GitHub
-              </a>
-              {""} and reach out!
-            </p>
+            <p>Then head over to our team's GitHub and reach out!</p>
+            <a
+              href="https://github.com/CoderAcademy-DEV-MERN-Group"
+              target="_blank"
+              className={styles.navItem}
+            >
+              <img className={styles.gitHubLogo} src={GitHubLogo} alt="GitHub Logo white" />{" "}
+              Joss-Nhi-Jordan GitHub Organization
+            </a>
           </article>
-        </fieldset>
+        </section>
       </section>
     </CustomModal>
   );

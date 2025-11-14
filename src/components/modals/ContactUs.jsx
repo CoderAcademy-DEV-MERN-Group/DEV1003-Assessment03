@@ -56,7 +56,9 @@ function ContactUs({ isOpen, onClose }) {
             />
           </p>
         </fieldset>
-        <button disabled={state.submitting}>Submit</button>
+        <button type="submit" className={styles.modalButton} disabled={state.submitting}>
+          Submit
+        </button>
       </form>
     </CustomModal>
   );
