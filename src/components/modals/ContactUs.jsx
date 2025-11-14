@@ -1,4 +1,4 @@
-import Modal from "react-modal";
+import CustomModal from "./CustomModal";
 import { useForm } from "@formspree/react";
 import styles from "./Modals.module.scss";
 
@@ -12,12 +12,7 @@ function ContactUs({ isOpen, onClose }) {
 
   if (state.succeeded) {
     return (
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={handleClose}
-        className={styles.modal}
-        overlayClassName={styles.modalOverlay}
-      >
+      <CustomModal isOpen={isOpen} onRequestClose={handleClose}>
         <p>
           Thanks for contacting us! We'll get back to you soon.
           <br />
@@ -26,20 +21,13 @@ function ContactUs({ isOpen, onClose }) {
           {" "}
           x{" "}
         </button>
-      </Modal>
+      </CustomModal>
     );
   }
   if (!isOpen) return null;
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={handleClose}
-      className={styles.modal}
-      overlayClassName={styles.modalOverlay}
-      shouldCloseOnOverlayClick
-      shouldCloseOnEsc
-    >
+    <CustomModal isOpen={isOpen} onRequestClose={handleClose}>
       <button
         type="button"
         onClick={handleClose}
@@ -70,7 +58,7 @@ function ContactUs({ isOpen, onClose }) {
         </fieldset>
         <button disabled={state.submitting}>Submit</button>
       </form>
-    </Modal>
+    </CustomModal>
   );
 }
 

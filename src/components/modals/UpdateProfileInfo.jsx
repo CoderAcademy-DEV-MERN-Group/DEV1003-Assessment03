@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { useAuthContext } from "../../contexts/useAuthContext";
 import toast from "react-hot-toast";
 import ErrorMessage from "../../components/common/ErrorMessage";
-import Modal from "react-modal";
+import CustomModal from "./CustomModal";
 import { useUpdateCurrentUser } from "../../utilities/customHooks/useUsers";
 
 export default function UpdateProfile({ isOpen, onClose }) {
@@ -48,16 +48,7 @@ export default function UpdateProfile({ isOpen, onClose }) {
 
   return (
     // Main: the main content of this component
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={onClose}
-      className={styles.modal}
-      overlayClassName={styles.modalOverlay}
-      closeTimeoutMS={500}
-      shouldFocusAfterRender={false}
-      shouldCloseOnOverlayClick
-      shouldCloseOnEsc
-    >
+    <CustomModal isOpen={isOpen} onRequestClose={onClose}>
       {/* Close button :D */}
       <button
         type="button"
@@ -132,6 +123,6 @@ export default function UpdateProfile({ isOpen, onClose }) {
           {isPending ? "Updating profile..." : "Update"}
         </button>
       </form>
-    </Modal>
+    </CustomModal>
   );
 }

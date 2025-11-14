@@ -1,19 +1,11 @@
-import Modal from "react-modal";
+import CustomModal from "./CustomModal";
 import styles from "./Modals.module.scss";
 
 function Terms({ isOpen, onClose }) {
   if (!isOpen) return null;
   return (
     // Modal
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={onClose}
-      className={styles.modal}
-      overlayClassName={styles.modalOverlay}
-      shouldFocusAfterRender={false}
-      shouldCloseOnOverlayClick
-      shouldCloseOnEsc
-    >
+    <CustomModal isOpen={isOpen} onRequestClose={onClose}>
       {/* Close button :D */}
       <button
         type="button"
@@ -75,7 +67,7 @@ function Terms({ isOpen, onClose }) {
           </article>
         </fieldset>
       </section>
-    </Modal>
+    </CustomModal>
   );
 }
 
