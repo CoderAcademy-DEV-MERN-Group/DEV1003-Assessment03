@@ -28,11 +28,11 @@ export default function ReelProgressCard({ className }) {
             <motion.div
               className={styles.progressFill}
               initial={{ height: "0%" }}
-              animate={{ height: `${progressPercentage}%`, x: [0, -3, 3, -2, 2, 0] }}
+              animate={{ height: `${progressPercentage}%` }}
               transition={{
-                duration: 1.2,
+                duration: 5,
                 ease: "easeOut",
-                delay: 1.5,
+                delay: 2,
               }}
             />
           </article>
