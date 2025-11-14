@@ -16,31 +16,59 @@ The development of our group's project is documented across the below GitHub rep
 - [Back-End API Application](https://github.com/CoderAcademy-DEV-MERN-Group/DEV1003-Assessment02)
 - [Front-End Application (this repository)](https://github.com/CoderAcademy-DEV-MERN-Group/DEV1003-Assessment03)
 
-### Purpose of the App
+### Project Description
 
 **The Century Screening Room** is a social platform web application that showcases the "Reel Canon," a curated list of 100 films for movie enthusiasts to explore, mark and rate movies they have watched.as they complete watching them.
+
+Key Features included
+
+---
 
 ## Programming Style Guide
 
 <!-- An identification and/or explanation of the style guide used in the programming throughout the project -->
 
-This project adheres to the [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript), enforced through ESLint configuration [`eslint.config.js`](eslint.config.js) and Prettier formatting [`.prettierrc`](.prettierrc) to ensure quality and maintainability. This style guide allows our code to be more consistent, readable, predictable and efficient.
+This project adheres to the [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) enforced through ESLint [`eslint.config.js`](eslint.config.js) and Prettier [`.prettierrc`](.prettierrc) which have been configured to automatically check and format code accoding to the Airbnb style guide rules. This style guide enables our code to be more consistent, readable, predictable and efficient to support overall quality maintainability and collaboration within our development team.
 
 <!-- Changed linter rules, what we changes and why "We made this change due to blah blah" -->
 
+---
+
 ## Technologies Used
 
+### Hardware Requirements
+
+To run this app, you need:
+
+- **A modern computer:** Laptop or desktop (minimum specs: 4GB RAM, 2GHz CPU)
+- **Internet connection:** For packages installation and API access
+- **Disk space:** ~500 MB (including dependencies)
+
+---
+
+### Software Requirements
+
+- **Operating System:** Windows, macOS, or Linux
+- **Node.js:** Version 18 or higher
+- **Package Manager:** npm
+- **Runtime Environment:** Node.js runtime environment
+- **Code Editor:** VSCode or similar editing software
+- **Browser:** Modern web browser (latest versions of Chrome, Firefox, Edge, Safari)
+- **Testing:** We use Vitest testing framework during development and run on localhost:3000 via Vite
+- **Version Control:** Git (GitHub)
+
+---
+
+### Programming Languages Used
+
+- JavaScript (ES6+)
+- JSX
+- HTML
+- CSS/SASS
+
+---
+
 ### Core Dependencies
-
-- **React (Version 19)** for the UI framework.
-- Why we use it
--
-- Pros vs Cons (Why) - 2 other comparisons to alternative technology choices
-
-- **Vite** for fast local development and build.
-- **Tanstack React Query**
-- **Axios**
-- **React-Modal**
 
 <!-- DEV1003 - Assessment 3 (Front End App)
 
@@ -55,43 +83,80 @@ The project must contain a README.md file that includes the following informatio
 EXPLAINS the relevance and impact of the utilised hardware and software technologies within a software project.
 
 Appropriate explanation of ALL of the hardware and software technologies used within a software project, including information on ALL of the following:
-industry-relevance of chosen technologies,
-comparisons to alternative technology choices,
-purposes of chosen technologies,
-and licensing of chosen technologies. -->
+- industry-relevance of chosen technologies,
+- comparisons to alternative technology choices,
+- purposes of chosen technologies,
+- and licensing of chosen technologies. -->
 
 ### `react`
 
-- **What it does:** The main React library lets us build UI components, manage state and use hooks.
-- **Why it’s important:** Everything in our app runs on React.
-- **Use case:** Core logic, hooks (`useState`, `useEffect`), rendering JSX.
-- **Resources:** [React Documentation](https://react.dev/reference/react)
+- **Industry Relevance:**
+  - React has a built-in large ecosystem providing plenty of built-in packages including for features such as for routing and forms. It is currently the most widely used front-end library used for building user interface (UI) components, use hooks, manage state and virtual document-object model (DOM), making it considered a highly relevant industry skill for developers to learn. (Add that link for the stats for 2025).
+  - It also provides flexibility to integrate with other packages and is backed by strong community support.
+- **Purpose & Usage:**
+  - React is a lightweight and the currently the main library
+  - Everything is a component under `/components/`. We use functional components with core logic, custom hooks as well as (`useState`, `useEffect`) and for rendering JSX.
+- **Why it’s important:**
+  - Everything in our app runs on React.
+- **Comparisons:**
+  - **Vue:** Vue is another popular front-end framework that has a gentler learning curve and is known for its simplicity and flexibility, with its single-file components and also built-in router and states. However, in comparison to React, it offers a component-based architecture and an extensive ecosystem making it more suitable for developers working towards building a larger-scale application.
+  - **Angular:** Angular is a comprehensive front-end framework that is considered more robust and suitable for large enterprise applications. It includes a full framework that is out of the box with built-in features like dependency injection and has a steeper learning curve compared to React. For the project scope and size of our team, React's flexibility such as being able to choose our own libraries for routing and state management, makes it more of an adaptable option for us to learn and use while we work in agile to make adjustments to our projects needs.
+- **License:** MIT License
+
+<!-- - **Resources:** [React Documentation](https://react.dev/reference/react) -->
 <!-- - **Comparison** Compared to alternatives like Vue or Angular, React offers a component-based architecture with a large ecosystem and flexibility in choosing libraries for routing and state management. Its virtual DOM enhances performance for dynamic applications. -->
 
 ---
 
 ### `vite`
 
+- **Industry Relevance:**
+  - Vite is a production bundler and it is an increasingly popular modern build tool for front-end development due to its speed and efficiency. It is widely adopted in the industry for its ability to provide a fast development experience with features for developers to learn and experiment building with more efficiently.
+- **Purpose & Usage:**
+  - Vite is used as the build tool and development server for our React application. It provides a fast and efficient development environment with features like hot module replacement (HMR) for effiency during development as it updates code in the browser almost instantly and requires minimal configuration for most React apps.
+- **Why it’s important:**
+  - It is optimised for modern JavaScript and leverages native ES modules in the browser, resulting in faster build times and improved performance compared to traditional bundlers.
+  - @vitejs/plugin-react (React Fast Refresh).
+- **Comparisons:**
+  - **Webpack:** Webpack is a widely used module bundler that offers extensive configuration options and a rich plugin ecosystem. However, it can be slower during development due to its bundling process. Vite, in comparison provides a much faster development experience by leveraging native ES modules and offering instant server start times making it a more preferred and efficient option for our React application.
+- **License:** MIT License
+
 ---
 
 ### `axios`
 
-- **What it does:** HTTP client for making API requests (`GET`, `POST`, etc.).
-- **Why it’s important:** Replaces `fetch()` with easier syntax and built-in JSON parsing.
-- **Use case:** Your `/apiServices.js` file uses `api.get('/leaderboard')`.
+- **Industry Relevance:**
+  - Axios is a widely used HTTP client library in the JavaScript ecosystem and it is known for its simplicity and ease to use when making API requests, which makes it a popular option for developers for handling asynchronous data fetching. It is commonly used particularly in React applications for its promise-based syntax and built-in features that simplify the process of making HTTP requests.
+- **Purpose & Usage:**
+  - It is a promise-based HTTP client for making API requests and centrally configured in `apiServices.js`. It is configured to use base URL for `GET`, `POST`, `PUT`, `DELETE` to interact with the Back-End API, automatic JSON parsing, used for authentication with JWT interceptors (like cancelling tokens), set timeouts for requests, and used with responses for error handling.
+- **Why it’s important:** Provides developers with working with easier syntax for fetch() and features built-in JSON parsing.
+- **Comparisons:**
+  - **Fetch API:** The native Fetch API is built into modern browsers and provides a simple way to make HTTP requests. However, it lacks some features that Axios provides out of the box, such as automatic JSON parsing, request cancellation, and interceptors for handling requests and responses. Axios also has better error handling capabilities compared to the Fetch API.
+- **License:** MIT License
+
+<!-- - **Use case:** The `/apiServices.js` file uses `api.get('/leaderboard')`.
 - **Relates to:** `@tanstack/react-query` for data fetching.
-- **Resources:** [Axios Documentation](https://axios-http.com/docs/intro)
+- **Resources:** [Axios Documentation](https://axios-http.com/docs/intro) -->
 <!-- - **Comparison:** Compared to the native `fetch()` API, Axios provides a simpler and more intuitive syntax for making HTTP requests. It automatically transforms JSON data, supports request and response interceptors, and has better error handling capabilities. Axios also supports older browsers that may not fully support the Fetch API. -->
 
 ---
 
 ### `@tanstack/react-query`
 
-- **What it does:** Handles API data fetching, caching, and background refetching.
-- **Why it’s important:** Simplifies async calls and manages “loading / success / error” states.
-- **Use case:** Fetch leaderboard data in your `useLeaderboard()` hook.
+- **Industry Relevance:**
+  - Tanstack React Query is a commonly used library for managing server state, caching, data fetching and invalidating server data in React applications. It is widely adopted in the industry due to its ability to simplify data management, caching and synchronise with server data with the use of Axios, making it a library that provides a seamless experience for developers when working with asynchronous data in React applications.
+- **Purpose & Usage:**
+  - It is used in conjunction with Axios (HTTP client) to handle data fetching, for state management and global cache config (queryClient).
+  - Every API call goes through custom hooks like `useLeaderboard()` and it handles API data fetching, caching, and background refetching.
+- **Why it’s important:**
+  - Simplifies async calls and manages “loading / success / error” states.
+- **Comparisons:**
+  - **Redux Toolkit Query:** Redux Toolkit Query is another popular library for managing server state in React applications. However, it is more tightly integrated with Redux and can require additional setup and configuration compared to Tanstack React Query. Tanstack React Query offers a more lightweight and flexible approach to data fetching and caching, making it easier to use in projects that do not already use Redux for state management.
+- **License:** MIT License
+
+<!-- - **Use case:** Fetch leaderboard data in your `useLeaderboard()` hook.
 - **Relates to:** `axios` (used to perform the actual request).
-- **Resources:** [React Query Documentation](https://tanstack.com/query/v4)
+- **Resources:** [React Query Documentation](https://tanstack.com/query/v4) -->
 <!-- - **Comparison:** Compared to manual data fetching with `useEffect`, React Query abstracts away much of the boilerplate code needed for handling loading states, caching, and refetching. It provides a declarative API that simplifies data management in React applications, leading to cleaner and more maintainable code. -->
 
 ---
@@ -107,7 +172,49 @@ and licensing of chosen technologies. -->
 
 ---
 
-(optional)
+## Additional Dependencies
+
+- **`react-dom`** - Renders React components to the browser DOM (required for React to work)
+- **`react-router-dom`** - Handles client-side routing and navigation between pages
+- **`react-hook-form`** - Simplifies form input handling and validation for login/registration forms
+- **`clsx`** - Utility for conditionally joining CSS class names
+- **`sass`** - CSS preprocessor for advanced styling features
+- **`react-modal`** - Creates accessible modal dialogues
+- **`react-hot-toast`** - Displays toast notifications for user feedback
+- **`react-error-boundary`** - Catches and handles React component errors gracefully
+- **`framer-motion`** - Animation library for smooth UI transitions
+- **`react-burger-menu`** - Mobile-friendly hamburger menu component
+- **`react-intersection-observer`** - Detects when elements enter viewport (for lazy loading)
+
+### Icon & Form Libraries (sub-dependencies for specific features)\_:
+
+- **`@fortawesome/react-fontawesome`** - icon packages (provides scalable vector icons
+- **`@formspree/react`** - Handles form submissions (contact forms)
+
+---
+
+## Development Dependencies
+
+### Testing
+
+- **`vitest`** - Fast unit testing framework
+- **`@vitest/ui`** - Interactive test UI
+- **`@testing-library/react`** , `jest-dom` & `user-event` - React component testing utilities
+- **`jsdom`** - Simulates browser environment for tests
+
+### Build Tools
+
+- **`vite`** - Build tool and dev server
+- **`@vitejs/plugin-react`** - Vite plugin for React support
+- **`@types/react`** + `@types/react-dom` - TypeScript type definitions
+
+### Linting & Formatting
+
+- **`eslint`** - JavaScript linter for code quality
+- **`prettier`** - Code formatter
+- Multiple ESLint plugins for React, accessibility, imports and code style
+
+---
 
 ### `react-hook-form`
 
@@ -202,25 +309,6 @@ and licensing of chosen technologies. -->
     "vitest": "^4.0.8"
   }
    -->
-
----
-
-### Hardware Requirements
-
-- Modern computer with internet connection
-- Disk space: 500MB including dependencies
-
----
-
-### Software Requirements
-
-- **Development:** VSCode or similar editing software
-- **Runtime:** Node.js compatible OS (Windows, macOS, Linux)
-- **Environment:** Node.js runtime environment
-- **Testing:** Vitest testing framework
-- **Version Control:** Git and GitHub
-- **Package Management:** npm
-- **Languages Used:** JavaScript (ES6+), JSX, HTML, CSS/SASS
 
 ---
 
@@ -324,6 +412,13 @@ These are the available scripts that you can run in this project directory:
 
 ---
 
+## Deployment
+
+Front-End: Netlify (https://the-reel-canon.netlify.app/)
+Back-End: Render (https://the-reel-canon.onrender.com/movies/reel-canon)
+
+---
+
 ### Future Development Plans
 
 ### Version Pipeline
@@ -398,3 +493,12 @@ Below is a list of current and future plans for improving functionality and feat
 - **Joss Raine:** [Joss's GitHub Repository](https://github.com/truth-josstice)
 - **Nhi Huynh:** [Nhi's Github Repository](https://github.com/lulu-codes)
 - **Jordan Leal:** [Jordan's GitHub Repository](https://github.com/jordanleal12)
+
+---
+
+### References
+
+- [State of JavaScript 2024: Front-end Frameworks](https://2024.stateofjs.com/en-US/libraries/front-end-frameworks)
+- [Angular vs React vs Vue: Core Differences | BrowserStack](https://www.browserstack.com/guide/angular-vs-react-vs-vue)
+- [React VS Angular VS Vue - Which Framework is the Best? - GeeksforGeeks](https://www.geeksforgeeks.org/blogs/react-vs-angular-vs-vue-which-framework-is-the-best/)
+- [React vs Angular vs Vue Performance in 2025 | by React Masters | Medium](https://medium.com/@reactmasters.in/react-vs-angular-vs-vue-performance-in-2025-7590f673494b)
