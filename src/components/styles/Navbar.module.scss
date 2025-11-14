@@ -17,7 +17,12 @@
 }
 
 .pageLinks {
-  padding-bottom: 5px;
+  padding-bottom: 7px;
+
+  :hover {
+    border-width: 3px;
+    border-style: inset;
+  }
 }
 
 .modalButtons {
@@ -57,7 +62,7 @@
   border-radius: 4px;
 
   &:hover:not(:disabled) {
-    color: color(primary-dark);
+    // color: color(primary-dark);
     background: rgba(255, 255, 255, 0.1);
   }
 }
@@ -97,7 +102,7 @@
     height: 7dvh;
     padding: 5px;
     padding-bottom: 0;
-    z-index:2;
+    z-index: 2;
   }
 
   .logoImg,

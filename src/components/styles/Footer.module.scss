@@ -2,15 +2,17 @@
 @use "../../styles/mixins" as *;
 
 .footer {
-  min-height: 4dvh;
+  height: auto;
+  max-height: fit-content;
   background-color: color(soft-background);
   position: 0, 0;
   display: flex;
-  justify-content: space-between;
-
+  justify-content: center;
+  align-items: center;
+  padding-left: clamp(0px, 0.8vw, 10px);
+  padding-right: clamp(0px, 0.8vw, 10px);
   p {
-    margin-top: 5px;
-    padding-right: 2dvh;
+    margin: 0;
   }
 }
 
@@ -20,23 +22,28 @@
 }
 
 .footerLinks {
+  flex: 1;
   display: flex;
+  padding: 5px 0px;
+  .footerButtons:nth-child(-n + 2) {
+    border-right: 2px solid black !important;
+  }
 }
 
 .footerButtons {
-  max-height: 4dvh;
+  max-width: fit-content;
   color: color(base-gold);
   height: auto;
+  max-height: fit-content;
   text-decoration: none;
-  padding-left: 2dvh;
-  padding-right: 2dvh;
   border-radius: 4px;
   background: none;
   border: none;
   font: inherit;
   cursor: pointer;
   transition: background 0.2s;
-  // text-align: left;
+  border-radius: 0 !important;
+  white-space: nowrap;
 
   &:hover {
     background: rgba(255, 255, 255, 0.1);
@@ -51,6 +58,14 @@
   border-radius: 4px;
 }
 
+.footerCopyright {
+  text-align: center;
+}
+
+.footerSpacer {
+  flex: 1;
+}
+
 // Make footer disappear on tablet and below
 @media (max-width: breakpoint(tablet)) {
   .footer > * {
@@ -62,12 +77,18 @@
   .footer {
     grid-row: 4;
     position: relative;
-    height: 6dvh;
     font-size: 0.9rem;
-
+    justify-content: space-around !important;
+    .footerSpacer {
+      display: none;
+    }
+    .footerButtons {
+      padding: 0 0.8dvw;
+      font-size: 0.8rem;
+    }
     p,
     a {
-      font-size: 0.9rem;
+      font-size: 0.7rem;
     }
   }
 }
