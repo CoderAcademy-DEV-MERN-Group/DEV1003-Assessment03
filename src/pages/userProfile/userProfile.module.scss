@@ -170,6 +170,13 @@
     order: -1;
   }
 
+  .userAddFriendsCard {
+    height: auto;
+    flex-basis: 40%;
+    overflow: hidden;
+    margin-bottom: 8dvh;
+  }
+
   .userFriendsCard {
     height: auto;
     flex-basis: 40%;
