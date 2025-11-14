@@ -2,11 +2,21 @@
 @use "../../styles/variables" as *;
 @use "../../styles/mixins" as *;
 
+/* Wrapper for burger menu component */
+.burger-menu-wrapper {
+  @media (min-width: breakpoint(tablet)) {
+    display: none !important;
+  }
+}
+
 .bm-overlay {
   position: fixed !important;
   top: 0 !important;
   bottom: 0 !important;
   touch-action: none;
+  background: rgba(0, 0, 0, 0.3);
+  height: 100% !important;
+  z-index: 999 !important;
   // height: auto !important;
 }
 
@@ -17,6 +27,7 @@
   height: 36px;
   left: 15px;
   top: 15px;
+  z-index: 1000;
 }
 
 /* Color/shape of burger icon bars */
@@ -54,6 +65,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   position: fixed;
   height: 100%;
   max-width: 15em;
+  z-index: 1000;
 }
 
 /* General sidebar styles */
@@ -112,11 +124,6 @@ Note: Beware of modifying this element as it can break the animations - you shou
   margin-bottom: 1.5rem;
   display: inline-block;
   background-color: color(secondary);
-}
-
-/* Styling of overlay */
-.bm-overlay {
-  background: rgba(0, 0, 0, 0.3);
 }
 
 /* Logo at bottom of menu */

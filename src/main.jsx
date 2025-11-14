@@ -24,7 +24,9 @@ createRoot(document.getElementById("root")).render(
         <ErrorBoundary FallbackComponent={ErrorFallback} onReset={() => queryClient.clear()}>
           <BrowserRouter>
             <Header />
-            <BurgerMenu />
+            <div className="burger-menu-wrapper">
+              <BurgerMenu />
+            </div>
             <App />
             <Footer />
           </BrowserRouter>
