@@ -4,18 +4,27 @@ import { useAllFriendships, useAllUsers } from "../../../utilities/customHooks";
 import styles from "../UserComponents.module.scss";
 import DeleteFriendship from "../../modals/DeleteFriendship";
 import LoadingSpinner from "../../common/LoadingScreenOverlay";
+import ErrorMessage from "../../common/ErrorMessage";
 
 export default function FriendsCard({ className }) {
   const { user } = useAuthContext();
-  const { data: friendships, isLoading: friendshipsLoading } = useAllFriendships();
-  const { data: users, isLoading: usersLoading } = useAllUsers();
+  const {
+    data: friendships,
+    isLoading: friendshipsLoading,
+    error: friendshipsError,
+    refetch: refetchFriendships,
+  } = useAllFriendships();
+  const {
+    data: users,
+    isLoading: usersLoading,
+    error: usersError,
+    refetch: refetchUsers,
+  } = useAllUsers();
   const [selectedFriendship, setSelectedFriendship] = useState(null);
 
   const userId = user?.id || user?._id;
 
-  if (usersLoading || friendshipsLoading) {
-    return <LoadingSpinner />;
-  }
+  if (usersLoading || friendshipsLoading) return <LoadingSpinner />;
 
   // Create a lookup table for all friendships (users are occasionally in the wrong order)
   const usersLookup = users?.users?.reduce((account, user) => {
@@ -33,6 +42,18 @@ export default function FriendsCard({ className }) {
   const selectedFriendUser = selectedFriendship
     ? getFriendFromFriendship(selectedFriendship)
     : null;
+
+  if (usersError || friendshipsError) {
+    const handleRetry = () => {
+      if (usersError) refetchUsers();
+      if (friendshipsError) refetchFriendships();
+    };
+    return (
+      <section className={className}>
+        <ErrorMessage error={usersError || friendshipsError} onRetry={handleRetry} />
+      </section>
+    );
+  }
 
   return (
     <section className={className}>
