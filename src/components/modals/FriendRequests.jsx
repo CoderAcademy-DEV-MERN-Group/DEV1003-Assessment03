@@ -6,12 +6,22 @@ import styles from "./Modals.module.scss";
 import LoadingSpinner from "../common/LoadingScreenOverlay";
 import toast from "react-hot-toast";
 import DeleteFriendship from "./DeleteFriendship";
+import ErrorMessage from "../common/ErrorMessage";
 
 export default function MyFriendRequests({ isOpen, onClose }) {
   const { user, isLoading: currentUserLoading } = useAuthContext();
-  const { data: friendships, isLoading: friendshipsLoading } = useAllFriendships();
-
-  const { data: users, isLoading: usersLoading } = useAllUsers();
+  const {
+    data: friendships,
+    isLoading: friendshipsLoading,
+    error: friendshipsError,
+    refetch: refetchFriendships,
+  } = useAllFriendships();
+  const {
+    data: users,
+    isLoading: usersLoading,
+    error: usersError,
+    refetch: refetchUsers,
+  } = useAllUsers();
   const { mutate: acceptRequest, isPending } = useUpdateFriendship();
 
   const [activeTab, setActiveTab] = useState("received");
@@ -61,6 +71,21 @@ export default function MyFriendRequests({ isOpen, onClose }) {
   };
 
   if (!isOpen) return null;
+
+  if (friendshipsError || usersError) {
+    const handleRetry = () => {
+      if (friendshipsError) refetchFriendships();
+      if (usersError) refetchUsers();
+    };
+    return (
+      <CustomModal isOpen={isOpen} onRequestClose={onClose}>
+        <button onClick={onClose} className={styles.closeButton}>
+          x
+        </button>
+        <ErrorMessage error={friendshipsError || usersError} onRetry={handleRetry} />
+      </CustomModal>
+    );
+  }
 
   return (
     <>
