@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 5000,
+    host: true,
   },
   test: {
     globals: true, // Lets us use globals like "describe", "test" and "it"
