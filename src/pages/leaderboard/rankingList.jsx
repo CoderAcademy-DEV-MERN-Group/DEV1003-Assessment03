@@ -1,5 +1,7 @@
 import { useLeaderboard } from "../../utilities/customHooks";
 import styles from "./leaderboard.module.scss";
+import LoadingSpinner from "../../components/common/LoadingScreenOverlay";
+import ErrorMessage from "../../components/common/ErrorMessage";
 
 export default function RankingList({ title }) {
   const { data, isLoading, error } = useLeaderboard();
@@ -12,6 +14,16 @@ export default function RankingList({ title }) {
       <td>{user.reelProgressCount}%</td>
     </tr>
   ));
+
+  if (isLoading) return <LoadingSpinner />;
+
+  if (error) {
+    return (
+      <section className={styles.rankings}>
+        <ErrorMessage error={error} />
+      </section>
+    );
+  }
 
   return (
     <div className={styles.rankings}>
