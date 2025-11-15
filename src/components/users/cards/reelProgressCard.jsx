@@ -3,16 +3,23 @@ import { useUserReelProgress } from "../../../utilities/customHooks";
 import LoadingSpinner from "../../common/LoadingScreenOverlay";
 import styles from "../UserComponents.module.scss";
 import { motion } from "framer-motion";
+import ErrorMessage from "../../common/ErrorMessage";
 
 export default function ReelProgressCard({ className }) {
   const { isAuthenticated } = useAuthContext();
 
-  const { data, isLoading } = useUserReelProgress({
+  const { data, isLoading, error, refetch } = useUserReelProgress({
     enabled: isAuthenticated,
   });
 
-  if (isLoading || !data) {
-    return <LoadingSpinner />;
+  if (isLoading || !data) return <LoadingSpinner />;
+
+  if (error) {
+    return (
+      <section className={className}>
+        <ErrorMessage error={error} onRetry={refetch} />
+      </section>
+    );
   }
 
   const progress = data.reelProgress.length;
