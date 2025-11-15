@@ -9,8 +9,11 @@ function CustomModal({ children, ...props }) {
   };
   // Remove inert and aria-hidden from root when modal is closed
   const closeModal = () => {
-    document.getElementById("root").removeAttribute("inert");
-    document.getElementById("root").removeAttribute("aria-hidden");
+    const root = document.getElementById("root");
+    if (root) {
+      root.removeAttribute("inert");
+      root.removeAttribute("aria-hidden");
+    }
   };
 
   return (
