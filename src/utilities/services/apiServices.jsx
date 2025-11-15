@@ -5,7 +5,7 @@ import API from "../constants/apiEndpoints";
 // Create a custom axios instance with custom configuration
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL, // Will set url depending on run command
-  timeout: 10000, // 10 seconds timeout for requests to prevent hanging
+  timeout: 5000, // 5 seconds timeout for requests to prevent hanging
   headers: { "Content-Type": "application/json" }, // Defaults headers to JSON format
 });
 

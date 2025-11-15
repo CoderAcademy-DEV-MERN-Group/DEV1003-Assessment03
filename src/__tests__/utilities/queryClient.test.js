@@ -20,8 +20,8 @@ describe("queryClient retry logic", () => {
   });
   // Test 5xx query errors retry up to 2 times
   it.each([[500], [502], [503]])("should retry %i query errors up to 2 times", (code) => {
-    expect(retryQuery(1, { status: code })).toBe(true);
-    expect(retryQuery(2, { status: code })).toBe(false);
+    expect(retryQuery(0, { status: code })).toBe(true);
+    expect(retryQuery(1, { status: code })).toBe(false);
   });
   // Test mutation with null status retries once
   it("should retry mutation with null status once", () => {

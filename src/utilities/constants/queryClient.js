@@ -9,8 +9,8 @@ export const queryClient = new QueryClient({
       retry: (failureCount, err) => {
         // 400-500 errors are client mistakes (like bad input) so don't retry
         if (err?.status >= 400 && err?.status < 500) return false;
-        // Boolean true continues retrying so will retry up to 2 times for other errors
-        return failureCount < 2;
+        // Retry once for network errors (faster feedback when backend is down)
+        return failureCount < 1;
       },
       staleTime: 5 * 60 * 1000, // Automatic refreshes won't trigger for 5 minutes
       refetchOnWindowFocus: false, // Don't refetch on window focus (like tab switch)
