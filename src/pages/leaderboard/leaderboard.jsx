@@ -2,10 +2,24 @@ import LeaderboardPodium from "../../components/common/leaderboardPodium";
 import RankingList from "./rankingList";
 import { useLeaderboard } from "../../utilities/customHooks";
 import styles from "./leaderboard.module.scss";
+import LoadingSpinner from "../../components/common/LoadingScreenOverlay";
+import ErrorMessage from "../../components/common/ErrorMessage";
 
 export default function Leaderboard() {
-  const { data } = useLeaderboard();
+  const { data, isLoading, error, refetch } = useLeaderboard();
   const topRankings = data?.reelProgressData.slice(0, 3).map((e) => e._id) || [];
+
+  if (isLoading) return <LoadingSpinner />;
+
+  if (error) {
+    return (
+      <section className={styles.leaderboard}>
+        <div className={styles.errorWrapper}>
+          <ErrorMessage error={error} onRetry={refetch} />
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className={styles.leaderboard}>

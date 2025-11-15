@@ -8,7 +8,12 @@ import LoadingSpinner from "../../components/common/LoadingScreenOverlay";
 import { useMemo, useState, useEffect } from "react";
 
 export default function ReelCanon() {
-  const { data: canon, isLoading: canonLoading, error: canonError } = useAllMovies();
+  const {
+    data: canon,
+    isLoading: canonLoading,
+    error: canonError,
+    refetch: refetchCanon,
+  } = useAllMovies();
 
   const { user, isAuthenticated } = useAuthContext();
 
@@ -16,6 +21,7 @@ export default function ReelCanon() {
     data: rpResponse,
     isLoading: progressLoading,
     error: progressError,
+    refetch: refetchProgress,
   } = useUserReelProgress({
     enabled: isAuthenticated,
   });
@@ -61,38 +67,46 @@ export default function ReelCanon() {
     }
   }, [visibleCount, movies.length]);
 
+  if (canonError) {
+    return <ErrorMessage error={canonError} onRetry={refetchCanon} />;
+  }
+
+  if (isAuthenticated && progressError && progressError.status !== 404) {
+    return <ErrorMessage error={progressError} onRetry={refetchProgress} />;
+  }
+
   if (canonLoading || progressLoading) {
     return <LoadingSpinner />;
   }
 
-  if (canonError) {
-    return (
-      <>
-        <div className={styles.reelProgress} />
-        <div className={styles.errorContainer}>
-          <ErrorMessage error={canonError.message} className={styles.errorMessage} />
-          <button onClick={() => window.location.reload()} className={styles.retryButton}>
-            Try Again
-          </button>
-        </div>
-      </>
-    );
-  }
+  // if (canonError) {
+  //   return (
+  //     <>
+  //       <div className={styles.reelProgress} />
+  //       <div className={styles.errorContainer}>
+  //         <ErrorMessage error={canonError.message} className={styles.errorMessage} />
+  //         <button onClick={() => window.location.reload()} className={styles.retryButton}>
+  //           Try Again
+  //         </button>
+  //       </div>
+  //     </>
+  //   );
+  // }
 
-  if (isAuthenticated && progressError && progressError.status !== 404) {
-    return (
-      <>
-        <div className={styles.reelProgress} />
-        <div className={styles.errorContainer}>
-          <ErrorMessage error={progressError.message} className={styles.errorMessage} />
-          <p className={styles.errorMessage}>Movie data loaded, but progress failed to load.</p>
-          <button onClick={() => window.location.reload()} className={styles.retryButton}>
-            Try Again
-          </button>
-        </div>
-      </>
-    );
-  }
+  // if (isAuthenticated && progressError && progressError.status !== 404) {
+  //   return (
+  //     <>
+  //       <div className={styles.reelProgress} />
+  //       <div className={styles.errorContainer}>
+  //         <ErrorMessage error={progressError.message} className={styles.errorMessage} />
+  //         <p className={styles.errorMessage}>Movie data loaded, but progress failed to load.</p>
+  //         <button onClick={() => window.location.reload()} className={styles.retryButton}>
+  //           Try Again
+  //         </button>
+  //       </div>
+  //     </>
+  //   );
+  // }
 
   return (
     <div>

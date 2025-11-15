@@ -9,6 +9,13 @@
   overflow: hidden;
 }
 
+.errorWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
 .title {
   h1 {
     margin-top: 0;
@@ -86,7 +93,7 @@
 @include tablet {
   .leaderboard {
     height: auto;
-    margin-top: 7.50dvh;
+    margin-top: 7.5dvh;
     overflow: visible;
   }
 
@@ -100,7 +107,7 @@
       order: -1;
     }
 
-    .rankings{
+    .rankings {
       margin-top: 8%;
       width: 500px;
     }
@@ -110,9 +117,9 @@
 @include mobile {
   .leaderboard {
     height: auto;
-    margin-top: 7.50dvh;
+    margin-top: 7.5dvh;
     overflow: visible;
-    padding:8%;
+    padding: 8%;
   }
 
   .featureContainer {
@@ -126,7 +133,7 @@
       order: -1;
     }
 
-    .rankings{
+    .rankings {
       min-width: auto;
       margin-top: 8%;
 

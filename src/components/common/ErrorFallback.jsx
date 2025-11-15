@@ -7,7 +7,7 @@ export default function ErrorFallback({ error, resetErrorBoundary }) {
     <div role="alert" aria-live="polite" className="error-fallback">
       <h2>Something went wrong.</h2>
       {/* Passing resetErrorBoundary means clicking retry will call function that re-renders */}
-      <ErrorMessage error={error?.message} onRetry={resetErrorBoundary} className="ErrorFallback" />
+      <ErrorMessage error={error?.message} onRetry={resetErrorBoundary} />
     </div>
   );
 }

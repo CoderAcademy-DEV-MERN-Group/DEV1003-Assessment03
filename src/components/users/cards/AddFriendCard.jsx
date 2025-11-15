@@ -7,11 +7,23 @@ import {
 } from "../../../utilities/customHooks";
 import styles from "../UserComponents.module.scss";
 import toast from "react-hot-toast";
+import ErrorMessage from "../../common/ErrorMessage";
+import LoadingSpinner from "../../common/LoadingScreenOverlay";
 
 export default function AddFriendCard({ className }) {
   const { user: currentUser } = useAuthContext();
-  const { data: allUsersData } = useAllUsers();
-  const { data: allFriendshipsData } = useAllFriendships();
+  const {
+    data: allUsersData,
+    isLoading: usersLoading,
+    error: usersError,
+    refetch: refetchUsers,
+  } = useAllUsers();
+  const {
+    data: allFriendshipsData,
+    isLoading: friendshipsLoading,
+    error: friendshipsError,
+    refetch: refetchFriendships,
+  } = useAllFriendships();
   const { mutate: addFriend, isPending } = useCreateFriendship();
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -63,6 +75,20 @@ export default function AddFriendCard({ className }) {
         </button>
       </div>
     ));
+  }
+
+  if (usersLoading || friendshipsLoading) return <LoadingSpinner />;
+
+  if (usersError || friendshipsError) {
+    const handleRetry = () => {
+      if (usersError) refetchUsers();
+      if (friendshipsError) refetchFriendships();
+    };
+    return (
+      <section className={className}>
+        <ErrorMessage error={usersError || friendshipsError} onRetry={handleRetry} />
+      </section>
+    );
   }
 
   return (

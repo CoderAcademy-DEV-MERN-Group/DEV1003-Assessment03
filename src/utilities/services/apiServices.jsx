@@ -5,7 +5,7 @@ import API from "../constants/apiEndpoints";
 // Create a custom axios instance with custom configuration
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL, // Will set url depending on run command
-  timeout: 10000, // 10 seconds timeout for requests to prevent hanging
+  timeout: 5000, // 5 seconds timeout for requests to prevent hanging
   headers: { "Content-Type": "application/json" }, // Defaults headers to JSON format
 });
 
@@ -140,8 +140,19 @@ export const getMovieByImdbId = async (imdbId) =>
 // REEL-PROGRESS ROUTES
 
 // Get reel-progress array for logged in user
-export const getUserReelProgress = async () =>
-  callApi(() => api.get(API.REEL_PROGRESS), "Error fetching user reel-progress");
+export const getUserReelProgress = async () => {
+  try {
+    const res = await api.get("/reel-progress");
+    return res.data;
+  } catch (err) {
+    // If 404, return empty array (no reel progress exists yet)
+    if (err.response?.status === 404) {
+      return { reelProgress: [] };
+    }
+    console.error(`Error fetching user reel-progress: ${err}`);
+    throw handleApiError(err);
+  }
+};
 
 // Update reel-progress by adding a new movie to reel-progress array
 export const addMovieToReelProgress = async (movieBodyData) =>
