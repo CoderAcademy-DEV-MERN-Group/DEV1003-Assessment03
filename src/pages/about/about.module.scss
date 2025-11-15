@@ -45,6 +45,7 @@
   flex-basis: 30%;
   box-shadow: 0px 0.4rem 0.5rem 0.5rem rgba(color(base-gold), 0.637);
   padding: spacing(md);
+  overflow: scroll;
 
   p {
     font-size: 1.1rem;
