@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, waitFor, fireEvent } from "../testUtils";
-import NavbarHeader from "../../components/navbarHeader";
+import NavbarHeader from "../../components/NavbarHeader";
 import * as api from "../../utilities/services/apiServices";
 import {
   HOME,
