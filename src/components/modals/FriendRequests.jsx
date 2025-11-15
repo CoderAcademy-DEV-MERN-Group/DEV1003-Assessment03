@@ -2,7 +2,7 @@ import { useState } from "react";
 import CustomModal from "./CustomModal";
 import { useAuthContext } from "../../contexts/useAuthContext";
 import { useAllFriendships, useAllUsers, useUpdateFriendship } from "../../utilities/customHooks";
-import styles from "./Modals.module.scss";
+import styles from "../styles/Modals.module.scss";
 import LoadingSpinner from "../common/LoadingScreenOverlay";
 import toast from "react-hot-toast";
 import DeleteFriendship from "./DeleteFriendship";

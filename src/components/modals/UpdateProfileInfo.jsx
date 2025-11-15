@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 // React hook form provides form management without useState
 import clsx from "clsx";
-import styles from "./Modals.module.scss";
+import styles from "../styles/Modals.module.scss";
 import { useForm } from "react-hook-form";
 import { useAuthContext } from "../../contexts/useAuthContext";
 import toast from "react-hot-toast";

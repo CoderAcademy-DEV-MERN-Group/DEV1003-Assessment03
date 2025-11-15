@@ -2,7 +2,7 @@ import clsx from "clsx";
 import CustomModal from "./CustomModal";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import styles from "./Modals.module.scss";
+import styles from "../styles/Modals.module.scss";
 import { useLogoutUser } from "../../utilities/customHooks/useAuth";
 import { useAuthContext } from "../../contexts/useAuthContext";
 

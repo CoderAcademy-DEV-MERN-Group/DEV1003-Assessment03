@@ -1,6 +1,6 @@
 // Custom Modal component so we can create common settings
 import Modal from "react-modal";
-import styles from "./Modals.module.scss";
+import styles from "../styles/Modals.module.scss";
 
 function CustomModal({ children, ...props }) {
   // Set inert on root when modal is open for accessibility

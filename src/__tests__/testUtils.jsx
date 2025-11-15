@@ -5,7 +5,7 @@ vitest object that replaces real api calls from apiServices with vitest spies*/
 import { render } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom";
-import AuthProvider from "../contexts/authProvider";
+import AuthProvider from "../contexts/AuthProvider";
 import { vi } from "vitest";
 
 /* Vitest mock object that replaces real API calls from apiServices with vitest spies, running

@@ -1,5 +1,5 @@
 import CustomModal from "./CustomModal";
-import styles from "./Modals.module.scss";
+import styles from "../styles/Modals.module.scss";
 import GitHubLogo from "../../assets/images/github-mark-white.png";
 
 function Terms({ isOpen, onClose }) {

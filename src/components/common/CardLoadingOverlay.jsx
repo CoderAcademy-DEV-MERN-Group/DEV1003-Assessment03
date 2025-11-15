@@ -8,7 +8,7 @@ export default function CardLoadingOverlay({ message = "Loading..." }) {
         <article className={styles.starsContainer}>
           {["⭐", "🌟", "⭐"].map((star, index) => (
             <motion.span
-              key={index}
+              key={`star-${index + 1}`}
               animate={{
                 y: [0, -10, 0],
                 rotate: [0, 10, 0],

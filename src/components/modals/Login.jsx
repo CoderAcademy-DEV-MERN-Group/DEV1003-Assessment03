@@ -3,7 +3,7 @@
 import clsx from "clsx";
 import CustomModal from "./CustomModal";
 import { useForm } from "react-hook-form";
-import styles from "./Modals.module.scss";
+import styles from "../styles/Modals.module.scss";
 import { useLoginUser } from "../../utilities/customHooks/useAuth";
 import { useAuthContext } from "../../contexts/useAuthContext";
 import toast from "react-hot-toast";

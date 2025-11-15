@@ -2,7 +2,7 @@ import { useState } from "react";
 import CustomModal from "./CustomModal";
 import toast from "react-hot-toast";
 import { useDeleteFriendship } from "../../utilities/customHooks/useFriendships";
-import styles from "./Modals.module.scss";
+import styles from "../styles/Modals.module.scss";
 
 export default function DeleteFriendship({
   isOpen,
