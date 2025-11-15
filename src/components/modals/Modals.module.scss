@@ -171,15 +171,10 @@ h2 {
 
 // Button Styles
 .modalButton {
-  @include button-reset;
-  width: 30%;
+  @include modal-action-button;
   margin-left: 35%;
-  margin-top: 5%;
-  padding: spacing(md);
-  font-size: 1.1rem;
   color: color(accent-gold);
   background: color(primary-dark);
-  border-radius: 5px;
   border-color: color(base-gold);
   box-shadow: 1px 1px 1px 1px color(secondary-shadow);
   cursor: pointer;
@@ -189,14 +184,6 @@ h2 {
     background: rgba(color(primary), 0.9);
     scale: 1.1;
   }
-
-  &.buttonLoading {
-    background: #a0aec0;
-  }
-
-  &.buttonDisabled {
-    filter: grayscale(0.9);
-  }
 }
 
 .buttonSection {
@@ -205,56 +192,28 @@ h2 {
 }
 
 .deleteButton {
-  @include button-reset;
-  width: 30%;
-  // margin-left: 41%;
-  margin-top: 5%;
-  padding: spacing(md);
+  @include modal-action-button;
   background: color(secondary);
   color: color(white);
-  border-radius: radius(md);
   font-weight: 600;
-  font-size: 1rem;
   transition: all 0.3s ease-in-out;
 
   &:hover:not(:disabled) {
     background: color(red);
     transform: translateY(-1px);
-  }
-
-  &.buttonLoading {
-    background: #a0aec0;
-  }
-
-  &.buttonDisabled {
-    filter: grayscale(0.9);
   }
 }
 
 .cancelButton {
-  @include button-reset;
-  width: 30%;
-  // margin-left: 41%;
-  margin-top: 5%;
-  padding: spacing(md);
+  @include modal-action-button;
   background: color(green);
   color: color(white);
-  border-radius: radius(md);
   font-weight: 600;
-  font-size: 1rem;
   transition: all 0.3s ease-in-out;
 
   &:hover:not(:disabled) {
     background: color(red);
     transform: translateY(-1px);
-  }
-
-  &.buttonLoading {
-    background: #a0aec0;
-  }
-
-  &.buttonDisabled {
-    filter: grayscale(0.9);
   }
 }
 

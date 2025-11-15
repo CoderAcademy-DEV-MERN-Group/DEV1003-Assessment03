@@ -108,3 +108,21 @@
     opacity: 0.6;
   }
 }
+
+// Modal action button mixin (shared styles for modalButton, deleteButton, cancelButton)
+@mixin modal-action-button {
+  @include button-reset;
+  width: 30%;
+  margin-top: 5%;
+  padding: spacing(md);
+  font-size: 1rem;
+  border-radius: radius(md);
+
+  &.buttonLoading {
+    background: #a0aec0;
+  }
+
+  &.buttonDisabled {
+    filter: grayscale(0.9);
+  }
+}
