@@ -1,7 +1,9 @@
 // Error message component that only renders when an error is passed as a prop and exists
+import styles from "../styles/ErrorMessage.module.scss";
+
 export default function ErrorMessage({
   error,
-  className = "",
+  className = null,
   onRetry,
   showDetailedErrors = true,
 }) {
@@ -22,7 +24,7 @@ export default function ErrorMessage({
   }
   // role="alert" & aria-live="polite" are for screen reader accessibility
   return (
-    <div className={className} role="alert" aria-live="polite">
+    <div className={className || styles.errorContainer} role="alert" aria-live="polite">
       <div>
         <p>{errorMessage}</p>
         {/* Render list of detailed errors if exists and showDetailedErrors not set to false */}
