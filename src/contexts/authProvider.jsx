@@ -74,9 +74,7 @@ export default function AuthProvider({ children }) {
   };
 
   // While auth check is happening, render this. Render app after it finishes.
-  if (isLoading) {
-    return <LoadingSpinner />; // Can replace with a spinner animation or something
-  }
+  if (isLoading) return <LoadingSpinner />;
 
   // Provide auth data and functions to all nested components
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

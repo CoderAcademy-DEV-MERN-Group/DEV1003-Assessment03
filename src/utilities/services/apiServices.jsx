@@ -140,8 +140,19 @@ export const getMovieByImdbId = async (imdbId) =>
 // REEL-PROGRESS ROUTES
 
 // Get reel-progress array for logged in user
-export const getUserReelProgress = async () =>
-  callApi(() => api.get(API.REEL_PROGRESS), "Error fetching user reel-progress");
+export const getUserReelProgress = async () => {
+  try {
+    const res = await api.get("/reel-progress");
+    return res.data;
+  } catch (err) {
+    // If 404, return empty array (no reel progress exists yet)
+    if (err.response?.status === 404) {
+      return { reelProgress: [] };
+    }
+    console.error(`Error fetching user reel-progress: ${err}`);
+    throw handleApiError(err);
+  }
+};
 
 // Update reel-progress by adding a new movie to reel-progress array
 export const addMovieToReelProgress = async (movieBodyData) =>
