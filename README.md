@@ -35,9 +35,37 @@ Check out this section for further details on the current version features and f
 
 ## Programming Style Guide
 
-This project adheres to the [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) enforced through ESLint [`eslint.config.js`](eslint.config.js) and Prettier [`.prettierrc`](.prettierrc) which have been configured to automatically check and format code accoding to the Airbnb style guide rules. This style guide enables our code to be more consistent, readable, predictable and efficient to support overall quality maintainability and collaboration within our development team.
+This project uses a customised version of the [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) enforced through ESLint [`eslint.config.js`](eslint.config.js) and Prettier [`.prettierrc`](.prettierrc) which have been configured to automatically check and format code according to the Airbnb style guide rules. This style guide enables our code to be more consistent, readable, predictable and efficient to support overall quality maintainability and collaboration within our development team.
 
-<!-- Changed linter rules, what we changes and why "We made this change due to blah blah" -->
+Using Airbnb's style guide as a base, we made a few notable changes listed below:
+
+| Changes                | Our Choice     | Airbnb        | Purpose of Change                                                                                                                                                                                                                                  |
+| ---------------------- | -------------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| JSX in `.js`           | Disallowed     | Allowed       | Running with Vite more seamlessly, and more strict definition between components (.jsx) and helper functions (.js)                                                                                                                                 |
+| Default exports        | Optional       | Required      | Better for modern React applications which prefer named imports instead of default                                                                                                                                                                 |
+| PropTypes              | Off + Not Used | Required      | By using Tanstack Query to share query data across routes, using simple and stable props where applied, and by knowing the exact shape of response data from our Back-End, prop types add noise: safety comes from Backend Schema + Tanstack Query |
+| Prop spreading         | Warn           | Error         | Enables React-Hook-Form `register(...)` pattern without boilerplate                                                                                                                                                                                |
+| Array destructuring    | Skipped        | Enforced      | Object destructuring more closely aligns with our backend API responses, array destructing was not deemed necessary                                                                                                                                |
+| `_unused` vars         | Allowed        | Only for args | Unused event handlers, props or state are safe and more human readable                                                                                                                                                                             |
+| a11y interaction rules | Warn           | Error         | Warn is closer to current industry standards for click events. Netflix, Shopify, GitHub use warn or off to avoid false positives                                                                                                                   |
+| Prettier               | Integrated     | Not included  | Added to automatically enforce style rules                                                                                                                                                                                                         |
+
+### ESLint & Style Guide Policy
+
+We follow **Airbnb principles** but **optimize for our stack**:
+
+**We DO NOT enforce**:
+
+- `react/prop-types` → Data shape guaranteed by backend + TanStack Query
+- `prefer-destructuring` for arrays → No benefit
+- `import/prefer-default-export` → Named exports preferred
+
+**We DO enforce**:
+
+- `.jsx` for components only
+- Prettier via `eslint-plugin-prettier`
+- Prop spreading only with intent (`react-hook-form`)
+- Vite HMR rules
 
 ---
 
@@ -195,24 +223,24 @@ To run this app, you need:
 
 All technologies and packages are documented below with **industry relevance**, **purpose**, **alternatives**, and **license**. See [Third-party Licenses](#third-party-licenses) for versioned list.
 
-| Technology / Package         | Purpose                                                          | Industry Relevance                                        | Alternatives                        |
-| ---------------------------- | ---------------------------------------------------------------- | --------------------------------------------------------- | ----------------------------------- |
-| **JavaScript (ES6+)**        | Core language                                                    | Universal web standard                                    | TypeScript (static typing)          |
-| **JSX**                      | Syntax extension for React                                       | De facto in React ecosystem                               | Template literals (rare)            |
-| **HTML / CSS / Sass**        | Structure & styling                                              | Sass: 2.1M weekly downloads (npm, Nov 2025)               | Tailwind, CSS-in-JS                 |
-| **`react-dom`**              | Renders React to DOM                                             | Required for all React web apps                           | None (core)                         |
-| **`react-router-dom`**       | Client-side routing                                              | 12M weekly downloads; standard in SPAs                    | Next.js App Router, TanStack Router |
-| **`react-hook-form`**        | Uncontrolled form state & validation - used for register page    | 8.7M downloads; performance leader                        | Formik (heavier), Zod + useForm     |
-| **`clsx`**                   | Conditional className logic - used sparingly for readable code   | 15M+ downloads; tiny (1KB)                                | classnames, template literals       |
-| **`framer-motion`**          | Declarative animations - used across UI features                 | Used in 40% of motion-heavy React apps (State of JS 2024) | React Spring, GSAP                  |
-| **`react-hot-toast`**        | Toast notifications - used for selected success and error states | 6M+ downloads; zero-config                                | react-toastify                      |
-| **`react-error-boundary`**   | Error fallbacks - used across all routes                         | Standard for production error UX                          | Custom try/catch in components      |
-| **`react-burger-menu`**      | Mobile nav drawer - used in tablet and mobile breakpoints        | Niche but accessible                                      | Custom drawer, Headless UI          |
-| **`@formspree/react`**       | Serverless form backend - used for our contact us form           | 1.2M downloads; no backend needed                         | EmailJS, custom API                 |
-| **`vitest`**                 | Unit testing                                                     | 1.8M weekly downloads; 3× faster than Jest in Vite        | Jest (enterprise), Mocha            |
-| **`@testing-library/react`** | Component testing                                                | 22M downloads; testing best practice                      | Enzyme (legacy)                     |
-| **`eslint` + `prettier`**    | Linting & formatting                                             | Enforced in 80%+ of JS codebases (State of JS)            | Biome, standardlint                 |
-| **`@vitejs/plugin-react`**   | React Fast Refresh in Vite                                       | Enables HMR                                               | Create React App (deprecated), Webpack           |
+| Technology / Package         | Purpose                                                          | Industry Relevance                                        | Alternatives                           |
+| ---------------------------- | ---------------------------------------------------------------- | --------------------------------------------------------- | -------------------------------------- |
+| **JavaScript (ES6+)**        | Core language                                                    | Universal web standard                                    | TypeScript (static typing)             |
+| **JSX**                      | Syntax extension for React                                       | De facto in React ecosystem                               | Template literals (rare)               |
+| **HTML / CSS / Sass**        | Structure & styling                                              | Sass: 2.1M weekly downloads (npm, Nov 2025)               | Tailwind, CSS-in-JS                    |
+| **`react-dom`**              | Renders React to DOM                                             | Required for all React web apps                           | None (core)                            |
+| **`react-router-dom`**       | Client-side routing                                              | 12M weekly downloads; standard in SPAs                    | Next.js App Router, TanStack Router    |
+| **`react-hook-form`**        | Uncontrolled form state & validation - used for register page    | 8.7M downloads; performance leader                        | Formik (heavier), Zod + useForm        |
+| **`clsx`**                   | Conditional className logic - used sparingly for readable code   | 15M+ downloads; tiny (1KB)                                | classnames, template literals          |
+| **`framer-motion`**          | Declarative animations - used across UI features                 | Used in 40% of motion-heavy React apps (State of JS 2024) | React Spring, GSAP                     |
+| **`react-hot-toast`**        | Toast notifications - used for selected success and error states | 6M+ downloads; zero-config                                | react-toastify                         |
+| **`react-error-boundary`**   | Error fallbacks - used across all routes                         | Standard for production error UX                          | Custom try/catch in components         |
+| **`react-burger-menu`**      | Mobile nav drawer - used in tablet and mobile breakpoints        | Niche but accessible                                      | Custom drawer, Headless UI             |
+| **`@formspree/react`**       | Serverless form backend - used for our contact us form           | 1.2M downloads; no backend needed                         | EmailJS, custom API                    |
+| **`vitest`**                 | Unit testing                                                     | 1.8M weekly downloads; 3× faster than Jest in Vite        | Jest (enterprise), Mocha               |
+| **`@testing-library/react`** | Component testing                                                | 22M downloads; testing best practice                      | Enzyme (legacy)                        |
+| **`eslint` + `prettier`**    | Linting & formatting                                             | Enforced in 80%+ of JS codebases (State of JS)            | Biome, standardlint                    |
+| **`@vitejs/plugin-react`**   | React Fast Refresh in Vite                                       | Enables HMR                                               | Create React App (deprecated), Webpack |
 
 ---
 
@@ -318,8 +346,8 @@ These are the available scripts that you can run in this project directory:
 
 ## Deployment
 
-Front-End: Netlify (https://the-reel-canon.netlify.app/)
-Back-End: Render (https://the-reel-canon.onrender.com/movies/reel-canon)
+Front-End: Netlify [The Century Screening Room](https://the-reel-canon.netlify.app/)
+Back-End: Render [The Reel Canon](https://the-reel-canon.onrender.com/movies/reel-canon)
 
 ---
 
