@@ -359,10 +359,16 @@ Below is a list of current and future plans for improving functionality and feat
 - **User Authentication and Authorisation:**
   - JWT-based authentication with protected routes.
     - User can Register and Login to manage their user accounts and profiles including Edit their profile info and update password.
+
+![A screenshot of the login modal](./src/assets/images/sign-in-modal.png)
+
 - **Movie Browsing with the "Reel Canon" with 100 loaded movies:**
   - Explore the curated list of 100 films via movie cards (with graphic animations effect) including a brief summary about the movie.
 - **Rating System:**
   - Rate movies from 1 to 5 stars after watching.
+
+![A screenshot of the Reel Canon page in deployment](./src/assets/images/deployed-reel-canon.png)
+
 - **"Reel" Progress tracking:**
   - Visual "Popcorn Meter" that shows how many percent of the Reel Canon the user has watched.
   - Ability to mark movies as "Watched" or "Unwatched".
@@ -375,13 +381,21 @@ Below is a list of current and future plans for improving functionality and feat
   - Search for other users by usernames to send and accept friend requests.
   - View friends list on profile page.
   - Check Friend Request notifications to see received and sent requests including other user's username, status of request and ability to action to accept or decline requests.
+
+![A screenshot of the My Profile page](./src/assets/images/deployed-my-profile.png)
+
 - **Leaderboard:**
   - Global leaderboard ranking users based on number of movies watched, their username and completion percentage of how much of the Reel Canon they have watched.
   - View top 3 ranking users and their stats.
+
+![A screenshot of the leaderboard](./src/assets/images/deployed-leaderboard.png)
+
 - **Contact Form:**
   - Contact form for users to submit feedback or inquiries.
   - Form submissions are sent via Formspree service.
   - Form validation and success/error notifications.
+
+![A screenshot of the contact us form](./src/assets/images/deployed-contact-us.png)
 
   **Planned Releases:**
 
