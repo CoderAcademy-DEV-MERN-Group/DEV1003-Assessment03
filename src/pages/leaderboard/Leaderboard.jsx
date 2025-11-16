@@ -22,7 +22,7 @@ export default function Leaderboard() {
   }
 
   return (
-    <section className={styles.leaderboard}>
+    <main className={styles.leaderboard}>
       <article className={styles.title}>
         <h1>Leaderboard</h1>
       </article>
@@ -30,6 +30,6 @@ export default function Leaderboard() {
         <LeaderboardPodium className={styles.podium} rankings={topRankings} />
         <RankingList className={styles.list} title="Ranking List" />
       </article>
-    </section>
+    </main>
   );
 }

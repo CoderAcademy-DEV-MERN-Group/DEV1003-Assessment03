@@ -22,14 +22,14 @@ function Header() {
   const navigate = useNavigate();
 
   return (
-    <nav className={styles.navbar}>
+    <header className={styles.navbar}>
       {/* Logo */}
       <NavLink to="/" className={styles.logo} end>
         <img className={styles.logoImg} src={logo} alt="Logo" />
       </NavLink>
 
       {/* Link section */}
-      <section className={styles.pageLinks}>
+      <nav className={styles.pageLinks}>
         <NavLink
           to={HOME}
           className={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
@@ -66,11 +66,11 @@ function Header() {
         >
           About
         </NavLink>
-      </section>
+      </nav>
 
       {/* Modal Buttons only appear when authentication is in the correct state*/}
 
-      <section className={styles.modalButtons}>
+      <nav className={styles.modalButtons}>
         {isAuthenticated ? (
           <>
             <FriendRequestButton />
@@ -91,8 +91,8 @@ function Header() {
         )}
         <Login isOpen={showLogin} onClose={() => setShowLogin(false)} />
         <Logout isOpen={showLogout} onClose={() => setShowLogout(false)} />
-      </section>
-    </nav>
+      </nav>
+    </header>
   );
 }
 

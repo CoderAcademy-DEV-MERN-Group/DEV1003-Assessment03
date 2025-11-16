@@ -14,8 +14,8 @@ export default function UserProfile() {
   const [showUpdatePassword, setShowUpdatePassword] = useState(false);
 
   return (
-    <div className={styles.profilePage}>
-      <div className={styles.userButtons}>
+    <main className={styles.profilePage}>
+      <section className={styles.userButtons}>
         <button onClick={() => setShowUpdateProfile(true)} className={styles.modalButton}>
           Edit Profile Info
         </button>
@@ -25,16 +25,16 @@ export default function UserProfile() {
         <button onClick={() => setShowDeleteProfile(true)} className={styles.deleteButton}>
           Delete Profile
         </button>
-      </div>
-      <div className={styles.userCards}>
+      </section>
+      <section className={styles.userCards}>
         <UserInfoCard className={styles.userInfoCard} />
         <AddFriendCard className={styles.userAddFriendsCard} />
         <FriendsCard className={styles.userFriendsCard} />
         <ReelProgressCard className={styles.userReelProgressCard} />
-      </div>
+      </section>
       <UpdateProfile isOpen={showUpdateProfile} onClose={() => setShowUpdateProfile(false)} />
       <UpdatePassword isOpen={showUpdatePassword} onClose={() => setShowUpdatePassword(false)} />
       <DeleteUser isOpen={showDeleteProfile} onClose={() => setShowDeleteProfile(false)} />
-    </div>
+    </main>
   );
 }

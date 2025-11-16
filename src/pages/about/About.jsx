@@ -10,7 +10,7 @@ export default function About() {
   const [showContact, setShowContact] = useState(false);
 
   return (
-    <div className={styles.aboutPage}>
+    <main className={styles.aboutPage}>
       <h1>Everything, Everyone, All At Once!</h1>
 
       <section className={styles.aboutTheSite}>
@@ -93,6 +93,6 @@ export default function About() {
         </button>
         <ContactUs isOpen={showContact} onClose={() => setShowContact(false)} />
       </section>
-    </div>
+    </main>
   );
 }
