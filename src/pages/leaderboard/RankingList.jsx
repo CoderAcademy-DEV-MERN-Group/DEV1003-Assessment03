@@ -26,9 +26,9 @@ export default function RankingList({ title }) {
   }
 
   return (
-    <div className={styles.rankings}>
+    <section className={styles.rankings}>
       <h2>{title}</h2>
-      <div className={styles.tableWrapper}>
+      <section className={styles.tableWrapper}>
         <table>
           <thead>
             <tr>
@@ -39,7 +39,7 @@ export default function RankingList({ title }) {
           </thead>
           <tbody>{rankingTable}</tbody>
         </table>
-      </div>
-    </div>
+      </section>
+    </section>
   );
 }

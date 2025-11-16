@@ -71,6 +71,7 @@ export default function UpdateProfile({ isOpen, onClose }) {
             <input
               id="email"
               type="email"
+              autoComplete="email"
               {...register("email", {
                 // Input validation rules go here!
                 pattern: {
@@ -91,6 +92,7 @@ export default function UpdateProfile({ isOpen, onClose }) {
             <label htmlFor="username">Username: </label>
             <input
               id="username"
+              autoComplete="username"
               type="text"
               {...register("username", {
                 minLength: {

@@ -323,7 +323,6 @@ Appropriate explanation of ALL of the hardware and software technologies used wi
 - **`react-router-dom`** - Handles client-side routing and navigation between pages
 - **`react-hook-form`** - Simplifies form input handling and validation for login/registration forms
 - **`clsx`** - Utility for conditionally joining CSS class names
-- **`sass`** - CSS preprocessor for advanced styling features
 - **`react-modal`** - Creates accessible modal dialogues
 - **`react-hot-toast`** - Displays toast notifications for user feedback
 - **`react-error-boundary`** - Catches and handles React component errors gracefully
@@ -357,6 +356,7 @@ Appropriate explanation of ALL of the hardware and software technologies used wi
 
 - **`eslint`** - JavaScript linter for code quality
 - **`prettier`** - Code formatter
+- **`sass`** - CSS preprocessor for advanced styling features
 - Multiple ESLint plugins for React, accessibility, imports and code style
 
 ---
@@ -365,49 +365,44 @@ Appropriate explanation of ALL of the hardware and software technologies used wi
 
 The project uses the following open-source packages with their versions and licenses:
 
-| Package Version                           | License           |
-| ----------------------------------------- | ----------------- |
-| @eslint/js 9.36.0                         | MIT               |
-| @formspree/react 3.0.0                    | MIT               |
-| @fortawesome/free-regular-svg-icons 7.1.0 | CC-BY-4.0 AND MIT |
-| @fortawesome/free-solid-svg-icons 7.1.0   | CC-BY-4.0 AND MIT |
-| @fortawesome/react-fontawesome 3.1.0      | MIT               |
-| @tanstack/eslint-plugin-query 5.91.2      | MIT               |
-| @tanstack/react-query 5.90.6              | MIT               |
-| @testing-library/jest-dom 6.9.1           | MIT               |
-| @testing-library/react 16.3.0             | MIT               |
-| @testing-library/user-event 14.6.1        | MIT               |
-| @types/react 19.1.16                      | MIT               |
-| @types/react-dom 19.1.9                   | MIT               |
-| @vitejs/plugin-react 5.1.0                | MIT               |
-| @vitest/ui 4.0.8                          | MIT               |
-| axios 1.13.1                              | MIT               |
-| clsx 2.1.1                                | MIT               |
-| eslint 9.36.0                             | MIT               |
-| eslint-config-prettier 10.1.8             | MIT               |
-| eslint-import-resolver-node 0.3.9         | MIT               |
-| eslint-plugin-import 2.32.0               | MIT               |
-| eslint-plugin-jsx-a11y 6.10.2             | MIT               |
-| eslint-plugin-prettier 5.5.4              | MIT               |
-| eslint-plugin-react 7.37.5                | MIT               |
-| eslint-plugin-react-hooks 5.2.0           | MIT               |
-| eslint-plugin-react-refresh 0.4.22        | MIT               |
-| framer-motion 12.23.24                    | MIT               |
-| globals 16.4.0                            | MIT               |
-| jsdom 27.1.0                              | MIT               |
-| prettier 3.6.2                            | MIT               |
-| react 19.1.1                              | MIT               |
-| react-burger-menu 3.1.0                   | MIT               |
-| react-dom 19.1.1                          | MIT               |
-| react-error-boundary 6.0.0                | MIT               |
-| react-hook-form 7.66.0                    | MIT               |
-| react-hot-toast 2.6.0                     | MIT               |
-| react-intersection-observer 10.0.0        | MIT               |
-| react-modal 3.16.3                        | MIT               |
-| react-router-dom 7.9.5                    | MIT               |
-| sass 1.93.3                               | MIT               |
-| vite 7.1.7                                | MIT               |
-| vitest 4.0.8                              | MIT               |
+| Package Version                         | License           |
+| --------------------------------------- | ----------------- |
+| @eslint/js 9.36.0                       | MIT               |
+| @formspree/react 3.0.0                  | MIT               |
+| @fortawesome/free-solid-svg-icons 7.1.0 | CC-BY-4.0 AND MIT |
+| @fortawesome/react-fontawesome 3.1.0    | MIT               |
+| @tanstack/react-query 5.90.6            | MIT               |
+| @testing-library/jest-dom 6.9.1         | MIT               |
+| @testing-library/react 16.3.0           | MIT               |
+| @vitejs/plugin-react 5.1.0              | MIT               |
+| @vitest/ui 4.0.8                        | MIT               |
+| axios 1.13.1                            | MIT               |
+| clsx 2.1.1                              | MIT               |
+| eslint 9.36.0                           | MIT               |
+| eslint-config-prettier 10.1.8           | MIT               |
+| eslint-import-resolver-node 0.3.9       | MIT               |
+| eslint-plugin-import 2.32.0             | MIT               |
+| eslint-plugin-jsx-a11y 6.10.2           | MIT               |
+| eslint-plugin-prettier 5.5.4            | MIT               |
+| eslint-plugin-react 7.37.5              | MIT               |
+| eslint-plugin-react-hooks 5.2.0         | MIT               |
+| eslint-plugin-react-refresh 0.4.22      | MIT               |
+| framer-motion 12.23.24                  | MIT               |
+| globals 16.4.0                          | MIT               |
+| jsdom 27.1.0                            | MIT               |
+| prettier 3.6.2                          | MIT               |
+| react 19.1.1                            | MIT               |
+| react-burger-menu 3.1.0                 | MIT               |
+| react-dom 19.1.1                        | MIT               |
+| react-error-boundary 6.0.0              | MIT               |
+| react-hook-form 7.66.0                  | MIT               |
+| react-hot-toast 2.6.0                   | MIT               |
+| react-intersection-observer 10.0.0      | MIT               |
+| react-modal 3.16.3                      | MIT               |
+| react-router-dom 7.9.5                  | MIT               |
+| sass 1.93.3                             | MIT               |
+| vite 7.1.7                              | MIT               |
+| vitest 4.0.8                            | MIT               |
 
 ---
 

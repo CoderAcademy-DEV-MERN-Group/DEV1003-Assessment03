@@ -43,11 +43,19 @@ function ContactUs({ isOpen, onClose }) {
           <legend> What's on your mind? </legend>
           <p>
             <label htmlFor="email">Email: </label>
-            <input name="email" type="email" className={styles.modalInput} required />
+            <input
+              id="email"
+              name="email"
+              type="email"
+              className={styles.modalInput}
+              required
+              autoComplete="email"
+            />
           </p>
           <p>
             <label htmlFor="message">Message: </label>
             <textarea
+              id="message"
               name="message"
               type="text"
               className={styles.modalTextarea}

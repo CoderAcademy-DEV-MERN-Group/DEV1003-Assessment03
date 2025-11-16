@@ -78,7 +78,7 @@ export default function ReelCanon() {
   if (canonLoading || progressLoading) return <LoadingSpinner />;
 
   return (
-    <div>
+    <main>
       <section className={styles.reelCanon}>
         <article className={styles.title}>
           <h1>The Reel Canon</h1>
@@ -101,6 +101,6 @@ export default function ReelCanon() {
 
         {visibleCount < movies.length && <LoadingSpinner />}
       </section>
-    </div>
+    </main>
   );
 }
