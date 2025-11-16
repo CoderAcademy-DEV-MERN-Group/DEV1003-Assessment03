@@ -93,8 +93,9 @@ export default function AddFriendCard({ className }) {
         <h2>Add Friends</h2>
         {/* Search bar!!!! WEEEWWW!!!! */}
         <search className={styles.searchContainer}>
-          <label>Enter a username to search for friends:</label>
+          <label htmlFor="searchField">Enter a username to search for friends:</label>
           <input
+            id="searchField"
             type="text"
             className={styles.searchField}
             placeholder=" &#x1F50E;&#xFE0E; Start your search..."
