@@ -66,7 +66,7 @@ export default function UpdatePassword({ isOpen, onClose }) {
           <legend>Confirm Current and Enter New Password</legend>
 
           <div className={styles.formField}>
-            <label htmlFor="currentPassword">Password: </label>
+            <label htmlFor="password">Password: </label>
             <input
               id="password"
               type="password"

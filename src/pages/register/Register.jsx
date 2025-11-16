@@ -61,6 +61,7 @@ export default function Register() {
             <input
               id="email"
               type="email"
+              autoComplete="email"
               {...register("email", {
                 // Input validation rules go here!
                 required: "Email is required", // Custom message for validation rule
@@ -83,6 +84,7 @@ export default function Register() {
             <input
               id="username"
               type="text"
+              autoComplete="username"
               {...register("username", {
                 required: "Username is required",
                 minLength: {

@@ -59,6 +59,7 @@ function Login({ isOpen, onClose }) {
             <input
               id="email"
               type="email"
+              autoComplete="email"
               {...register("email", {
                 // Input validation rules go here!
                 required: "Email is required", // Custom message for validation rule
