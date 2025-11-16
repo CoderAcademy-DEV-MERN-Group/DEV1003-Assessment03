@@ -1,5 +1,6 @@
 @use "../../styles/variables" as *;
 @use "../../styles/mixins" as *;
+@use "sass:color";
 
 * {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -349,7 +350,7 @@ h2 {
   color: white;
 
   &:hover:not(:disabled) {
-    background: darken(color(green), 10%);
+    background: color.adjust(green, $lightness: -10%);
   }
 }
 
