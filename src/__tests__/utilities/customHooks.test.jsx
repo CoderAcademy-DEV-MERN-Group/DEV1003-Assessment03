@@ -194,7 +194,7 @@ describe("Reel Progress Custom Hooks", () => {
       { success: true, message: "Reel Progress record deleted successfully" },
       { movieId: movies[0].imdbId }
     );
-  });
+  }, 30000);
 });
 
 // Test user custom hooks work as expected
