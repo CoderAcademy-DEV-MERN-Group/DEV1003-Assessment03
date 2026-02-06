@@ -33,7 +33,7 @@ export default function Home() {
     return <ErrorMessage error={canonError || leaderboardError} onRetry={handleRetry} />;
   }
 
-  const topRankings = data?.reelProgressData.slice(0, 3).map((e) => e._id) || [];
+  const topRankings = (data?.reelProgressData || []).slice(0, 3).map((e) => e._id) || [];
   return (
     <main className={styles.home}>
       <h1>The Century Screening Room</h1>

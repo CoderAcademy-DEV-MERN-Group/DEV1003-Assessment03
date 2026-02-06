@@ -1,5 +1,4 @@
-import { useQuery, useMutation } from "@tanstack/react-query";
-import { queryClient } from "../constants/queryClient";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   getUserReelProgress,
   addMovieToReelProgress,
@@ -17,8 +16,9 @@ export const useUserReelProgress = (options = {}) =>
   });
 
 // Create tanstack MUTATION custom hook to ADD new movie to user reel progress
-export const useAddMovieToReelProgress = () =>
-  useMutation({
+export const useAddMovieToReelProgress = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
     mutationFn: addMovieToReelProgress,
     // Invalidate and refetch all reel progress and current user after creating a new entry
     onSuccess: () => {
@@ -30,10 +30,12 @@ export const useAddMovieToReelProgress = () =>
       toast.error(error.message);
     },
   });
+};
 
 // Create tanstack MUTATION custom hook to UPDATE rating of movie in reel progress of logged in user
-export const useUpdateReelProgressMovieRating = () =>
-  useMutation({
+export const useUpdateReelProgressMovieRating = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
     mutationFn: updateReelProgressMovieRating,
     // Invalidate and refetch all reel progress and current user after updating an entry
     onSuccess: ({ newRating }) => {
@@ -45,10 +47,12 @@ export const useUpdateReelProgressMovieRating = () =>
       toast.error(error.message);
     },
   });
+};
 
 // Create tanstack MUTATION custom hook to DELETE movie from reel progress for logged in user
-export const useDeleteMovieFromReelProgress = () =>
-  useMutation({
+export const useDeleteMovieFromReelProgress = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
     mutationFn: deleteMovieFromReelProgress,
     // Invalidate and refetch all reel progress and current user after deleting an entry
     onSuccess: () => {
@@ -60,3 +64,4 @@ export const useDeleteMovieFromReelProgress = () =>
       toast.error(error.message);
     },
   });
+};

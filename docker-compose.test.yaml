@@ -1,0 +1,12 @@
+services:
+  # Frontend Service
+  frontend-test:
+    build: ./
+    container_name: frontend_test_container
+    environment:
+      # Tells jest/vitest that tests are running in CI environment, so they exit after running
+      - CI=true
+    command: npm test
+    volumes:
+      # Bind mounts not needed as no hot reloading in tests, anonymous volume for node_modules only
+      - /app/node_modules
