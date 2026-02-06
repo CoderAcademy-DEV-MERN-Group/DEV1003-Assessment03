@@ -1,0 +1,24 @@
+services:
+  # Frontend Service
+  frontend:
+    build: ./
+    container_name: frontend_container
+    ports:
+      # Map container port for dev and prod as it is needed to access application
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://localhost:5000
+    volumes:
+      # Add application working directory as bind mount to enable hot reloading
+      - ./:/frontend_app
+      # Create anonymous volume for node_modules to ensure container uses its own installed packages
+      - /frontend_app/node_modules
+    networks:
+      - mern-network
+
+# Define the network
+networks:
+  mern-network:
+    # Connect to the backend's existing network as external
+    external: true
+    name: mern-network
